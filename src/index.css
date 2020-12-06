@@ -1,0 +1,67 @@
+@font-face {
+  font-family: Shabnam;
+  src: url('Font/Shabnam.eot');
+  src: url('Font/Shabnam.eot?#iefix') format('embedded-opentype'),
+  url('Font/Shabnam.woff2') format('woff2'),
+  url('Font/Shabnam.woff') format('woff'),
+  url('Font/Shabnam.ttf') format('truetype');
+  font-weight: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: Shabnam;
+  src: url('Font/Shabnam-Bold.eot');
+  src: url('Font/Shabnam-Bold.eot?#iefix') format('embedded-opentype'),
+  url('Font/Shabnam-Bold.woff2') format('woff2'),
+  url('Font/Shabnam-Bold.woff') format('woff'),
+  url('Font/Shabnam-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: Shabnam;
+  src: url('Font/Shabnam-Thin.eot');
+  src: url('Font/Shabnam-Thin.eot?#iefix') format('embedded-opentype'),
+  url('Font/Shabnam-Thin.woff2') format('woff2'),
+  url('Font/Shabnam-Thin.woff') format('woff'),
+  url('Font/Shabnam-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: Shabnam;
+  src: url('Font/Shabnam-Light.eot');
+  src: url('Font/Shabnam-Light.eot?#iefix') format('embedded-opentype'),
+  url('Font/Shabnam-Light.woff2') format('woff2'),
+  url('Font/Shabnam-Light.woff') format('woff'),
+  url('Font/Shabnam-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: Shabnam;
+  src: url('Font/Shabnam-Medium.eot');
+  src: url('Font/Shabnam-Medium.eot?#iefix') format('embedded-opentype'),
+  url('Font/Shabnam-Medium.woff2') format('woff2'),
+  url('Font/Shabnam-Medium.woff') format('woff'),
+  url('Font/Shabnam-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: fallback;
+}
+
+body {
+  font-family: Shabnam,-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
