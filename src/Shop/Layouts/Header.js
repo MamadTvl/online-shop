@@ -1,25 +1,33 @@
 import React, {useState} from "react";
 import AppBar from "@material-ui/core/AppBar";
 import logo from '../../img/zimmerman.svg'
-import {Button, IconButton, SvgIcon} from "@material-ui/core";
+import {Button, FormControl, IconButton, SvgIcon} from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import {StyledSearchField} from './StyledSearchField'
 import MenuIcon from '@material-ui/icons/Menu';
-import History from "../Components/Search/History";
+import {useHistory} from "react-router-dom";
 import {useHeaderStyle} from "./Styles/useHeaderStyle";
 
 function Header() {
     const classes = useHeaderStyle()
+    const history = useHistory()
     const [searchInput, setSearchInput] = useState('')
-    const searchHandler = (event) => {
-        event.preventDefault();
-        History.push('/search?s=' + searchInput);
-        setSearchInput('')
-        // eslint-disable-next-line no-restricted-globals
-        location.reload()
-    }
+    const [clicked, setClicked] = useState(false)
 
+    const searchHandler = () => {
+        if (!clicked){
+            const search = document.getElementById('search-website')
+            search.addEventListener('keyup', (event) => {
+                if (event.keyCode === 13 && search.value !== ''){
+                    console.log(search.value)
+                    history.push('/search?s=' + search.value);
+                }
+            })
+            setClicked(!clicked)
+        }
+
+    }
     return (
         <AppBar position={"fixed"} className={classes.appBar}>
             <div className={classes.items}>
@@ -27,7 +35,7 @@ function Header() {
                     <IconButton className={classes.menuIcon}>
                         <MenuIcon/>
                     </IconButton>
-                    <img className={classes.logo} src={logo} alt={'zimmerman.ir'}/>
+                    <img className={classes.logo} src={logo} alt={'didartshop.ir'}/>
                     <Button
                         size={"small"}
                         dir={'ltr'}
@@ -40,7 +48,7 @@ function Header() {
                     </Button>
 
                 </div>
-                <form onSubmit={searchHandler}>
+                <FormControl>
                     <StyledSearchField
                         id="search-website"
                         className={classes.searchBar}
@@ -48,6 +56,7 @@ function Header() {
                         type="search"
                         value={searchInput}
                         onChange={(event) => setSearchInput(event.target.value)}
+                        onClick={searchHandler}
                         InputProps={{
                             classes: {
                                 input: classes.textField,
@@ -73,7 +82,7 @@ function Header() {
                             }
                         }}
                     />
-                </form>
+                </FormControl>
                 <div className={classes.leftItems}>
                     <IconButton className={classes.searchBarIcon}>
                         <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.811" height="17.811"

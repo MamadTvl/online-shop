@@ -81,11 +81,6 @@ function Search({location}) {
                                 Hello
                             </div>
                         </Grid>
-                        <Grid xs={12} item>
-                            <div style={{width: '100%', backgroundColor: 'black'}}>
-                                Hello
-                            </div>
-                        </Grid>
                     </Grid>
 
                     <Grid container className={classes.productsContainer} spacing={2.5} md={9} direction={"row"}>
