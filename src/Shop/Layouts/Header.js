@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {useStyles} from "./Styles/HeaderStyle";
 import AppBar from "@material-ui/core/AppBar";
 import logo from '../../img/zimmerman.svg'
 import {Button, IconButton, SvgIcon} from "@material-ui/core";
@@ -8,9 +7,10 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import {StyledSearchField} from './StyledSearchField'
 import MenuIcon from '@material-ui/icons/Menu';
 import History from "../Components/Search/History";
+import {useHeaderStyle} from "./Styles/useHeaderStyle";
 
 function Header() {
-    const classes = useStyles()
+    const classes = useHeaderStyle()
     const [searchInput, setSearchInput] = useState('')
     const searchHandler = (event) => {
         event.preventDefault();

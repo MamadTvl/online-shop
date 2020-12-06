@@ -4,8 +4,8 @@ import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom
 import {createBrowserHistory} from "history";
 import {ThemeProvider} from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import HomePage from "../../zimmerman/src/Shop/Components/Pages/HomePage";
-import Search from "../../zimmerman/src/Shop/Components/Search/Search";
+import HomePage from "./Shop/Components/Pages/HomePage";
+import Search from "./Shop/Components/Search/Search";
 
 
 function App() {
