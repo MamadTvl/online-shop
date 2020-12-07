@@ -83,7 +83,7 @@ function TablePaginationActions(props) {
     }
 
     return (
-        <ButtonGroup className={classes.buttonGroup}>
+        <ButtonGroup className={props.buttonGroupClass}>
 
             <IconButton
                 onClick={() => {

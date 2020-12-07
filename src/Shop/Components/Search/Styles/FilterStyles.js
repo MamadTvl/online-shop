@@ -46,6 +46,9 @@ export const FilterStyles = withStyles({
 export const useFilterPriceStyle = makeStyles((theme) => ({
     card: {
         padding: theme.spacing(2),
+        [theme.breakpoints.down('sm')]: {
+            padding: theme.spacing(1),
+        }
     },
     priceContainer: {
         display: "flex",

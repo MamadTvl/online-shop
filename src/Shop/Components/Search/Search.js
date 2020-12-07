@@ -3,14 +3,13 @@ import ShopLayout from "../../Layouts/ShopLayout";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import ItemLink from "../../../Routes/Link/ItemLink";
-import {Grid, Typography, Card, CardContent} from "@material-ui/core";
+import {Card, CardContent, Grid, Typography} from "@material-ui/core";
 import productImage from "../../../img/img.png";
 import ProductCard from "../Home/ProuductCard";
-import {useStyles} from "./Styles/SearchStyle";
+import {StyledSwitch, useStyles} from "./Styles/SearchStyle";
 import TablePaginationActions from "../../../utills/TablePaginationActions";
 import FilterPrice from "./FilterPrice";
 import FilterCategory from "./FilterCategory";
-import {StyledSwitch} from "./Styles/SearchStyle";
 
 function createData(name, price, img, hasDiscount, discount, newPrice) {
     return {name, price, img, hasDiscount, discount, newPrice}
@@ -50,7 +49,6 @@ function Search({location}) {
     const numPages = parseInt((products.length / 10).toString()) + 1
 
 
-
     useEffect(() => {
         const params = new URLSearchParams(location.search)
         const s = params.get('s')
@@ -72,17 +70,20 @@ function Search({location}) {
                 </div>
 
                 <Grid xs={12} className={classes.gridContainer} container direction={"row"}>
-                    <Grid container md={3} className={classes.filterContainer} direction={"row"}>
+                    <Grid container sm={3} className={classes.filterContainer} direction={"row"}>
+
                         <Grid className={classes.filterItem} xs={12} item>
                             <div>
                                 <FilterPrice/>
                             </div>
                         </Grid>
-                        <Grid className={classes.filterItem} xs={12} item>
+
+                        <Grid className={classes.categoryMdItem} xs={12} item>
                             <div>
                                 <FilterCategory/>
                             </div>
                         </Grid>
+
                         <Grid className={classes.filterItem} xs={12} item>
                             <div>
                                 <Card>
@@ -98,18 +99,25 @@ function Search({location}) {
                         </Grid>
                     </Grid>
 
-                    <Grid container className={classes.productsContainer}  md={9} direction={"row"}>
+                    <Grid container className={classes.productsContainer} sm={9} xs={12} direction={"row"}>
                         {
                             products.slice(page * 15, page * 15 + 15)
                                 .map((product) => (
-                                    <Grid className={classes.productItem} md={4} item>
+                                    <Grid className={classes.productItem} md={4} sm={6} item>
                                         <ProductCard product={product} className={classes.card}/>
                                     </Grid>
                                 ))
                         }
-                        <Grid item xs={9}>
-                            <TablePaginationActions numPages={numPages} page={page} onChange={handleChangePages}/>
+                        <Grid item  xs={12}>
+                            <TablePaginationActions buttonGroupClass={classes.buttonGroup} numPages={numPages} page={page} onChange={handleChangePages}/>
                         </Grid>
+
+                    </Grid>
+
+                    <Grid item className={classes.categoryXsItem} xs={12}>
+                        <div style={{width: '100%'}}>
+                            <FilterCategory/>
+                        </div>
                     </Grid>
 
                 </Grid>

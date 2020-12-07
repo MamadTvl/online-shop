@@ -19,12 +19,12 @@ export const useHeaderStyle = makeStyles((theme) => ({
         flexDirection: "row",
         justifyContent: 'space-between',
         margin: theme.spacing(0, 17.5),
-        [theme.breakpoints.up('md')]: {
-
-        },
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('md')]: {
             margin: theme.spacing(0, 3),
         },
+        // [theme.breakpoints.down('sm')]: {
+        //     margin: theme.spacing(0, 3),
+        // },
         [theme.breakpoints.down('xs')]: {
             margin: theme.spacing(0, 0),
         }

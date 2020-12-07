@@ -26,7 +26,7 @@ function FilterCategory() {
     // todo: need useReducer in search component
     }
     return (
-        <Card>
+        <Card style={{width: '100%'}}>
             <CardHeader
 
                 title={<Typography className={classes.title}>دسته‌بندی</Typography>}

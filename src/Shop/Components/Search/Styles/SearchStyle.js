@@ -3,9 +3,9 @@ import Switch from "@material-ui/core/Switch";
 import {withStyles} from "@material-ui/styles"
 
 export const useStyles = makeStyles((theme) => ({
-    searchContainer:{
+    searchContainer: {
         padding: theme.spacing(0, 17.5),
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('md')]: {
             padding: theme.spacing(0, 3),
         },
 
@@ -13,43 +13,67 @@ export const useStyles = makeStyles((theme) => ({
             padding: 18.5,
         },
     },
-    breadcrumbContainer:{
+    breadcrumbContainer: {
         marginTop: 24,
     },
-    breadcrumb:{
+    breadcrumb: {
         fontFamily: 'Shabnam',
         fontSize: 12,
         color: '#545454'
     },
-    titleContainer:{
-        display : "flex",
+    titleContainer: {
+        display: "flex",
         marginBottom: 37,
         marginTop: 21,
     },
-    titleRectangle:{
+    titleRectangle: {
         borderRightWidth: 4,
         borderRightColor: '#F16522',
         borderRightStyle: 'inset',
         marginLeft: 8
     },
-    title:{
+    title: {
         fontFamily: 'Shabnam',
         fontWeight: 'bold',
         fontSize: 28,
         color: '#545454',
     },
-    gridContainer:{},
-    filterContainer:{
+    gridContainer: {},
+    filterContainer: {
         maxHeight: 485,
     },
     filterItem: {
         marginBottom: theme.spacing(2),
     },
-    productsContainer:{},
+    categoryMdItem: {
+        marginBottom: theme.spacing(2),
+        [theme.breakpoints.down('xs')]: {
+            display: 'none',
+        },
+    },
+    categoryXsItem: {
+        display: "none",
+        marginBottom: theme.spacing(2),
+        [theme.breakpoints.down('xs')]: {
+            display: 'flex'
+        },
+    },
+    productsContainer: {},
     productItem: {
         paddingRight: 20,
         paddingBottom: 20,
-
+        [theme.breakpoints.down('xs')]: {
+            paddingRight: 0,
+        },
+    },
+    buttonGroup: {
+        width: '30%',
+        display: 'flex',
+        margin: 'auto',
+        [theme.breakpoints.down('xs')]: {
+            width: '68%',
+            marginBottom: 16,
+        },
     },
     discount: {
         display: 'flex',
