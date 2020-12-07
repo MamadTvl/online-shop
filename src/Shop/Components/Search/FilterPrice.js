@@ -1,20 +1,13 @@
-import React, {useState} from "react";
+import React from "react";
 import {Card, CardActions, CardHeader, Typography} from "@material-ui/core";
 import ThumbComponent, {FilterStyles, useFilterPriceStyle} from "./Styles/FilterStyles";
 import {separateDigit} from '../../../utills/ToFaDigit'
+import * as PropTypes from "prop-types";
 
-function FilterPrice() {
+function FilterPrice(props) {
     const classes = useFilterPriceStyle()
-    const [values, setValues] = useState({
-        from: 0,
-        to: 15000000,
-    })
-    const handleChange = (event, newValue) => {
-        setValues({
-            from: newValue[0],
-            to: newValue[1],
-        })
-    }
+    const {filterValues, dispatch} = props
+
     return (
         <Card className={classes.card}>
             <CardHeader
@@ -25,22 +18,28 @@ function FilterPrice() {
                 <FilterStyles
                     ThumbComponent={ThumbComponent}
                     getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
-                    value={[values.from, values.to]}
+                    value={[filterValues.from, filterValues.to]}
                     defaultValue={[0, 15000000]}
                     step={512340}
-                    onChange={handleChange}
+                    onChange={(event, newValues) => {
+                        dispatch(
+                            {
+                                type: 'priceFilter',
+                                filterValues: {from: newValues[0], to: newValues[1]}
+                            })
+                    }}
                     max={15000000}
                     scale={(x) => x}
                 />
                 <div className={classes.priceContainer}>
                     <div className={classes.fromPrice}>
                         <Typography className={classes.label}>از</Typography>
-                        <Typography className={classes.price}>{separateDigit(values.from)}</Typography>
+                        <Typography className={classes.price}>{separateDigit(filterValues.from)}</Typography>
                         <Typography className={classes.label}>تومان</Typography>
                     </div>
                     <div className={classes.toPrice}>
                         <Typography className={classes.label}>تا</Typography>
-                        <Typography className={classes.price}>{separateDigit(values.to)}</Typography>
+                        <Typography className={classes.price}>{separateDigit(filterValues.to)}</Typography>
                         <Typography className={classes.label}>تومان</Typography>
 
                     </div>
@@ -51,3 +50,8 @@ function FilterPrice() {
 }
 
 export default FilterPrice
+
+FilterPrice.propTypes = {
+    filterValues: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+}

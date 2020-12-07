@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useReducer, useState} from "react";
 import ShopLayout from "../../Layouts/ShopLayout";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
@@ -10,6 +10,7 @@ import {StyledSwitch, useStyles} from "./Styles/SearchStyle";
 import TablePaginationActions from "../../../utills/TablePaginationActions";
 import FilterPrice from "./FilterPrice";
 import FilterCategory from "./FilterCategory";
+import {reducer, initialStates} from "./Reducer";
 
 function createData(name, price, img, hasDiscount, discount, newPrice) {
     return {name, price, img, hasDiscount, discount, newPrice}
@@ -36,6 +37,8 @@ const initialProducts = [
 
 function Search({location}) {
     const classes = useStyles()
+    const [searchStates, dispatch] = useReducer(reducer, initialStates)
+
     const [page, setPage] = useState(0)
     const [hasDiscount, setHasDiscount] = useState(false)
     const handleChangePages = (pageNumber) => {
@@ -48,10 +51,10 @@ function Search({location}) {
     const [products, setProducts] = useState(initialProducts)
     const numPages = parseInt((products.length / 10).toString()) + 1
 
-
     useEffect(() => {
         const params = new URLSearchParams(location.search)
         const s = params.get('s')
+        const category = params.get('category')
         setSearchItem(s)
     }, [location.search])
 
@@ -74,7 +77,10 @@ function Search({location}) {
 
                         <Grid className={classes.filterItem} xs={12} item>
                             <div>
-                                <FilterPrice/>
+                                <FilterPrice
+                                    filterValues={searchStates.filterValues}
+                                    dispatch={dispatch}
+                                />
                             </div>
                         </Grid>
 

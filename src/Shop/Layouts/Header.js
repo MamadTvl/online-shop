@@ -20,7 +20,6 @@ function Header() {
             const search = document.getElementById('search-website')
             search.addEventListener('keyup', (event) => {
                 if (event.keyCode === 13 && search.value !== ''){
-                    console.log(search.value)
                     history.push('/search?s=' + search.value);
                 }
             })
