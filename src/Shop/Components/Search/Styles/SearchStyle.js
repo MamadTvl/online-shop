@@ -1,5 +1,6 @@
 import {makeStyles} from "@material-ui/core/styles";
-
+import Switch from "@material-ui/core/Switch";
+import {withStyles} from "@material-ui/styles"
 
 export const useStyles = makeStyles((theme) => ({
     searchContainer:{
@@ -49,6 +50,34 @@ export const useStyles = makeStyles((theme) => ({
         paddingRight: 20,
         paddingBottom: 20,
 
+    },
+    discount: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: "space-between",
+    },
+    discountTitle: {
+        fontFamily: 'Shabnam',
+        fontWeight: 'bold',
+        fontSize: 16,
+        color: '#545454',
+        marginTop: 7,
     }
-
 }));
+
+export const StyledSwitch = withStyles({
+    switchBase: {
+        color: '#888888',
+        '&$checked': {
+            color: '#F16522',
+        },
+        '&track': {
+            backgroundColor: '#B8B8B8'
+        },
+        '&$checked + $track': {
+            backgroundColor: '#B8B8B8',
+        },
+    },
+    checked: {},
+    track: {},
+})(Switch);

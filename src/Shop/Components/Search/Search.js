@@ -3,12 +3,14 @@ import ShopLayout from "../../Layouts/ShopLayout";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import ItemLink from "../../../Routes/Link/ItemLink";
-import {Grid, Typography} from "@material-ui/core";
+import {Grid, Typography, Card, CardContent} from "@material-ui/core";
 import productImage from "../../../img/img.png";
 import ProductCard from "../Home/ProuductCard";
 import {useStyles} from "./Styles/SearchStyle";
 import TablePaginationActions from "../../../utills/TablePaginationActions";
 import FilterPrice from "./FilterPrice";
+import FilterCategory from "./FilterCategory";
+import {StyledSwitch} from "./Styles/SearchStyle";
 
 function createData(name, price, img, hasDiscount, discount, newPrice) {
     return {name, price, img, hasDiscount, discount, newPrice}
@@ -35,15 +37,19 @@ const initialProducts = [
 
 function Search({location}) {
     const classes = useStyles()
-
     const [page, setPage] = useState(0)
+    const [hasDiscount, setHasDiscount] = useState(false)
     const handleChangePages = (pageNumber) => {
         setPage(pageNumber)
     }
-
+    const handleChangeSwitch = () => {
+        setHasDiscount(!hasDiscount)
+    }
     const [searchItem, setSearchItem] = useState('')
     const [products, setProducts] = useState(initialProducts)
     const numPages = parseInt((products.length / 10).toString()) + 1
+
+
 
     useEffect(() => {
         const params = new URLSearchParams(location.search)
@@ -65,21 +71,29 @@ function Search({location}) {
                     <Typography component={"h1"} className={classes.title}>{`لیست محصولات "${searchItem}"`}</Typography>
                 </div>
 
-                <Grid xs={12} className={classes.gridContainer} container spacing={2.5} direction={"row"}>
+                <Grid xs={12} className={classes.gridContainer} container direction={"row"}>
                     <Grid container md={3} className={classes.filterContainer} direction={"row"}>
                         <Grid className={classes.filterItem} xs={12} item>
                             <div>
                                 <FilterPrice/>
                             </div>
                         </Grid>
-                        <Grid xs={12} item>
-                            <div style={{width: '100%', backgroundColor: 'green'}}>
-                                Hello
+                        <Grid className={classes.filterItem} xs={12} item>
+                            <div>
+                                <FilterCategory/>
                             </div>
                         </Grid>
-                        <Grid xs={12} item>
-                            <div style={{width: '100%', backgroundColor: 'blue'}}>
-                                Hello
+                        <Grid className={classes.filterItem} xs={12} item>
+                            <div>
+                                <Card>
+                                    <CardContent style={{padding: '8px 16px'}} className={classes.discount}>
+                                        <Typography className={classes.discountTitle}>تخفیف‌دار ها</Typography>
+                                        <StyledSwitch
+                                            checked={hasDiscount}
+                                            onChange={handleChangeSwitch}
+                                        />
+                                    </CardContent>
+                                </Card>
                             </div>
                         </Grid>
                     </Grid>

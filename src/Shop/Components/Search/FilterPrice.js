@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import {Card, CardActions, CardHeader, Typography} from "@material-ui/core";
-import ThumbComponent, {FilterStyles, useStyle} from "./FilterStyles";
+import ThumbComponent, {FilterStyles, useFilterPriceStyle} from "./Styles/FilterStyles";
 import {separateDigit} from '../../../utills/ToFaDigit'
 
 function FilterPrice() {
-    const classes = useStyle()
+    const classes = useFilterPriceStyle()
     const [values, setValues] = useState({
         from: 0,
-        to: 999999999,
+        to: 15000000,
     })
     const handleChange = (event, newValue) => {
         setValues({

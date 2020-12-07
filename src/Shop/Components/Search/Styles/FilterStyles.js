@@ -1,6 +1,6 @@
 import React from "react";
 import {withStyles} from "@material-ui/core/styles";
-import {Slider} from "@material-ui/core";
+import {Slider, Checkbox} from "@material-ui/core";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import {makeStyles} from "@material-ui/styles";
@@ -43,7 +43,7 @@ export const FilterStyles = withStyles({
 
 })(Slider)
 
-export const useStyle = makeStyles((theme) => ({
+export const useFilterPriceStyle = makeStyles((theme) => ({
     card: {
         padding: theme.spacing(2),
     },
@@ -88,14 +88,9 @@ export const useStyle = makeStyles((theme) => ({
         fontSize: '16px',
         fontWeight: 'bold',
         color: '#545454',
-
-
     }
-
-
 }))
-
-function ThumbComponent(props) {
+export default function ThumbComponent(props) {
     return (
         <div {...props}>
             {
@@ -108,4 +103,54 @@ function ThumbComponent(props) {
 }
 
 
-export default ThumbComponent
+export const useFilterCategoryStyle = makeStyles((theme) => ({
+
+    categories: {
+        padding: 0,
+    },
+    container: {
+        display: "flex",
+        flexDirection: "column",
+        width: '100%',
+    },
+    title: {
+        fontFamily: 'Shabnam',
+        fontWeight: 'bold',
+        fontSize: 16,
+        color: '#545454',
+        marginRight: 11,
+    },
+
+    label: {
+        fontFamily: 'Shabnam',
+        fontSize: 14,
+        color: '#545454'
+    },
+
+
+    expand: {
+        transform: 'rotate(0deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.shortest,
+        }),
+        marginRight: 11,
+    },
+    expandOpen: {
+        transform: 'rotate(180deg)',
+    },
+
+}))
+export const CategoryCheckbox = withStyles({
+    root: {
+        color: '#434343',
+        opacity: 0.5,
+        '&$checked': {
+            color: '#F16522',
+            opacity: 1,
+        },
+    },
+    checked: {},
+})((props) => <Checkbox color="default" {...props} />);
+
+
