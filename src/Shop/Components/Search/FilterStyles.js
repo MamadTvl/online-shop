@@ -9,7 +9,7 @@ export const FilterStyles = withStyles({
     root: {
         color: '#F16522',
         height: 4,
-        padding: '20px 0',
+        // padding: '20px 0',
         marginLeft: 30,
         maxWidth: 234,
         alignSelf: "center",
@@ -47,12 +47,6 @@ export const useStyle = makeStyles((theme) => ({
     card: {
         padding: theme.spacing(2),
     },
-//     width: 228px;
-//     height: 0px;
-//     background: transparent;
-//     border: 1px solid #434343;
-// opacity: 0.1;
-
     priceContainer: {
         display: "flex",
         borderTop: '1px solid rgba(67, 67, 67, 0.1)',
@@ -64,17 +58,38 @@ export const useStyle = makeStyles((theme) => ({
     actions: {
         display: "flex",
         flexDirection: 'column',
-        padding: theme.spacing(2)
 
     },
     fromPrice: {
+        display: "flex",
+        flexDirection: 'column',
+        justifyContent: "center",
+        textAlign: 'center',
         height: 78,
         width: 114,
     },
     toPrice: {
+        display: "flex",
+        flexDirection: 'column',
+        justifyContent: "center",
+        textAlign: 'center',
         borderRight: '1px solid rgba(67, 67, 67, 0.1)',
         height: 78,
         width: 114,
+    },
+    label: {
+        fontFamily: 'Shabnam',
+        fontSize: '14px',
+        color: '#545454',
+        opacity: 0.68,
+    },
+    price: {
+        fontFamily: 'Shabnam',
+        fontSize: '16px',
+        fontWeight: 'bold',
+        color: '#545454',
+
+
     }
 
 

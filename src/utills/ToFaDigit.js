@@ -24,6 +24,7 @@ function reverseString(str) {
 
 export const separateDigit = (number) => {
     let count = 0
+    number = toFaDigit(number.toString())
     let separatedNum = ''
     for(let i= number.length - 1 ; i >= 0 ; i--){
         if (count < 3){
@@ -31,10 +32,10 @@ export const separateDigit = (number) => {
             count++
         }
         if (count === 3){
-            separatedNum += ','
+            separatedNum += '٫'
             count = 0
         }
     }
     separatedNum = reverseString(separatedNum)
-    return separatedNum.indexOf(',') === 0 ? separatedNum.substring(1) : separatedNum
+    return separatedNum.indexOf('٫') === 0 ? separatedNum.substring(1) : separatedNum
 }
