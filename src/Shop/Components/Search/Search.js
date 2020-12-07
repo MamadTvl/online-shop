@@ -8,6 +8,7 @@ import productImage from "../../../img/img.png";
 import ProductCard from "../Home/ProuductCard";
 import {useStyles} from "./Styles/SearchStyle";
 import TablePaginationActions from "../../../utills/TablePaginationActions";
+import FilterPrice from "./FilterPrice";
 
 function createData(name, price, img, hasDiscount, discount, newPrice) {
     return {name, price, img, hasDiscount, discount, newPrice}
@@ -61,14 +62,14 @@ function Search({location}) {
                 </Breadcrumbs>
                 <div className={classes.titleContainer}>
                     <div className={classes.titleRectangle}/>
-                    <Typography className={classes.title}>{`لیست محصولات "${searchItem}"`}</Typography>
+                    <Typography component={"h1"} className={classes.title}>{`لیست محصولات "${searchItem}"`}</Typography>
                 </div>
 
                 <Grid xs={12} className={classes.gridContainer} container spacing={2.5} direction={"row"}>
                     <Grid container md={3} className={classes.filterContainer} direction={"row"}>
-                        <Grid xs={12} item>
-                            <div style={{width: '100%', backgroundColor: 'red'}}>
-                                Hello
+                        <Grid className={classes.filterItem} xs={12} item>
+                            <div>
+                                <FilterPrice/>
                             </div>
                         </Grid>
                         <Grid xs={12} item>
@@ -83,11 +84,11 @@ function Search({location}) {
                         </Grid>
                     </Grid>
 
-                    <Grid container className={classes.productsContainer} spacing={2.5} md={9} direction={"row"}>
+                    <Grid container className={classes.productsContainer}  md={9} direction={"row"}>
                         {
                             products.slice(page * 15, page * 15 + 15)
                                 .map((product) => (
-                                    <Grid md={4} item>
+                                    <Grid className={classes.productItem} md={4} item>
                                         <ProductCard product={product} className={classes.card}/>
                                     </Grid>
                                 ))

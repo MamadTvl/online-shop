@@ -38,6 +38,17 @@ export const useStyles = makeStyles((theme) => ({
         color: '#545454',
     },
     gridContainer:{},
-    filterContainer:{},
+    filterContainer:{
+        maxHeight: 485,
+    },
+    filterItem: {
+        marginBottom: theme.spacing(2),
+    },
     productsContainer:{},
+    productItem: {
+        paddingRight: 20,
+        paddingBottom: 20,
+
+    }
+
 }));

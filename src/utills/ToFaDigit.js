@@ -7,7 +7,7 @@ const isNumber = (str) => {
 }
 
 
-const toFaDigit = (text) => {
+export const toFaDigit = (text) => {
     let ret = '';
     for (let i = 0; i < text.length; i++) {
         if(isNumber(text[i]))
@@ -18,5 +18,23 @@ const toFaDigit = (text) => {
 
     return ret;
 }
+function reverseString(str) {
+    return (str === '') ? '' : reverseString(str.substr(1)) + str.charAt(0);
+}
 
-export default toFaDigit
+export const separateDigit = (number) => {
+    let count = 0
+    let separatedNum = ''
+    for(let i= number.length - 1 ; i >= 0 ; i--){
+        if (count < 3){
+            separatedNum+= number[i]
+            count++
+        }
+        if (count === 3){
+            separatedNum += ','
+            count = 0
+        }
+    }
+    separatedNum = reverseString(separatedNum)
+    return separatedNum.indexOf(',') === 0 ? separatedNum.substring(1) : separatedNum
+}

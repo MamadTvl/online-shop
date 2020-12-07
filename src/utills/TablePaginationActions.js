@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, ButtonGroup, IconButton, Typography} from "@material-ui/core";
-import ToFaDigit from "./ToFaDigit";
+import {toFaDigit} from './ToFaDigit'
 import * as PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core/styles";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
@@ -57,7 +57,7 @@ function TablePaginationActions(props) {
                 }}
                         className={classes.pageButton}
                 >
-                    {ToFaDigit(value.toString())}
+                    {toFaDigit(value.toString())}
                 </Button>
                 :
                 <Button
@@ -77,7 +77,7 @@ function TablePaginationActions(props) {
                         onChange(value - 1)
                     }}
                 >
-                    {ToFaDigit(value.toString())}
+                    {toFaDigit(value.toString())}
                 </Button>
         )
     }
