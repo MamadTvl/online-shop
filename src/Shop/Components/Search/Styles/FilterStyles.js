@@ -5,7 +5,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import {makeStyles} from "@material-ui/styles";
 
-export const FilterStyles = withStyles({
+export const FilterStyles = withStyles((theme) => ({
     root: {
         color: '#F16522',
         height: 4,
@@ -13,6 +13,10 @@ export const FilterStyles = withStyles({
         marginLeft: 30,
         maxWidth: 234,
         alignSelf: "center",
+        [theme.breakpoints.down('xs')]: {
+            maxWidth: 312,
+            marginLeft: 20,
+        },
     },
     thumb: {
         height: 20,
@@ -41,14 +45,18 @@ export const FilterStyles = withStyles({
         height: 4,
     },
 
-})(Slider)
+}))(Slider)
 
 export const useFilterPriceStyle = makeStyles((theme) => ({
     card: {
         padding: theme.spacing(2),
         [theme.breakpoints.down('sm')]: {
             padding: theme.spacing(1),
-        }
+        },
+        [theme.breakpoints.down('xs')]: {
+            height: 120,
+        },
+
     },
     priceContainer: {
         display: "flex",
@@ -56,7 +64,11 @@ export const useFilterPriceStyle = makeStyles((theme) => ({
         height: 78,
         maxWidth: '100%',
         width: 228,
-        background: 'transparent'
+        background: 'transparent',
+        [theme.breakpoints.down('xs')]: {
+            justifyContent: 'center',
+            width: 311,
+        },
     },
     actions: {
         display: "flex",
@@ -70,6 +82,12 @@ export const useFilterPriceStyle = makeStyles((theme) => ({
         textAlign: 'center',
         height: 78,
         width: 114,
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'row',
+            padding: 8,
+            width: 155,
+
+        },
     },
     toPrice: {
         display: "flex",
@@ -79,18 +97,31 @@ export const useFilterPriceStyle = makeStyles((theme) => ({
         borderRight: '1px solid rgba(67, 67, 67, 0.1)',
         height: 78,
         width: 114,
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'row',
+            padding: 8,
+            width: 155,
+            margin: 'auto'
+        },
     },
     label: {
         fontFamily: 'Shabnam',
         fontSize: '14px',
         color: '#545454',
         opacity: 0.68,
+        [theme.breakpoints.down('xs')]: {
+            margin: '0 8px',
+            textAlign: 'center'
+        },
     },
     price: {
         fontFamily: 'Shabnam',
         fontSize: '16px',
         fontWeight: 'bold',
         color: '#545454',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: 14,
+        },
     }
 }))
 export default function ThumbComponent(props) {

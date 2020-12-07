@@ -19,7 +19,11 @@ export const useStyles = makeStyles((theme) => ({
     breadcrumb: {
         fontFamily: 'Shabnam',
         fontSize: 12,
-        color: '#545454'
+        color: '#545454',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: 10,
+        },
+
     },
     titleContainer: {
         display: "flex",
@@ -28,15 +32,26 @@ export const useStyles = makeStyles((theme) => ({
     },
     titleRectangle: {
         borderRightWidth: 4,
+        height: 32,
+        marginTop: 3,
         borderRightColor: '#F16522',
-        borderRightStyle: 'inset',
-        marginLeft: 8
+        borderRightStyle: 'solid',
+        marginLeft: 8,
+        [theme.breakpoints.down('xs')]: {
+            borderRightWidth: 2,
+            height: 15,
+            marginTop: 2,
+        },
+
     },
     title: {
         fontFamily: 'Shabnam',
         fontWeight: 'bold',
         fontSize: 28,
         color: '#545454',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: 14,
+        },
     },
     gridContainer: {},
     filterContainer: {
@@ -44,6 +59,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     filterItem: {
         marginBottom: theme.spacing(2),
+        [theme.breakpoints.down('xs')]: {
+            marginBottom: 1,
+        },
     },
     categoryMdItem: {
         marginBottom: theme.spacing(2),
@@ -71,7 +89,7 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         margin: 'auto',
         [theme.breakpoints.down('xs')]: {
-            width: '68%',
+            width: '78%',
             marginBottom: 16,
         },
     },
@@ -86,6 +104,10 @@ export const useStyles = makeStyles((theme) => ({
         fontSize: 16,
         color: '#545454',
         marginTop: 7,
+        [theme.breakpoints.down('xs')]: {
+            fontSize: 14
+        },
+
     }
 }));
 
