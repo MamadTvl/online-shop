@@ -4,36 +4,13 @@ import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import ItemLink from "../../../Routes/Link/ItemLink";
 import {Card, CardContent, Grid, Typography} from "@material-ui/core";
-import productImage from "../../../img/img.png";
 import ProductCard from "../Home/ProuductCard";
 import {StyledSwitch, useStyles} from "./Styles/SearchStyle";
 import TablePaginationActions from "../../../utills/TablePaginationActions";
 import FilterPrice from "./FilterPrice";
 import FilterCategory from "./FilterCategory";
-import {reducer, initialStates} from "./Reducer";
+import {initialStates, reducer} from "./Reducer";
 
-function createData(name, price, img, hasDiscount, discount, newPrice) {
-    return {name, price, img, hasDiscount, discount, newPrice}
-}
-
-const initialProducts = [
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-]
 
 function Search({location}) {
     const classes = useStyles()
@@ -48,8 +25,8 @@ function Search({location}) {
         setHasDiscount(!hasDiscount)
     }
     const [searchItem, setSearchItem] = useState('')
-    const [products, setProducts] = useState(initialProducts)
-    const numPages = parseInt((products.length / 10).toString()) + 1
+
+    const numPages = parseInt((searchStates.products.length / 10).toString()) + 1
 
     useEffect(() => {
         const params = new URLSearchParams(location.search)
@@ -86,7 +63,10 @@ function Search({location}) {
 
                         <Grid className={classes.categoryMdItem} xs={12} item>
                             <div>
-                                <FilterCategory/>
+                                <FilterCategory
+                                    categories={searchStates.categories}
+                                    dispatch={dispatch}
+                                />
                             </div>
                         </Grid>
 
@@ -107,22 +87,26 @@ function Search({location}) {
 
                     <Grid container className={classes.productsContainer} sm={9} xs={12} direction={"row"}>
                         {
-                            products.slice(page * 15, page * 15 + 15)
+                            searchStates.products.slice(page * 15, page * 15 + 15)
                                 .map((product) => (
                                     <Grid className={classes.productItem} md={4} sm={6} item>
                                         <ProductCard product={product} className={classes.card}/>
                                     </Grid>
                                 ))
                         }
-                        <Grid item  xs={12}>
-                            <TablePaginationActions buttonGroupClass={classes.buttonGroup} numPages={numPages} page={page} onChange={handleChangePages}/>
+                        <Grid item xs={12}>
+                            <TablePaginationActions buttonGroupClass={classes.buttonGroup} numPages={numPages}
+                                                    page={page} onChange={handleChangePages}/>
                         </Grid>
 
                     </Grid>
 
                     <Grid item className={classes.categoryXsItem} xs={12}>
                         <div style={{width: '100%'}}>
-                            <FilterCategory/>
+                            <FilterCategory
+                                categories={searchStates.categories}
+                                dispatch={dispatch}
+                            />
                         </div>
                     </Grid>
 

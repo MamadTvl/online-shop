@@ -1,30 +1,19 @@
 import React, {useState} from "react";
-import {
-    Card,
-    CardActions,
-    CardHeader,
-    Collapse,
-    FormControlLabel,
-    FormGroup,
-    IconButton,
-    Typography
-} from "@material-ui/core";
+import {Card, CardActions, CardHeader, Collapse, FormControlLabel, IconButton, Typography} from "@material-ui/core";
 import {CategoryCheckbox, useFilterCategoryStyle} from "./Styles/FilterStyles";
 import clsx from 'clsx';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import * as PropTypes from "prop-types";
 
 
-function FilterCategory() {
+function FilterCategory(props) {
     const classes = useFilterCategoryStyle()
-    const categories = ["پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک", "پوشاک"]
+    const {categories, dispatch} = props
     const [expanded, setExpanded] = useState(false)
     const handleExpandClick = () => {
         setExpanded(!expanded);
     }
 
-    const handleChangeOptions = () => {
-    // todo: need useReducer in search component
-    }
     return (
         <Card style={{width: '100%'}}>
             <CardHeader
@@ -37,9 +26,18 @@ function FilterCategory() {
                         categories.slice(0, 4)
                             .map((category) => (
                                 <FormControlLabel
-                                    control={<CategoryCheckbox checked={true} onChange={handleChangeOptions}
-                                                               name={category}/>}
-                                    label={<Typography className={classes.label}>{category}</Typography>}
+                                    control={<CategoryCheckbox
+                                        checked={category.checked}
+                                        onChange={() => {
+                                            dispatch({
+                                                type: 'selectCategory',
+                                                category: {...category, checked: !category.checked}
+                                            })
+                                        }}
+                                        name={category.name}
+
+                                    />}
+                                    label={<Typography className={classes.label}>{category.name}</Typography>}
                                 />
                             ))
                     }
@@ -59,8 +57,17 @@ function FilterCategory() {
                                 categories.slice(4, categories.length)
                                     .map((category) => (
                                         <FormControlLabel
-                                            control={<CategoryCheckbox checked={false} onChange={handleChangeOptions}/>}
-                                            label={<Typography className={classes.label}>{category}</Typography>}
+                                            control={
+                                                <CategoryCheckbox
+                                                    checked={category.checked}
+                                                    onChange={() => {
+                                                        dispatch({
+                                                            type: 'selectCategory',
+                                                            category: {...category, checked: !category.checked}
+                                                        })
+                                                    }}
+                                                />}
+                                            label={<Typography className={classes.label}>{category.name}</Typography>}
                                         />
                                     ))
                             }
@@ -74,4 +81,10 @@ function FilterCategory() {
 
 }
 
+
 export default FilterCategory
+
+FilterCategory.propTypes = {
+    categories: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+}
