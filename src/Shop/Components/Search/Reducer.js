@@ -59,6 +59,7 @@ export const initialStates = {
         from: 0,
         to: 15000000,
     },
+    changed: 0,
     products: initialProducts,
     categories: initialCategories,
     hasDiscount: false,
@@ -73,11 +74,13 @@ export const reducer = (state, action) => {
                 filterValues: action.filterValues,
             }
         case 'selectCategory':
-            let index = state.categories.findIndex(x => x.id === action.category.id)
-            state.categories[index] = action.category
+            let index = state.categories.findIndex(x => x.id === action.categoryId)
+            state.categories[index].checked = action.value
+            state.changed ++
+
             return {
                 ...state,
-                categories: state.categories
+                categories: state.categories,
             }
         case 'discount':
             return {

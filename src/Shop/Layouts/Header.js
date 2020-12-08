@@ -6,21 +6,32 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import {StyledSearchField} from './StyledSearchField'
 import MenuIcon from '@material-ui/icons/Menu';
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {useHeaderStyle} from "./Styles/useHeaderStyle";
+import CategoryMenu from "./CategoryMenu";
 
 function Header() {
     const classes = useHeaderStyle()
+    const location = useLocation()
+    const params = new URLSearchParams(location.search)
+    const categorySearch = params.get('categoryId') ? `&?categoryId=${params.get('categoryId')}` : ''
     const history = useHistory()
     const [searchInput, setSearchInput] = useState('')
     const [clicked, setClicked] = useState(false)
-
+    const [anchorEl, setAnchorEl] = useState(null);
     const searchHandler = () => {
-        if (!clicked){
+        if (!clicked) {
             const search = document.getElementById('search-website')
             search.addEventListener('keyup', (event) => {
-                if (event.keyCode === 13 && search.value !== ''){
-                    history.push('/search?s=' + search.value);
+                if (event.keyCode === 13 && search.value !== '') {
+                    let tempLoc = location.search === '' ? '?' : location.search
+                    if (tempLoc.includes('?s=')){
+                        tempLoc = tempLoc.replace(`${params.get('s')}`, search.value)
+                    }else {
+                        tempLoc += `s=${search.value}`
+                    }
+                    history.push(`/search${tempLoc}`);
+                    setSearchInput('')
                 }
             })
             setClicked(!clicked)
@@ -31,12 +42,16 @@ function Header() {
         <AppBar position={"fixed"} className={classes.appBar}>
             <div className={classes.items}>
                 <div className={classes.rightItems}>
-                    <IconButton className={classes.menuIcon}>
+                    <IconButton
+                        onClick={(event) => setAnchorEl(event.currentTarget)}
+                        className={classes.menuIcon}
+                    >
                         <MenuIcon/>
                     </IconButton>
                     <img className={classes.logo} src={logo} alt={'didartshop.ir'}/>
                     <Button
                         size={"small"}
+                        onClick={(event) => setAnchorEl(event.currentTarget)}
                         dir={'ltr'}
                         className={classes.category}
                         startIcon={
@@ -45,6 +60,10 @@ function Header() {
                     >
                         دسته‌بندی‌ها
                     </Button>
+                    <CategoryMenu
+                        anchorEl={anchorEl}
+                        setAnchorEl={setAnchorEl}
+                    />
 
                 </div>
                 <FormControl>

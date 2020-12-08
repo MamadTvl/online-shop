@@ -31,8 +31,10 @@ function FilterCategory(props) {
                                         onChange={() => {
                                             dispatch({
                                                 type: 'selectCategory',
-                                                category: {...category, checked: !category.checked}
+                                                categoryId: category.id,
+                                                value: !category.checked
                                             })
+
                                         }}
                                         name={category.name}
 
@@ -63,7 +65,8 @@ function FilterCategory(props) {
                                                     onChange={() => {
                                                         dispatch({
                                                             type: 'selectCategory',
-                                                            category: {...category, checked: !category.checked}
+                                                            categoryId: category.id,
+                                                            value: !category.checked
                                                         })
                                                     }}
                                                 />}

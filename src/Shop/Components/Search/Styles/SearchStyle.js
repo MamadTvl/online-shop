@@ -55,7 +55,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     gridContainer: {},
     filterContainer: {
-        maxHeight: 485,
+        height: '100%',
     },
     filterItem: {
         marginBottom: theme.spacing(2),

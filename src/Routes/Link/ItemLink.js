@@ -2,7 +2,6 @@ import React from "react";
 import {Link as RouterLink} from "react-router-dom";
 import {Link} from "@material-ui/core";
 import * as PropTypes from "prop-types";
-import ListItemLink from "./ListItemLink";
 
 
 function ItemLink(props) {
@@ -19,7 +18,7 @@ function ItemLink(props) {
     );
 }
 
-ListItemLink.propTypes = {
+ItemLink.propTypes = {
     text: PropTypes.string,
     to: PropTypes.string.isRequired,
     children: PropTypes.object,

@@ -10,25 +10,52 @@ import TablePaginationActions from "../../../utills/TablePaginationActions";
 import FilterPrice from "./FilterPrice";
 import FilterCategory from "./FilterCategory";
 import {initialStates, reducer} from "./Reducer";
-
+import {useHistory} from 'react-router-dom'
+import {usePrevious} from "../../../utills/Hooks/usePrevious";
 
 function Search({location}) {
     const classes = useStyles()
+    const history = useHistory()
     const [searchStates, dispatch] = useReducer(reducer, initialStates)
-
+    const prevArray = usePrevious(searchStates.categories)
     const [page, setPage] = useState(0)
     const handleChangePages = (pageNumber) => {
         setPage(pageNumber)
     }
     const numPages = parseInt((searchStates.products.length / 10).toString()) + 1
 
-    const [searchItem, setSearchItem] = useState('')
+    const [searchItems, setSearchItems] = useState({
+        s: '',
+    })
     useEffect(() => {
         const params = new URLSearchParams(location.search)
-        const s = params.get('s')
-        const category = params.get('category')
-        setSearchItem(s)
-    }, [location.search])
+        const s = params.get('s') ? `"${params.get('s')}"` : ''
+
+        for (let i = 0; i < searchStates.categories.length; i++) {
+            if (params.get(`categoryId[${i}]`)) {
+                dispatch({
+                    type: 'selectCategory',
+                    categoryId: parseInt(params.get(`categoryId[${i}]`)),
+                    value: true,
+                })
+            }
+        }
+        setSearchItems({s: s})
+    }, [location])
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search)
+        let newLocation = ''
+        if (params.get('s')) {
+            newLocation = `s=${params.get('s')}`
+        }
+        for (let i = 0; i < searchStates.categories.length; i++) {
+            if (searchStates.categories[i].checked) {
+                newLocation += `&categoryId[${i}]=${searchStates.categories[i].id}`
+            }
+        }
+        history.push(`/search?${newLocation}`)
+    }, [JSON.stringify(searchStates.categories)])
 
     return (
         <ShopLayout>
@@ -41,7 +68,8 @@ function Search({location}) {
                 </Breadcrumbs>
                 <div className={classes.titleContainer}>
                     <div className={classes.titleRectangle}/>
-                    <Typography component={"h1"} className={classes.title}>{`لیست محصولات "${searchItem}"`}</Typography>
+                    <Typography component={"h1"}
+                                className={classes.title}>{`لیست محصولات ${searchItems.s}`}</Typography>
                 </div>
 
                 <Grid xs={12} className={classes.gridContainer} container direction={"row"}>

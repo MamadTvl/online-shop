@@ -68,6 +68,13 @@ export const useHeaderStyle = makeStyles((theme) => ({
         }
 
     },
+    menuLabel: {
+        fontFamily: 'Shabnam',
+        fontSize: 14,
+        [theme.breakpoints.up('sm')]: {
+            minWidth: 200,
+        }
+    },
     label: {
         alignSelf: "center",
         fontFamily: 'Shabnam',
