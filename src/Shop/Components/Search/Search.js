@@ -17,17 +17,12 @@ function Search({location}) {
     const [searchStates, dispatch] = useReducer(reducer, initialStates)
 
     const [page, setPage] = useState(0)
-    const [hasDiscount, setHasDiscount] = useState(false)
     const handleChangePages = (pageNumber) => {
         setPage(pageNumber)
     }
-    const handleChangeSwitch = () => {
-        setHasDiscount(!hasDiscount)
-    }
-    const [searchItem, setSearchItem] = useState('')
-
     const numPages = parseInt((searchStates.products.length / 10).toString()) + 1
 
+    const [searchItem, setSearchItem] = useState('')
     useEffect(() => {
         const params = new URLSearchParams(location.search)
         const s = params.get('s')
@@ -76,8 +71,8 @@ function Search({location}) {
                                     <CardContent style={{padding: '8px 16px'}} className={classes.discount}>
                                         <Typography className={classes.discountTitle}>تخفیف‌دار ها</Typography>
                                         <StyledSwitch
-                                            checked={hasDiscount}
-                                            onChange={handleChangeSwitch}
+                                            checked={searchStates.hasDiscount}
+                                            onChange={() => dispatch({type: 'discount'})}
                                         />
                                     </CardContent>
                                 </Card>

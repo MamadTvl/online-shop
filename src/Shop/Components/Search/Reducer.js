@@ -61,6 +61,8 @@ export const initialStates = {
     },
     products: initialProducts,
     categories: initialCategories,
+    hasDiscount: false,
+
 }
 
 export const reducer = (state, action) => {
@@ -76,6 +78,11 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 categories: state.categories
+            }
+        case 'discount':
+            return {
+                ...state,
+                hasDiscount: !state.hasDiscount
             }
 
         default:
