@@ -5,7 +5,8 @@ import {createBrowserHistory} from "history";
 import {ThemeProvider} from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import HomePage from "./Shop/Components/Pages/HomePage";
-import Search from "./Shop/Components/Pages/Search";
+import SearchPage from "./Shop/Components/Pages/SearchPage";
+import ProductPage from "./Shop/Components/Pages/ProductPage";
 
 
 function App() {
@@ -22,12 +23,8 @@ function App() {
             <Router history={customHistory}>
                 <Switch>
                     <Route exact path={'/'} component={HomePage}/>
-                    <Route exact path={'/search'} component={Search}/>
-                    <Route exact path={'/products/:productID'}>
-                        <div>
-                            useParams() => https://reactrouter.com/web/example/url-params
-                        </div>
-                    </Route>
+                    <Route exact path={'/search'} component={SearchPage}/>
+                    <Route exact path={'/products/:code/:product'} component={ProductPage}/>
                     <Route exact path={'/profile'}/>
                     <Route exact path={'/profile/login'}/>
                     <Route exact path={'/profile/signup'}/>

@@ -12,7 +12,7 @@ import FilterCategory from "../Search/FilterCategory";
 import {initialStates, reducer} from "../Search/Reducer";
 import {useHistory} from 'react-router-dom'
 
-function Search({location}) {
+function SearchPage({location}) {
     const classes = useStyles()
     const history = useHistory()
     const [searchStates, dispatch] = useReducer(reducer, initialStates)
@@ -137,4 +137,4 @@ function Search({location}) {
     )
 }
 
-export default Search
+export default SearchPage
