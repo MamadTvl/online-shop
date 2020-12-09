@@ -9,16 +9,18 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {useHistory, useLocation} from "react-router-dom";
 import {useHeaderStyle} from "./Styles/useHeaderStyle";
 import CategoryMenu from "./CategoryMenu";
+import SearchDialog from "./SearchDialog";
 
 function Header() {
     const classes = useHeaderStyle()
     const location = useLocation()
     const params = new URLSearchParams(location.search)
-    const categorySearch = params.get('categoryId') ? `&?categoryId=${params.get('categoryId')}` : ''
     const history = useHistory()
     const [searchInput, setSearchInput] = useState('')
     const [clicked, setClicked] = useState(false)
+    const [dialogOpen, setDialogOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null);
+
     const searchHandler = () => {
         if (!clicked) {
             const search = document.getElementById('search-website')
@@ -36,8 +38,8 @@ function Header() {
             })
             setClicked(!clicked)
         }
-
     }
+
     return (
         <AppBar position={"fixed"} className={classes.appBar}>
             <div className={classes.items}>
@@ -102,7 +104,7 @@ function Header() {
                     />
                 </FormControl>
                 <div className={classes.leftItems}>
-                    <IconButton className={classes.searchBarIcon}>
+                    <IconButton onClick={() => setDialogOpen(true)} className={classes.searchBarIcon}>
                         <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.811" height="17.811"
                                  viewBox="0 0 17.811 17.811">
                             <g id="search" transform="translate(-2.25 -2.25)" opacity="0.68">
@@ -115,8 +117,13 @@ function Header() {
                                       strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
                             </g>
                         </SvgIcon>
-
                     </IconButton>
+                    <SearchDialog
+                        searchInput={searchInput}
+                        setSearchInput={setSearchInput}
+                        open={dialogOpen}
+                        setOpen={setDialogOpen}
+                    />
                     <Button
                         size={"small"}
                         dir={'ltr'}

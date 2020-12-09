@@ -84,6 +84,12 @@ export const useHeaderStyle = makeStyles((theme) => ({
     icon: {
         color: '#8B8B8B'
     },
+    dialog: {
+        top: '-34%'
+    },
+    dialogContent: {
+
+    },
     textField: {
         width: 453,
         minHeight: 40,
