@@ -1,7 +1,7 @@
 import React from "react";
 import {useStyles} from "./Styles/AmazingOffersStyle";
 import productImage from "../../../img/img.png";
-import ProductCard from "./ProuductCard";
+import ProductCard from "../Public/ProuductCard";
 import {Typography} from "@material-ui/core";
 import useWindowSize from "../../../utills/Hooks/useWindowSize";
 

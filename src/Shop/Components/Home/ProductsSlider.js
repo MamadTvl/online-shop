@@ -8,7 +8,7 @@ import PrevArrow from './PrevArrow'
 import productImage from '../../../img/img.png'
 import {useStyles} from "./Styles/ProductsSliderStyle";
 import useWindowSize from "../../../utills/Hooks/useWindowSize";
-import ProductCard from "./ProuductCard";
+import ProductCard from "../Public/ProuductCard";
 
 
 function ProductsSlider() {

@@ -4,20 +4,18 @@ import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import ItemLink from "../../../Routes/Link/ItemLink";
 import {Card, CardContent, Grid, Typography} from "@material-ui/core";
-import ProductCard from "../Home/ProuductCard";
-import {StyledSwitch, useStyles} from "./Styles/SearchStyle";
-import TablePaginationActions from "../../../utills/TablePaginationActions";
-import FilterPrice from "./FilterPrice";
-import FilterCategory from "./FilterCategory";
-import {initialStates, reducer} from "./Reducer";
+import ProductCard from "../Public/ProuductCard";
+import {StyledSwitch, useStyles} from "../Search/Styles/SearchStyle";
+import TablePaginationActions from "../Public/TablePaginationActions";
+import FilterPrice from "../Search/FilterPrice";
+import FilterCategory from "../Search/FilterCategory";
+import {initialStates, reducer} from "../Search/Reducer";
 import {useHistory} from 'react-router-dom'
-import {usePrevious} from "../../../utills/Hooks/usePrevious";
 
 function Search({location}) {
     const classes = useStyles()
     const history = useHistory()
     const [searchStates, dispatch] = useReducer(reducer, initialStates)
-    const prevArray = usePrevious(searchStates.categories)
     const [page, setPage] = useState(0)
     const handleChangePages = (pageNumber) => {
         setPage(pageNumber)

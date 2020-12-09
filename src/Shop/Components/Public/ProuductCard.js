@@ -1,7 +1,7 @@
 import React from "react";
 import {Card, CardContent, CardMedia, Typography} from "@material-ui/core";
 import Chip from "@material-ui/core/Chip";
-import {useStyles} from "./Styles/ProductsSliderStyle";
+import {useStyles} from "../Home/Styles/ProductsSliderStyle";
 
 
 function ProductCard(props) {

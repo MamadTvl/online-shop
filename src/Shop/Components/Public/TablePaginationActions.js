@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, ButtonGroup, IconButton, Typography} from "@material-ui/core";
-import {toFaDigit} from './ToFaDigit'
+import {toFaDigit} from '../../../utills/ToFaDigit'
 import * as PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core/styles";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
