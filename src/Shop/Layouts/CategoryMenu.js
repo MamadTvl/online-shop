@@ -71,7 +71,7 @@ function CategoryMenu(props) {
             {
                 initialCategories.map((category, index) => (
                     <ItemLink to={{pathname: '/search', search: `${search}categoryId[${index}]=${category.id}`}}>
-                        <MenuItem className={classes.menuLabel} onClick={handleClose}>{category.name}</MenuItem>
+                        <MenuItem key={category.id} className={classes.menuLabel} onClick={handleClose}>{category.name}</MenuItem>
                     </ItemLink>
                 ))
             }
