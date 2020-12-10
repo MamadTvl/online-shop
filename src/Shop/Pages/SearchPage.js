@@ -1,15 +1,15 @@
 import React, {useEffect, useReducer, useState} from "react";
-import ShopLayout from "../../Layouts/ShopLayout";
+import ShopLayout from "../Layouts/ShopLayout";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import ItemLink from "../../../Routes/Link/ItemLink";
+import ItemLink from "../../Routes/Link/ItemLink";
 import {Card, CardContent, Grid, Typography} from "@material-ui/core";
-import ProductCard from "../Public/ProuductCard";
-import {StyledSwitch, useStyles} from "../Search/Styles/SearchStyle";
-import TablePaginationActions from "../Public/TablePaginationActions";
-import FilterPrice from "../Search/FilterPrice";
-import FilterCategory from "../Search/FilterCategory";
-import {initialStates, reducer} from "../Search/Reducer";
+import ProductCard from "../Components/Public/ProuductCard";
+import {StyledSwitch, useStyles} from "../Components/Search/Styles/SearchStyle";
+import TablePaginationActions from "../Components/Public/TablePaginationActions";
+import FilterPrice from "../Components/Search/FilterPrice";
+import FilterCategory from "../Components/Search/FilterCategory";
+import {initialStates, reducer} from "../Components/Search/Reducer";
 import {useHistory} from 'react-router-dom'
 
 function SearchPage({location}) {
@@ -17,9 +17,11 @@ function SearchPage({location}) {
     const history = useHistory()
     const [searchStates, dispatch] = useReducer(reducer, initialStates)
     const [page, setPage] = useState(0)
+    const [change, setChange] = useState(0)
     const handleChangePages = (pageNumber) => {
         setPage(pageNumber)
     }
+    console.log(change)
     const numPages = parseInt((searchStates.products.length / 10).toString()) + 1
 
     const [searchItems, setSearchItems] = useState({
@@ -53,7 +55,7 @@ function SearchPage({location}) {
             }
         }
         history.push(`/search?${newLocation}`)
-    }, [JSON.stringify(searchStates.categories)])
+    }, [change])
 
     return (
         <ShopLayout>
@@ -85,6 +87,7 @@ function SearchPage({location}) {
                         <Grid className={classes.categoryMdItem} xs={12} item>
                             <div>
                                 <FilterCategory
+                                    setChange={setChange}
                                     categories={searchStates.categories}
                                     dispatch={dispatch}
                                 />

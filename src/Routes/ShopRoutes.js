@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Switch} from 'react-router-dom';
-import HomePage from "../Shop/Components/Pages/HomePage";
+import HomePage from "../Shop/Pages/HomePage";
 
 function ShopRoutes(props) {
 

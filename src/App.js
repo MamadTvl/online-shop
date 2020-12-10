@@ -4,9 +4,9 @@ import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom
 import {createBrowserHistory} from "history";
 import {ThemeProvider} from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import HomePage from "./Shop/Components/Pages/HomePage";
-import SearchPage from "./Shop/Components/Pages/SearchPage";
-import ProductPage from "./Shop/Components/Pages/ProductPage";
+import HomePage from "./Shop/Pages/HomePage";
+import SearchPage from "./Shop/Pages/SearchPage";
+import ProductPage from "./Shop/Pages/ProductPage";
 
 
 function App() {

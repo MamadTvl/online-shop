@@ -8,7 +8,7 @@ import * as PropTypes from "prop-types";
 
 function FilterCategory(props) {
     const classes = useFilterCategoryStyle()
-    const {categories, dispatch} = props
+    const {categories, dispatch, setChange} = props
     const [expanded, setExpanded] = useState(false)
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -34,7 +34,7 @@ function FilterCategory(props) {
                                                 categoryId: category.id,
                                                 value: !category.checked
                                             })
-
+                                            setChange(prvState => prvState + 1)
                                         }}
                                         name={category.name}
 
@@ -68,6 +68,7 @@ function FilterCategory(props) {
                                                             categoryId: category.id,
                                                             value: !category.checked
                                                         })
+                                                        setChange(prvState => prvState + 1)
                                                     }}
                                                 />}
                                             label={<Typography className={classes.label}>{category.name}</Typography>}
@@ -90,4 +91,5 @@ export default FilterCategory
 FilterCategory.propTypes = {
     categories: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
+    setChange: PropTypes.number.isRequired,
 }

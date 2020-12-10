@@ -76,7 +76,6 @@ export const reducer = (state, action) => {
         case 'selectCategory':
             let index = state.categories.findIndex(x => x.id === action.categoryId)
             state.categories[index].checked = action.value
-            state.changed ++
 
             return {
                 ...state,
@@ -87,6 +86,7 @@ export const reducer = (state, action) => {
                 ...state,
                 hasDiscount: !state.hasDiscount
             }
+
 
         default:
             break
