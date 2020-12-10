@@ -4,10 +4,10 @@ import PhotoViewer from "./PhotoViewer";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import {separateDigit} from "../../../utills/ToFaDigit";
-import {useDetailCardStyle} from "./Styles/useDetailCardStyle";
+import {useProductStyle} from "./Styles/useProductStyle";
 
-function DetailCard() {
-    const classes = useDetailCardStyle()
+function Product() {
+    const classes = useProductStyle()
     const product = {
         title: 'آستین کوتاه باله دار خاکستری',
         detail: 'تیشرت دخترانه جنس: یکرو ویسکوز، اسلپ\n' +
@@ -157,4 +157,4 @@ function DetailCard() {
 }
 
 
-export default DetailCard
+export default Product

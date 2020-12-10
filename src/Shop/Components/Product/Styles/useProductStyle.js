@@ -1,7 +1,7 @@
 import {makeStyles} from "@material-ui/styles";
 
 
-export const useDetailCardStyle = makeStyles((theme) => ({
+export const useProductStyle = makeStyles((theme) => ({
 
     detailContainer: {
         display: 'flex',
