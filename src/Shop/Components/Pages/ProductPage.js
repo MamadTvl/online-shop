@@ -8,9 +8,9 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import ItemLink from "../../../Routes/Link/ItemLink";
 import {Typography} from "@material-ui/core";
 import ProductDetail from "../Product/ProductDetail";
+import SimilarProducts from "../Product/SimilarProducts"
 
-
-function ProductPage() {
+function ProductPage() { // todo: make this responsive
     const {code, id, product} = useParams()
     const location = useLocation()
     const classes = useProductPageStyle()
@@ -31,6 +31,7 @@ function ProductPage() {
                 <Product/>
 
                 <ProductDetail/>
+                <SimilarProducts/>
 
             </div>
         </ShopLayout>

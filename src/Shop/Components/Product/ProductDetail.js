@@ -26,6 +26,9 @@ function ProductDetail() {
     const StyledTextField = withStyles({
         root: {
             '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                    borderColor: '#EDEDED',
+                },
                 '&:hover fieldset': {
                     borderColor: '#F16522',
                 },
@@ -52,10 +55,10 @@ function ProductDetail() {
                     <CommentCard comment={comment}/>
                     <StyledTextField
                         id="outlined-textarea"
-                        placeholder="دیدگاه خود رو بنویسید"
+                        placeholder="دیدگاه خود را بنویسید"
                         InputProps={{
                             endAdornment:
-                                <InputAdornment style={{potision: 'absolute', left: 0, bottom: 28}} position="end">
+                                <InputAdornment style={{position: 'absolute', left: 0, bottom: 28}} position="end">
                                     <IconButton>
                                         <SendRoundedIcon style={{transform: 'rotate(180deg)', color: '#F16522'}}/>
                                     </IconButton>
