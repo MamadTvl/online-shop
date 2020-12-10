@@ -4,9 +4,8 @@ import {makeStyles} from "@material-ui/styles";
 export const usePhotoViewerStyle = makeStyles((theme) => ({
     container: {
         position: 'relative',
-        width: '40vw',
-        height: '40vw',//maybe grid help
-        padding: 24,
+        width: '30vw',
+        height: '30vw',//maybe grid help
     },
     viewer: {
         width: '100%'
@@ -22,7 +21,7 @@ export const usePhotoViewerStyle = makeStyles((theme) => ({
         borderRadius: '50%',
         backgroundColor: 'rgba(0, 0, 0, 0.4)',
         right: '5%',
-        top: '50%',
+        top: '41%',
     },
     prevArrow: {
         position: 'absolute',
@@ -31,23 +30,23 @@ export const usePhotoViewerStyle = makeStyles((theme) => ({
         height: 24,
         backgroundColor: 'rgba(0, 0, 0, 0.4)',
         left: '5%',
-        top: '50%',
+        top: '41%',
     },
     imageButtonContainer: {
         display: 'flex',
         justifyContent: 'space-between',
         position: 'relative',
-        bottom: '20%',
-        paddingRight: '24px',
+        bottom: '23%',
+        paddingRight: '16px',
         overflowX: 'scroll',
         msOverflowStyle: 'none',// IE and Edge
         scrollbarWidth: 'none', // firefox
         '&::-webkit-scrollbar': { //chrome
-            display: "none",
+            display: 'none',
         },
     },
     listItem: {
-        marginLeft: '10%',
+        marginLeft: '16px',
     },
 
 

@@ -4,7 +4,7 @@ import {useStyles} from "./Styles/ProductsSliderStyle";
 
 function NextArrow(props) {
     const classes = useStyles()
-    const {className, style, onClick} = props;
+    const {className, style, onClick} = props; //todo: delete className
     return (
         <div
             className={classes.nextArrow}

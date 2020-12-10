@@ -20,7 +20,7 @@ function ItemLink(props) {
 
 ItemLink.propTypes = {
     text: PropTypes.string,
-    to: PropTypes.object.isRequired,
+    to: PropTypes.any.isRequired,
     children: PropTypes.object,
 };
 
