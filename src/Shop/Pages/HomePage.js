@@ -6,8 +6,8 @@ import ProductsSlider from "../Components/Home/ProductsSlider";
 import AmazingOffers from "../Components/Home/AmazingOffers";
 import Attributes from "../Components/Home/Attributes";
 import BlogInterView from "../Components/Home/BlogInterView";
+
 function HomePage() {
-    //todo : responsive for ipad pro
     return (
         <ShopLayout>
            <Slider/>

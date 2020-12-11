@@ -7,7 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import HomePage from "./Shop/Pages/HomePage";
 import SearchPage from "./Shop/Pages/SearchPage";
 import ProductPage from "./Shop/Pages/ProductPage";
-
+import ProfileRoutes from './Routes/ProfileRoutes'
 
 function App() {
 
@@ -25,14 +25,9 @@ function App() {
                     <Route exact path={'/'} component={HomePage}/>
                     <Route exact path={'/search'} component={SearchPage}/>
                     <Route exact path={'/products/:code/:product'} component={ProductPage}/>
-                    <Route exact path={'/profile'}/>
-                    <Route exact path={'/profile/login'}/>
-                    <Route exact path={'/profile/signup'}/>
-                    <Route exact path={'/profile/forget-password'}/>
-                    <Route exact path={'/profile/personal-info'}/>
-                    <Route exact path={'/profile/add-address'}/>
-                    <Route exact path={'/profile/cart'}/>
-                    <Route exact path={'/profile/order'}/>
+                    {/*<Route exact path={'/profile'} >*/}
+                    <ProfileRoutes/>
+                    {/*</Route>*/}
                     <Route exact path={'/not-found'}>
                         <div>
                             صفحه ای که دنبال آن بودید پیدا نشد
