@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import {AppBar, Card, IconButton, Tab, Tabs, TextField, Typography} from "@material-ui/core";
+import {AppBar, Card, IconButton, Tab, Tabs, Typography} from "@material-ui/core";
 import {toFaDigit} from "../../../utills/ToFaDigit";
-import {withStyles} from "@material-ui/styles";
 import TabPanel from "./TabPanel";
 import {useProductDetailStyle} from "./Styles/useProductDetailStyle";
 import CommentCard from "./CommentCard";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
+import {StyledTextField} from "../Public/StyledTextField";
 
 function ProductDetail() {
     const classes = useProductDetailStyle()
@@ -23,21 +23,6 @@ function ProductDetail() {
         setValue(newValue);
     };
 
-    const StyledTextField = withStyles({
-        root: {
-            '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                    borderColor: '#EDEDED',
-                },
-                '&:hover fieldset': {
-                    borderColor: '#F16522',
-                },
-                '&.Mui-focused fieldset': {
-                    borderColor: '#F16522',
-                },
-            },
-        },
-    })(TextField);
 
     return (
         <Card className={classes.card}>
