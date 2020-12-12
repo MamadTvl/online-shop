@@ -16,28 +16,45 @@ export const useLoginPageStyle = makeStyles((theme) => ({
     card: {
         display: "flex",
         flexDirection: 'row',
-        justifyContent: "flex-start"
+        justifyContent: "flex-start",
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'column'
+        },
     },
+    imageContainer: {
+        margin: 'auto 37px auto 0px',
+        [theme.breakpoints.down('xs')]: {
+            margin: 'auto',
+            marginTop: 24,
+        },
 
+    },
     image: {
         width: 122,
         height: 122,
-        margin: 'auto 37px auto 0px',
+
     },
     cardContent: {
         display: 'flex',
         flexDirection: 'column',
-        width: '77%'
+        width: '77%',
+        [theme.breakpoints.down('xs')]: {
+            width: '100%',
+        },
     },
     contentRoot: {
         '&:last-child': {
-            padding: '32px 45px 32px 24px'
+            padding: '32px 45px 32px 24px',
+            [theme.breakpoints.down('xs')]: {
+                padding: 12.5,
+            },
+
         },
 
     },
 
     mobileContainer: {
-        margin: 'auto 24px'
+        margin: 'auto 12.5px'
     },
 
     label: {
@@ -51,7 +68,7 @@ export const useLoginPageStyle = makeStyles((theme) => ({
     },
     root: {},
     passwordContainer: {
-        margin: 'auto 24px'
+        margin: 'auto 12.5px'
     },
     passwordLabels: {
         display: "flex",
@@ -64,20 +81,49 @@ export const useLoginPageStyle = makeStyles((theme) => ({
         fontSize: 12,
         color: '#545454',
         opacity: 0.68,
-        margin: 'auto'
+        margin: 'auto',
+        [theme.breakpoints.down('xs')]: {
+            display: 'none'
+        },
+    },
+    forgetMobileLabel: {
+        fontFamily: 'Shabnam',
+        fontSize: 12,
+        color: '#545454',
+        opacity: 0.68,
+        margin: 'auto',
+        marginTop: 12,
+        [theme.breakpoints.up('sm')]: {
+            display: 'none',
+
+        },
     },
     action: {
         display: 'flex',
         justifyContent: 'space-between',
         marginTop: '24px',
         alignItems: 'center',
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'column-reverse',
+            margin: 'auto 12.5px',
+            marginTop: 39.5,
+        },
+
     },
     signupContainer: {
         display: 'flex',
         justifyContent: 'flex-start',
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'column-reverse',
+        },
     },
     signupButton: {
-        color: '#434343',
+        fontFamily: 'Shabnam',
+        fontSize: 14,
+        color: '#545454',
+    },
+    iconColor: {
+        color: '#434343'
     },
     signInButton: {
         minWidth: 226,
@@ -92,6 +138,16 @@ export const useLoginPageStyle = makeStyles((theme) => ({
             opacity: '70%'
         },
     },
+    buttonProgress: {
+        position: "absolute",
+        right: '94px',
+        top: '3%',
+        color: '#F16522',
+        zIndex: 1,
+        [theme.breakpoints.down('xs')]: {
+            right: '43.25%',
+        },
+    }
 
 
 }));

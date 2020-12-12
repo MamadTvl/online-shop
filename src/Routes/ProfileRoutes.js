@@ -1,5 +1,4 @@
 import React from "react";
-import {Route} from 'react-router-dom';
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import LoginPage from "../Shop/Pages/LoginPage";
@@ -7,13 +6,33 @@ import LoginPage from "../Shop/Pages/LoginPage";
 function ProfileRoutes() {
     return (
         <>
-            <PrivateRoute>
-                <Route exact path={'/profile'}/>
-                <Route exact path={'/profile/personal-info'}/>
-                <Route exact path={'/profile/add-address'}/>
-                <Route exact path={'/profile/cart'}/>
-                <Route exact path={'/profile/order'}/>
+            <PrivateRoute path={'/profile'}>
+                <div>
+                    here
+                </div>
             </PrivateRoute>
+            <PrivateRoute path={'/profile/personal-info'}>
+                <div>
+                    kadl
+                </div>
+            </PrivateRoute>
+            <PrivateRoute path={'/profile/add-address'}>
+                <div>
+                    kadl
+                </div>
+            </PrivateRoute>
+            <PrivateRoute path={'/profile/cart'}>
+                <div>
+                    kadl
+                </div>
+            </PrivateRoute>
+
+            <PrivateRoute path={'/profile/order'}>
+                <div>
+                    kadl
+                </div>
+            </PrivateRoute>
+
 
             <PublicRoute path={`/profile/login`}>
                 <LoginPage/>

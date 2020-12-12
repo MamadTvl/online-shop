@@ -10,6 +10,7 @@ import {useHistory, useLocation} from "react-router-dom";
 import {useHeaderStyle} from "./Styles/useHeaderStyle";
 import CategoryMenu from "./CategoryMenu";
 import SearchDialog from "./SearchDialog";
+import ItemLink from "../../Routes/Link/ItemLink";
 
 function Header() {
     const classes = useHeaderStyle()
@@ -27,9 +28,9 @@ function Header() {
             search.addEventListener('keyup', (event) => {
                 if (event.keyCode === 13 && search.value !== '') {
                     let tempLoc = location.search === '' ? '?' : location.search
-                    if (tempLoc.includes('?s=')){
+                    if (tempLoc.includes('?s=')) {
                         tempLoc = tempLoc.replace(`${params.get('s')}`, search.value)
-                    }else {
+                    } else {
                         tempLoc += `s=${search.value}`
                     }
                     history.push(`/search${tempLoc}`);
@@ -124,11 +125,31 @@ function Header() {
                         open={dialogOpen}
                         setOpen={setDialogOpen}
                     />
-                    <Button
-                        size={"small"}
-                        dir={'ltr'}
-                        className={classes.login}
-                        endIcon={
+                    <ItemLink style={{margin: 'auto'}} to={'/profile/login'}>
+                        <Button
+                            size={"small"}
+                            dir={'ltr'}
+                            className={classes.login}
+                            endIcon={
+                                <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.5" height="19.5"
+                                         viewBox="0 0 17.5 19.5">
+                                    <g id="user" transform="translate(-3.25 -2.25)">
+                                        <path id="Path_10" data-name="Path 10"
+                                              d="M20,21V19a4,4,0,0,0-4-4H8a4,4,0,0,0-4,4v2"
+                                              fill="none" stroke="#8B8B8B" strokeLinecap="round" strokeLinejoin="round"
+                                              strokeWidth="1.5"/>
+                                        <circle id="Ellipse_1" data-name="Ellipse 1" cx="4" cy="4" r="4"
+                                                transform="translate(8 3)" fill="none" stroke="#8B8B8B"
+                                                strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
+                                    </g>
+                                </SvgIcon>
+                            }
+                        >
+                            ورود / ثبت‌نام
+                        </Button>
+                    </ItemLink>
+                    <ItemLink to={'/profile/login'}>
+                        <IconButton className={classes.iconButtons}>
                             <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.5" height="19.5"
                                      viewBox="0 0 17.5 19.5">
                                 <g id="user" transform="translate(-3.25 -2.25)">
@@ -141,24 +162,8 @@ function Header() {
                                             strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
                                 </g>
                             </SvgIcon>
-                        }
-                    >
-                        ورود / ثبت‌نام
-                    </Button>
-                    <IconButton className={classes.iconButtons}>
-                        <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.5" height="19.5"
-                                 viewBox="0 0 17.5 19.5">
-                            <g id="user" transform="translate(-3.25 -2.25)">
-                                <path id="Path_10" data-name="Path 10"
-                                      d="M20,21V19a4,4,0,0,0-4-4H8a4,4,0,0,0-4,4v2"
-                                      fill="none" stroke="#8B8B8B" strokeLinecap="round" strokeLinejoin="round"
-                                      strokeWidth="1.5"/>
-                                <circle id="Ellipse_1" data-name="Ellipse 1" cx="4" cy="4" r="4"
-                                        transform="translate(8 3)" fill="none" stroke="#8B8B8B"
-                                        strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
-                            </g>
-                        </SvgIcon>
-                    </IconButton>
+                        </IconButton>
+                    </ItemLink>
                     <Button
                         size={"small"}
                         dir={'ltr'}

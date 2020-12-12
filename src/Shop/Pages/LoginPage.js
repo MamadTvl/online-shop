@@ -1,22 +1,42 @@
 import React, {useState} from "react";
 import ShopLayout from "../Layouts/ShopLayout";
 import {useLoginPageStyle} from "./Styles/useLoginPageStyle";
-import {Button, Card, CardContent, CardMedia, IconButton, InputAdornment, Typography} from "@material-ui/core";
+import {
+    Button,
+    Card,
+    CardContent,
+    CircularProgress,
+    IconButton,
+    InputAdornment,
+    TextField,
+    Typography
+} from "@material-ui/core";
 import loginImage from '../../img/Login.png'
-import {StyledTextField} from "../Components/Public/StyledTextField";
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import ItemLink from "../../Routes/Link/ItemLink";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Title from "../Components/Public/Title";
+import useAxios from "axios-hooks";
+import {useHistory} from 'react-router-dom'
+import useWindowSize from "../../utills/Hooks/useWindowSize";
 
 function LoginPage() {
     const classes = useLoginPageStyle()
+    const history = useHistory()
+    const baseUrl = "https://api.didartshop.ir"
     const [values, setValues] = useState({
         mobileNumber: '',
         password: '',
         showPassword: false
     })
+    const [error, setError] = useState(false)
+    const [{loading}, signIn] = useAxios({
+        url: `${baseUrl}/user/sign_in`,
+        method: 'POST'
+    }, {manual: true})
+    const size = useWindowSize()
+
     const handleChange = (props) => (event) => {
         setValues(prevState => {
             return {...prevState, [props]: event.target.value}
@@ -32,20 +52,41 @@ function LoginPage() {
         event.preventDefault();
     };
 
+    const handleLogin = async (event) => {
+        event.preventDefault()
+        try {
+            const response = await signIn({
+                data: {
+                    "mobile_number": values.mobileNumber,
+                    "password": values.password,
+                }
+            })
+            if (response.data.status === "success") {
+                localStorage.setItem("Authorization", response.data.data.token)
+                history.push('/profile')
+            } else {
+                setError(true)
+            }
+        } catch (err) {
+            history.push('/profile/login')
+        }
+    }
+
     return (
         <ShopLayout>
-            <div className={classes.container}>
+            <form onSubmit={handleLogin} className={classes.container}>
                 <Title title={'ورود به حساب کاربری'}/>
                 <Card className={classes.card}>
-                    <CardMedia
-                        image={loginImage}
-                        className={classes.image}
-                    />
+                    <div className={classes.imageContainer}>
+                        <img alt={'login'} src={loginImage} className={classes.image}/>
+                    </div>
                     <CardContent classes={{root: classes.contentRoot}} className={classes.cardContent}>
                         <div className={classes.mobileContainer}>
-                            <Typography style={{marginBottom: '12px'}} className={classes.label}>شماره موبایل</Typography>
-                            <StyledTextField
+                            <Typography style={{marginBottom: '12px'}} className={classes.label}>شماره
+                                موبایل</Typography>
+                            <TextField
                                 dir={'ltr'}
+                                error={error}
                                 value={values.mobileNumber}
                                 onChange={handleChange('mobileNumber')}
                                 InputProps={{
@@ -66,8 +107,10 @@ function LoginPage() {
                                         کرده‌اید!؟</Typography>
                                 </ItemLink>
                             </div>
-                            <StyledTextField
+                            <TextField
+                                error={error}
                                 dir={'ltr'}
+                                autocompelete={'current-password'}
                                 value={values.password}
                                 onChange={handleChange('password')}
                                 type={values.showPassword ? 'text' : 'password'}
@@ -90,28 +133,73 @@ function LoginPage() {
                                 fullWidth
                                 variant="outlined"
                             />
-
+                            <ItemLink style={{margin: 'auto 0'}} to={'/profile/forget-password'}>
+                                <Typography className={classes.forgetMobileLabel}>رمزعبور خود را فراموش
+                                    کرده‌اید!؟</Typography>
+                            </ItemLink>
                         </div>
+                        {
+                            size.width < 600 &&
+                            <div className={classes.action}>
+                                <ItemLink style={{alignSelf: 'flex-start', marginTop: 24,}} to={'/profile/signup'}>
+                                    <Button
+                                        className={classes.signupButton}
+                                        dir={'ltr'}
+                                        variant={'text'}
+                                        endIcon={
+                                            <AddCircleOutlineIcon color={'primary'}
+                                                                  classes={{colorPrimary: classes.iconColor}}/>
+                                        }
+                                    >
+                                        ساخت حساب‌کاربری جدید
+                                    </Button>
+                                </ItemLink>
+                                <div style={{position: 'relative', width: '100%'}}>
+                                    <Button
+                                        fullWidth
+                                        disabled={loading}
+                                        type={'submit'}
+                                        className={classes.signInButton}
+                                        variant={'contained'}
+                                    >
+                                        ورود</Button>
+                                    {loading && <CircularProgress size={38} className={classes.buttonProgress}/>}
+                                </div>
+                            </div>
+                        }
                     </CardContent>
+
                 </Card>
-                <div className={classes.action}>
-                    <div className={classes.signupContainer}>
-                        <ItemLink style={{display: 'flex'}} to={'/profile/signup'}>
-                            <IconButton className={classes.signupButton}>
-                                <AddCircleOutlineIcon/>
-                            </IconButton>
-                            <Typography style={{margin: 'auto'}} className={classes.label}>ساخت حساب‌کاربری جدید</Typography>
+
+                {
+                    size.width >= 600 &&
+                    <div className={classes.action}>
+                        <ItemLink to={'/profile/signup'}>
+                            <Button
+                                className={classes.signupButton}
+                                dir={'ltr'}
+                                variant={'text'}
+                                endIcon={
+                                    <AddCircleOutlineIcon color={'primary'}
+                                                          classes={{colorPrimary: classes.iconColor}}/>
+                                }
+                            >
+                                ساخت حساب‌کاربری جدید
+                            </Button>
                         </ItemLink>
+                        <div style={{position: 'relative'}}>
+                            <Button
+                                disabled={loading}
+                                type={'submit'}
+                                className={classes.signInButton}
+                                variant={'contained'}
+                            >
+                                ورود</Button>
+                            {loading && <CircularProgress size={38} className={classes.buttonProgress}/>}
+                        </div>
                     </div>
-                    <Button
-                        className={classes.signInButton}
-                        variant={'contained'}
-                    >
-
-
-                        ورود</Button>
-                </div>
-            </div>
+                }
+            </form>
         </ShopLayout>
     )
 }
