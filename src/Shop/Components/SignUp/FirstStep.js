@@ -2,12 +2,16 @@ import React from "react";
 import image from '../../../img/create_account.png'
 import {TextField, Typography} from "@material-ui/core";
 import {useSignUpPageStyle} from "../../Pages/Styles/useSignUpPageStyle";
+import PropType from 'prop-types'
+import {toFaDigit} from "../../../utills/ToFaDigit";
 
-
-function FirstStep() {
+function FirstStep(props) {
     const classes = useSignUpPageStyle()
-
-    return(
+    const {values, setValues, errors} = props
+    const handleChange = (mobileNumber) => (event) => {
+        setValues({...values, [mobileNumber]: event.target.value})
+    }
+    return (
         <>
             <div className={classes.imageContainer}>
                 <img src={image} alt={'create_account'} className={classes.image}/>
@@ -16,13 +20,14 @@ function FirstStep() {
                 <Typography className={classes.label}>شماره موبایل</Typography>
                 <TextField
                     dir={'ltr'}
-                    // error={error}
-                    // value={values.mobileNumber}
-                    // onChange={handleChange('mobileNumber')}
+                    error={errors.mobileNumber}
+                    placeholder={toFaDigit('09123456789')}
+                    value={toFaDigit(values.mobileNumber)}
+                    onChange={handleChange('mobileNumber')}
                     InputProps={{
                         classes: {
                             input: classes.input,
-                            root: classes.TextFieldRoot,
+                            root: classes.textFieldRoot,
                         }
                     }}
                     fullWidth
@@ -31,6 +36,12 @@ function FirstStep() {
             </div>
         </>
     )
+}
+
+FirstStep.propTypes = {
+    values: PropType.object.isRequired,
+    setValues: PropType.func.isRequired,
+    errors: PropType.object.isRequired,
 }
 
 
