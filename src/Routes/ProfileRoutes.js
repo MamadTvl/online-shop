@@ -3,6 +3,7 @@ import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import LoginPage from "../Shop/Pages/LoginPage";
 import SignUpPage from "../Shop/Pages/SignUpPage";
+import ForgetPassPage from "../Shop/Pages/ForgetPassPage";
 
 function ProfileRoutes() {
     return (
@@ -42,9 +43,7 @@ function ProfileRoutes() {
                 <SignUpPage/>
             </PublicRoute>
             <PublicRoute path={`/profile/forget-password`}>
-                <div>
-                    forget password
-                </div>
+                <ForgetPassPage/>
             </PublicRoute>
         </>
     )
