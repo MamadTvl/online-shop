@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Button, Card} from "@material-ui/core";
 import Title from "../Components/Public/Title";
-import Step from "../Components/SignUp/Step"
+import Step from "../Components/Public/Step"
 import FirstStep from "../Components/SignUp/FirstStep";
 import ShopLayout from "../Layouts/ShopLayout";
 import {useHistory} from 'react-router-dom'
@@ -52,41 +52,11 @@ function SignUpPage() {
     const setButton = (step) => {
         switch (step) {
             case 0:
-                return (
-                    <Button
-                        // disabled={loading}
-                        type={'submit'}
-                        fullWidth
-                        className={classes.signUpButton}
-                        variant={'contained'}
-                    >
-                        ارسال کد
-                    </Button>
-                )
+                return 'ارسال کد'
             case 1:
-                return (
-                    <Button
-                        // disabled={loading}
-                        type={'submit'}
-                        fullWidth
-                        className={classes.signUpButton}
-                        variant={'contained'}
-                    >
-                        تایید کد
-                    </Button>
-                )
+                return 'تایید کد'
             case 2:
-                return (
-                    <Button
-                        // disabled={loading}
-                        type={'submit'}
-                        fullWidth
-                        className={classes.signUpButton}
-                        variant={'contained'}
-                    >
-                        ثبت‌نام
-                    </Button>
-                )
+                return 'ثبت‌نام'
             default:
                 break
         }
@@ -141,7 +111,15 @@ function SignUpPage() {
                     </Step>
                 </Card>
                 <div style={{width: size.width >= 600 ? '33.33%' : '100%', float: 'left', marginTop: 24}}>
-                    {setButton(step)}
+                    <Button
+                        // disabled={loading}
+                        type={'submit'}
+                        fullWidth
+                        className={classes.signUpButton}
+                        variant={'contained'}
+                    >
+                        {setButton(step)}
+                    </Button>
                 </div>
             </form>
         </ShopLayout>

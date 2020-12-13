@@ -3,16 +3,6 @@ import {makeStyles} from "@material-ui/styles";
 
 export const useSignUpPageStyle = makeStyles((theme) => ({
 
-    step: {
-        display: 'flex',
-        padding: 32,
-        alignItems: 'center',
-        [theme.breakpoints.down('xs')]: {
-            flexDirection: 'column'
-        },
-    },
-
-
     container: {
         marginTop: theme.spacing(7),
         marginBottom: 185,
@@ -34,7 +24,6 @@ export const useSignUpPageStyle = makeStyles((theme) => ({
     },
 
     signUpButton: {
-        // minWidth: 226,
         height: 40,
         backgroundColor: '#F16522',
         color: 'white',
