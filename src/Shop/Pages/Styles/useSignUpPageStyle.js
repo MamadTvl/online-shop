@@ -132,5 +132,7 @@ export const useSignUpPageStyle = makeStyles((theme) => ({
         color: '#F16522',
     },
 
+    /** ThirdStep **/
+
 
 }));

@@ -8,6 +8,7 @@ import {useHistory} from 'react-router-dom'
 import {useSignUpPageStyle} from "./Styles/useSignUpPageStyle";
 import SecondStep from "../Components/SignUp/SecondStep";
 import useWindowSize from "../../utills/Hooks/useWindowSize";
+import ThirdStep from "../Components/SignUp/ThirdStep";
 
 function SignUpPage() {
     const classes = useSignUpPageStyle()
@@ -18,13 +19,12 @@ function SignUpPage() {
         mobileNumber: '',
         code: '',
         timer: 2,
-        information: {
-            name: '',
-            email: '',
-            state: '',
-            city: '',
-            password: ''
-        }
+        name: '',
+        email: '',
+        state: '',
+        city: '',
+        password: ''
+
     })
     const [errors, setErrors] = useState({
         mobileNumber: false,
@@ -77,8 +77,14 @@ function SignUpPage() {
                 )
             case 2:
                 return (
-                    <Button>
-
+                    <Button
+                        // disabled={loading}
+                        type={'submit'}
+                        fullWidth
+                        className={classes.signUpButton}
+                        variant={'contained'}
+                    >
+                        ثبت‌نام
                     </Button>
                 )
             default:
@@ -117,7 +123,7 @@ function SignUpPage() {
                             errors={errors}
                         />
                     </Step>
-                    <Step style={{}} index={1} step={step}>
+                    <Step index={1} step={step}>
                         <SecondStep
                             expiryTimestamp={time}
                             values={values}
@@ -126,10 +132,12 @@ function SignUpPage() {
                             setStep={setStep}
                         />
                     </Step>
-                    <Step style={{}} index={2} step={step}>
-                        <div>
-                            helllllo
-                        </div>
+                    <Step index={2} step={step}>
+                        <ThirdStep
+                            values={values}
+                            setValues={setValues}
+                            errors={errors}
+                        />
                     </Step>
                 </Card>
                 <div style={{width: size.width >= 600 ? '33.33%' : '100%', float: 'left', marginTop: 24}}>
