@@ -32,6 +32,10 @@ export const useLoginPageStyle = makeStyles((theme) => ({
     image: {
         width: 122,
         height: 122,
+        [theme.breakpoints.down('xs')]: {
+            width: 88,
+            height: 88,
+        },
 
     },
     cardContent: {

@@ -2,6 +2,7 @@ import React from "react";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import LoginPage from "../Shop/Pages/LoginPage";
+import SignUpPage from "../Shop/Pages/SignUpPage";
 
 function ProfileRoutes() {
     return (
@@ -38,9 +39,7 @@ function ProfileRoutes() {
                 <LoginPage/>
             </PublicRoute>
             <PublicRoute path={`/profile/signup`}>
-                <div>
-                    signup
-                </div>
+                <SignUpPage/>
             </PublicRoute>
             <PublicRoute path={`/profile/forget-password`}>
                 <div>
