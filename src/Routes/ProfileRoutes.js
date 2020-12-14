@@ -4,21 +4,20 @@ import PublicRoute from "./PublicRoute";
 import LoginPage from "../Shop/Pages/LoginPage";
 import SignUpPage from "../Shop/Pages/SignUpPage";
 import ForgetPassPage from "../Shop/Pages/ForgetPassPage";
+import ProfilePage from "../Shop/Pages/ProfilePage";
 
 function ProfileRoutes() {
     return (
         <>
             <PrivateRoute path={'/profile'}>
-                <div>
-                    here
-                </div>
+                <ProfilePage/>
             </PrivateRoute>
             <PrivateRoute path={'/profile/personal-info'}>
                 <div>
                     kadl
                 </div>
             </PrivateRoute>
-            <PrivateRoute path={'/profile/add-address'}>
+            <PrivateRoute path={'/profile/addresses'}>
                 <div>
                     kadl
                 </div>
