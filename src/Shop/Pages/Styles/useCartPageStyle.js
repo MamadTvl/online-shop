@@ -6,7 +6,7 @@ export const useCartPageStyle = makeStyles((theme) => ({
         marginTop: theme.spacing(7),
         marginBottom: 185,
         padding: theme.spacing(0, 17.5),
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('md')]: {
             padding: theme.spacing(0, 3),
         },
 
@@ -74,6 +74,7 @@ export const useCartPageStyle = makeStyles((theme) => ({
             backgroundColor: '#F16522',
             opacity: '70%'
         },
+        marginLeft: '-8px'
 
     },
     textFieldRoot: {
@@ -96,4 +97,10 @@ export const useCartPageStyle = makeStyles((theme) => ({
             opacity: '70%'
         },
     },
+    // steps style
+    orderCardsStep: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
+    }
 }));

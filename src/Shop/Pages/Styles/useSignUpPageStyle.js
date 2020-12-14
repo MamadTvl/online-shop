@@ -15,6 +15,14 @@ export const useSignUpPageStyle = makeStyles((theme) => ({
             padding: 18.5,
         },
     },
+    step: {
+        display: 'flex',
+        padding: 32,
+        alignItems: 'center',
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'column'
+        },
+    },
     textFieldRoot: {
         borderRadius: 6,
         height: 48,

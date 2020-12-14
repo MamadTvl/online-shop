@@ -5,12 +5,37 @@ import {Button, Card, Divider, Grid, InputAdornment, TextField, Typography} from
 import Title from "../Components/Public/Title";
 import useWindowSize from "../../utills/Hooks/useWindowSize";
 import Step from "../Components/Public/Step";
+import OrderCard from "../Components/Cart/OrderCard";
+import image from '../../img/photoViewer.png'
+const product = {
+    title: 'آستین کوتاه باله دار خاکستری',
+    detail: 'تیشرت دخترانه جنس: یکرو ویسکوز، اسلپ\n' +
+        'جنس: ویسکوز\n' +
+        'سبک: روزمره\n' +
+        'نوع: تیشرت\n' +
+        'یقه: یقه گرد\n' +
+        'نوع آستین: آستین کوتاه\n' +
+        'طرح: ساده\n' +
+        'رنگ: خاکستر',
+    description: '',
+    sizes: ['لارج', "ایکس لارج", "دو ایکس لارج", "اسمال"],
+    colors: ['زرد', "قرمز", "سبز", "آبی"],
+    count: 0,
+    hasDiscount: true,
+    discount: 0.15,
+    price: 2459000,
+    priceWithDiscount: 2659000,
+    image: image,
 
+}
+const products = [product, product]
 
 function CartPage() {
     const classes = useCartPageStyle()
     const size = useWindowSize()
     const [step, setStep] = useState(0)
+    const [selects, setSelects] = useState({})
+
 
     const setTitle = (step) => {
         switch (step) {
@@ -25,13 +50,21 @@ function CartPage() {
         }
 
     }
+    const handleDelete = () => {
+
+    }
     return (
         <ShopLayout>
             <div className={classes.container}>
                 <Title title={setTitle(step)}/>
                 <Grid container spacing={3}>
                     <Grid item md={9} xs={12}>
-                        <Step index={0} step={step}>
+                        <Step stepClass={classes.orderCardsStep} index={0} step={step}>
+                            {
+                                products.map((product) => (
+                                    <OrderCard selects={selects} setSelects={setSelects} product={product} deleteHandler={handleDelete}/>
+                                ))
+                            }
 
                         </Step>
                         <Step index={1} step={step}>
@@ -47,7 +80,8 @@ function CartPage() {
                         <Card className={classes.card}>
                             <Typography className={classes.discountTitle}>کد تخفیف</Typography>
                             <TextField
-                                placeholder={'کد تخفیف'}
+                                dir={'ltr'}
+                                // placeholder={'کد تخفیف'}
                                 // value={values[`${index + 1}`]}
                                 // onChange={handleChangeValues(`${index + 1}`)}
                                 margin={'normal'}
@@ -57,8 +91,8 @@ function CartPage() {
                                         input: classes.input,
                                         root: classes.textFieldRoot,
                                     },
-                                    endAdornment:
-                                        <InputAdornment position={"end"}>
+                                    startAdornment:
+                                        <InputAdornment position={"start"}>
                                             <Button
                                                 size={"small"}
                                                 className={classes.save}

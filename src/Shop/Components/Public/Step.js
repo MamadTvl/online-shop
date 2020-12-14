@@ -15,13 +15,13 @@ const useStyle = makeStyles((theme) => ({
 
 function Step(props) {
     const classes = useStyle()
-    const {children, index, step} = props
+    const {children, index, step, stepClass} = props
 
     const style = {
         display: step !== index ? 'none' : 'flex'
     }
     return (
-        <div style={style} className={classes.step} hidden={step !== index}>
+        <div style={style} className={stepClass} hidden={step !== index}>
             {step === index && children}
         </div>
     )
@@ -33,5 +33,6 @@ Step.propTypes = {
     children: PropTypes.node,
     index: PropTypes.number.isRequired,
     step: PropTypes.number.isRequired,
+    stepClass: PropTypes.any,
 }
 export default Step

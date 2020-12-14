@@ -86,14 +86,14 @@ function SignUpPage() {
             <form onSubmit={handleSubmit} className={classes.container}>
                 <Title title={setTitle(step)}/>
                 <Card>
-                    <Step index={0} step={step}>
+                    <Step index={0} step={step} stepClass={classes.step}>
                         <FirstStep
                             values={values}
                             setValues={setValues}
                             errors={errors}
                         />
                     </Step>
-                    <Step index={1} step={step}>
+                    <Step index={1} step={step} stepClass={classes.step}>
                         <SecondStep
                             expiryTimestamp={time}
                             values={values}
@@ -102,7 +102,7 @@ function SignUpPage() {
                             setStep={setStep}
                         />
                     </Step>
-                    <Step index={2} step={step}>
+                    <Step index={2} step={step} stepClass={classes.step}>
                         <ThirdStep
                             values={values}
                             setValues={setValues}
