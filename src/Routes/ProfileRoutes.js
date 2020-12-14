@@ -7,6 +7,7 @@ import ForgetPassPage from "../Shop/Pages/ForgetPassPage";
 import ProfilePage from "../Shop/Pages/ProfilePage";
 import UserInfoPage from "../Shop/Pages/UserInfoPage";
 import AddressesPage from "../Shop/Pages/AddressesPage";
+import CartPage from "../Shop/Pages/CartPage";
 
 function ProfileRoutes() {
     return (
@@ -21,9 +22,7 @@ function ProfileRoutes() {
                 <AddressesPage/>
             </PrivateRoute>
             <PrivateRoute path={'/profile/cart'}>
-                <div>
-                    kadl
-                </div>
+                <CartPage/>
             </PrivateRoute>
 
             <PrivateRoute path={'/profile/order'}>
