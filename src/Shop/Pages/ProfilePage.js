@@ -6,10 +6,11 @@ import profileImage from '../../img/profile.png'
 import PreviewOrderCard from "../Components/Profile/PreviewOrderCard";
 import {useProfilePageStyle} from "./Styles/useProfilePageStyle";
 import PreviewAddressCard from "../Components/Profile/PreviewAddressCard";
-
+import {useHistory} from 'react-router-dom'
 
 function ProfilePage() {
     const classes = useProfilePageStyle()
+    const history = useHistory()
 
     function createOrderData(code, date, status, cost) {
         return {code, date, status, cost}
@@ -47,6 +48,7 @@ function ProfilePage() {
                         </div>
                     </div>
                     <Button
+                        onClick={() => history.push('/profile/personal-info')}
                         className={classes.editButton}
                         variant={'outlined'}
                     >
@@ -61,7 +63,10 @@ function ProfilePage() {
                         ))
                     }
                 </div>
-                <Typography style={{marginTop: 22}} className={classes.title}>آدرس‌های شما</Typography>
+                <div style={{marginTop: 22, marginBottom: 16, display: 'flex', justifyContent: 'space-between'}}>
+                    <Typography style={{margin: 'auto 0'}} className={classes.title}>آدرس‌های شما</Typography>
+                    <Button onClick={() => history.push('/profile/addresses')}><Typography className={classes.addAddress}>افزودن آدرس</Typography></Button>
+                </div>
                 <div className={classes.cardsContainer}>
                     {
                         addresses.map((address) => (

@@ -68,6 +68,12 @@ export const useProfilePageStyle = makeStyles((theme) => ({
         marginTop: 32,
         marginBottom: 16,
     },
+    addAddress: {
+        fontFamily: 'Shabnam',
+        fontSize: 16,
+        color: '#F16522',
+        margin: 'auto 0'
+    },
     cardsContainer: {
         display: 'flex',
         flexDirection: 'column',
