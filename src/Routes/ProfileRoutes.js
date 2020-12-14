@@ -6,6 +6,7 @@ import SignUpPage from "../Shop/Pages/SignUpPage";
 import ForgetPassPage from "../Shop/Pages/ForgetPassPage";
 import ProfilePage from "../Shop/Pages/ProfilePage";
 import UserInfoPage from "../Shop/Pages/UserInfoPage";
+import AddressesPage from "../Shop/Pages/AddressesPage";
 
 function ProfileRoutes() {
     return (
@@ -17,7 +18,7 @@ function ProfileRoutes() {
                 <UserInfoPage/>
             </PrivateRoute>
             <PrivateRoute path={'/profile/addresses'}>
-
+                <AddressesPage/>
             </PrivateRoute>
             <PrivateRoute path={'/profile/cart'}>
                 <div>
