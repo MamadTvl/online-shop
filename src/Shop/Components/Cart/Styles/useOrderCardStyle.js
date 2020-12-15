@@ -31,7 +31,10 @@ export const useOrderCardStyle = makeStyles((theme) => ({
         fontWeight: 500,
         color: '#545454',
         [theme.breakpoints.down('xs')]: {
-            margin: 'auto'
+            margin: 'auto',
+            fontSize: 18,
+            marginTop: 8,
+
         },
     },
     deleteLabel: {

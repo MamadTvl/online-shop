@@ -9,6 +9,7 @@ import OrderCard from "../Components/Cart/OrderCard";
 import image from '../../img/photoViewer.png'
 import AddressCard from "../Components/Cart/AddressCard";
 import AddressForm from "../Components/Public/AddressForm";
+import FactorCard from "../Components/Cart/FactorCard";
 
 const product = {
     title: 'آستین کوتاه باله دار خاکستری',
@@ -37,6 +38,10 @@ function createAddressData(state, city, code, address) {
     return {state, city, code, address}
 }
 
+function createInformationData(name, mobileNumber, email, state, city, code, address) {
+    return {name, mobileNumber, email, state, city, code, address}
+}
+
 const addresses = [
     createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
     createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
@@ -44,6 +49,8 @@ const addresses = [
     createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
     createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
 ]
+
+const info = createInformationData('آرش دامن‌افشان', '۰۹۳۴۴۴۳۲۵۳', 'Arash@mail.com', 'تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴')
 
 function CartPage() {
     const classes = useCartPageStyle()
@@ -160,6 +167,9 @@ function CartPage() {
                             </Card>
                         </Step>
                         <Step index={2} step={step}>
+                            <Card className={classes.card}>
+                                <FactorCard products={products} info={info}/>
+                            </Card>
 
                         </Step>
 

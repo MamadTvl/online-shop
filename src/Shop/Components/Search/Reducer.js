@@ -57,7 +57,7 @@ export const initialStates = {
     // todo: get Products & category from api and set into initialStates
     filterValues: {
         from: 0,
-        to: 15000000,
+        to: 1500000,
     },
     changed: 0,
     products: initialProducts,
