@@ -1,7 +1,7 @@
 import React from "react";
 import PropType from 'prop-types'
 import {Card, Chip, IconButton, SvgIcon, TextField, Typography} from "@material-ui/core";
-import {useOrderCardStyle} from "./Styles/OrderCardStyle";
+import {useOrderCardStyle} from "./Styles/useOrderCardStyle";
 import AddIcon from "@material-ui/icons/Add";
 import {separateDigit} from "../../../utills/ToFaDigit";
 import RemoveIcon from "@material-ui/icons/Remove";

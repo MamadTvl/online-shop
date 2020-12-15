@@ -1,0 +1,12 @@
+import {withStyles} from "@material-ui/styles";
+import {Radio} from "@material-ui/core";
+
+export const StyledRadio = withStyles({
+    root: {
+        color: '#888888',
+        '&$checked': {
+            color: '#F16522',
+        },
+    },
+    checked: {},
+})((props) => <Radio color="default" {...props} />);

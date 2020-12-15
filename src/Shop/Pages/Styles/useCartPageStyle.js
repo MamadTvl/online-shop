@@ -102,5 +102,28 @@ export const useCartPageStyle = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between'
-    }
+    },
+    // step index = 1 :
+    addAddress: {
+        fontFamily: 'Shabnam',
+        fontSize: 16,
+        color: '#F16522',
+        width: 'fit-content'
+    },
+    title: {
+        fontFamily: 'Shabnam',
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#545454',
+        marginTop: 32,
+        marginBottom: 16
+    },
+    descriptionLabel: {
+        fontFamily: 'Shabnam',
+        fontSize: 14,
+        color: '#545454',
+        marginBottom: 12,
+    },
+
+
 }));

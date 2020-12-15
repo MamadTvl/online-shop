@@ -7,6 +7,8 @@ import useWindowSize from "../../utills/Hooks/useWindowSize";
 import Step from "../Components/Public/Step";
 import OrderCard from "../Components/Cart/OrderCard";
 import image from '../../img/photoViewer.png'
+import AddressCard from "../Components/Cart/AddressCard";
+
 const product = {
     title: 'آستین کوتاه باله دار خاکستری',
     detail: 'تیشرت دخترانه جنس: یکرو ویسکوز، اسلپ\n' +
@@ -29,6 +31,18 @@ const product = {
 
 }
 const products = [product, product]
+
+function createAddressData(state, city, code, address) {
+    return {state, city, code, address}
+}
+
+const addresses = [
+    createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
+    createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
+    createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
+    createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
+    createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
+]
 
 function CartPage() {
     const classes = useCartPageStyle()
@@ -53,6 +67,14 @@ function CartPage() {
     const handleDelete = () => {
 
     }
+    const handleClickContinue = (event) => {
+        if (step === 0) {
+            setStep(1)
+        } else if (step === 1) {
+            setStep(2)
+        }
+        window.scrollTo(0, 0)
+    }
     return (
         <ShopLayout>
             <div className={classes.container}>
@@ -62,13 +84,48 @@ function CartPage() {
                         <Step stepClass={classes.orderCardsStep} index={0} step={step}>
                             {
                                 products.map((product) => (
-                                    <OrderCard selects={selects} setSelects={setSelects} product={product} deleteHandler={handleDelete}/>
+                                    <OrderCard
+                                        selects={selects}
+                                        setSelects={setSelects}
+                                        product={product}
+                                        deleteHandler={handleDelete}
+                                    />
                                 ))
                             }
-
                         </Step>
-                        <Step index={1} step={step}>
-
+                        <Step stepClass={classes.orderCardsStep} index={1} step={step}>
+                            {
+                                addresses.map((address) => (
+                                    <AddressCard
+                                        data={address}
+                                        checked={true}
+                                        handleChange={() => console.log()}
+                                    />
+                                ))
+                            }
+                            <Button
+                                variant={'text'}
+                                className={classes.addAddress}
+                            >
+                                افزودن آدرس جدید
+                            </Button>
+                            <Typography className={classes.title}>توضیحات سفارش</Typography>
+                            <Card className={classes.card}>
+                                <Typography className={classes.descriptionLabel}>توضیحات</Typography>
+                                <TextField
+                                    multiline
+                                    rows={4}
+                                    // value={values.address}
+                                    // onChange={handleChange('address')}
+                                    InputProps={{
+                                        classes: {
+                                            input: classes.input,
+                                        }
+                                    }}
+                                    fullWidth
+                                    variant="outlined"
+                                />
+                            </Card>
                         </Step>
                         <Step index={2} step={step}>
 
@@ -107,9 +164,9 @@ function CartPage() {
                             />
                         </Card>
                         <Step index={2} step={step}>
-                            <Card>
-                                <Typography>توضیحات</Typography>
-                                <Typography>لطفا تمامی کقش‌ها در سایز ۴۴ باشند.</Typography>
+                            <Card style={{width: '100%'}} className={classes.card}>
+                                <Typography style={{marginBottom: 16}} className={classes.discountTitle}>توضیحات</Typography>
+                                <Typography className={classes.descriptionLabel}>لطفا تمامی کقش‌ها در سایز ۴۴ باشند.</Typography>
                             </Card>
                         </Step>
                         <Card className={classes.card}>
@@ -129,7 +186,8 @@ function CartPage() {
                                 <div className={classes.detailContainer}>
                                     <Typography className={classes.detailTitle}>تخفیف</Typography>
                                     <div className={classes.priceContainer}>
-                                        <Typography style={{color: '#F16522'}} className={classes.number}>۱۴۱٫۰۰۰</Typography>
+                                        <Typography style={{color: '#F16522'}}
+                                                    className={classes.number}>۱۴۱٫۰۰۰</Typography>
                                         <Typography className={classes.toman}>تومان</Typography>
                                     </div>
                                 </div>
@@ -152,8 +210,8 @@ function CartPage() {
                             <div style={{width: '100%', float: 'left', marginTop: 24}}>
                                 <Button
                                     // disabled={loading}
-                                    type={'submit'}
                                     fullWidth
+                                    onClick={handleClickContinue}
                                     className={classes.shopButton}
                                     variant={'contained'}
                                 >

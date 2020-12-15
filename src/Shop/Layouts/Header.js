@@ -51,7 +51,7 @@ function Header() {
                     >
                         <MenuIcon/>
                     </IconButton>
-                    <img className={classes.logo} src={logo} alt={'didartshop.ir'}/>
+                    <img onClick={() => history.push('/')} className={classes.logo} src={logo} alt={'didartshop.ir'}/>
                     <Button
                         size={"small"}
                         onClick={(event) => setAnchorEl(event.currentTarget)}
@@ -125,8 +125,8 @@ function Header() {
                         open={dialogOpen}
                         setOpen={setDialogOpen}
                     />
-                    <ItemLink style={{margin: 'auto'}} to={'/profile/login'}>
                         <Button
+                            onClick={() => history.push('/profile/login')}
                             size={"small"}
                             dir={'ltr'}
                             className={classes.login}
@@ -147,9 +147,7 @@ function Header() {
                         >
                             ورود / ثبت‌نام
                         </Button>
-                    </ItemLink>
-                    <ItemLink to={'/profile/login'}>
-                        <IconButton className={classes.iconButtons}>
+                        <IconButton onClick={() => history.push('/profile/login')} className={classes.iconButtons}>
                             <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.5" height="19.5"
                                      viewBox="0 0 17.5 19.5">
                                 <g id="user" transform="translate(-3.25 -2.25)">
@@ -163,12 +161,12 @@ function Header() {
                                 </g>
                             </SvgIcon>
                         </IconButton>
-                    </ItemLink>
                     <Button
                         size={"small"}
                         dir={'ltr'}
                         variant={"outlined"}
                         className={classes.cart}
+                        onClick={() => history.push('/profile/cart')}
                         endIcon={
                             <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
                                      viewBox="0 0 19.5 21.5">
@@ -189,7 +187,7 @@ function Header() {
                     >
                         سبد خرید
                     </Button>
-                    <IconButton className={classes.iconButtons}>
+                    <IconButton onClick={() => history.push('/profile/cart')} className={classes.iconButtons}>
                         <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
                                  viewBox="0 0 19.5 21.5">
                             <g id="shopping-bag" transform="translate(-2.25 -1.25)">
