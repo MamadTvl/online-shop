@@ -1,6 +1,4 @@
 
-// todo : function separate 3 digits
-
 
 const isNumber = (str) => {
     return /^\d+$/.test(str)

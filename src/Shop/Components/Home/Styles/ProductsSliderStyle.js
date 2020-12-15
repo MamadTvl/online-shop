@@ -85,15 +85,17 @@ export const useStyles = makeStyles((theme) => ({
         textDecoration: 'line-through',
     },
     discountChip: {
-        color: 'white',
-        width: 43,
-        height: 24,
-        backgroundColor: '#F16522',
-        fontFamily: 'Shabnam',
-        fontWeight: 'bold',
-        fontSize: 16,
-        marginRight: 12,
-        marginTop: 1,
+        '&.MuiChip-root':{
+            color: 'white',
+            width: 43,
+            height: 24,
+            backgroundColor: '#F16522',
+            fontFamily: 'Shabnam',
+            fontWeight: 'bold',
+            fontSize: 16,
+            marginRight: 12,
+            marginTop: 1,
+        },
 
         '& .MuiChip-label': {
             padding: 0,

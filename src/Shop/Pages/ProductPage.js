@@ -1,14 +1,14 @@
 import React from "react";
-import ShopLayout from "../../Layouts/ShopLayout";
+import ShopLayout from "../Layouts/ShopLayout";
 import {useLocation, useParams} from 'react-router-dom'
-import Product from "../Product/Product";
+import Product from "../Components/Product/Product";
 import {useProductPageStyle} from "./Styles/useProductPageStyle";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
-import ItemLink from "../../../Routes/Link/ItemLink";
+import ItemLink from "../../Routes/Link/ItemLink";
 import {Typography} from "@material-ui/core";
-import ProductDetail from "../Product/ProductDetail";
-import SimilarProducts from "../Product/SimilarProducts"
+import ProductDetail from "../Components/Product/ProductDetail";
+import SimilarProducts from "../Components/Product/SimilarProducts"
 
 function ProductPage() { // todo: make this responsive
     const {code, id, product} = useParams()

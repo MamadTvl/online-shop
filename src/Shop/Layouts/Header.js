@@ -10,8 +10,10 @@ import {useHistory, useLocation} from "react-router-dom";
 import {useHeaderStyle} from "./Styles/useHeaderStyle";
 import CategoryMenu from "./CategoryMenu";
 import SearchDialog from "./SearchDialog";
+import useLogin from "../../utills/Hooks/useLogin";
 
 function Header() {
+    const [isLogin, loading] = useLogin(true)
     const classes = useHeaderStyle()
     const location = useLocation()
     const params = new URLSearchParams(location.search)
@@ -27,9 +29,9 @@ function Header() {
             search.addEventListener('keyup', (event) => {
                 if (event.keyCode === 13 && search.value !== '') {
                     let tempLoc = location.search === '' ? '?' : location.search
-                    if (tempLoc.includes('?s=')){
+                    if (tempLoc.includes('?s=')) {
                         tempLoc = tempLoc.replace(`${params.get('s')}`, search.value)
-                    }else {
+                    } else {
                         tempLoc += `s=${search.value}`
                     }
                     history.push(`/search${tempLoc}`);
@@ -50,7 +52,7 @@ function Header() {
                     >
                         <MenuIcon/>
                     </IconButton>
-                    <img className={classes.logo} src={logo} alt={'didartshop.ir'}/>
+                    <img onClick={() => history.push('/')} className={classes.logo} src={logo} alt={'didartshop.ir'}/>
                     <Button
                         size={"small"}
                         onClick={(event) => setAnchorEl(event.currentTarget)}
@@ -125,6 +127,7 @@ function Header() {
                         setOpen={setDialogOpen}
                     />
                     <Button
+                        onClick={() => history.push('/profile/login')}
                         size={"small"}
                         dir={'ltr'}
                         className={classes.login}
@@ -143,9 +146,13 @@ function Header() {
                             </SvgIcon>
                         }
                     >
-                        ورود / ثبت‌نام
+                        {
+                            isLogin
+                                ? 'خوش‌آمدید'
+                                : 'ورود / ثبت‌نام'
+                        }
                     </Button>
-                    <IconButton className={classes.iconButtons}>
+                    <IconButton onClick={() => history.push('/profile/login')} className={classes.iconButtons}>
                         <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.5" height="19.5"
                                  viewBox="0 0 17.5 19.5">
                             <g id="user" transform="translate(-3.25 -2.25)">
@@ -164,6 +171,7 @@ function Header() {
                         dir={'ltr'}
                         variant={"outlined"}
                         className={classes.cart}
+                        onClick={() => history.push('/profile/cart')}
                         endIcon={
                             <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
                                      viewBox="0 0 19.5 21.5">
@@ -184,7 +192,7 @@ function Header() {
                     >
                         سبد خرید
                     </Button>
-                    <IconButton className={classes.iconButtons}>
+                    <IconButton onClick={() => history.push('/profile/cart')} className={classes.iconButtons}>
                         <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
                                  viewBox="0 0 19.5 21.5">
                             <g id="shopping-bag" transform="translate(-2.25 -1.25)">

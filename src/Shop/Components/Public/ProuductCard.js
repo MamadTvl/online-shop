@@ -19,7 +19,7 @@ function ProductCard(props) {
                             <div className={classes.discountCard}>
                                 <br/>
                                 <div style={{display: 'flex'}}>
-                                    <Chip className={classes.discountChip}
+                                    <Chip classes={{root: classes.discountChip}}
                                           label={`%${props.product.discount}`}/>
                                     <Typography
                                         className={classes.discountLabel}>{props.product.price}</Typography>

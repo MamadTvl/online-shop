@@ -1,22 +1,26 @@
-import React, {useEffect, useReducer, useState} from "react";
-import ShopLayout from "../../Layouts/ShopLayout";
+import React, {useEffect, useReducer, useRef, useState} from "react";
+import ShopLayout from "../Layouts/ShopLayout";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import ItemLink from "../../../Routes/Link/ItemLink";
+import ItemLink from "../../Routes/Link/ItemLink";
 import {Card, CardContent, Grid, Typography} from "@material-ui/core";
-import ProductCard from "../Public/ProuductCard";
-import {StyledSwitch, useStyles} from "../Search/Styles/SearchStyle";
-import TablePaginationActions from "../Public/TablePaginationActions";
-import FilterPrice from "../Search/FilterPrice";
-import FilterCategory from "../Search/FilterCategory";
-import {initialStates, reducer} from "../Search/Reducer";
+import ProductCard from "../Components/Public/ProuductCard";
+import {StyledSwitch, useStyles} from "../Components/Search/Styles/SearchStyle";
+import TablePaginationActions from "../Components/Public/TablePaginationActions";
+import FilterPrice from "../Components/Search/FilterPrice";
+import FilterCategory from "../Components/Search/FilterCategory";
+import {initialStates, reducer} from "../Components/Search/Reducer";
 import {useHistory} from 'react-router-dom'
+import useCategoriesData from "../FetchData/useCategoriesData";
 
 function SearchPage({location}) {
+    const search = useRef(location.search)
+    const [loading, result] = useCategoriesData(true)
     const classes = useStyles()
     const history = useHistory()
     const [searchStates, dispatch] = useReducer(reducer, initialStates)
     const [page, setPage] = useState(0)
+    const [change, setChange] = useState(0)
     const handleChangePages = (pageNumber) => {
         setPage(pageNumber)
     }
@@ -25,6 +29,26 @@ function SearchPage({location}) {
     const [searchItems, setSearchItems] = useState({
         s: '',
     })
+    useEffect(() => {
+        if (!loading){
+            dispatch({
+                type: 'setCategories',
+                categories: result,
+            })
+            const params = new URLSearchParams(search.current)
+            for (let i = 0; i < result.length; i++) {
+                const categoryId = params.get(`categoryId[${i}]`)
+                if (categoryId){
+                    dispatch({
+                        type: 'selectCategory',
+                        categoryId: parseInt(categoryId),
+                        value: true,
+                    })
+                    setChange(prevState => prevState + 1)
+                }
+            }
+        }
+    }, [loading])
     useEffect(() => {
         const params = new URLSearchParams(location.search)
         const s = params.get('s') ? `"${params.get('s')}"` : ''
@@ -53,7 +77,7 @@ function SearchPage({location}) {
             }
         }
         history.push(`/search?${newLocation}`)
-    }, [JSON.stringify(searchStates.categories)])
+    }, [change])
 
     return (
         <ShopLayout>
@@ -85,6 +109,7 @@ function SearchPage({location}) {
                         <Grid className={classes.categoryMdItem} xs={12} item>
                             <div>
                                 <FilterCategory
+                                    setChange={setChange}
                                     categories={searchStates.categories}
                                     dispatch={dispatch}
                                 />
