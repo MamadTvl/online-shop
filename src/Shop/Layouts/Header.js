@@ -10,9 +10,10 @@ import {useHistory, useLocation} from "react-router-dom";
 import {useHeaderStyle} from "./Styles/useHeaderStyle";
 import CategoryMenu from "./CategoryMenu";
 import SearchDialog from "./SearchDialog";
-import ItemLink from "../../Routes/Link/ItemLink";
+import useLogin from "../../utills/Hooks/useLogin";
 
 function Header() {
+    const [isLogin, loading] = useLogin(true)
     const classes = useHeaderStyle()
     const location = useLocation()
     const params = new URLSearchParams(location.search)
@@ -125,29 +126,12 @@ function Header() {
                         open={dialogOpen}
                         setOpen={setDialogOpen}
                     />
-                        <Button
-                            onClick={() => history.push('/profile/login')}
-                            size={"small"}
-                            dir={'ltr'}
-                            className={classes.login}
-                            endIcon={
-                                <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.5" height="19.5"
-                                         viewBox="0 0 17.5 19.5">
-                                    <g id="user" transform="translate(-3.25 -2.25)">
-                                        <path id="Path_10" data-name="Path 10"
-                                              d="M20,21V19a4,4,0,0,0-4-4H8a4,4,0,0,0-4,4v2"
-                                              fill="none" stroke="#8B8B8B" strokeLinecap="round" strokeLinejoin="round"
-                                              strokeWidth="1.5"/>
-                                        <circle id="Ellipse_1" data-name="Ellipse 1" cx="4" cy="4" r="4"
-                                                transform="translate(8 3)" fill="none" stroke="#8B8B8B"
-                                                strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
-                                    </g>
-                                </SvgIcon>
-                            }
-                        >
-                            ورود / ثبت‌نام
-                        </Button>
-                        <IconButton onClick={() => history.push('/profile/login')} className={classes.iconButtons}>
+                    <Button
+                        onClick={() => history.push('/profile/login')}
+                        size={"small"}
+                        dir={'ltr'}
+                        className={classes.login}
+                        endIcon={
                             <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.5" height="19.5"
                                      viewBox="0 0 17.5 19.5">
                                 <g id="user" transform="translate(-3.25 -2.25)">
@@ -160,7 +144,28 @@ function Header() {
                                             strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
                                 </g>
                             </SvgIcon>
-                        </IconButton>
+                        }
+                    >
+                        {
+                            isLogin
+                                ? 'خوش‌آمدید'
+                                : 'ورود / ثبت‌نام'
+                        }
+                    </Button>
+                    <IconButton onClick={() => history.push('/profile/login')} className={classes.iconButtons}>
+                        <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.5" height="19.5"
+                                 viewBox="0 0 17.5 19.5">
+                            <g id="user" transform="translate(-3.25 -2.25)">
+                                <path id="Path_10" data-name="Path 10"
+                                      d="M20,21V19a4,4,0,0,0-4-4H8a4,4,0,0,0-4,4v2"
+                                      fill="none" stroke="#8B8B8B" strokeLinecap="round" strokeLinejoin="round"
+                                      strokeWidth="1.5"/>
+                                <circle id="Ellipse_1" data-name="Ellipse 1" cx="4" cy="4" r="4"
+                                        transform="translate(8 3)" fill="none" stroke="#8B8B8B"
+                                        strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
+                            </g>
+                        </SvgIcon>
+                    </IconButton>
                     <Button
                         size={"small"}
                         dir={'ltr'}

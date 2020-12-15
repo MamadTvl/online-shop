@@ -9,20 +9,24 @@ import BlogInterView from "../Components/Home/BlogInterView";
 import useHomeData from "../FetchData/useHomeData";
 
 function HomePage() {
-    const [fetch, setFetch] = useState(true)
+    const [fetch,] = useState(true)
     const [loading, result] = useHomeData(fetch)
+
     if (loading)
         return null
-
     return (
         <ShopLayout>
            <Slider
                sliders={result[0]}
            />
-           <Banners/>
+           <Banners
+               banners={result[1]}
+           />
            <ProductsSlider/>
            <AmazingOffers/>
-           <Attributes/>
+           <Attributes
+               attributes={result[3]}
+           />
            <BlogInterView/>
         </ShopLayout>
     )

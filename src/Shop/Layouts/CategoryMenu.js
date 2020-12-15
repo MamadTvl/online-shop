@@ -5,6 +5,7 @@ import {withStyles} from "@material-ui/styles"
 import ItemLink from "../../Routes/Link/ItemLink";
 import * as PropTypes from "prop-types";
 import {useLocation} from 'react-router-dom'
+import useCategoriesData from "../FetchData/useCategoriesData";
 
 const StyledMenu = withStyles({
     list: {
@@ -20,37 +21,8 @@ const StyledMenu = withStyles({
 ));
 
 
-function createCategoryData(id, name, checked) {
-    return {id, name, checked}
-}
-
-const initialCategories = [
-    createCategoryData(1, 'پوشاک', false),
-    createCategoryData(2, 'پوشاک', false),
-    createCategoryData(3, 'پوشاک', false),
-    createCategoryData(4, 'پوشاک', false),
-    createCategoryData(5, 'پوشاک', false),
-    createCategoryData(6, 'پوشاک', false),
-    createCategoryData(7, 'پوشاک', false),
-    createCategoryData(8, 'پوشاک', false),
-    createCategoryData(9, 'پوشاک', false),
-    createCategoryData(10, 'پوشاک', false),
-    createCategoryData(11, 'پوشاک', false),
-    createCategoryData(12, 'پوشاک', false),
-    createCategoryData(13, 'پوشاک', false),
-    createCategoryData(14, 'پوشاک', false),
-    createCategoryData(15, 'پوشاک', false),
-    createCategoryData(16, 'پوشاک', false),
-    createCategoryData(17, 'پوشاک', false),
-    createCategoryData(18, 'پوشاک', false),
-    createCategoryData(19, 'پوشاک', false),
-    createCategoryData(20, 'پوشاک', false),
-    createCategoryData(21, 'پوشاک', false),
-    createCategoryData(22, 'پوشاک', false),
-
-]
-
 function CategoryMenu(props) {
+    const [loading, result] = useCategoriesData(true)
     const {anchorEl, setAnchorEl} = props
     const classes = useHeaderStyle()
     const location = useLocation()
@@ -69,9 +41,10 @@ function CategoryMenu(props) {
             onClose={handleClose}
         >
             {
-                initialCategories.map((category, index) => (
+                result.map((category, index) => (
                     <ItemLink to={{pathname: '/search', search: `${search}categoryId[${index}]=${category.id}`}}>
-                        <MenuItem key={category.id} className={classes.menuLabel} onClick={handleClose}>{category.name}</MenuItem>
+                        <MenuItem key={category.id} className={classes.menuLabel}
+                                  onClick={handleClose}>{category.name}</MenuItem>
                     </ItemLink>
                 ))
             }
