@@ -17,7 +17,6 @@ export const useOrderCardStyle = makeStyles((theme) => ({
     },
     image: {
         width: '22%',
-        height: '22%',
         borderRadius: 7,
         marginLeft: 16,
         [theme.breakpoints.down('xs')]: {

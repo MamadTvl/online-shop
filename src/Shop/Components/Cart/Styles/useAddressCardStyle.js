@@ -33,6 +33,7 @@ export const useAddressCardStyle = makeStyles((theme) => ({
     dataContainer: {
         display: 'flex',
         flexDirection: 'column',
+        marginRight: 32
     },
     title: {
         fontFamily: 'Shabnam',
