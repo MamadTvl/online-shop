@@ -8,6 +8,7 @@ import Step from "../Components/Public/Step";
 import OrderCard from "../Components/Cart/OrderCard";
 import image from '../../img/photoViewer.png'
 import AddressCard from "../Components/Cart/AddressCard";
+import AddressForm from "../Components/Public/AddressForm";
 
 const product = {
     title: 'آستین کوتاه باله دار خاکستری',
@@ -48,8 +49,25 @@ function CartPage() {
     const classes = useCartPageStyle()
     const size = useWindowSize()
     const [step, setStep] = useState(0)
+    const [addressStep, setAddressStep] = useState(0)
     const [selects, setSelects] = useState({})
+    const [values, setValues] = useState({
+        name: '',
+        mobileNumber: '',
+        email: '',
+        state: '',
+        city: '',
+        code: '',
+        address: ''
+    })
 
+    const [errors, setErrors] = useState({
+        name: false,
+        mobileNumber: false,
+        email: false,
+        code: false,
+        address: false
+    })
 
     const setTitle = (step) => {
         switch (step) {
@@ -94,18 +112,32 @@ function CartPage() {
                             }
                         </Step>
                         <Step stepClass={classes.orderCardsStep} index={1} step={step}>
-                            {
-                                addresses.map((address) => (
-                                    <AddressCard
-                                        data={address}
-                                        checked={true}
-                                        handleChange={() => console.log()}
-                                    />
-                                ))
-                            }
+                            <Step stepClass={classes.orderCardsStep} index={0} step={addressStep}>
+                                {
+                                    addresses.map((address) => (
+                                        <AddressCard
+                                            data={address}
+                                            checked={true}
+                                            handleChange={() => console.log()}
+                                        />
+                                    ))
+                                }
+                            </Step>
+                            <Step stepClass={classes.orderCardsStep} index={1} step={addressStep}>
+                                <AddressForm
+                                    values={values}
+                                    setValues={setValues}
+                                    errors={errors}
+                                    setErrors={setErrors}
+                                />
+                            </Step>
+
                             <Button
                                 variant={'text'}
                                 className={classes.addAddress}
+                                onClick={() => setAddressStep(prevState => {
+                                    return prevState === 0 ? 1 : 0
+                                })}
                             >
                                 افزودن آدرس جدید
                             </Button>
@@ -165,8 +197,10 @@ function CartPage() {
                         </Card>
                         <Step index={2} step={step}>
                             <Card style={{width: '100%'}} className={classes.card}>
-                                <Typography style={{marginBottom: 16}} className={classes.discountTitle}>توضیحات</Typography>
-                                <Typography className={classes.descriptionLabel}>لطفا تمامی کقش‌ها در سایز ۴۴ باشند.</Typography>
+                                <Typography style={{marginBottom: 16}}
+                                            className={classes.discountTitle}>توضیحات</Typography>
+                                <Typography className={classes.descriptionLabel}>لطفا تمامی کقش‌ها در سایز ۴۴
+                                    باشند.</Typography>
                             </Card>
                         </Step>
                         <Card className={classes.card}>
