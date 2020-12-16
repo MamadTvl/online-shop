@@ -1,15 +1,17 @@
 import React from "react";
 import {SvgIcon} from "@material-ui/core";
 import {useStyles} from "./Styles/FooterStyle";
+import useSocialNetworkData from "../FetchData/useSocialNetworkData";
 
 
 
 export default function SocialNetwork(props) {
+    const [loading, result] = useSocialNetworkData(true)
     const classes = useStyles()
     return (
         <div className={props.isXs ? classes.socialContainerXs : classes.socialContainer}>
             {/* instagram logo */}
-            <a href={'https://www.instagram.com/'}>
+            <a href={`${!loading && result[3].link}`} target="_blank" rel="noopener noreferrer">
                 <SvgIcon className={classes.social} xmlns="http://www.w3.org/2000/svg" width="24"
                          height="24.001"
                          viewBox="0 0 24 24.001">
@@ -30,7 +32,7 @@ export default function SocialNetwork(props) {
                 </SvgIcon>
             </a>
             {/* aparat logo */}
-            <a href={'https://www.aparat.ir/'}>
+            <a href={`${!loading && result[0].link}`} target="_blank" rel="noopener noreferrer">
                 <SvgIcon className={classes.social} xmlns="http://www.w3.org/2000/svg" width="23.982"
                          height="24"
                          viewBox="0 0 23.982 24">
@@ -57,7 +59,7 @@ export default function SocialNetwork(props) {
             </a>
 
             {/* twitter logo */}
-            <a href={'https://www.twitter.com/'}>
+            <a href={`${!loading && result[1].link}`} target="_blank" rel="noopener noreferrer">
                 <SvgIcon className={classes.social} id="twitter-color"
                          xmlns="http://www.w3.org/2000/svg"
                          width="24" height="20"
@@ -71,7 +73,7 @@ export default function SocialNetwork(props) {
             </a>
 
             {/* youtube logo */}
-            <a href={'https://www.youtube.com/'}>
+            <a href={`${!loading && result[4].link}`} target="_blank" rel="noopener noreferrer">
                 <SvgIcon className={classes.social} id="youtube-black"
                          xmlns="http://www.w3.org/2000/svg" width="24" height="17"
                          viewBox="0 0 24 17">
@@ -84,7 +86,7 @@ export default function SocialNetwork(props) {
             </a>
 
             {/* telegram logo */}
-            <a href={'https://www.telegram.org/'}>
+            <a href={`${!loading && result[2].link}`} target="_blank" rel="noopener noreferrer">
                 <SvgIcon className={classes.social} xmlns="http://www.w3.org/2000/svg" width="24"
                          height="24" viewBox="0 0 24 24">
                     <path id="telegram"

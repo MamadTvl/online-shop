@@ -269,8 +269,8 @@ function CartPage() {
                                         // disabled={loading}
                                         fullWidth
                                         onClick={() => setStep(step - 1)}
-                                        className={classes.shopButton}
-                                        variant={'contained'}
+                                        className={classes.backButton}
+                                        variant={'outlined'}
                                     >
                                         بازگشت به مرحله قبل
                                     </Button>

@@ -105,7 +105,7 @@ function ProductsSlider() {
         if (size.width >= 373 && size.width <= 500) {
             const slides = document.getElementsByClassName('custom-slider-slick')[0]
                 .children[1].children[0].children
-            // if you want to find out what you are doing console it !
+            // if you want to find out what you are doing log it !
             for (let i = 0; i < slides.length; i++) {
                 slides[i].children[0].style.display = 'flex'
                 slides[i].children[0].style.justifyContent = 'center'

@@ -23,6 +23,7 @@ export const useFactorCardStyle = makeStyles((theme) => ({
     },
     payButton: {
         width: '23%',
+        opacity: 0.8,
         '&:hover': {
             backgroundColor: '#004677',
         },

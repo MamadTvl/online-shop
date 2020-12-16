@@ -29,7 +29,7 @@ function FactorCard(props) {
             <Button
                 style={{backgroundColor: backgroundColor}}
                 onClick={() => setBackgroundColor('#004677')}
-                variant={'outlined'}
+                variant={'contained'}
                 className={classes.payButton}
             >
                 <img src={idPayLogo} alt="IdPay"/>

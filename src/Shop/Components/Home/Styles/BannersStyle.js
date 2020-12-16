@@ -49,7 +49,7 @@ export const useStyles = makeStyles((theme) => ({
     thirdImage: {
         // position: 'absolute',
         width: '100%',
-        height: 520,
+        height: 'auto',
         [theme.breakpoints.down('sm')]: {
             height: 'auto',
         },

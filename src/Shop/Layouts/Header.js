@@ -6,7 +6,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import {StyledSearchField} from './StyledSearchField'
 import MenuIcon from '@material-ui/icons/Menu';
-import {useHistory, useLocation} from "react-router-dom";
+import {Link, useHistory, useLocation} from "react-router-dom";
 import {useHeaderStyle} from "./Styles/useHeaderStyle";
 import CategoryMenu from "./CategoryMenu";
 import SearchDialog from "./SearchDialog";
@@ -52,7 +52,9 @@ function Header() {
                     >
                         <MenuIcon/>
                     </IconButton>
-                    <img onClick={() => history.push('/')} className={classes.logo} src={logo} alt={'didartshop.ir'}/>
+                    <Link style={{margin: 'auto'}} to={'/'}>
+                        <img className={classes.logo} src={logo} alt={'didartshop.ir'}/>
+                    </Link>
                     <Button
                         size={"small"}
                         onClick={(event) => setAnchorEl(event.currentTarget)}

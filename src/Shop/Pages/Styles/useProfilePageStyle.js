@@ -48,17 +48,17 @@ export const useProfilePageStyle = makeStyles((theme) => ({
         color: '#545454',
     },
     editButton: {
-        fontFamily: 'Shabnam',
-        fontSize: 16,
-        color: '#545454',
-        width: 200,
         height: 48,
-        borderColor: '#434343',
-        margin: 'auto 0',
+        borderColor: '#F16522',
+        borderWidth: '2px',
+        color: '#F16522',
+        fontSize: '16px',
+        fontFamily: 'Shabnam',
+        fontWeight: "bold",
         '&:hover': {
+            backgroundColor: '#F16522',
             color: 'white',
-            backgroundColor: '#545454'
-        }
+        },
     },
     title: {
         fontFamily: 'Shabnam',

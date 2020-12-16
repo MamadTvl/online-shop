@@ -25,10 +25,15 @@ function Footer() {
                     <Grid item md={2} sm={4}>
                         <div className={classes.title}><Typography className={classes.pages}>صفحات</Typography></div>
                         <div className={classes.linkContainer}>
-                            <Link href={'/'} className={classes.link}>سوالات متداول</Link>
                             <Link className={classes.link}>تماس با ما</Link>
                             <Link className={classes.link}>درباره ما</Link>
-                            <Link className={classes.link}>بلاگ</Link>
+                            <Link
+                                href={'https://blog.didartshop.ir'}
+                                target="_blank" rel="noopener noreferrer"
+                                className={classes.link}
+                            >
+                                بلاگ
+                            </Link>
                         </div>
                     </Grid>
                     <Grid className={classes.xsGrid} md={false} sm={false} xs={5}/>

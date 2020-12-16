@@ -97,6 +97,19 @@ export const useCartPageStyle = makeStyles((theme) => ({
             opacity: '70%'
         },
     },
+    backButton: {
+        height: 48,
+        borderColor: '#F16522',
+        borderWidth: '2px',
+        color: '#F16522',
+        fontSize: '16px',
+        fontFamily: 'Shabnam',
+        fontWeight: "bold",
+        '&:hover': {
+            backgroundColor: '#F16522',
+            color: 'white',
+        },
+    },
     // steps style
     orderCardsStep: {
         display: 'flex',
