@@ -15,7 +15,7 @@ function HomePage() {
     if (loading)
         return null
     return (
-        <ShopLayout>
+        <>
            <Slider
                sliders={result[0]}
            />
@@ -28,7 +28,7 @@ function HomePage() {
                attributes={result[3]}
            />
            <BlogInterView/>
-        </ShopLayout>
+        </>
     )
 }
 

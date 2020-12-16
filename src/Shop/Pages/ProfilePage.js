@@ -36,7 +36,7 @@ function ProfilePage() {
         createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
     ]
     return (
-        <ShopLayout>
+        <>
             <div className={classes.container}>
                 <Title title={'پروفایل کاربری'}/>
                 <Card className={classes.profileCard}>
@@ -75,7 +75,7 @@ function ProfilePage() {
                     }
                 </div>
             </div>
-        </ShopLayout>
+        </>
     )
 }
 

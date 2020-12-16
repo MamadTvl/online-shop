@@ -15,7 +15,7 @@ function ProductPage() { // todo: make this responsive
     const location = useLocation()
     const classes = useProductPageStyle()
     return (
-        <ShopLayout>
+        <>
             <div className={classes.container}>
 
                 <Breadcrumbs className={classes.breadcrumbContainer} separator={<NavigateBeforeIcon fontSize="small"/>}>
@@ -34,7 +34,7 @@ function ProductPage() { // todo: make this responsive
                 <SimilarProducts/>
 
             </div>
-        </ShopLayout>
+        </>
     )
 
 

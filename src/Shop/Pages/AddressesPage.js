@@ -28,7 +28,7 @@ function AddressPage() {
         address: false
     })
     return (
-        <ShopLayout>
+        <>
             <form className={classes.container}>
                 <Title title={'افزودن آدرس جدید'} />
                 <AddressForm
@@ -50,7 +50,7 @@ function AddressPage() {
                 </div>
             </form>
 
-        </ShopLayout>
+        </>
     )
 }
 

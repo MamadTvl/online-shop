@@ -8,6 +8,7 @@ import HomePage from "./Shop/Pages/HomePage";
 import SearchPage from "./Shop/Pages/SearchPage";
 import ProductPage from "./Shop/Pages/ProductPage";
 import ProfileRoutes from './Routes/ProfileRoutes'
+import ShopLayout from "./Shop/Layouts/ShopLayout";
 
 function App() {
 
@@ -22,11 +23,13 @@ function App() {
             <CssBaseline/>
             <Router history={customHistory}>
                 <Switch>
-                    <Route exact path={'/'} component={HomePage}/>
-                    <Route exact path={'/search'} component={SearchPage}/>
-                    <Route exact path={'/products/:code/:product'} component={ProductPage}/>
-                    {/*<Route exact path={'/profile'} >*/}
-                    <ProfileRoutes/>
+                    <ShopLayout>
+                        <Route exact path={'/'} component={HomePage}/>
+                        <Route exact path={'/search'} component={SearchPage}/>
+                        <Route exact path={'/products/:code/:product'} component={ProductPage}/>
+                        {/*<Route exact path={'/profile'} >*/}
+                        <ProfileRoutes/>
+                    </ShopLayout>
                     {/*</Route>*/}
                     <Route exact path={'/not-found'}>
                         <div>

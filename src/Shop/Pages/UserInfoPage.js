@@ -28,7 +28,7 @@ function UserInfoPage() {
     }
 
     return (
-        <ShopLayout>
+        <>
             <form className={classes.container}>
                 <Title title={'ویرایش اطلاعات کاربری'}/>
                 <Card className={classes.card}>
@@ -131,7 +131,7 @@ function UserInfoPage() {
                     </Button>
                 </div>
             </form>
-        </ShopLayout>
+        </>
     )
 
 }
