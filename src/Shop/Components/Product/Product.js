@@ -5,9 +5,11 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import {separateDigit} from "../../../utills/ToFaDigit";
 import {useProductStyle} from "./Styles/useProductStyle";
-
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {useLocation} from "react-router-dom"
 function Product() {
     const classes = useProductStyle()
+    const location = useLocation()
     const product = {
         title: 'آستین کوتاه باله دار خاکستری',
         detail: 'تیشرت دخترانه جنس: یکرو ویسکوز، اسلپ\n' +
@@ -38,7 +40,7 @@ function Product() {
                     <div className={classes.details}>
                         <Typography className={classes.title}>{product.title}</Typography>
                         <Typography className={classes.subtitle}>مشخصات محصول:</Typography>
-                        <Typography  className={classes.detail}>{product.detail}</Typography>
+                        <Typography className={classes.detail}>{product.detail}</Typography>
                     </div>
 
                     <div className={classes.selects}>
@@ -91,28 +93,31 @@ function Product() {
                     </div>
                 </div>
                 <div className={classes.actionContainer}>
-                    <IconButton className={classes.shareButton}>
-                        <SvgIcon xmlns="http://www.w3.org/2000/svg" width="22.5" height="21" viewBox="0 0 22.5 21">
-                            <g id="share" transform="translate(-0.75 -1.5)">
-                                <circle id="Ellipse_115" data-name="Ellipse 115" cx="3.75" cy="3.75" r="3.75"
-                                        transform="translate(1.5 7.5)" fill="none" stroke="#434343"
-                                        strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
-                                <circle id="Ellipse_116" data-name="Ellipse 116" cx="3.75" cy="3.75" r="3.75"
-                                        transform="translate(15 2.25)" fill="none" stroke="#434343"
-                                        strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
-                                <circle id="Ellipse_117" data-name="Ellipse 117" cx="3.75" cy="3.75" r="3.75"
-                                        transform="translate(15 14.25)" fill="none" stroke="#434343"
-                                        strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
-                                <path id="Path_30119" data-name="Path 30119" d="M8.746,9.891,15.254,7.36" fill="none"
-                                      stroke="#434343" strokeLinecap="round" strokeLinejoin="round"
-                                      strokeWidth="1.5"/>
-                                <path id="Path_30120" data-name="Path 30120" d="M8.6,12.928l6.79,3.395" fill="none"
-                                      stroke="#434343" strokeLinecap="round" strokeLinejoin="round"
-                                      strokeWidth="1.5"/>
-                            </g>
-                        </SvgIcon>
+                    <CopyToClipboard text={window.location.href}>
+                        <IconButton className={classes.shareButton}>
+                            <SvgIcon xmlns="http://www.w3.org/2000/svg" width="22.5" height="21" viewBox="0 0 22.5 21">
+                                <g id="share" transform="translate(-0.75 -1.5)">
+                                    <circle id="Ellipse_115" data-name="Ellipse 115" cx="3.75" cy="3.75" r="3.75"
+                                            transform="translate(1.5 7.5)" fill="none" stroke="#434343"
+                                            strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
+                                    <circle id="Ellipse_116" data-name="Ellipse 116" cx="3.75" cy="3.75" r="3.75"
+                                            transform="translate(15 2.25)" fill="none" stroke="#434343"
+                                            strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
+                                    <circle id="Ellipse_117" data-name="Ellipse 117" cx="3.75" cy="3.75" r="3.75"
+                                            transform="translate(15 14.25)" fill="none" stroke="#434343"
+                                            strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
+                                    <path id="Path_30119" data-name="Path 30119" d="M8.746,9.891,15.254,7.36"
+                                          fill="none"
+                                          stroke="#434343" strokeLinecap="round" strokeLinejoin="round"
+                                          strokeWidth="1.5"/>
+                                    <path id="Path_30120" data-name="Path 30120" d="M8.6,12.928l6.79,3.395" fill="none"
+                                          stroke="#434343" strokeLinecap="round" strokeLinejoin="round"
+                                          strokeWidth="1.5"/>
+                                </g>
+                            </SvgIcon>
 
-                    </IconButton>
+                        </IconButton>
+                    </CopyToClipboard>
                     <div className={classes.priceDetailContainer}>
                         <div className={classes.discountContainer}>
                             <Chip className={classes.discountChip} label={`%${separateDigit(product.discount * 100)}`}/>
