@@ -82,7 +82,7 @@ function SignUpPage() {
     }
 
     return (
-        <ShopLayout>
+        <>
             <form onSubmit={handleSubmit} className={classes.container}>
                 <Title title={setTitle(step)}/>
                 <Card>
@@ -122,7 +122,7 @@ function SignUpPage() {
                     </Button>
                 </div>
             </form>
-        </ShopLayout>
+        </>
     )
 
 }

@@ -127,7 +127,7 @@ function Header() {
                         setOpen={setDialogOpen}
                     />
                     <Button
-                        onClick={() => history.push('/profile/login')}
+                        onClick={() => history.push(`${isLogin ? '/profile' : '/login'}`)}
                         size={"small"}
                         dir={'ltr'}
                         className={classes.login}
@@ -152,7 +152,7 @@ function Header() {
                                 : 'ورود / ثبت‌نام'
                         }
                     </Button>
-                    <IconButton onClick={() => history.push('/profile/login')} className={classes.iconButtons}>
+                    <IconButton onClick={() => history.push(`${isLogin ? '/profile' : '/login'}`)} className={classes.iconButtons}>
                         <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.5" height="19.5"
                                  viewBox="0 0 17.5 19.5">
                             <g id="user" transform="translate(-3.25 -2.25)">

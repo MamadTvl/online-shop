@@ -25,17 +25,10 @@ function ProfileRoutes() {
                 <CartPage/>
             </PrivateRoute>
 
-            <PrivateRoute path={'/profile/order'}>
-                <div>
-                    kadl
-                </div>
-            </PrivateRoute>
-
-
-            <PublicRoute path={`/profile/login`}>
+            <PublicRoute path={`/login`}>
                 <LoginPage/>
             </PublicRoute>
-            <PublicRoute path={`/profile/signup`}>
+            <PublicRoute path={`/signup`}>
                 <SignUpPage/>
             </PublicRoute>
             <PublicRoute path={`/profile/forget-password`}>

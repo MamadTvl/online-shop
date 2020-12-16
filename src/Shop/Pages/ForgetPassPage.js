@@ -66,7 +66,7 @@ function ForgetPassPage() {
     }
 
     return (
-        <ShopLayout>
+        <>
             <form onSubmit={handleSubmit} className={classes.container}>
                 <Title title={setTitle(step)}/>
                 <Card>
@@ -108,7 +108,7 @@ function ForgetPassPage() {
                     </Button>
                 </div>
             </form>
-        </ShopLayout>
+        </>
     )
 
 

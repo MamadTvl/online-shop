@@ -80,7 +80,7 @@ function SearchPage({location}) {
     }, [change])
 
     return (
-        <ShopLayout>
+        <>
             <div className={classes.searchContainer}>
                 <Breadcrumbs className={classes.breadcrumbContainer} separator={<NavigateBeforeIcon fontSize="small"/>}>
                     <ItemLink to={'/'}>
@@ -158,7 +158,7 @@ function SearchPage({location}) {
 
                 </Grid>
             </div>
-        </ShopLayout>
+        </>
     )
 }
 

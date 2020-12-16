@@ -63,7 +63,7 @@ function LoginPage() {
             })
             if (response.data.status === "success") {
                 localStorage.setItem("Authorization", response.data.data.token)
-                history.push('/profile')
+                history.go(0)
             } else {
                 setError(true)
             }
@@ -73,7 +73,7 @@ function LoginPage() {
     }
 
     return (
-        <ShopLayout>
+        <>
             <form onSubmit={handleLogin} className={classes.container}>
                 <Title title={'ورود به حساب کاربری'}/>
                 <Card className={classes.card}>
@@ -141,7 +141,7 @@ function LoginPage() {
                         {
                             size.width < 600 &&
                             <div className={classes.action}>
-                                <ItemLink style={{alignSelf: 'flex-start', marginTop: 24,}} to={'/profile/signup'}>
+                                <ItemLink style={{alignSelf: 'flex-start', marginTop: 24,}} to={'/signup'}>
                                     <Button
                                         className={classes.signupButton}
                                         dir={'ltr'}
@@ -200,7 +200,7 @@ function LoginPage() {
                     </div>
                 }
             </form>
-        </ShopLayout>
+        </>
     )
 }
 

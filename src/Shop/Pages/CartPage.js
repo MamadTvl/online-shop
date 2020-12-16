@@ -101,7 +101,7 @@ function CartPage() {
         window.scrollTo(0, 0)
     }
     return (
-        <ShopLayout>
+        <>
             <div className={classes.container}>
                 <Title title={setTitle(step)}/>
                 <Grid container spacing={3}>
@@ -280,7 +280,7 @@ function CartPage() {
                     </Grid>
                 </Grid>
             </div>
-        </ShopLayout>
+        </>
     )
 }
 
