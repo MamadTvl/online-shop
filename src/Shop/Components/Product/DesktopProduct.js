@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Card, CardContent, Chip, IconButton, SvgIcon, TextField, Typography} from "@material-ui/core";
+import {Button, Card, Chip, IconButton, SvgIcon, TextField, Typography} from "@material-ui/core";
 import PhotoViewer from "./PhotoViewer";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -7,7 +7,8 @@ import {separateDigit} from "../../../utills/ToFaDigit";
 import {useProductStyle} from "./Styles/useProductStyle";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {useLocation} from "react-router-dom"
-function Product() {
+
+function DesktopProduct() {
     const classes = useProductStyle()
     const location = useLocation()
     const product = {
@@ -33,8 +34,10 @@ function Product() {
 
     return (
         <Card>
-            <CardContent style={{padding: 24, display: 'flex'}}>
-                <PhotoViewer/>
+            <div className={classes.content}>
+                {/*<div style={{width: '100%'}}>*/}
+                    <PhotoViewer/>
+                {/*</div>*/}
                 <div className={classes.detailContainer}>
 
                     <div className={classes.details}>
@@ -47,7 +50,7 @@ function Product() {
                         <div className={classes.selectContainer}>
                             <Typography className={classes.label}>سایز</Typography>
                             <TextField
-                                style={{flexGrow: 1}}
+                                // style={{flexGrow: 1}}
                                 id="size"
                                 select
                                 value={''}
@@ -64,7 +67,7 @@ function Product() {
                         <div className={classes.selectContainer}>
                             <Typography className={classes.label}>رنگ</Typography>
                             <TextField
-                                style={{flexGrow: 1}}
+                                // style={{flexGrow: 1}}
                                 id="color"
                                 select
                                 // value={selectedCategory ? selectedCategory.name : ''}
@@ -92,6 +95,7 @@ function Product() {
                         </div>
                     </div>
                 </div>
+
                 <div className={classes.actionContainer}>
                     <CopyToClipboard text={window.location.href}>
                         <IconButton className={classes.shareButton}>
@@ -156,10 +160,10 @@ function Product() {
                         </Button>
                     </div>
                 </div>
-            </CardContent>
+            </div>
         </Card>
     )
 }
 
 
-export default Product
+export default DesktopProduct

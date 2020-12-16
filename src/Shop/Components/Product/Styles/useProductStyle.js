@@ -2,14 +2,24 @@ import {makeStyles} from "@material-ui/styles";
 
 
 export const useProductStyle = makeStyles((theme) => ({
-
+    content: {
+        padding: 24,
+        display: 'flex',
+        justifyContent: 'space-between',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column'
+        }
+    },
     detailContainer: {
         display: 'flex',
         marginRight: theme.spacing(3),
-        width: '35vw',
-        height: '30vw',
+        width: '35%',
+        // height: '30vw',
         flexDirection: 'column',
         justifyContent: 'space-between',
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+        }
     },
 
     details: {
@@ -46,11 +56,16 @@ export const useProductStyle = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-start',
+        flexWrap: "wrap",
+        margin: '0 -8px -8px 16px'
     },
 
     selectContainer: {
         display: 'flex',
         flexDirection: 'column',
+        flexGrow: 1,
+        padding: 8,
+
     },
 
     label: {
@@ -62,7 +77,7 @@ export const useProductStyle = makeStyles((theme) => ({
     },
     textFieldRoot: {
         height: 40,
-        width: 120,
+        width: '100%',
         marginLeft: 16,
         borderRadius: 6,
     },
@@ -79,7 +94,7 @@ export const useProductStyle = makeStyles((theme) => ({
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: 'rgba(67, 67, 67, 0.32)',
-        width: 120,
+        width: '100%',
         height: 40,
     },
 
@@ -170,7 +185,7 @@ export const useProductStyle = makeStyles((theme) => ({
     },
 
     shopButton: {
-        minWidth: 196,
+        width: '100%',
         height: 40,
         backgroundColor: '#F16522',
         color: 'white',

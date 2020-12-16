@@ -5,7 +5,13 @@ export const usePhotoViewerStyle = makeStyles((theme) => ({
     container: {
         position: 'relative',
         width: '30vw',
-        height: '30vw',//maybe grid help
+        height: '30vw',
+        margin: 'auto 0',
+        [theme.breakpoints.down('sm')]: {
+            width: '40vw',
+            height: '40vw',
+            margin: '0 auto',
+        }
     },
     viewer: {
         width: '100%'

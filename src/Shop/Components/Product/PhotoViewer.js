@@ -8,6 +8,7 @@ function PhotoViewer() {
     const [index, setIndex] = useState(0)
     const images = [image, image, image, image, image, image, image, image]
     const classes = usePhotoViewerStyle()
+
     useEffect(() => {
         const slider = document.getElementById('image-buttons');
         let isDown = false;
@@ -32,6 +33,37 @@ function PhotoViewer() {
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 1.5; //scroll-fast
+            slider.scrollLeft = scrollLeft - walk;
+        });
+    }, [])
+
+    useEffect(() => {
+        const slider = document.getElementById('image-buttons');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('touchstart', (e) => {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.targetTouches[0].pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+        slider.addEventListener('touchend', () => {
+            console.log('touchend')
+            isDown = false;
+            slider.classList.remove('active');
+        });
+        slider.addEventListener('touchcancel', () => {
+            console.log('touchcancel')
+            isDown = false;
+            slider.classList.remove('active');
+        });
+        slider.addEventListener('touchmove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.targetTouches[0].pageX - slider.offsetLeft;
             const walk = (x - startX) * 1.5; //scroll-fast
             slider.scrollLeft = scrollLeft - walk;
         });
