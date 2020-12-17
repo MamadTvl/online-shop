@@ -8,12 +8,12 @@ import {useProductSliderStyles} from "./Styles/ProductsSliderStyle";
 function ProductGrid(props) {
     const {products} = props
     const classes = useProductSliderStyles()
-
+    // if 1 = xs=6
     return (
         <Grid justify={'center'} container spacing={2}>
             {
                 products.map(product => (
-                    <Grid justify={'center'} item xs={3}>
+                    <Grid  item >
                         <ProductCard className={classes.card} product={product}/>
                     </Grid>
                 ))

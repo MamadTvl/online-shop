@@ -88,7 +88,7 @@ function ProductsSlider(props) {
                 rtl: true,
             })
         }
-        if (size.width >= 373 && size.width <= 500) {
+        if (size.width >= 373 && size.width <= 500 && products.length >= 4) {
             const slides = document.getElementsByClassName('custom-slider-slick')[0]
                 .children[1].children[0].children
             // if you want to find out what you are doing log it !
