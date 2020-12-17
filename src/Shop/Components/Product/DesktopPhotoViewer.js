@@ -4,7 +4,8 @@ import image from '../../../img/photoViewer.png'
 import {ButtonBase, IconButton, SvgIcon} from "@material-ui/core";
 import {usePhotoViewerStyle} from "./Styles/usePhotoViewerStyle";
 
-function PhotoViewer() {
+
+function DesktopPhotoViewer() {
     const [index, setIndex] = useState(0)
     const images = [image, image, image, image, image, image, image, image]
     const classes = usePhotoViewerStyle()
@@ -84,7 +85,7 @@ function PhotoViewer() {
             <SwipeableViews axis={'x-reverse'} index={index} enableMouseEvents>
                 {
                     images.map((image) => (
-                        <img className={classes.imageView} src={image} alt={'Hello'}/>
+                        <img className={classes.imageView} src={image} alt={image}/>
                     ))
                 }
             </SwipeableViews>
@@ -121,4 +122,4 @@ function PhotoViewer() {
 }
 
 
-export default PhotoViewer
+export default DesktopPhotoViewer

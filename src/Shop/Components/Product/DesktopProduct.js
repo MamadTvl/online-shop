@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Card, Chip, IconButton, SvgIcon, TextField, Typography} from "@material-ui/core";
-import PhotoViewer from "./PhotoViewer";
+import DesktopPhotoViewer from "./DesktopPhotoViewer";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import {separateDigit} from "../../../utills/ToFaDigit";
@@ -36,7 +36,7 @@ function DesktopProduct() {
         <Card>
             <div className={classes.content}>
                 {/*<div style={{width: '100%'}}>*/}
-                    <PhotoViewer/>
+                    <DesktopPhotoViewer/>
                 {/*</div>*/}
                 <div className={classes.detailContainer}>
 

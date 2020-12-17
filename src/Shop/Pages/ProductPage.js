@@ -9,6 +9,7 @@ import {Typography} from "@material-ui/core";
 import ProductDetail from "../Components/Product/ProductDetail";
 import SimilarProducts from "../Components/Product/SimilarProducts"
 import useWindowSize from "../../utills/Hooks/useWindowSize"
+import MobileProduct from "../Components/Product/MobileProduct";
 
 
 
@@ -35,7 +36,7 @@ function ProductPage() { // todo: make this responsive
                 {
                     size.width > 600
                      ? <DesktopProduct/>
-                     : <></>
+                     : <MobileProduct/>
                 }
 
                 <ProductDetail/>
