@@ -1,20 +1,21 @@
 import React, {useState} from "react";
-import {Button, Card, Typography} from "@material-ui/core";
 import {useMobileProductStyle} from "./Styles/useMobileProductStyle";
-import PropTypes from 'prop-types';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import {Button, Card, Typography} from "@material-ui/core";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import FullScreenDialog from "./FullScreenDialog";
+import PropTypes from "prop-types";
+import DetailCard from "./DetailCard";
 
 
-function DetailCard(props) {
+function DescriptionCard(props) {
     const classes = useMobileProductStyle()
     const {product} = props
     const [open, setOpen] = useState(false)
     return (
         <>
             <Card className={classes.card}>
-                <Typography className={classes.detailTitle}>مشخصات محصول</Typography>
-                <Typography className={classes.detailDescription}>{product.detail}</Typography>
+                <Typography className={classes.detailTitle}>توضیحات محصول</Typography>
+                <Typography className={classes.detailDescription}>{product.description}</Typography>
                 <Button
                     onClick={() => setOpen(true)}
                     className={classes.moreButton}
@@ -26,22 +27,19 @@ function DetailCard(props) {
                 >
                     مشاهده بیشتر
                 </Button>
-
             </Card>
-            <FullScreenDialog open={open} setOpen={setOpen} title={'مشخصات محصول'}>
-                <Card style={{height: '100%'}} className={classes.card}>
+            <FullScreenDialog open={open} setOpen={setOpen} title={'توضیحات محصول'}>
+                <Card className={classes.card}>
                     <Typography style={{maxHeight: 'initial'}} className={classes.detailDescription}>
-                        {product.detail}
+                        {product.description}
                     </Typography>
                 </Card>
             </FullScreenDialog>
         </>
     )
-
 }
 
 DetailCard.propTypes = {
     product: PropTypes.object.isRequired,
 }
-
-export default DetailCard
+export default DescriptionCard

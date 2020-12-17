@@ -140,6 +140,7 @@ export const useMobileProductStyle = makeStyles((theme) => ({
         fontSize: 16,
         fontWeight: 'bold',
         color: '#545454',
+        marginBottom: 16,
         // margin: '16px 0 ',
     },
     detailDescription: {
@@ -156,6 +157,53 @@ export const useMobileProductStyle = makeStyles((theme) => ({
         fontSize: '16px',
         fontFamily: 'Shabnam',
         float: 'left',
+    },
+
+    //--------comment Card Style-------
+    commentCard: {
+        backgroundColor: '#FAFAFA',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: 16,
+    },
+    userComment: {
+        fontFamily: 'Shabnam',
+        fontSize: 14,
+        fontWeight: 500,
+        color: '#444444',
+        marginBottom: 14,
+    },
+    commentPreviewDescription: {
+        fontFamily: 'Shabnam',
+        fontSize: 12,
+        color: '#888888',
+        maxHeight: 73,
+        whiteSpace: 'pre-wrap',
+        overflowY: 'hidden',
+    },
+    commentDescription: {
+        fontFamily: 'Shabnam',
+        fontSize: 12,
+        color: '#888888',
+        whiteSpace: 'pre-wrap',
+    },
+    likeButtonContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+    },
+    like: {
+        fontFamily: 'Shabnam',
+        fontSize: 16,
+    },
+    defaultButtonColor: {
+        color: '#888888',
+    },
+    defaultColor: {
+        color: 'black',
+    },
+    activeColor: {
+        color: '#F16522',
     },
 
     //--------dialog styles------------
