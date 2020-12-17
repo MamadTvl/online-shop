@@ -3,8 +3,8 @@ import {makeStyles} from "@material-ui/styles";
 
 export const useMobilePhotoViewerStyle = makeStyles((theme) => ({
     container: {
-        width: '80vw',
-        height: '80vw',
+        width: '84vw',
+        height: '84vw',
         margin: '0 auto',
         position: 'relative',
         borderRadius: 4,

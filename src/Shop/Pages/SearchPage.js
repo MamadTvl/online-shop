@@ -150,6 +150,7 @@ function SearchPage({location}) {
                     <Grid item className={classes.categoryXsItem} xs={12}>
                         <div style={{width: '100%'}}>
                             <FilterCategory
+                                setChange={setChange}
                                 categories={searchStates.categories}
                                 dispatch={dispatch}
                             />

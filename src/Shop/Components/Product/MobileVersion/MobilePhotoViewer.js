@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import SwipeableViews from "react-swipeable-views";
-import image from "../../../img/photoViewer.png";
+import image from "../../../../img/photoViewer.png";
 import {useMobilePhotoViewerStyle} from "./Styles/useMobilePhotoViewerStyle";
 import {IconButton} from "@material-ui/core";
 
@@ -22,12 +22,10 @@ function MobilePhotoViewer() {
             scrollLeft = slider.scrollLeft;
         });
         slider.addEventListener('touchend', () => {
-            console.log('touchend')
             isDown = false;
             slider.classList.remove('active');
         });
         slider.addEventListener('touchcancel', () => {
-            console.log('touchcancel')
             isDown = false;
             slider.classList.remove('active');
         });
@@ -51,7 +49,7 @@ function MobilePhotoViewer() {
 
     return(
         <div className={classes.container}>
-            <SwipeableViews style={{borderRadius: 4}} axis={'x-reverse'} index={index} enableMouseEvents>
+            <SwipeableViews onChangeIndex={(event) => setIndex(event)} style={{borderRadius: 4}} axis={'x-reverse'} index={index} enableMouseEvents>
                 {
                     images.map((image) => (
                         <img className={classes.imageView} src={image} alt={'Hello'}/>

@@ -6,29 +6,18 @@ function useCategoriesData(fetch) {
     const [result, setResult] = useState([])
     const [loading, setLoading] = useState(true)
     const [, getCategories] = useAxios({
-        url: '/admin/category_mng/get_category',
+        url: '/get_all_category',
     }, {manual: true})
 
     useEffect(() => {
         async function getResult() {
             try {
                 setLoading(true)
-                const pagesResponse = await getCategories({
-                    url: '/admin/category_mng/get_category?page=0'
-                })
-                const pages = pagesResponse.data.data.pages
-                let categoriesResponse = []
-                for (let i = 0; i <= pages; i++) {
-                    categoriesResponse.push(await getCategories({
-                        url: `/admin/category_mng/get_category?page=${i}`
-                    }))
-                }
+                const response = await getCategories()
+                const responseCats = response.data.data.categories
                 let categories = []
-                for (let i = 0; i < categoriesResponse.length; i++) {
-                    const category = categoriesResponse[i].data.data.categories
-                    for (let j = 0; j <category.length; j++) {
-                        categories.push({...category[j], checked: false})
-                    }
+                for (let i = 0; i < responseCats.length; i++) {
+                    categories.push({...responseCats[i], checked: false})
                 }
                 setResult(categories)
                 setLoading(false)

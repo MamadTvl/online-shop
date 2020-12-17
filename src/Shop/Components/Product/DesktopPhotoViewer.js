@@ -82,7 +82,7 @@ function DesktopPhotoViewer() {
 
     return (
         <div className={classes.container}>
-            <SwipeableViews axis={'x-reverse'} index={index} enableMouseEvents>
+            <SwipeableViews onChangeIndex={(event) => setIndex(event)} axis={'x-reverse'} index={index} enableMouseEvents>
                 {
                     images.map((image) => (
                         <img className={classes.imageView} src={image} alt={image}/>
