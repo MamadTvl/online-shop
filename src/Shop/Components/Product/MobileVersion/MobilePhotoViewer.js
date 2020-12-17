@@ -39,17 +39,18 @@ function MobilePhotoViewer() {
     }, [])
 
     useEffect(() => {
-        for (let i = 0; i <images.length; i++) {
-            const imageButton =  document.getElementById(`photoViewer-dots-${i}`)
+        for (let i = 0; i < images.length; i++) {
+            const imageButton = document.getElementById(`photoViewer-dots-${i}`)
             imageButton.style.backgroundColor = 'rgba(0, 0, 0, 0.45)'
         }
         const imageButton = document.getElementById(`photoViewer-dots-${index}`)
         imageButton.style.backgroundColor = 'white'
     }, [index])
 
-    return(
+    return (
         <div className={classes.container}>
-            <SwipeableViews onChangeIndex={(event) => setIndex(event)} style={{borderRadius: 4}} axis={'x-reverse'} index={index} enableMouseEvents>
+            <SwipeableViews onChangeIndex={(event) => setIndex(event)} style={{borderRadius: 4}} axis={'x-reverse'}
+                            index={index} enableMouseEvents>
                 {
                     images.map((image) => (
                         <img className={classes.imageView} src={image} alt={'Hello'}/>
@@ -68,4 +69,5 @@ function MobilePhotoViewer() {
         </div>
     )
 }
+
 export default MobilePhotoViewer

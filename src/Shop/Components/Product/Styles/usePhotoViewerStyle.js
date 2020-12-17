@@ -8,8 +8,8 @@ export const usePhotoViewerStyle = makeStyles((theme) => ({
         height: '30vw',
         margin: 'auto 0',
         [theme.breakpoints.down('sm')]: {
-            width: '40vw',
-            height: '40vw',
+            width: '82vw',
+            height: '82vw',
             margin: '0 auto',
         }
     },
@@ -50,6 +50,9 @@ export const usePhotoViewerStyle = makeStyles((theme) => ({
         '&::-webkit-scrollbar': { //chrome
             display: 'none',
         },
+        [theme.breakpoints.down('sm')]: {
+            bottom: '9%',
+        }
     },
     listItem: {
         marginLeft: '16px',
