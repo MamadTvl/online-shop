@@ -8,8 +8,8 @@ import previewImage from "../../../img/shoes.png"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import NextArrow from './NextArrow'
-import PrevArrow from "./PrevArrow";
+import NextArrow from '../Public/NextArrow'
+import PrevArrow from "../Public/PrevArrow";
 
 function AmazingOffers() {
     const classes = useStyles()

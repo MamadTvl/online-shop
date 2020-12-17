@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import Slider from "../Components/Home/Slider";
 import Banners from "../Components/Home/Banners";
-import ProductsSlider from "../Components/Home/ProductsSlider";
 import AmazingOffers from "../Components/Home/AmazingOffers";
 import Attributes from "../Components/Home/Attributes";
 import BlogInterView from "../Components/Home/BlogInterView";
 import useHomeData from "../FetchData/useHomeData";
 import {Skeleton} from "@material-ui/lab";
+import BestSeller from "../Components/Home/BestSeller";
 
 function HomePage() {
     const [fetch,] = useState(true)
@@ -23,7 +23,7 @@ function HomePage() {
             <Banners
                 banners={result[1]}
             />
-            <ProductsSlider/>
+            <BestSeller/>
             <AmazingOffers/>
             <Attributes
                 attributes={result[3]}

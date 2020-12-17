@@ -1,10 +1,10 @@
 import React from "react";
 import {IconButton, SvgIcon} from "@material-ui/core";
-import {useStyles} from "./Styles/ProductsSliderStyle";
+import {useProductSliderStyles} from "./Styles/ProductsSliderStyle";
 
 function NextArrow(props) {
-    const classes = useStyles()
-    const {className, style, onClick} = props; //todo: delete className
+    const classes = useProductSliderStyles()
+    const {style, onClick} = props; //todo: delete className
     return (
         <div
             className={classes.nextArrow}

@@ -1,11 +1,11 @@
 import React from "react";
 import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
 import Chip from "@material-ui/core/Chip";
-import {useStyles} from "../Home/Styles/ProductsSliderStyle";
+import {useProductSliderStyles} from "./Styles/ProductsSliderStyle";
 import {useHistory} from 'react-router-dom'
 
 function ProductCard(props) {
-    const classes = useStyles()
+    const classes = useProductSliderStyles()
     const history = useHistory()
     return (
         <Card component={'div'} className={props.className}>

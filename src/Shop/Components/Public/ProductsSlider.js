@@ -5,18 +5,14 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
-import productImage from '../../../img/img.png'
-import {useStyles} from "./Styles/ProductsSliderStyle";
+import {useProductSliderStyles} from "./Styles/ProductsSliderStyle";
 import useWindowSize from "../../../utills/Hooks/useWindowSize";
-import ProductCard from "../Public/ProuductCard";
+import ProductCard from "./ProuductCard";
+import PropType from 'prop-types'
 
-
-function ProductsSlider() {
-    const classes = useStyles()
-
-    function createData(name, price, img, hasDiscount, discount, newPrice) {
-        return {name, price, img, hasDiscount, discount, newPrice}
-    }
+function ProductsSlider(props) {
+    const classes = useProductSliderStyles()
+    const {products} = props
 
     const size = useWindowSize()
 
@@ -30,17 +26,6 @@ function ProductsSlider() {
         prevArrow: <PrevArrow/>,
         rtl: true,
     })
-
-    const products = [
-        createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-        createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-        createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-        createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-        createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-        createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-        createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-        createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-    ]
 
     useEffect(() => {
         const slides = document.getElementsByClassName('custom-slider-slick')[0]
@@ -131,6 +116,10 @@ function ProductsSlider() {
             </div>
         </div>
     )
+}
+
+ProductsSlider.propTypes = {
+    products: PropType.array.isRequired,
 }
 
 export default ProductsSlider

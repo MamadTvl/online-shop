@@ -1,10 +1,10 @@
 import React from "react";
 import {IconButton, SvgIcon} from "@material-ui/core";
-import {useStyles} from "./Styles/ProductsSliderStyle";
+import {useProductSliderStyles} from "./Styles/ProductsSliderStyle";
 
 function PrevArrow(props) {
-    const classes = useStyles()
-    const {className, style, onClick} = props;
+    const classes = useProductSliderStyles()
+    const {style, onClick} = props;
     return (
         <div
             className={classes.prevArrow}
