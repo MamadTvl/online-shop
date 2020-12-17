@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {Typography} from "@material-ui/core";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -28,13 +27,15 @@ function ProductsSlider(props) {
     })
 
     useEffect(() => {
-        const slides = document.getElementsByClassName('custom-slider-slick')[0]
-            .children[1].children[0].children
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.padding = '0 20px'
+        if (products.length >= 4) {
+            const slides = document.getElementsByClassName('custom-slider-slick')[0]
+                .children[1].children[0].children
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.padding = '0 20px'
+            }
+            const slideContainer = document.getElementsByClassName('custom-slider-slick')[0]
+            slideContainer.style.marginTop = '23px'
         }
-        const slideContainer = document.getElementsByClassName('custom-slider-slick')[0]
-        slideContainer.style.marginTop = '23px'
 
     }, [])
 
@@ -100,20 +101,14 @@ function ProductsSlider(props) {
 
 
     return (
-        <div className={classes.SliderContainer}>
-            <div style={{display: 'flex', marginTop: 60}}>
-                <div className={classes.titleContainer}/>
-                <Typography className={classes.title}>پرفروش‌ترین محصولات</Typography>
-            </div>
-            <div>
-                <Slider {...responsiveSetting}>
-                    {
-                        products.map((product) => (
-                            <ProductCard className={classes.card} product={product}/>
-                        ))
-                    }
-                </Slider>
-            </div>
+        <div>
+            <Slider {...responsiveSetting}>
+                {
+                    products.map((product) => (
+                        <ProductCard className={classes.card} product={product}/>
+                    ))
+                }
+            </Slider>
         </div>
     )
 }

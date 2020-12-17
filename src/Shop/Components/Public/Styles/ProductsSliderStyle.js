@@ -2,9 +2,9 @@ import {makeStyles} from "@material-ui/core/styles";
 
 
 export const useProductSliderStyles = makeStyles((theme) => ({
-    SliderContainer: {
+    sliderContainer: {
         padding: theme.spacing(0, 17.5),
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('md')]: {
             padding: theme.spacing(0, 3),
         },
 
