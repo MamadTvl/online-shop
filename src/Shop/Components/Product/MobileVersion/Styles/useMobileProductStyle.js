@@ -205,6 +205,14 @@ export const useMobileProductStyle = makeStyles((theme) => ({
     activeColor: {
         color: '#F16522',
     },
+    commentInput: {
+        fontFamily: 'Shabnam',
+        fontSize: 16,
+        color: '#444444'
+    },
+    commentInputRoot: {
+        marginTop: 8,
+    },
 
     //--------dialog styles------------
     dialogHeader: {
