@@ -27,6 +27,11 @@ function CategoryMenu(props) {
     const classes = useHeaderStyle()
     const location = useLocation()
     const params = new URLSearchParams(location.search)
+    const linkStyle = {
+        borderLeftStyle: 'solid',
+        borderLeftColor: 'rgba(0, 0, 0, 0.12)',
+        borderLeftWidth: '0.5px',
+    }
     const search = location.search !== '' ? `${location.search}&` : ''
     const handleClose = () => {
         setAnchorEl(null);
@@ -42,10 +47,16 @@ function CategoryMenu(props) {
         >
             {
                 result.map((category, index) => (
-                    <ItemLink to={{pathname: '/search', search: `${search}categoryId[${index}]=${category.id}`}}>
+                    index !== result.length - 1 ?
+                    <ItemLink style={linkStyle} to={{pathname: '/search', search: `${search}categoryId[${index}]=${category.id}`}}>
                         <MenuItem key={category.id} className={classes.menuLabel}
                                   onClick={handleClose}>{category.name}</MenuItem>
                     </ItemLink>
+                        :
+                        <ItemLink to={{pathname: '/search', search: `${search}categoryId[${index}]=${category.id}`}}>
+                            <MenuItem key={category.id} className={classes.menuLabel}
+                                      onClick={handleClose}>{category.name}</MenuItem>
+                        </ItemLink>
                 ))
             }
         </StyledMenu>

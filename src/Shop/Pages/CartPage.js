@@ -266,7 +266,6 @@ function CartPage() {
                                 step !== 0 &&
                                 <div style={{width: '100%', float: 'left', marginTop: 24}}>
                                     <Button
-                                        // disabled={loading}
                                         fullWidth
                                         onClick={() => setStep(step - 1)}
                                         className={classes.backButton}

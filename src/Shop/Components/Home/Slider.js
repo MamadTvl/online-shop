@@ -11,7 +11,7 @@ function Slider(props) {
     const settings = {
         dots: true,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 3000,
         rtl: true,
     };
     return (

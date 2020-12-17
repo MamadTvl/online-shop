@@ -105,11 +105,8 @@ export const useCartPageStyle = makeStyles((theme) => ({
         fontSize: '16px',
         fontFamily: 'Shabnam',
         fontWeight: "bold",
-        '&:hover': {
-            backgroundColor: '#F16522',
-            color: 'white',
-        },
     },
+
     // steps style
     orderCardsStep: {
         display: 'flex',
