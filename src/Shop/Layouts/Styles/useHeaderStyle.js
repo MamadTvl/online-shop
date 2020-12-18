@@ -90,6 +90,39 @@ export const useHeaderStyle = makeStyles((theme) => ({
     dialogContent: {
 
     },
+    drawer: {
+        [theme.breakpoints.up('sm')]: {
+            width: 270,
+            flexShrink: 0,
+        },
+    },
+    drawerAppBar: {
+        //for keep it fix on bottom and necessary for content to be below bar
+        offset: theme.mixins.toolbar,
+        position: 'sticky',
+        display: 'flex',
+        width: '100%',
+        alignItems: 'center',
+        background: '#FFFFFF',
+        padding: theme.spacing(1),
+        // necessary for content to be below app bar
+        ...theme.mixins.toolbar,
+    },
+    drawerPaper: {
+        width: 270,
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+        '&::-webkit-scrollbar': {
+            display: "none"
+        }
+    },
+    appbarTitle: {
+        fontFamily: 'Shabnam',
+        fontSize: 16,
+        fontWeight: "bold",
+        color: '#545454',
+        margin: 'auto',
+    },
     textField: {
         width: 453,
         minHeight: 40,
