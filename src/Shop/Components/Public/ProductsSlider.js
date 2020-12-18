@@ -28,6 +28,10 @@ function ProductsSlider(props) {
 
     useEffect(() => {
         if (products.length > 4 || (products.length === 4 && size.width <= 1280) ) {
+            document.getElementsByClassName('custom-slider-slick')[0]
+                .children[1].children[0].style.height = '422px'
+            console.log(document.getElementsByClassName('custom-slider-slick')[0]
+                .children[1].children[0].style)
             const slides = document.getElementsByClassName('custom-slider-slick')[0]
                 .children[1].children[0].children
             for (let i = 0; i < slides.length; i++) {
@@ -100,7 +104,7 @@ function ProductsSlider(props) {
 
 
     return (
-        <div>
+        <>
             <Slider {...responsiveSetting}>
                 {
                     products.map((product) => (
@@ -108,7 +112,7 @@ function ProductsSlider(props) {
                     ))
                 }
             </Slider>
-        </div>
+        </>
     )
 }
 

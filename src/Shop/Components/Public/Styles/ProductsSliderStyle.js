@@ -104,7 +104,7 @@ export const useProductSliderStyles = makeStyles((theme) => ({
     normalCard: {
         display: "flex",
         direction: 'ltr',
-        marginTop: 64,
+        marginTop: 109,
 
     },
     priceLabel:{

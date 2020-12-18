@@ -1,12 +1,14 @@
-import React, {useState} from "react";
-import ShopLayout from "../Layouts/ShopLayout";
+import React, {useEffect, useState} from "react";
 import {Button, Card, Grid, TextField, Typography} from "@material-ui/core";
 import {useUserInfoPageStyle} from "./Styles/useUserInfoPageStyle";
 import Title from "../Components/Public/Title";
 import useWindowSize from "../../utills/Hooks/useWindowSize";
+import useUserData from "../FetchData/useUserData";
+import {toFaDigit} from "../../utills/ToFaDigit";
 
 
 function UserInfoPage() {
+    const [loading, result] = useUserData(true)
     const classes = useUserInfoPageStyle()
     const size = useWindowSize()
     const [values, setValues] = useState({
@@ -26,6 +28,17 @@ function UserInfoPage() {
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value})
     }
+    useEffect(() => {
+        if (!loading) {
+            setValues({
+                name: result.name_and_last_name,
+                mobileNumber: result.mobile_number,
+                email: result.email,
+                state: result.state,
+                city: result.city,
+            })
+        }
+    }, [loading, result])
 
     return (
         <>
@@ -54,7 +67,7 @@ function UserInfoPage() {
                             <TextField
                                 dir={'ltr'}
                                 error={errors.mobileNumber}
-                                value={values.mobileNumber}
+                                value={toFaDigit((values.mobileNumber).toString())}
                                 onChange={handleChange('mobileNumber')}
                                 InputProps={{
                                     classes: {
