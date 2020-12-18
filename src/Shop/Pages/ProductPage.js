@@ -12,7 +12,7 @@ import useWindowSize from "../../utills/Hooks/useWindowSize"
 import MobileProduct from "../Components/Product/MobileVersion/MobileProduct";
 
 
-function ProductPage() { // todo: make this responsive
+function ProductPage() {
     const {code, id, product} = useParams()
     const location = useLocation()
     const classes = useProductPageStyle()

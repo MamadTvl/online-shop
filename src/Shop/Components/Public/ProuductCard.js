@@ -3,26 +3,33 @@ import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@materia
 import Chip from "@material-ui/core/Chip";
 import {useProductSliderStyles} from "./Styles/ProductsSliderStyle";
 import {useHistory} from 'react-router-dom'
+import PropType from 'prop-types'
+import {separateDigit, toFaDigit} from "../../../utills/ToFaDigit";
+
 
 function ProductCard(props) {
     const classes = useProductSliderStyles()
+    const {product, className} = props
     const history = useHistory()
     return (
-        <Card component={'div'} className={props.className}>
-            <CardActionArea onClick={() => history.push(`/products/Did1234/${props.product.name}?id=2`)}>
-                <CardMedia className={classes.cardMedia} image={props.product.img} title={props.product.name}/>
+        <Card component={'div'} className={className}>
+            <CardActionArea
+                onClick={
+                    () => history.push(`/products/${product.unique_code}/${product.title}?id=${product.id}`)}
+            >
+                <CardMedia className={classes.cardMedia} image={product.preview_image} title={product.name}/>
                 <CardContent>
-                    <Typography className={classes.cardTitle}>{props.product.name}</Typography>
+                    <Typography className={classes.cardTitle}>{product.title}</Typography>
                     {
-                        props.product.hasDiscount ?
+                        product.has_discount ?
 
                             <div className={classes.discountCard}>
                                 <br/>
                                 <div style={{display: 'flex'}}>
                                     <Chip classes={{root: classes.discountChip}}
-                                          label={`%${props.product.discount}`}/>
+                                          label={`%${toFaDigit((product.percent_of_discount * 100).toString())}`}/>
                                     <Typography
-                                        className={classes.discountLabel}>{props.product.price}</Typography>
+                                        className={classes.discountLabel}>{separateDigit(product.price)}</Typography>
                                 </div>
                                 <div style={{display: 'flex'}}>
                                                     <span style={{
@@ -33,7 +40,7 @@ function ProductCard(props) {
                                                         marginTop: 8,
                                                     }}>تومان</span>
                                     <Typography
-                                        className={classes.priceLabel}>{props.product.newPrice}</Typography>
+                                        className={classes.priceLabel}>{separateDigit(product.price_with_discount)}</Typography>
                                 </div>
 
                             </div>
@@ -48,7 +55,7 @@ function ProductCard(props) {
                                                     marginTop: 8,
                                                 }}>تومان</span>
                                     <Typography
-                                        className={classes.priceLabel}>{`${props.product.price}`}</Typography>
+                                        className={classes.priceLabel}>{separateDigit(product.price)}</Typography>
                                 </div>
                             </div>
                     }
@@ -56,6 +63,11 @@ function ProductCard(props) {
             </CardActionArea>
         </Card>
     )
+}
+
+ProductCard.propTypes = {
+    product: PropType.object.isRequired,
+    className: PropType.any.isRequired,
 }
 
 export default ProductCard
