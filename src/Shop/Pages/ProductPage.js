@@ -13,6 +13,7 @@ import MobileProduct from "../Components/Product/MobileVersion/MobileProduct";
 import useProductData from "../FetchData/useProductData";
 import useCategoriesData from "../FetchData/useCategoriesData";
 import * as PropTypes from "prop-types";
+import ProductPageSkeleton from "../Components/Skeletons/ProductPageSkeleton";
 
 function ProductPage(props) {
     const {setBasketChange} = props
@@ -24,8 +25,6 @@ function ProductPage(props) {
     const classes = useProductPageStyle()
     const size = useWindowSize()
 
-    if (loading || catsLoading)
-        return null
 
     const findCategoryIndex = (id) => {
         for (let i = 0; i < catsResult.length; i++) {
@@ -76,7 +75,7 @@ function ProductPage(props) {
                 cart.push(localStorageCart[i])
             }
         }
-        if(index === -1) {
+        if (index === -1) {
             cart.push(order)
         }
         localStorage.setItem('cart', JSON.stringify(cart))
@@ -85,27 +84,34 @@ function ProductPage(props) {
     return (
         <>
             <div className={classes.container}>
-                <Breadcrumbs className={classes.breadcrumbContainer} separator={<NavigateBeforeIcon fontSize="small"/>}>
-                    <ItemLink to={'/'}>
-                        <Typography className={classes.breadcrumb}>خانه</Typography>
-                    </ItemLink>
-                    <ItemLink
-                        to={`/search?&categoryId[${findCategoryIndex(result.merchandise.category.id)}]=${result.merchandise.category.id}`}>
-                        <Typography className={classes.breadcrumb}>{result.merchandise.category.name}</Typography>
-                    </ItemLink>
-                    <Typography className={classes.breadcrumb}>{product}</Typography>
-                </Breadcrumbs>
 
                 {
-                    size.width > 600
-                        ? <DesktopProduct addToCart={addToCart} product={result.merchandise}/>
-                        : <MobileProduct addToCart={addToCart} product={result.merchandise}/>
-                }
-                {
-                    size.width > 600 && <ProductDetail product={result.merchandise}/>
-                }
-                <SimilarProducts products={result.related_merchandise}/>
+                    loading && catsLoading ? <ProductPageSkeleton/>
+                        : <>
+                        <Breadcrumbs className={classes.breadcrumbContainer}
+                                     separator={<NavigateBeforeIcon fontSize="small"/>}>
+                            <ItemLink to={'/'}>
+                                <Typography className={classes.breadcrumb}>خانه</Typography>
+                            </ItemLink>
+                            <ItemLink
+                                to={`/search?&categoryId[${findCategoryIndex(result.merchandise.category.id)}]=${result.merchandise.category.id}`}>
+                                <Typography
+                                    className={classes.breadcrumb}>{result.merchandise.category.name}</Typography>
+                            </ItemLink>
+                            <Typography className={classes.breadcrumb}>{product}</Typography>
+                        </Breadcrumbs>
 
+                        {
+                            size.width > 600
+                                ? <DesktopProduct addToCart={addToCart} product={result.merchandise}/>
+                                : <MobileProduct addToCart={addToCart} product={result.merchandise}/>
+                        }
+                        {
+                            size.width > 600 && <ProductDetail product={result.merchandise}/>
+                        }
+                        <SimilarProducts products={result.related_merchandise}/>
+                    </>
+                }
             </div>
         </>
     )
