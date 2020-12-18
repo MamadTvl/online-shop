@@ -12,9 +12,10 @@ import useWindowSize from "../../utills/Hooks/useWindowSize"
 import MobileProduct from "../Components/Product/MobileVersion/MobileProduct";
 import useProductData from "../FetchData/useProductData";
 import useCategoriesData from "../FetchData/useCategoriesData";
+import * as PropTypes from "prop-types";
 
-
-function ProductPage() {
+function ProductPage(props) {
+    const {setBasketChange} = props
     const {product} = useParams()
     const location = useLocation()
     const params = new URLSearchParams(location.search)
@@ -28,13 +29,59 @@ function ProductPage() {
 
     const findCategoryIndex = (id) => {
         for (let i = 0; i < catsResult.length; i++) {
-            if (id === catsResult[i].id){
+            if (id === catsResult[i].id) {
                 return i
             }
         }
         return -1
     }
-    console.log(result)
+
+    const isDuplicate = (order) => {
+        const localStorageCart = JSON.parse(localStorage.getItem('cart'))
+        for (let i = 0; i < localStorageCart.length; i++) {
+            if (localStorageCart[i].id === order.id
+                && localStorageCart[i].color === order.color
+                && localStorageCart[i].size === order.size
+                && localStorageCart[i].count === order.count) {
+                return true
+            }
+        }
+        return false
+    }
+
+    const isCountChanged = (order) => { // true -> index, false -> -1
+        const localStorageCart = JSON.parse(localStorage.getItem('cart'))
+        for (let i = 0; i < localStorageCart.length; i++) {
+            if (localStorageCart[i].id === order.id
+                && localStorageCart[i].size === order.size
+                && localStorageCart[i].color === order.color) {
+                return i
+            }
+        }
+        return -1
+    }
+
+    const addToCart = (order) => { // order : id, color, size, count
+        let cart = []
+        let index = -1
+        const localStorageCart = JSON.parse(localStorage.getItem('cart'))
+        if (localStorage.getItem('cart')) {
+            if (isDuplicate(order))
+                return
+            index = isCountChanged(order)
+            if (index !== -1) {
+                localStorageCart[index].count = order.count
+            }
+            for (let i = 0; i < localStorageCart.length; i++) {
+                cart.push(localStorageCart[i])
+            }
+        }
+        if(index === -1) {
+            cart.push(order)
+        }
+        localStorage.setItem('cart', JSON.stringify(cart))
+        setBasketChange(prvState => prvState + 1)
+    }
     return (
         <>
             <div className={classes.container}>
@@ -42,7 +89,8 @@ function ProductPage() {
                     <ItemLink to={'/'}>
                         <Typography className={classes.breadcrumb}>خانه</Typography>
                     </ItemLink>
-                    <ItemLink to={`/search?&categoryId[${findCategoryIndex(result.merchandise.category.id)}]=${result.merchandise.category.id}`}>
+                    <ItemLink
+                        to={`/search?&categoryId[${findCategoryIndex(result.merchandise.category.id)}]=${result.merchandise.category.id}`}>
                         <Typography className={classes.breadcrumb}>{result.merchandise.category.name}</Typography>
                     </ItemLink>
                     <Typography className={classes.breadcrumb}>{product}</Typography>
@@ -50,8 +98,8 @@ function ProductPage() {
 
                 {
                     size.width > 600
-                        ? <DesktopProduct product={result.merchandise}/>
-                        : <MobileProduct product={result.merchandise}/>
+                        ? <DesktopProduct addToCart={addToCart} product={result.merchandise}/>
+                        : <MobileProduct addToCart={addToCart} product={result.merchandise}/>
                 }
                 {
                     size.width > 600 && <ProductDetail product={result.merchandise}/>
@@ -63,6 +111,10 @@ function ProductPage() {
     )
 
 
+}
+
+ProductPage.propTypes = {
+    setBasketChange: PropTypes.func.isRequired
 }
 
 export default ProductPage

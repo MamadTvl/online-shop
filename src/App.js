@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {createMuiTheme} from '@material-ui/core/styles';
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom"; //todo : warning for useHistory change BrowserRouter to Router
 import {createBrowserHistory} from "history";
@@ -13,7 +13,7 @@ import ShopLayout from "./Shop/Layouts/ShopLayout";
 function App() {
 
     const customHistory = createBrowserHistory();
-
+    const [basketChange, setBasketChange] = useState(0)
     const rtlTheme = createMuiTheme({
         direction: 'rtl'
     })
@@ -23,10 +23,12 @@ function App() {
             <CssBaseline/>
             <Router history={customHistory}>
                 <Switch>
-                    <ShopLayout>
+                    <ShopLayout basketChange={basketChange}>
                         <Route exact path={'/'} component={HomePage}/>
                         <Route exact path={'/search'} component={SearchPage}/>
-                        <Route exact path={'/products/:code/:product'} component={ProductPage}/>
+                        <Route exact path={'/products/:code/:product'}>
+                            <ProductPage setBasketChange={setBasketChange}/>
+                        </Route>
                         {/*<Route exact path={'/profile'} >*/}
                         <ProfileRoutes/>
                     </ShopLayout>

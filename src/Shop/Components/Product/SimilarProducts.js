@@ -1,6 +1,5 @@
 import React from "react";
 import useWindowSize from "../../../utills/Hooks/useWindowSize";
-import {useProductSliderStyles} from "../Public/Styles/ProductsSliderStyle";
 import ProductsSlider from "../Public/ProductsSlider";
 import ProductGrid from "../Public/ProductGrid";
 import Title from "../Public/Title";
@@ -9,7 +8,6 @@ import * as PropTypes from "prop-types";
 function SimilarProducts(props) {
     const size = useWindowSize()
     const {products} = props
-    const classes = useProductSliderStyles()
 
     const setComponent = (products, width) => {
         if (products.length >= 4) {

@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import AppBar from "@material-ui/core/AppBar";
 import logo from '../../img/zimmerman.svg'
-import {Button, Drawer, FormControl, IconButton, SvgIcon} from "@material-ui/core";
+import {Badge, Button, Drawer, FormControl, IconButton, SvgIcon} from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import {StyledSearchField} from './StyledSearchField'
@@ -13,8 +13,9 @@ import SearchDialog from "./SearchDialog";
 import useLogin from "../../utills/Hooks/useLogin";
 import Typography from "@material-ui/core/Typography";
 import CategoriesList from "./CategoriesList";
+import {separateDigit} from "../../utills/ToFaDigit";
 
-function Header() {
+function Header(props) {
     const [isLogin, loading] = useLogin(true)
     const classes = useHeaderStyle()
     const location = useLocation()
@@ -25,6 +26,7 @@ function Header() {
     const [dialogOpen, setDialogOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null);
     const [drawerOpen, setDrawerOpen] = useState(false)
+    const [basketCount, setBasketCount] = useState(0)
 
     const searchHandler = () => {
         if (!clicked) {
@@ -44,6 +46,11 @@ function Header() {
             setClicked(!clicked)
         }
     }
+    useEffect(() => {
+        const localStorageCart = JSON.parse(localStorage.getItem('cart'))
+        if (localStorageCart)
+            setBasketCount(localStorageCart.length)
+    }, [props.basketChange])
 
     const drawer = (
         <>
@@ -181,13 +188,64 @@ function Header() {
                                 </g>
                             </SvgIcon>
                         </IconButton>
-                        <Button
-                            size={"small"}
-                            dir={'ltr'}
-                            variant={"outlined"}
-                            className={classes.cart}
-                            onClick={() => history.push('/profile/cart')}
-                            endIcon={
+                        <Badge
+                            className={classes.desktopBasketVisibility}
+                            color={'primary'}
+                            badgeContent={separateDigit(basketCount)}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'right',
+                            }}
+                            classes={{
+                                badge: classes.basketBadge,
+                                colorPrimary: classes.basketBadgeColor,
+                                anchorOriginBottomRightRectangle: classes.basketBadgeAlign,
+                            }}
+                            invisible={basketCount === 0}
+                        >
+                            <Button
+                                size={"small"}
+                                dir={'ltr'}
+                                variant={"outlined"}
+                                className={classes.cart}
+                                onClick={() => history.push('/profile/cart')}
+                                endIcon={
+                                    <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
+                                             viewBox="0 0 19.5 21.5">
+                                        <g id="shopping-bag" transform="translate(-2.25 -1.25)">
+                                            <path id="Path_8" data-name="Path 8"
+                                                  d="M6,2,3,6V20a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2V6L18,2Z" fill="none"
+                                                  stroke="#434343" strokeLinecap="round" strokeLinejoin="round"
+                                                  strokeWidth="1.5"/>
+                                            <line id="Line_1" data-name="Line 1" x2="18" transform="translate(3 6)"
+                                                  fill="none" stroke="#434343" strokeLinecap="round"
+                                                  strokeLinejoin="round" strokeWidth="1.5"/>
+                                            <path id="Path_9" data-name="Path 9" d="M16,10a4,4,0,0,1-8,0" fill="none"
+                                                  stroke="#434343" strokeLinecap="round" strokeLinejoin="round"
+                                                  strokeWidth="1.5"/>
+                                        </g>
+                                    </SvgIcon>
+                                }
+                            >
+                                سبد خرید
+                            </Button>
+                        </Badge>
+                        <Badge
+                            className={classes.mobileBasketVisibility}
+                            color={'primary'}
+                            badgeContent={separateDigit(basketCount)}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'right',
+                            }}
+                            classes={{
+                                badge: classes.basketBadge,
+                                colorPrimary: classes.basketBadgeColor,
+                                anchorOriginBottomRightRectangle: classes.basketBadgeXsAlign,
+                            }}
+                            invisible={basketCount === 0}
+                        >
+                            <IconButton onClick={() => history.push('/profile/cart')} className={classes.iconButtons}>
                                 <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
                                          viewBox="0 0 19.5 21.5">
                                     <g id="shopping-bag" transform="translate(-2.25 -1.25)">
@@ -203,27 +261,8 @@ function Header() {
                                               strokeWidth="1.5"/>
                                     </g>
                                 </SvgIcon>
-                            }
-                        >
-                            سبد خرید
-                        </Button>
-                        <IconButton onClick={() => history.push('/profile/cart')} className={classes.iconButtons}>
-                            <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
-                                     viewBox="0 0 19.5 21.5">
-                                <g id="shopping-bag" transform="translate(-2.25 -1.25)">
-                                    <path id="Path_8" data-name="Path 8"
-                                          d="M6,2,3,6V20a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2V6L18,2Z" fill="none"
-                                          stroke="#434343" strokeLinecap="round" strokeLinejoin="round"
-                                          strokeWidth="1.5"/>
-                                    <line id="Line_1" data-name="Line 1" x2="18" transform="translate(3 6)"
-                                          fill="none" stroke="#434343" strokeLinecap="round"
-                                          strokeLinejoin="round" strokeWidth="1.5"/>
-                                    <path id="Path_9" data-name="Path 9" d="M16,10a4,4,0,0,1-8,0" fill="none"
-                                          stroke="#434343" strokeLinecap="round" strokeLinejoin="round"
-                                          strokeWidth="1.5"/>
-                                </g>
-                            </SvgIcon>
-                        </IconButton>
+                            </IconButton>
+                        </Badge>
                     </div>
                 </div>
             </AppBar>

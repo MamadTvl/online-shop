@@ -10,7 +10,7 @@ import * as PropTypes from 'prop-types'
 
 
 function DesktopProduct(props) {
-    const {product} = props
+    const {product, addToCart} = props
     const classes = useProductStyle()
     const [selectedSize, setSelectedSize] = useState(product.size_list[0])
     const [selectedColor, setSelectedColor] = useState(product.color_list[0])
@@ -169,7 +169,13 @@ function DesktopProduct(props) {
                         }
 
                         <Button
-                            className={classes.shopButton}
+                            className={classes.shopButton}// order : id, color, size, count
+                            onClick={() => addToCart({
+                                id: product.id,
+                                color: selectedColor,
+                                size: selectedSize,
+                                count: count,
+                            })}
                             dir={'ltr'}
                             variant={'contained'}
                             endIcon={
@@ -201,6 +207,7 @@ function DesktopProduct(props) {
 
 DesktopProduct.propTypes = {
     product: PropTypes.object.isRequired,
+    addToCart: PropTypes.func.isRequired,
 }
 
 

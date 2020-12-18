@@ -9,7 +9,7 @@ import PropType from 'prop-types'
 
 
 function ProductViewCard(props) {
-    const {product} = props
+    const {product, addToCart} = props
     const classes = useMobileProductStyle()
     const [selectedSize, setSelectedSize] = useState(product.size_list[0])
     const [selectedColor, setSelectedColor] = useState(product.color_list[0])
@@ -133,6 +133,12 @@ function ProductViewCard(props) {
                 <Button
                     className={classes.shopButton}
                     dir={'ltr'}
+                    onClick={() => addToCart({
+                        id: product.id,
+                        color: selectedColor,
+                        size: selectedSize,
+                        count: count,
+                    })}
                     variant={'contained'}
                     endIcon={
                         <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
@@ -161,6 +167,7 @@ function ProductViewCard(props) {
 
 ProductViewCard.propTypes = {
     product: PropType.object.isRequired,
+    addToCart: PropType.func.isRequired,
 }
 
 

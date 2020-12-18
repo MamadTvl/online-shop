@@ -14,7 +14,6 @@ function useProductData(fetch, id) {
             try {
                 setLoading(true)
                 const response = await getProduct()
-                console.log(response)
                 setResult(response.data.data)
                 setLoading(false)
             } catch (err) {

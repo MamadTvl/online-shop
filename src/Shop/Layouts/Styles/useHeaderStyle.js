@@ -169,6 +169,30 @@ export const useHeaderStyle = makeStyles((theme) => ({
             display: 'flex'
         }
     },
+    desktopBasketVisibility: {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'flex'
+        }
+    },
+    mobileBasketVisibility: {
+        [theme.breakpoints.up('md')]: {
+            display: 'none'
+        }
+    },
+    basketBadgeColor: {
+        backgroundColor: '#F16522'
+    },
+    basketBadge: {
+        fontFamily: 'Shabnam',
+    },
+    basketBadgeAlign: {
+      bottom:10,
+    },
+    basketBadgeXsAlign: {
+        right: 20,
+        bottom:10,
+    },
     iconButtons: {
         marginRight: 8,
         [theme.breakpoints.up('md')]: {

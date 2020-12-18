@@ -9,7 +9,7 @@ function ShopLayout(props) {
 
     return (
         <>
-            <Header/>
+            <Header basketChange={props.basketChange}/>
             <main className={classes.main}>
                 <div className={classes.toolbar}/>
                 {props.children}

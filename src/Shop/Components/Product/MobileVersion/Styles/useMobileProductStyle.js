@@ -92,6 +92,9 @@ export const useMobileProductStyle = makeStyles((theme) => ({
         fontSize: 14,
         color: '#545454',
     },
+    menu: {
+        fontFamily: 'Shabnam',
+    },
 
     buttonGroup: {
         display: 'flex',
