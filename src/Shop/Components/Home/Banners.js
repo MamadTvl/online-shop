@@ -15,14 +15,14 @@ function Banners(props) {
                     <img className={classes.firstImage} src={banners[0].image} alt={banners[0].image}/>
                 </Grid>
                 <Grid className={classes.secondImageContainer} item md={7} xs={12}>
-                    <img className={classes.secondImage} src={banners[0].image} alt={banners[0].image}/>
+                    <img className={classes.secondImage} src={banners[1].image} alt={banners[0].image}/>
                 </Grid>
                 <Grid className={classes.thirdImageContainer} item xs={12}>
-                    <img className={classes.thirdImage} src={banners[0].image} alt={banners[0].image}/>
+                    <img className={classes.thirdImage} src={banners[2].image} alt={banners[0].image}/>
                 </Grid>
             </Grid>
             <div className={classes.thirdImageXsContainer}>
-                <img className={classes.thirdImage} src={banners[0].image} alt={banners[0].image}/>
+                <img className={classes.thirdImage} src={banners[2].image} alt={banners[0].image}/>
             </div>
         </>
     )

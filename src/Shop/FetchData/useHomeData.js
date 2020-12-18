@@ -19,7 +19,7 @@ function useHomeData(fetch) {
                     response.data.data.covers,
                     response.data.data.campaigns,
                     response.data.data.top_merchandises,
-                    response.data.data.amazing_offers.merchandise_list,
+                    response.data.data.amazing_offers,
                     response.data.data.mottos,
                     // todo: array of blog posts
                 ])

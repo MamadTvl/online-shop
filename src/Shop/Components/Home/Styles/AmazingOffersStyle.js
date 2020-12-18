@@ -56,7 +56,7 @@ export const useStyles = makeStyles((theme) => ({
         width: '100%',
         margin: 'auto',
         [theme.breakpoints.between(600, 800)]:{
-            width: '70%'
+            width: '60%'
         },
         [theme.breakpoints.between(0, 400)]:{
             width: '103%'
@@ -82,19 +82,19 @@ export const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignSelf: "center",
-        minHeight: 422,
+        // minHeight: 422,
         // height: "auto",
-        width: 'auto',
+        width: '100%',
         // marginLeft: 16,
         [theme.breakpoints.between(376, 600)]: {
             marginRight: 'auto',
             width: 288,
-            height: 265,
+            // height: 265,
         },
         [theme.breakpoints.between(0, 500)]: {
             marginRight: 'auto',
             width: 231,
-            height: 265,
+            // height: 265,
         },
 
     },

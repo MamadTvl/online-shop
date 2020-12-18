@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
         width: '100%',
         marginTop: theme.spacing(6),
 
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('md')]: {
             padding: theme.spacing(0, 3),
         },
 
@@ -38,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
     secondImageContainer: {
-        position: "relative",
+
         [theme.breakpoints.up('md')]: {
             paddingRight: 24,
             paddingBottom: 24,
@@ -47,7 +47,7 @@ export const useStyles = makeStyles((theme) => ({
 
     },
     thirdImage: {
-        // position: 'absolute',
+
         width: '100%',
         height: 'auto',
         [theme.breakpoints.down('sm')]: {
@@ -56,14 +56,14 @@ export const useStyles = makeStyles((theme) => ({
 
     },
     thirdImageContainer:{
-        position: "relative",
+
         [theme.breakpoints.down('sm')]: {
             display: 'none',
         },
     },
     thirdImageXsContainer: {
-        position: "relative",
-        [theme.breakpoints.up('sm')]: {
+
+        [theme.breakpoints.up('md')]: {
             display: 'none',
         },
     },

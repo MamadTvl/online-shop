@@ -13,7 +13,7 @@ import * as PropTypes from "prop-types";
 
 function AmazingOffers(props) {
     const classes = useStyles()
-    const {products} = props
+    const {products, cover} = props
     const size = useWindowSize()
     const [setting, setSetting] = useState({
         className: 'amazing-slider-slick',
@@ -28,22 +28,26 @@ function AmazingOffers(props) {
 
 
     useEffect(() => {
-        const slides = document.getElementsByClassName('amazing-slider-slick')[0]
-            .children[1].children[0].children
-        // if you want to find out what you are doing log it !
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].children[0].style.display = 'flex'
-            slides[i].children[0].style.justifyContent = 'center'
+        if (products.length !== 0) {
+            const slides = document.getElementsByClassName('amazing-slider-slick')[0]
+                .children[1].children[0].children
+            // if you want to find out what you are doing log it !
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].children[0].style.display = 'flex'
+                slides[i].children[0].style.justifyContent = 'center'
+            }
         }
     }, [])
     useEffect(() => {
-        const slides = document.getElementsByClassName('amazing-slider-slick')[0]
-            .children[1].children[0].children
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.padding = '0 20px'
+        if (products.length !== 0) {
+            const slides = document.getElementsByClassName('amazing-slider-slick')[0]
+                .children[1].children[0].children
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.padding = '0 20px'
+            }
+            const slideContainer = document.getElementsByClassName('amazing-slider-slick')[0]
+            slideContainer.style.marginTop = '23px'
         }
-        const slideContainer = document.getElementsByClassName('amazing-slider-slick')[0]
-        slideContainer.style.marginTop = '23px'
     }, [])
 
     useEffect(() => {
@@ -92,12 +96,12 @@ function AmazingOffers(props) {
             <div className={classes.titleContainer}>
                 <Typography className={classes.title}>پیشنهاد</Typography>
                 <Typography className={classes.title}>شگفت‌انگیز</Typography>
-                <img src={previewImage} alt={products[0].preview_image} className={classes.previewImage}/>
+                <img src={cover} alt={''} className={classes.previewImage}/>
             </div>
 
             {
                 size.width > 900 ?
-                    <Grid container spacing={2} direction={"row"}>
+                    <Grid container spacing={8} direction={"row"}>
                         {
                             products.map((product) => (
                                 <Grid item xs={4}>
@@ -127,6 +131,7 @@ function AmazingOffers(props) {
 
 AmazingOffers.propTypes = {
     products: PropTypes.array.isRequired,
+    cover: PropTypes.string.isRequired,
 }
 
 export default AmazingOffers

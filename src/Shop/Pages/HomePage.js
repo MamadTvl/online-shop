@@ -24,7 +24,7 @@ function HomePage() {
                 banners={result[1]}
             />
             <BestSeller products={result[2]}/>
-            {/*<AmazingOffers products={result[3]}/>*/}
+            <AmazingOffers cover={result[3].cover} products={result[3].merchandise_list}/>
             <Attributes
                 attributes={result[4]}
             />

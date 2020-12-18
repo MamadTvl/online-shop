@@ -56,8 +56,8 @@ export const useProductSliderStyles = makeStyles((theme) => ({
         alignSelf: "center",
         // minHeight: 422,
         // height: "auto",
-        maxWidth: 276,
-
+        // maxWidth: 276,
+        width: '100%',
     },
     cardMedia: {
         width: '100%',
@@ -75,7 +75,7 @@ export const useProductSliderStyles = makeStyles((theme) => ({
         direction: 'ltr',
         display: "flex",
         flexDirection: 'column',
-        marginTop: 4,
+        marginTop: 64,
     },
     discountLabel:{
         fontFamily: 'Shabnam',
@@ -104,7 +104,7 @@ export const useProductSliderStyles = makeStyles((theme) => ({
     normalCard: {
         display: "flex",
         direction: 'ltr',
-        marginTop: 54,
+        marginTop: 64,
 
     },
     priceLabel:{
