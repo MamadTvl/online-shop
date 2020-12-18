@@ -82,7 +82,7 @@ export const useMobileProductStyle = makeStyles((theme) => ({
 
     },
     textFieldRoot: {
-        height: 40,
+        height: 33,
         width: '100%',
         marginLeft: 16,
         borderRadius: 6,
@@ -91,7 +91,6 @@ export const useMobileProductStyle = makeStyles((theme) => ({
         fontFamily: 'Shabnam',
         fontSize: 14,
         color: '#545454',
-        height: 33,
     },
 
     buttonGroup: {

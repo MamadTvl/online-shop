@@ -1,28 +1,14 @@
 import React from "react";
-import productImage from "../../../img/img.png";
 import useWindowSize from "../../../utills/Hooks/useWindowSize";
 import {useProductSliderStyles} from "../Public/Styles/ProductsSliderStyle";
 import ProductsSlider from "../Public/ProductsSlider";
 import ProductGrid from "../Public/ProductGrid";
 import Title from "../Public/Title";
+import * as PropTypes from "prop-types";
 
-function createData(name, price, img, hasDiscount, discount, newPrice) {
-    return {name, price, img, hasDiscount, discount, newPrice}
-}
-
-const products = [
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-    createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-    // createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-    // createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-    // createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-    // createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, false),
-]
-
-function SimilarProducts() {
+function SimilarProducts(props) {
     const size = useWindowSize()
+    const {products} = props
     const classes = useProductSliderStyles()
 
     const setComponent = (products, width) => {
@@ -56,6 +42,10 @@ function SimilarProducts() {
         </>
 
     )
+}
+
+SimilarProducts.propTypes = {
+    products: PropTypes.object.isRequired,
 }
 
 export default SimilarProducts

@@ -1,60 +1,56 @@
-import React from "react";
-import {Button, Card, Chip, IconButton, SvgIcon, TextField, Typography} from "@material-ui/core";
+import React, {useState} from "react";
+import {Button, Card, Chip, IconButton, MenuItem, SvgIcon, TextField, Typography} from "@material-ui/core";
 import DesktopPhotoViewer from "./DesktopPhotoViewer";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import {separateDigit} from "../../../utills/ToFaDigit";
 import {useProductStyle} from "./Styles/useProductStyle";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-import {useLocation} from "react-router-dom"
+import * as PropTypes from 'prop-types'
 
-function DesktopProduct() {
+
+function DesktopProduct(props) {
+    const {product} = props
     const classes = useProductStyle()
-    const location = useLocation()
-    const product = {
-        title: 'آستین کوتاه باله دار خاکستری',
-        detail: 'تیشرت دخترانه جنس: یکرو ویسکوز، اسلپ\n' +
-            'جنس: ویسکوز\n' +
-            'سبک: روزمره\n' +
-            'نوع: تیشرت\n' +
-            'یقه: یقه گرد\n' +
-            'نوع آستین: آستین کوتاه\n' +
-            'طرح: ساده\n' +
-            'رنگ: خاکستر',
-        description: '',
-        sizes: ['لارج', "ایکس لارج", "دو ایکس لارج", "اسمال"],
-        colors: ['زرد', "قرمز", "سبز", "آبی"],
-        count: 0,
-        hasDiscount: true,
-        discount: 0.15,
-        price: 2459000,
-        priceWithDiscount: 2659000,
+    const [selectedSize, setSelectedSize] = useState(product.size_list[0])
+    const [selectedColor, setSelectedColor] = useState(product.color_list[0])
+    const [count, setCount] = useState(1)
+    const getMaxStockNumber = () => {
+        for (let i = 0; i < product.stock_list.length; i++) {
+            if (product.stock_list[i].size === selectedSize
+                && product.stock_list[i].color === selectedColor) {
+                return product.stock_list[i].stock_number
+            }
+        }
 
     }
-
+    let images = [product.preview_image]
+    for (let i = 0; i < product.other_image_list.length; i++) {
+        images.push(product.other_image_list[i])
+    }
     return (
         <Card>
             <div className={classes.content}>
-                {/*<div style={{width: '100%'}}>*/}
-                    <DesktopPhotoViewer/>
-                {/*</div>*/}
+                <DesktopPhotoViewer images={images}/>
                 <div className={classes.detailContainer}>
 
                     <div className={classes.details}>
                         <Typography className={classes.title}>{product.title}</Typography>
                         <Typography className={classes.subtitle}>مشخصات محصول:</Typography>
-                        <Typography className={classes.detail}>{product.detail}</Typography>
+                        <Typography className={classes.detail}>{product.specification}</Typography>
                     </div>
 
                     <div className={classes.selects}>
                         <div className={classes.selectContainer}>
                             <Typography className={classes.label}>سایز</Typography>
                             <TextField
-                                // style={{flexGrow: 1}}
                                 id="size"
                                 select
-                                value={''}
-                                // onChange={handleChange}
+                                value={selectedSize}
+                                onChange={(event) => {
+                                    setSelectedSize(event.target.value)
+                                    setCount(1)
+                                }}
                                 InputProps={{
                                     classes: {
                                         input: classes.textFieldFont,
@@ -62,16 +58,26 @@ function DesktopProduct() {
                                     }
                                 }}
                                 variant="outlined"
-                            />
+                            >
+                                {
+                                    product.size_list.map((size, index) => (
+                                        <MenuItem className={classes.menu} key={index} value={size}>
+                                            {size}
+                                        </MenuItem>
+                                    ))
+                                }
+                            </TextField>
                         </div>
                         <div className={classes.selectContainer}>
                             <Typography className={classes.label}>رنگ</Typography>
                             <TextField
-                                // style={{flexGrow: 1}}
                                 id="color"
                                 select
-                                // value={selectedCategory ? selectedCategory.name : ''}
-                                // onChange={handleChange}
+                                value={selectedColor}
+                                onChange={(event) => {
+                                    setSelectedColor(event.target.value)
+                                    setCount(1)
+                                }}
                                 InputProps={{
                                     classes: {
                                         input: classes.textFieldFont,
@@ -79,16 +85,30 @@ function DesktopProduct() {
                                     }
                                 }}
                                 variant="outlined"
-                            />
+                            >
+                                {
+                                    product.color_list.map((color, index) => (
+                                        <MenuItem className={classes.menu} key={index} value={color}>
+                                            {color}
+                                        </MenuItem>
+                                    ))
+                                }
+                            </TextField>
                         </div>
                         <div className={classes.selectContainer}>
                             <Typography className={classes.label}>تعداد</Typography>
                             <div className={classes.buttonGroup}>
-                                <IconButton className={classes.addButton}>
+                                <IconButton
+                                    onClick={() => count !== getMaxStockNumber() && setCount(count + 1)}
+                                    className={classes.addButton}
+                                >
                                     <AddIcon/>
                                 </IconButton>
-                                <Typography className={classes.countLabel}>{separateDigit(product.count)}</Typography>
-                                <IconButton className={classes.removeButton}>
+                                <Typography className={classes.countLabel}>{separateDigit(count)}</Typography>
+                                <IconButton
+                                    onClick={() => count !== 1 && setCount(count - 1)}
+                                    className={classes.removeButton}
+                                >
                                     <RemoveIcon/>
                                 </IconButton>
                             </div>
@@ -123,17 +143,31 @@ function DesktopProduct() {
                         </IconButton>
                     </CopyToClipboard>
                     <div className={classes.priceDetailContainer}>
-                        <div className={classes.discountContainer}>
-                            <Chip className={classes.discountChip} label={`%${separateDigit(product.discount * 100)}`}/>
-                            <Typography className={classes.prevPrice}>{separateDigit(product.price)}</Typography>
 
-                        </div>
-                        <div className={classes.priceContainer}>
-                            <Typography className={classes.toman}>تومان</Typography>
-                            <Typography
-                                className={classes.price}>{separateDigit(product.priceWithDiscount)}</Typography>
+                        {
+                            product.has_discount ?
+                                <>
+                                    <div className={classes.discountContainer}>
+                                        <Chip className={classes.discountChip}
+                                              label={`%${separateDigit(product.percent_of_discount * 100)}`}/>
+                                        <Typography
+                                            className={classes.prevPrice}>{separateDigit(product.price)}</Typography>
 
-                        </div>
+                                    </div>
+                                    <div className={classes.priceContainer}>
+                                        <Typography className={classes.toman}>تومان</Typography>
+                                        <Typography
+                                            className={classes.price}>{separateDigit(product.price_with_discount)}</Typography>
+                                    </div>
+                                </>
+                                :
+                                <div className={classes.priceContainer}>
+                                    <Typography className={classes.toman}>تومان</Typography>
+                                    <Typography
+                                        className={classes.price}>{separateDigit(product.price)}</Typography>
+                                </div>
+                        }
+
                         <Button
                             className={classes.shopButton}
                             dir={'ltr'}
@@ -163,6 +197,10 @@ function DesktopProduct() {
             </div>
         </Card>
     )
+}
+
+DesktopProduct.propTypes = {
+    product: PropTypes.object.isRequired,
 }
 
 

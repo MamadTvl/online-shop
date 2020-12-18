@@ -67,6 +67,9 @@ export const useProductStyle = makeStyles((theme) => ({
         padding: 8,
 
     },
+    menu: {
+        fontFamily: 'Shabnam',
+    },
 
     label: {
         fontFamily: 'Shabnam',
@@ -85,7 +88,6 @@ export const useProductStyle = makeStyles((theme) => ({
         fontFamily: 'Shabnam',
         fontSize: 14,
         color: '#545454',
-        height: 48,
     },
 
     buttonGroup: {

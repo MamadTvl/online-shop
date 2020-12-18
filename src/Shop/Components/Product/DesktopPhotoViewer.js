@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import SwipeableViews from 'react-swipeable-views';
-import image from '../../../img/photoViewer.png'
 import {ButtonBase, IconButton, SvgIcon} from "@material-ui/core";
 import {usePhotoViewerStyle} from "./Styles/usePhotoViewerStyle";
+import * as PropTypes from "prop-types";
 
 
-function DesktopPhotoViewer() {
+function DesktopPhotoViewer(props) {
     const [index, setIndex] = useState(0)
-    const images = [image, image, image, image, image, image, image, image]
+    const {images} = props
     const classes = usePhotoViewerStyle()
 
     useEffect(() => {
@@ -120,6 +120,8 @@ function DesktopPhotoViewer() {
     )
 
 }
-
+DesktopPhotoViewer.propTypes = {
+    images: PropTypes.array.isRequired,
+}
 
 export default DesktopPhotoViewer

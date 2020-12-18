@@ -40,7 +40,7 @@ export const usePhotoViewerStyle = makeStyles((theme) => ({
     },
     imageButtonContainer: {
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         position: 'relative',
         bottom: '23%',
         paddingRight: '16px',

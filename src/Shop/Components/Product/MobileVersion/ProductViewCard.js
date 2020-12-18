@@ -1,5 +1,5 @@
-import React from "react";
-import {Button, Card, Chip, IconButton, SvgIcon, TextField, Typography} from "@material-ui/core";
+import React, {useState} from "react";
+import {Button, Card, Chip, IconButton, MenuItem, SvgIcon, TextField, Typography} from "@material-ui/core";
 import MobilePhotoViewer from "./MobilePhotoViewer";
 import {useMobileProductStyle} from "./Styles/useMobileProductStyle";
 import {separateDigit} from "../../../../utills/ToFaDigit";
@@ -11,33 +11,63 @@ import PropType from 'prop-types'
 function ProductViewCard(props) {
     const {product} = props
     const classes = useMobileProductStyle()
+    const [selectedSize, setSelectedSize] = useState(product.size_list[0])
+    const [selectedColor, setSelectedColor] = useState(product.color_list[0])
+    const [count, setCount] = useState(1)
+    const getMaxStockNumber = () => {
+        for (let i = 0; i < product.stock_list.length; i++) {
+            if (product.stock_list[i].size === selectedSize
+                && product.stock_list[i].color === selectedColor) {
+                return product.stock_list[i].stock_number
+            }
+        }
+
+    }
+    let images = [product.preview_image]
+    for (let i = 0; i < product.other_image_list.length; i++) {
+        images.push(product.other_image_list[i])
+    }
 
     return (
         <Card className={classes.card}>
-            <MobilePhotoViewer/>
+            <MobilePhotoViewer images={images}/>
             <Typography className={classes.title}>{product.title}</Typography>
             <div className={classes.priceDetailContainer}>
-                <div className={classes.discountContainer}>
-                    <Chip className={classes.discountChip} label={`%${separateDigit(product.discount * 100)}`}/>
-                    <Typography className={classes.prevPrice}>{separateDigit(product.price)}</Typography>
+                {
+                    product.has_discount ?
+                        <>
+                            <div className={classes.discountContainer}>
+                                <Chip className={classes.discountChip}
+                                      label={`%${separateDigit(product.percent_of_discount * 100)}`}/>
+                                <Typography
+                                    className={classes.prevPrice}>{separateDigit(product.price)}</Typography>
 
-                </div>
-                <div className={classes.priceContainer}>
-                    <Typography className={classes.toman}>تومان</Typography>
-                    <Typography
-                        className={classes.price}>{separateDigit(product.priceWithDiscount)}</Typography>
-
-                </div>
+                            </div>
+                            <div className={classes.priceContainer}>
+                                <Typography className={classes.toman}>تومان</Typography>
+                                <Typography
+                                    className={classes.price}>{separateDigit(product.price_with_discount)}</Typography>
+                            </div>
+                        </>
+                        :
+                        <div className={classes.priceContainer}>
+                            <Typography className={classes.toman}>تومان</Typography>
+                            <Typography
+                                className={classes.price}>{separateDigit(product.price)}</Typography>
+                        </div>
+                }
             </div>
             <div className={classes.selects}>
                 <div className={classes.selectContainer}>
                     <Typography className={classes.label}>سایز</Typography>
                     <TextField
-                        // style={{flexGrow: 1}}
                         id="size"
                         select
-                        value={''}
-                        // onChange={handleChange}
+                        value={selectedSize}
+                        onChange={(event) => {
+                            setSelectedSize(event.target.value)
+                            setCount(1)
+                        }}
                         InputProps={{
                             classes: {
                                 input: classes.textFieldFont,
@@ -45,16 +75,26 @@ function ProductViewCard(props) {
                             }
                         }}
                         variant="outlined"
-                    />
+                    >
+                        {
+                            product.size_list.map((size, index) => (
+                                <MenuItem className={classes.menu} key={index} value={size}>
+                                    {size}
+                                </MenuItem>
+                            ))
+                        }
+                    </TextField>
                 </div>
                 <div className={classes.selectContainer}>
                     <Typography className={classes.label}>رنگ</Typography>
                     <TextField
-                        // style={{flexGrow: 1}}
                         id="color"
                         select
-                        // value={selectedCategory ? selectedCategory.name : ''}
-                        // onChange={handleChange}
+                        value={selectedColor}
+                        onChange={(event) => {
+                            setSelectedColor(event.target.value)
+                            setCount(1)
+                        }}
                         InputProps={{
                             classes: {
                                 input: classes.textFieldFont,
@@ -62,16 +102,30 @@ function ProductViewCard(props) {
                             }
                         }}
                         variant="outlined"
-                    />
+                    >
+                        {
+                            product.color_list.map((color, index) => (
+                                <MenuItem className={classes.menu} key={index} value={color}>
+                                    {color}
+                                </MenuItem>
+                            ))
+                        }
+                    </TextField>
                 </div>
                 <div className={classes.selectContainer}>
                     <Typography className={classes.label}>تعداد</Typography>
                     <div className={classes.buttonGroup}>
-                        <IconButton className={classes.addButton}>
+                        <IconButton
+                            onClick={() => count !== getMaxStockNumber() && setCount(count + 1)}
+                            className={classes.addButton}
+                        >
                             <AddIcon/>
                         </IconButton>
-                        <Typography className={classes.countLabel}>{separateDigit(product.count)}</Typography>
-                        <IconButton className={classes.removeButton}>
+                        <Typography className={classes.countLabel}>{separateDigit(count)}</Typography>
+                        <IconButton
+                            onClick={() => count !== 1 && setCount(count - 1)}
+                            className={classes.removeButton}
+                        >
                             <RemoveIcon/>
                         </IconButton>
                     </div>

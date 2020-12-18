@@ -14,7 +14,7 @@ function DetailCard(props) {
         <>
             <Card className={classes.card}>
                 <Typography className={classes.detailTitle}>مشخصات محصول</Typography>
-                <Typography className={classes.detailDescription}>{product.detail}</Typography>
+                <Typography className={classes.detailDescription}>{product.specification}</Typography>
                 <Button
                     onClick={() => setOpen(true)}
                     className={classes.moreButton}
@@ -31,7 +31,7 @@ function DetailCard(props) {
             <FullScreenDialog open={open} setOpen={setOpen} title={'مشخصات محصول'}>
                 <Card style={{height: '100%'}} className={classes.card}>
                     <Typography style={{maxHeight: 'initial'}} className={classes.detailDescription}>
-                        {product.detail}
+                        {product.specification}
                     </Typography>
                 </Card>
             </FullScreenDialog>

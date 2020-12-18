@@ -20,7 +20,7 @@ function CommentContainer(props) {
         <>
             <Card className={classes.card}>
                 <Typography className={classes.detailTitle}>{toFaDigit(`دیدگاه ها (2)`)}</Typography>
-                <MobileCommentCard isPreview={true} comment={comments[0]}/>
+                {comments.length > 0 && <MobileCommentCard isPreview={true} comment={comments[0]}/>}
                 <Button
                     onClick={() => setOpen(true)}
                     style={{marginTop: 8}}
