@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {useStyles} from "./Styles/AmazingOffersStyle";
-import productImage from "../../../img/img.png";
 import ProductCard from "../Public/ProuductCard";
 import {Grid, Typography} from "@material-ui/core";
 import useWindowSize from "../../../utills/Hooks/useWindowSize";
@@ -10,9 +9,11 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import NextArrow from '../Public/NextArrow'
 import PrevArrow from "../Public/PrevArrow";
+import * as PropTypes from "prop-types";
 
-function AmazingOffers() {
+function AmazingOffers(props) {
     const classes = useStyles()
+    const {products} = props
     const size = useWindowSize()
     const [setting, setSetting] = useState({
         className: 'amazing-slider-slick',
@@ -25,15 +26,6 @@ function AmazingOffers() {
         rtl: true,
     })
 
-    function createData(name, price, img, hasDiscount, discount, newPrice) {
-        return {name, price, img, hasDiscount, discount, newPrice}
-    }
-
-    const products = [
-        createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-        createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-        createData('کتانی نایک اسموکی Nike Smooky مدل لاین ۲۰۲۰ کد ۱۹۴۸۷', '۲٫۶۵۹٫۰۰۰', productImage, true, '۱۵', '۲٫۴۵۹٫۰۰۰'),
-    ]
 
     useEffect(() => {
         const slides = document.getElementsByClassName('amazing-slider-slick')[0]
@@ -55,7 +47,7 @@ function AmazingOffers() {
     }, [])
 
     useEffect(() => {
-        if (size.width < 900 && size.width >= 800){
+        if (size.width < 900 && size.width >= 800) {
             setSetting({
                 className: 'amazing-slider-slick',
                 dots: false,
@@ -67,7 +59,7 @@ function AmazingOffers() {
                 rtl: true,
             })
         }
-        if (size.width < 800){
+        if (size.width < 800) {
             setSetting({
                 className: 'amazing-slider-slick',
                 dots: false,
@@ -100,7 +92,7 @@ function AmazingOffers() {
             <div className={classes.titleContainer}>
                 <Typography className={classes.title}>پیشنهاد</Typography>
                 <Typography className={classes.title}>شگفت‌انگیز</Typography>
-                <img src={previewImage} alt={products[0].name} className={classes.previewImage}/>
+                <img src={previewImage} alt={products[0].preview_image} className={classes.previewImage}/>
             </div>
 
             {
@@ -116,7 +108,7 @@ function AmazingOffers() {
 
                     </Grid>
                     :
-                    <div className={classes.sliderContainer} >
+                    <div className={classes.sliderContainer}>
                         <Slider {...setting}>
                             {
                                 products.map((product) => (
@@ -133,5 +125,8 @@ function AmazingOffers() {
     )
 }
 
+AmazingOffers.propTypes = {
+    products: PropTypes.array.isRequired,
+}
 
 export default AmazingOffers

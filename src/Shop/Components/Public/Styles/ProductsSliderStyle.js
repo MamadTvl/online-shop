@@ -54,7 +54,7 @@ export const useProductSliderStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignSelf: "center",
-        minHeight: 422,
+        // minHeight: 422,
         // height: "auto",
         maxWidth: 276,
 

@@ -26,21 +26,35 @@ function ProductCard(props) {
                             <div className={classes.discountCard}>
                                 <br/>
                                 <div style={{display: 'flex'}}>
-                                    <Chip classes={{root: classes.discountChip}}
-                                          label={`%${toFaDigit((product.percent_of_discount * 100).toString())}`}/>
+                                    <Chip
+                                        classes={{root: classes.discountChip}}
+                                        label={`%${toFaDigit((product.percent_of_discount * 100).toString())}`}
+                                    />
                                     <Typography
-                                        className={classes.discountLabel}>{separateDigit(product.price)}</Typography>
+                                        className={classes.discountLabel}
+                                    >
+                                        {separateDigit(product.price)}
+                                    </Typography>
                                 </div>
-                                <div style={{display: 'flex'}}>
-                                                    <span style={{
-                                                        fontFamily: 'Shabnam',
-                                                        fontSize: 14,
-                                                        color: '#545454',
-                                                        marginRight: 8,
-                                                        marginTop: 8,
-                                                    }}>تومان</span>
+                                <div
+                                    style={{display: 'flex'}}
+                                >
+                                                    <span
+                                                        style={{
+                                                            fontFamily: 'Shabnam',
+                                                            fontSize: 14,
+                                                            color: '#545454',
+                                                            marginRight: 8,
+                                                            marginTop: 8,
+                                                        }}
+                                                    >
+                                                        تومان
+                                                    </span>
                                     <Typography
-                                        className={classes.priceLabel}>{separateDigit(product.price_with_discount)}</Typography>
+                                        className={classes.priceLabel}
+                                    >
+                                        {separateDigit(product.price_with_discount)}
+                                    </Typography>
                                 </div>
 
                             </div>
@@ -55,7 +69,10 @@ function ProductCard(props) {
                                                     marginTop: 8,
                                                 }}>تومان</span>
                                     <Typography
-                                        className={classes.priceLabel}>{separateDigit(product.price)}</Typography>
+                                        className={classes.priceLabel}
+                                    >
+                                        {separateDigit(product.price)}
+                                    </Typography>
                                 </div>
                             </div>
                     }
