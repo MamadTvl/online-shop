@@ -16,11 +16,15 @@ function DesktopProduct(props) {
     const [selectedColor, setSelectedColor] = useState(product.color_list[0])
     const [count, setCount] = useState(1)
     const getMaxStockNumber = () => {
-        for (let i = 0; i < product.stock_list.length; i++) {
-            if (product.stock_list[i].size === selectedSize
-                && product.stock_list[i].color === selectedColor) {
-                return product.stock_list[i].stock_number
+        if (product.merchandise_type === 1) {
+            for (let i = 0; i < product.stock_list.length; i++) {
+                if (product.stock_list[i].size === selectedSize
+                    && product.stock_list[i].color === selectedColor) {
+                    return product.stock_list[i].stock_number
+                }
             }
+        } else {
+            return product.stock_number
         }
 
     }
