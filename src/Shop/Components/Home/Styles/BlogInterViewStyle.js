@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     container: {
         padding: theme.spacing(0, 17.5),
 
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('md')]: {
             padding: theme.spacing(0, 3),
         },
 

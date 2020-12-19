@@ -4,13 +4,13 @@ import {makeStyles} from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
     main: {
         padding: theme.spacing(0, 17.5),
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('md')]: {
             padding: theme.spacing(0, 3),
         },
 
         [theme.breakpoints.down('xs')]: {
             marginTop: 12,
-            padding: 18.5,
+            padding: 0,
         }
     },
 
