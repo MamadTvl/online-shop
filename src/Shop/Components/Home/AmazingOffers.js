@@ -3,7 +3,6 @@ import {useStyles} from "./Styles/AmazingOffersStyle";
 import ProductCard from "../Public/ProuductCard";
 import {Grid, Typography} from "@material-ui/core";
 import useWindowSize from "../../../utills/Hooks/useWindowSize";
-import previewImage from "../../../img/shoes.png"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -105,7 +104,7 @@ function AmazingOffers(props) {
                         {
                             products.map((product) => (
                                 <Grid item xs={4}>
-                                    <ProductCard className={classes.card} product={product}/>
+                                    <ProductCard product={product}/>
                                 </Grid>
                             ))
                         }
@@ -117,7 +116,7 @@ function AmazingOffers(props) {
                             {
                                 products.map((product) => (
 
-                                    <ProductCard className={classes.card} product={product}/>
+                                    <ProductCard product={product}/>
 
                                 ))
                             }

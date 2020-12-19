@@ -1,15 +1,15 @@
 import React from "react";
 import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
 import Chip from "@material-ui/core/Chip";
-import {useProductSliderStyles} from "./Styles/ProductsSliderStyle";
 import {useHistory} from 'react-router-dom'
 import PropType from 'prop-types'
 import {separateDigit, toFaDigit} from "../../../utills/ToFaDigit";
+import {useProductCardStyles} from "./Styles/useProductCardStyle";
 
 
 function ProductCard(props) {
-    const classes = useProductSliderStyles()
-    const {product, className} = props
+    const classes = useProductCardStyles()
+    const {product} = props
     const history = useHistory()
     return (
         <Card component={'div'} className={classes.card}>
@@ -17,7 +17,6 @@ function ProductCard(props) {
                 classes={{
                     root: classes.cardRoot,
                 }}
-                // style={{height: '100'}}
                 onClick={
                     () => history.push(`/products/${product.unique_code}/${product.title}?id=${product.id}`)}
             >
@@ -90,7 +89,6 @@ function ProductCard(props) {
 
 ProductCard.propTypes = {
     product: PropType.object.isRequired,
-    className: PropType.any.isRequired,
 }
 
 export default ProductCard
