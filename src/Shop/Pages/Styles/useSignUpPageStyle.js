@@ -88,7 +88,7 @@ export const useSignUpPageStyle = makeStyles((theme) => ({
     seconds: {
         position: 'absolute',
         bottom: 8,
-        right: '31%',
+        right: '12%',
         fontFamily: 'Shabnam',
         fontSize: 14,
         color: 'rgba(49, 71, 72, 0.53)',

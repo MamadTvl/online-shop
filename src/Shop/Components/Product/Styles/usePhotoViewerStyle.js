@@ -7,6 +7,10 @@ export const usePhotoViewerStyle = makeStyles((theme) => ({
         width: '30vw',
         height: '30vw',
         margin: 'auto 0',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: '#B5B5B5',
+        borderRadius: 4,
         [theme.breakpoints.down('sm')]: {
             width: '82vw',
             height: '82vw',

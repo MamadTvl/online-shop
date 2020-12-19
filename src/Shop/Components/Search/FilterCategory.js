@@ -43,16 +43,26 @@ function FilterCategory(props) {
                                 />
                             ))
                     }
-                    <IconButton
-                        className={clsx(classes.expand, {
-                            [classes.expandOpen]: expanded,
-                        })}
-                        onClick={handleExpandClick}
-                        aria-expanded={expanded}
-                        aria-label="show more"
-                    >
-                        <ExpandMoreIcon/>
-                    </IconButton>
+                    {
+                        categories.length > 4 &&
+                        <div className={classes.seeMoreContainer}>
+                            <IconButton
+                                className={clsx(classes.expand, {
+                                    [classes.expandOpen]: expanded,
+                                })}
+                                onClick={handleExpandClick}
+                                aria-expanded={expanded}
+                                aria-label="show more"
+                            >
+                                <ExpandMoreIcon/>
+                            </IconButton>
+                            {
+                                expanded
+                                    ? <Typography className={classes.seeMoreText}>مشاهده کمتر</Typography>
+                                    : <Typography className={classes.seeMoreText}>مشاهده بیشتر</Typography>
+                            }
+                        </div>
+                    }
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                         <div className={classes.container}>
                             {

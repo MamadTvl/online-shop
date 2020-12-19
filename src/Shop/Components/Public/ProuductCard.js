@@ -25,6 +25,7 @@ function ProductCard(props) {
                     <Typography className={classes.cardTitle}>{product.title}</Typography>
                     <div className={classes.priceContainer}>
                         {
+                            product.is_exist ?
                             product.has_discount ?
 
                                 <div className={classes.discountCard}>
@@ -78,6 +79,14 @@ function ProductCard(props) {
                                             {separateDigit(product.price)}
                                         </Typography>
                                     </div>
+                                </>
+                                :
+                                <>
+                                    <Typography
+                                        className={classes.priceLabel}
+                                    >
+                                        ناموجود
+                                    </Typography>
                                 </>
                         }
                     </div>

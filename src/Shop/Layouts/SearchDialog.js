@@ -46,7 +46,7 @@ function SearchDialog(props) {
                             input: classes.textField,
                         },
                         startAdornment:
-                            <InputAdornment style={{marginLeft: 8}} position="start">
+                            <InputAdornment  onClick={searchHandler} style={{marginLeft: 8}} position="start">
                                 <SvgIcon xmlns="http://www.w3.org/2000/svg" width="13.811" height="13.811"
                                          viewBox="0 0 13.811 13.811">
                                     <g id="search" transform="translate(-2.25 -2.25)" opacity="0.68">

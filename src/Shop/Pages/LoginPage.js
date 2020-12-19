@@ -174,7 +174,7 @@ function LoginPage() {
                 {
                     size.width >= 600 &&
                     <div className={classes.action}>
-                        <ItemLink to={'/profile/signup'}>
+                        <ItemLink to={'/signup'}>
                             <Button
                                 className={classes.signupButton}
                                 dir={'ltr'}

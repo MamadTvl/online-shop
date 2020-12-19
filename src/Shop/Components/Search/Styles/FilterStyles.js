@@ -1,6 +1,6 @@
 import React from "react";
 import {withStyles} from "@material-ui/core/styles";
-import {Slider, Checkbox} from "@material-ui/core";
+import {Checkbox, Slider} from "@material-ui/core";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import {makeStyles} from "@material-ui/styles";
@@ -146,6 +146,7 @@ export const useFilterCategoryStyle = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         width: '100%',
+        marginBottom: 8,
     },
     title: {
         fontFamily: 'Shabnam',
@@ -161,10 +162,18 @@ export const useFilterCategoryStyle = makeStyles((theme) => ({
         color: '#545454'
     },
 
-
+    seeMoreContainer: {
+        display: "flex",
+    },
+    seeMoreText: {
+        fontFamily: 'Shabnam',
+        fontSize: 13,
+        margin: 'auto 0',
+        color: 'black',
+        opacity: 0.8,
+    },
     expand: {
         transform: 'rotate(0deg)',
-        marginLeft: 'auto',
         transition: theme.transitions.create('transform', {
             duration: theme.transitions.duration.shortest,
         }),

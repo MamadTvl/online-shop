@@ -103,6 +103,7 @@ function DesktopProduct(props) {
                             <Typography className={classes.label}>تعداد</Typography>
                             <div className={classes.buttonGroup}>
                                 <IconButton
+                                    disabled={!product.is_exist}
                                     onClick={() => count !== getMaxStockNumber() && setCount(count + 1)}
                                     className={classes.addButton}
                                 >
@@ -110,6 +111,7 @@ function DesktopProduct(props) {
                                 </IconButton>
                                 <Typography className={classes.countLabel}>{separateDigit(count)}</Typography>
                                 <IconButton
+                                    disabled={!product.is_exist}
                                     onClick={() => count !== 1 && setCount(count - 1)}
                                     className={classes.removeButton}
                                 >
@@ -149,30 +151,40 @@ function DesktopProduct(props) {
                     <div className={classes.priceDetailContainer}>
 
                         {
-                            product.has_discount ?
-                                <>
-                                    <div className={classes.discountContainer}>
-                                        <Chip className={classes.discountChip}
-                                              label={`%${separateDigit(product.percent_of_discount * 100)}`}/>
-                                        <Typography
-                                            className={classes.prevPrice}>{separateDigit(product.price)}</Typography>
+                            product.is_exist ?
+                                product.has_discount ?
+                                    <>
+                                        <div className={classes.discountContainer}>
+                                            <Chip className={classes.discountChip}
+                                                  label={`%${separateDigit(product.percent_of_discount * 100)}`}/>
+                                            <Typography
+                                                className={classes.prevPrice}>{separateDigit(product.price)}</Typography>
 
-                                    </div>
+                                        </div>
+                                        <div className={classes.priceContainer}>
+                                            <Typography className={classes.toman}>تومان</Typography>
+                                            <Typography
+                                                className={classes.price}>{separateDigit(product.price_with_discount)}</Typography>
+                                        </div>
+                                    </>
+                                    :
                                     <div className={classes.priceContainer}>
                                         <Typography className={classes.toman}>تومان</Typography>
                                         <Typography
-                                            className={classes.price}>{separateDigit(product.price_with_discount)}</Typography>
+                                            className={classes.price}>{separateDigit(product.price)}</Typography>
                                     </div>
-                                </>
                                 :
-                                <div className={classes.priceContainer}>
-                                    <Typography className={classes.toman}>تومان</Typography>
-                                    <Typography
-                                        className={classes.price}>{separateDigit(product.price)}</Typography>
-                                </div>
+                                <>
+                                    <div className={classes.priceContainer}>
+                                        <Typography
+                                            className={classes.price}>ناموجود</Typography>
+                                    </div>
+
+                                </>
                         }
 
                         <Button
+                            disabled={!product.is_exist}
                             className={classes.shopButton}// order : id, color, size, count
                             onClick={() => addToCart({
                                 id: product.id,

@@ -22,13 +22,19 @@ function SecondStep(props) {
         <>
             <div className={classes.timerContainer}>
                 <div className={classes.timer_div}>
-                    <Typography className={classes.timer} component={'span'}>{toFaDigit(`${minutes}:${seconds}`)}</Typography>
+                    <Typography
+                        className={classes.timer}
+                        component={'span'}
+                    >
+                        {toFaDigit(`0${minutes}:${seconds > 10 ? seconds : `0${seconds}`}`)}
+                    </Typography>
                     <Typography className={classes.seconds} component={'span'}>ثانیه</Typography>
                 </div>
                 <Typography className={classes.timerLabel}>تا ارسال دوباره کد تایید</Typography>
             </div>
             <div className={classes.timerContent}>
-                <Typography className={classes.timerTitle}>کد پنج رقمی تایید به شماره ۰۹۱۲۶۶۸۷۴۷۳ ارسال شده است.</Typography>
+                <Typography className={classes.timerTitle}>کد پنج رقمی تایید به شماره ۰۹۱۲۶۶۸۷۴۷۳ ارسال شده
+                    است.</Typography>
                 <div className={classes.codeContainer}>
                     <Typography className={classes.label}>کد تایید</Typography>
                     <TextField

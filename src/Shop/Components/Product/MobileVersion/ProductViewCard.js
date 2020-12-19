@@ -38,27 +38,36 @@ function ProductViewCard(props) {
             <Typography className={classes.title}>{product.title}</Typography>
             <div className={classes.priceDetailContainer}>
                 {
-                    product.has_discount ?
-                        <>
-                            <div className={classes.discountContainer}>
-                                <Chip className={classes.discountChip}
-                                      label={`%${separateDigit(product.percent_of_discount * 100)}`}/>
-                                <Typography
-                                    className={classes.prevPrice}>{separateDigit(product.price)}</Typography>
+                    product.is_exist ?
+                        product.has_discount ?
+                            <>
+                                <div className={classes.discountContainer}>
+                                    <Chip className={classes.discountChip}
+                                          label={`%${separateDigit(product.percent_of_discount * 100)}`}/>
+                                    <Typography
+                                        className={classes.prevPrice}>{separateDigit(product.price)}</Typography>
 
-                            </div>
+                                </div>
+                                <div className={classes.priceContainer}>
+                                    <Typography className={classes.toman}>تومان</Typography>
+                                    <Typography
+                                        className={classes.price}>{separateDigit(product.price_with_discount)}</Typography>
+                                </div>
+                            </>
+                            :
                             <div className={classes.priceContainer}>
                                 <Typography className={classes.toman}>تومان</Typography>
                                 <Typography
-                                    className={classes.price}>{separateDigit(product.price_with_discount)}</Typography>
+                                    className={classes.price}>{separateDigit(product.price)}</Typography>
                             </div>
-                        </>
                         :
-                        <div className={classes.priceContainer}>
-                            <Typography className={classes.toman}>تومان</Typography>
-                            <Typography
-                                className={classes.price}>{separateDigit(product.price)}</Typography>
-                        </div>
+                        <>
+                            <div className={classes.priceContainer}>
+                                <Typography
+                                    className={classes.price}>ناموجود</Typography>
+                            </div>
+
+                        </>
                 }
             </div>
             <div className={classes.selects}>
@@ -120,6 +129,7 @@ function ProductViewCard(props) {
                     <Typography className={classes.label}>تعداد</Typography>
                     <div className={classes.buttonGroup}>
                         <IconButton
+                            disabled={!product.is_exist}
                             onClick={() => count !== getMaxStockNumber() && setCount(count + 1)}
                             className={classes.addButton}
                         >
@@ -127,6 +137,7 @@ function ProductViewCard(props) {
                         </IconButton>
                         <Typography className={classes.countLabel}>{separateDigit(count)}</Typography>
                         <IconButton
+                            disabled={!product.is_exist}
                             onClick={() => count !== 1 && setCount(count - 1)}
                             className={classes.removeButton}
                         >
@@ -135,6 +146,7 @@ function ProductViewCard(props) {
                     </div>
                 </div>
                 <Button
+                    disabled={!product.is_exist}
                     className={classes.shopButton}
                     dir={'ltr'}
                     onClick={() => addToCart({

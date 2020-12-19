@@ -1,5 +1,4 @@
 import React, {useEffect, useReducer, useRef, useState} from "react";
-import ShopLayout from "../Layouts/ShopLayout";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import ItemLink from "../../Routes/Link/ItemLink";
@@ -30,7 +29,7 @@ function SearchPage({location}) {
         s: '',
     })
     useEffect(() => {
-        if (!loading){
+        if (!loading) {
             dispatch({
                 type: 'setCategories',
                 categories: result,
@@ -38,7 +37,7 @@ function SearchPage({location}) {
             const params = new URLSearchParams(search.current)
             for (let i = 0; i < result.length; i++) {
                 const categoryId = params.get(`categoryId[${i}]`)
-                if (categoryId){
+                if (categoryId) {
                     dispatch({
                         type: 'selectCategory',
                         categoryId: parseInt(categoryId),
@@ -135,7 +134,7 @@ function SearchPage({location}) {
                         {
                             searchStates.products.slice(page * 15, page * 15 + 15)
                                 .map((product) => (
-                                    <Grid className={classes.productItem} md={4} sm={6} item>
+                                    <Grid className={classes.productItem} md={4} sm={6} xs={12} item>
                                         <ProductCard product={product} className={classes.card}/>
                                     </Grid>
                                 ))
