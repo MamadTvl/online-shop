@@ -24,12 +24,11 @@ function SearchPage({location}) {
         setPage(pageNumber)
     }
     const numPages = parseInt((searchStates.products.length / 10).toString()) + 1
-
     const [searchItems, setSearchItems] = useState({
         s: '',
     })
     useEffect(() => {
-        if (!loading) {
+        if (!loading && search.current !== undefined) {
             dispatch({
                 type: 'setCategories',
                 categories: result,
@@ -46,6 +45,7 @@ function SearchPage({location}) {
                     setChange(prevState => prevState + 1)
                 }
             }
+            search.current = undefined
         }
     }, [loading])
     useEffect(() => {

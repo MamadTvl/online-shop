@@ -3,28 +3,15 @@ import {Dialog, SvgIcon} from "@material-ui/core";
 import {StyledSearchField} from './StyledSearchField'
 import InputAdornment from "@material-ui/core/InputAdornment";
 import {useHeaderStyle} from "./Styles/useHeaderStyle";
-import {useHistory, useLocation} from "react-router-dom";
 import Transition from "./Styles/Transition";
 import * as PropTypes from "prop-types";
 
 function SearchDialog(props) {
     const classes = useHeaderStyle()
-    const location = useLocation()
-    const params = new URLSearchParams(location.search)
-    const history = useHistory()
-    const {searchInput, setSearchInput, open, setOpen} = props
+    const {searchInput, setSearchInput, open, setOpen, searchHandler} = props
 
-
-    const searchHandler = (event) => {
-        event.preventDefault()
-        let tempLoc = location.search === '' ? '?' : location.search
-        if (tempLoc.includes('?s=')) {
-            tempLoc = tempLoc.replace(`${params.get('s')}`, searchInput)
-        } else {
-            tempLoc += `s=${searchInput}`
-        }
-        history.push(`/search${tempLoc}`);
-        setSearchInput('')
+    const handleSubmit = (event) => {
+        searchHandler(event)
         setOpen(false)
     }
     const handleClose = () => {
@@ -34,7 +21,7 @@ function SearchDialog(props) {
     return (
         <Dialog TransitionComponent={Transition} classes={{paper: classes.dialog}} open={open} onClose={handleClose}
                 aria-labelledby="form-dialog-title">
-            <form onSubmit={searchHandler} style={{display: 'flex'}}>
+            <form onSubmit={handleSubmit} style={{display: 'flex'}}>
                 <StyledSearchField
                     id="search-dialog-website"
                     placeholder={'جستجو'}
@@ -46,7 +33,7 @@ function SearchDialog(props) {
                             input: classes.textField,
                         },
                         startAdornment:
-                            <InputAdornment  onClick={searchHandler} style={{marginLeft: 8}} position="start">
+                            <InputAdornment onClick={handleSubmit} style={{marginLeft: 8}} position="start">
                                 <SvgIcon xmlns="http://www.w3.org/2000/svg" width="13.811" height="13.811"
                                          viewBox="0 0 13.811 13.811">
                                     <g id="search" transform="translate(-2.25 -2.25)" opacity="0.68">
@@ -80,4 +67,5 @@ SearchDialog.propType = {
     setSearchInput: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     setOpen: PropTypes.func.isRequired,
+    searchHandler: PropTypes.func.isRequired,
 }

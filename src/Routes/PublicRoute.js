@@ -4,7 +4,6 @@ import useLogin from '../utills/Hooks/useLogin'
 
 function PublicRoute(props) {
     const [isLogin, loading] = useLogin(true)
-    window.scrollTo(0, 0)
     if (loading)
         return null
 
