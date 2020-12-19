@@ -20,7 +20,7 @@ function ProductsSlider(props) {
         dots: false,
         infinite: true,
         slidesToShow: 4,
-        slidesToScroll: 2,
+        slidesToScroll: 1,
         nextArrow: <NextArrow/>,
         prevArrow: <PrevArrow/>,
         rtl: true,
@@ -28,17 +28,17 @@ function ProductsSlider(props) {
 
     useEffect(() => {
         if (products.length > 4 || (products.length === 4 && size.width <= 1280) ) {
-            document.getElementsByClassName('custom-slider-slick')[0]
-                .children[1].children[0].style.height = '422px'
-            console.log(document.getElementsByClassName('custom-slider-slick')[0]
-                .children[1].children[0].style)
-            const slides = document.getElementsByClassName('custom-slider-slick')[0]
-                .children[1].children[0].children
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.padding = '0 20px'
-            }
-            const slideContainer = document.getElementsByClassName('custom-slider-slick')[0]
-            slideContainer.style.marginTop = '23px'
+            try {
+                document.getElementsByClassName('custom-slider-slick')[0]
+                    .children[1].children[0].style.height = '422px'
+                const slides = document.getElementsByClassName('custom-slider-slick')[0]
+                    .children[1].children[0].children
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.padding = '0 20px'
+                }
+                const slideContainer = document.getElementsByClassName('custom-slider-slick')[0]
+                slideContainer.style.marginTop = '23px'
+            }catch (e) {}
         }
     }, [])
 
@@ -49,7 +49,7 @@ function ProductsSlider(props) {
                 dots: false,
                 infinite: true,
                 slidesToShow: 4,
-                slidesToScroll: 2,
+                slidesToScroll: 1,
                 nextArrow: <NextArrow/>,
                 prevArrow: <PrevArrow/>,
                 rtl: true,

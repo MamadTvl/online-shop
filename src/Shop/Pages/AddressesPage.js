@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import AddressForm from "../Components/Public/AddressForm";
-import ShopLayout from "../Layouts/ShopLayout";
 import {useAddressPageStyle} from "./Styles/useAddressPageStyle";
 import Title from "../Components/Public/Title";
 import {Button} from "@material-ui/core";
@@ -30,7 +29,7 @@ function AddressPage() {
     return (
         <>
             <form className={classes.container}>
-                <Title title={'افزودن آدرس جدید'} />
+                <Title title={'افزودن آدرس جدید'}/>
                 <AddressForm
                     values={values}
                     setValues={setValues}

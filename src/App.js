@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {createMuiTheme} from '@material-ui/core/styles';
-import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom"; //todo : warning for useHistory change BrowserRouter to Router
-import {createBrowserHistory} from "history";
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import {ThemeProvider} from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import HomePage from "./Shop/Pages/HomePage";
@@ -11,8 +10,6 @@ import ProfileRoutes from './Routes/ProfileRoutes'
 import ShopLayout from "./Shop/Layouts/ShopLayout";
 
 function App() {
-
-    const customHistory = createBrowserHistory();
     const [basketChange, setBasketChange] = useState(0)
     const rtlTheme = createMuiTheme({
         direction: 'rtl'
@@ -21,7 +18,7 @@ function App() {
     return (
         <ThemeProvider theme={rtlTheme}>
             <CssBaseline/>
-            <Router history={customHistory}>
+            <Router>
                 <Switch>
                     <ShopLayout basketChange={basketChange}>
                         <Route exact path={'/'} component={HomePage}/>
@@ -29,16 +26,10 @@ function App() {
                         <Route exact path={'/products/:code/:product'}>
                             <ProductPage setBasketChange={setBasketChange}/>
                         </Route>
-                        {/*<Route exact path={'/profile'} >*/}
                         <ProfileRoutes/>
+                        <Redirect to={'/'}/>
                     </ShopLayout>
-                    {/*</Route>*/}
-                    <Route exact path={'/not-found'}>
-                        <div>
-                            صفحه ای که دنبال آن بودید پیدا نشد
-                        </div>
-                    </Route>
-                    <Redirect to={'/not-found'}/>
+
                 </Switch>
             </Router>
         </ThemeProvider>

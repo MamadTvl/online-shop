@@ -3,7 +3,12 @@ import {makeStyles} from "@material-ui/core/styles";
 
 export const useProductCardStyles = makeStyles((theme) => ({
     cardRoot: {
-        height: '100%'
+        height: '100%',
+        textDecoration: 'none',
+        '&:hover':{
+            textDecoration: 'none',
+            // backgroundColor: 'rgba(241, 101, 34, 0.1)'
+        },
     },
     card: {
         direction: 'rtl',

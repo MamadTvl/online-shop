@@ -1,7 +1,7 @@
 import React from "react";
 import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
 import Chip from "@material-ui/core/Chip";
-import {useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import PropType from 'prop-types'
 import {separateDigit, toFaDigit} from "../../../utills/ToFaDigit";
 import {useProductCardStyles} from "./Styles/useProductCardStyle";
@@ -12,38 +12,41 @@ function ProductCard(props) {
     const {product, className} = props
     const history = useHistory()
     return (
-        <Card component={'div'} className={className? className : classes.card}>
+        <Card component={'div'} className={className ? className : classes.card}>
+
             <CardActionArea
                 classes={{
                     root: classes.cardRoot,
                 }}
                 onClick={
-                    () => history.push(`/products/${product.unique_code}/${product.title}?id=${product.id}`)}
+                    () => window.scrollTo(0, 0)}
             >
-                <CardMedia className={classes.cardMedia} image={product.preview_image} title={product.name}/>
-                <CardContent className={classes.cardContent}>
-                    <Typography className={classes.cardTitle}>{product.title}</Typography>
-                    <div className={classes.priceContainer}>
-                        {
-                            product.is_exist ?
-                            product.has_discount ?
+                <Link className={classes.cardRoot}
+                      to={`/products/${product.unique_code}/${product.title}?id=${product.id}`}>
+                    <CardMedia className={classes.cardMedia} image={product.preview_image} title={product.name}/>
+                    <CardContent className={classes.cardContent}>
+                        <Typography className={classes.cardTitle}>{product.title}</Typography>
+                        <div className={classes.priceContainer}>
+                            {
+                                product.is_exist ?
+                                    product.has_discount ?
 
-                                <div className={classes.discountCard}>
-                                    <br/>
-                                    <div style={{display: 'flex'}}>
-                                        <Chip
-                                            classes={{root: classes.discountChip}}
-                                            label={`%${toFaDigit((product.percent_of_discount * 100).toString())}`}
-                                        />
-                                        <Typography
-                                            className={classes.discountLabel}
-                                        >
-                                            {separateDigit(product.price)}
-                                        </Typography>
-                                    </div>
-                                    <div
-                                        style={{display: 'flex'}}
-                                    >
+                                        <div className={classes.discountCard}>
+                                            <br/>
+                                            <div style={{display: 'flex'}}>
+                                                <Chip
+                                                    classes={{root: classes.discountChip}}
+                                                    label={`%${toFaDigit((product.percent_of_discount * 100).toString())}`}
+                                                />
+                                                <Typography
+                                                    className={classes.discountLabel}
+                                                >
+                                                    {separateDigit(product.price)}
+                                                </Typography>
+                                            </div>
+                                            <div
+                                                style={{display: 'flex'}}
+                                            >
                                                     <span
                                                         style={{
                                                             fontFamily: 'Shabnam',
@@ -55,17 +58,17 @@ function ProductCard(props) {
                                                     >
                                                         تومان
                                                     </span>
-                                        <Typography
-                                            className={classes.priceLabel}
-                                        >
-                                            {separateDigit(product.price_with_discount)}
-                                        </Typography>
-                                    </div>
+                                                <Typography
+                                                    className={classes.priceLabel}
+                                                >
+                                                    {separateDigit(product.price_with_discount)}
+                                                </Typography>
+                                            </div>
 
-                                </div>
-                                :
-                                <>
-                                    <div className={classes.normalCard}>
+                                        </div>
+                                        :
+                                        <>
+                                            <div className={classes.normalCard}>
                                                 <span style={{
                                                     fontFamily: 'Shabnam',
                                                     fontSize: 14,
@@ -73,25 +76,27 @@ function ProductCard(props) {
                                                     marginRight: 8,
                                                     marginTop: 8,
                                                 }}>تومان</span>
+                                                <Typography
+                                                    className={classes.priceLabel}
+                                                >
+                                                    {separateDigit(product.price)}
+                                                </Typography>
+                                            </div>
+                                        </>
+                                    :
+                                    <>
                                         <Typography
                                             className={classes.priceLabel}
                                         >
-                                            {separateDigit(product.price)}
+                                            ناموجود
                                         </Typography>
-                                    </div>
-                                </>
-                                :
-                                <>
-                                    <Typography
-                                        className={classes.priceLabel}
-                                    >
-                                        ناموجود
-                                    </Typography>
-                                </>
-                        }
-                    </div>
-                </CardContent>
+                                    </>
+                            }
+                        </div>
+                    </CardContent>
+                </Link>
             </CardActionArea>
+
         </Card>
     )
 }
