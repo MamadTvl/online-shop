@@ -9,10 +9,10 @@ import {useProductCardStyles} from "./Styles/useProductCardStyle";
 
 function ProductCard(props) {
     const classes = useProductCardStyles()
-    const {product} = props
+    const {product, className} = props
     const history = useHistory()
     return (
-        <Card component={'div'} className={classes.card}>
+        <Card component={'div'} className={className? className : classes.card}>
             <CardActionArea
                 classes={{
                     root: classes.cardRoot,
@@ -89,6 +89,7 @@ function ProductCard(props) {
 
 ProductCard.propTypes = {
     product: PropType.object.isRequired,
+    className: PropType.any,
 }
 
 export default ProductCard

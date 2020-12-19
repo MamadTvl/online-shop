@@ -11,8 +11,6 @@ export const useProductCardStyles = makeStyles((theme) => ({
         flexDirection: "column",
         alignSelf: "center",
         height: 420,
-        // height: "auto",
-        // maxWidth: 276,
         width: '100%',
     },
     cardContent: {
@@ -35,13 +33,11 @@ export const useProductCardStyles = makeStyles((theme) => ({
         fontWeight: 500,
         fontSize: 20,
         color: '#545454',
-        // lineHeight: 1.6,
     },
     discountCard: {
         direction: 'ltr',
         display: "flex",
         flexDirection: 'column',
-        // marginTop: 64,
     },
     discountLabel:{
         fontFamily: 'Shabnam',
@@ -70,7 +66,6 @@ export const useProductCardStyles = makeStyles((theme) => ({
     normalCard: {
         display: "flex",
         direction: 'ltr',
-        // marginTop: 109,
 
     },
     priceLabel:{

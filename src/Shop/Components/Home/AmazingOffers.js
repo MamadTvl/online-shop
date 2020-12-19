@@ -10,6 +10,7 @@ import NextArrow from '../Public/NextArrow'
 import PrevArrow from "../Public/PrevArrow";
 import * as PropTypes from "prop-types";
 
+
 function AmazingOffers(props) {
     const classes = useStyles()
     const {products, cover} = props
@@ -28,24 +29,32 @@ function AmazingOffers(props) {
 
     useEffect(() => {
         if (products.length !== 0) {
-            const slides = document.getElementsByClassName('amazing-slider-slick')[0]
-                .children[1].children[0].children
-            // if you want to find out what you are doing log it !
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].children[0].style.display = 'flex'
-                slides[i].children[0].style.justifyContent = 'center'
+            try {
+                const slides = document.getElementsByClassName('amazing-slider-slick')[0]
+                    .children[1].children[0].children
+                // if you want to find out what you are doing log it !
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].children[0].style.display = 'flex'
+                    slides[i].children[0].style.justifyContent = 'center'
+                }
+            } catch (e) {
+
             }
+
         }
     }, [])
     useEffect(() => {
         if (products.length !== 0) {
-            const slides = document.getElementsByClassName('amazing-slider-slick')[0]
-                .children[1].children[0].children
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.padding = '0 20px'
+            try {
+                const slides = document.getElementsByClassName('amazing-slider-slick')[0]
+                    .children[1].children[0].children
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.padding = '0 20px'
+                }
+                const slideContainer = document.getElementsByClassName('amazing-slider-slick')[0]
+                slideContainer.style.marginTop = '23px'
+            } catch (e) {
             }
-            const slideContainer = document.getElementsByClassName('amazing-slider-slick')[0]
-            slideContainer.style.marginTop = '23px'
         }
     }, [])
 
@@ -89,42 +98,63 @@ function AmazingOffers(props) {
 
         }
     }, [size.width])
-
+    const setSmGrid = () => {
+        if (size.width >= 800 && size.width <= 900)
+            return [3, 9]
+        else if (size.width < 800 && size.width >= 600){
+            return [5, 7]
+        }else {
+            return [4, 8]
+        }
+    }
     return (
-        <div className={classes.container}>
-            <div className={classes.titleContainer}>
+        <Grid classes={{"spacing-xs-5": classes.spacingContainer}} container spacing={5}
+              className={classes.container}>
+            <Grid
+                item
+                md={3}
+                sm={setSmGrid()[0]}
+                xs={size.width > 400 ? 4 : 5}
+                className={classes.titleContainer}
+            >
                 <Typography className={classes.title}>پیشنهاد</Typography>
                 <Typography className={classes.title}>شگفت‌انگیز</Typography>
-                <img src={products[0].preview_image} alt={''} className={classes.previewImage}/>
-            </div>
-
-            {
-                size.width > 900 ?
-                    <Grid container spacing={8} direction={"row"}>
-                        {
-                            products.map((product) => (
-                                <Grid item xs={4}>
-                                    <ProductCard product={product}/>
-                                </Grid>
-                            ))
-                        }
-
-                    </Grid>
-                    :
-                    <div className={classes.sliderContainer}>
-                        <Slider {...setting}>
+                <img src={cover} alt={''} className={classes.previewImage}/>
+            </Grid>
+            <Grid
+                item
+                md={9}
+                sm={setSmGrid()[1]}
+                xs={size.width > 400 ? 8 : 7}
+            >
+                {
+                    size.width > 900 ?
+                        <Grid container spacing={2} direction={"row"}>
                             {
                                 products.map((product) => (
-
-                                    <ProductCard product={product}/>
-
+                                    <Grid item xs={4}>
+                                        <ProductCard product={product}/>
+                                    </Grid>
                                 ))
                             }
-                        </Slider>
-                    </div>
-            }
 
-        </div>
+                        </Grid>
+                        :
+                        <div className={classes.sliderContainer}>
+                            <Slider {...setting}>
+                                {
+                                    products.map((product) => (
+
+                                        <ProductCard className={classes.card} product={product}/>
+
+                                    ))
+                                }
+                            </Slider>
+                        </div>
+                }
+            </Grid>
+
+        </Grid>
     )
 }
 
