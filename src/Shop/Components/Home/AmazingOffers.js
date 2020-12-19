@@ -96,7 +96,7 @@ function AmazingOffers(props) {
             <div className={classes.titleContainer}>
                 <Typography className={classes.title}>پیشنهاد</Typography>
                 <Typography className={classes.title}>شگفت‌انگیز</Typography>
-                <img src={cover} alt={''} className={classes.previewImage}/>
+                <img src={products[0].preview_image} alt={''} className={classes.previewImage}/>
             </div>
 
             {

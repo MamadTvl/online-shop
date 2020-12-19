@@ -49,33 +49,46 @@ export const useProductSliderStyles = makeStyles((theme) => ({
     slider: {
         padding: 20,
     },
+    cardRoot: {
+      height: '100%'
+    },
     card: {
         direction: 'rtl',
         display: "flex",
         flexDirection: "column",
         alignSelf: "center",
-        // minHeight: 422,
+        height: 420,
         // height: "auto",
         // maxWidth: 276,
         width: '100%',
     },
+    cardContent: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        height: '51%',
+    },
     cardMedia: {
         width: '100%',
-        height: 210,
-
+        height: '49%',
+    },
+    priceContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
     },
     cardTitle: {
         fontFamily: 'Shabnam',
         fontWeight: 500,
         fontSize: 20,
         color: '#545454',
-        lineHeight: 1.6,
+        // lineHeight: 1.6,
     },
     discountCard: {
         direction: 'ltr',
         display: "flex",
         flexDirection: 'column',
-        marginTop: 64,
+        // marginTop: 64,
     },
     discountLabel:{
         fontFamily: 'Shabnam',
@@ -104,7 +117,7 @@ export const useProductSliderStyles = makeStyles((theme) => ({
     normalCard: {
         display: "flex",
         direction: 'ltr',
-        marginTop: 109,
+        // marginTop: 109,
 
     },
     priceLabel:{

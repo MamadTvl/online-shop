@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {useCartPageStyle} from "./Styles/useCartPageStyle";
-import ShopLayout from "../Layouts/ShopLayout";
 import {Button, Card, Divider, Grid, InputAdornment, TextField, Typography} from "@material-ui/core";
 import Title from "../Components/Public/Title";
 import useWindowSize from "../../utills/Hooks/useWindowSize";
@@ -10,6 +9,7 @@ import image from '../../img/photoViewer.png'
 import AddressCard from "../Components/Cart/AddressCard";
 import AddressForm from "../Components/Public/AddressForm";
 import FactorCard from "../Components/Cart/FactorCard";
+import usePostCart from "../PostData/usePostCart";
 
 const product = {
     title: 'آستین کوتاه باله دار خاکستری',
@@ -53,6 +53,8 @@ const addresses = [
 const info = createInformationData('آرش دامن‌افشان', '۰۹۳۴۴۴۳۲۵۳', 'Arash@mail.com', 'تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴')
 
 function CartPage() {
+    const [fetch, setFetch] = useState(true)
+    const [loading, result] = usePostCart(fetch)
     const classes = useCartPageStyle()
     const size = useWindowSize()
     const [step, setStep] = useState(0)
@@ -100,6 +102,10 @@ function CartPage() {
         }
         window.scrollTo(0, 0)
     }
+    if (!loading){
+        console.log(result)
+    }
+
     return (
         <>
             <div className={classes.container}>

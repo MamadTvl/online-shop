@@ -12,15 +12,19 @@ function ProductCard(props) {
     const {product, className} = props
     const history = useHistory()
     return (
-        <Card component={'div'} className={className}>
+        <Card component={'div'} className={classes.card}>
             <CardActionArea
+                classes={{
+                    root: classes.cardRoot,
+                }}
+                // style={{height: '100'}}
                 onClick={
                     () => history.push(`/products/${product.unique_code}/${product.title}?id=${product.id}`)}
             >
                 <CardMedia className={classes.cardMedia} image={product.preview_image} title={product.name}/>
-                <CardContent>
+                <CardContent className={classes.cardContent}>
                     <Typography className={classes.cardTitle}>{product.title}</Typography>
-                    <div>
+                    <div className={classes.priceContainer}>
                         {
                             product.has_discount ?
 
