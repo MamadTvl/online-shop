@@ -11,6 +11,7 @@ import FilterCategory from "../Components/Search/FilterCategory";
 import {initialStates, reducer} from "../Components/Search/Reducer";
 import {useHistory} from 'react-router-dom'
 import useCategoriesData from "../FetchData/useCategoriesData";
+import Title from "../Components/Public/Title";
 
 function SearchPage({location}) {
     const search = useRef(location.search)
@@ -87,11 +88,7 @@ function SearchPage({location}) {
                     </ItemLink>
                     <Typography className={classes.breadcrumb}>جستجو میان محصولات</Typography>
                 </Breadcrumbs>
-                <div className={classes.titleContainer}>
-                    <div className={classes.titleRectangle}/>
-                    <Typography component={"h1"}
-                                className={classes.title}>{`لیست محصولات ${searchItems.s}`}</Typography>
-                </div>
+                <Title title={`لیست محصولات ${searchItems.s}`}/>
 
                 <Grid xs={12} className={classes.gridContainer} container direction={"row"}>
                     <Grid container sm={3} className={classes.filterContainer} direction={"row"}>

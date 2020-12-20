@@ -17,8 +17,8 @@ const useStyle = makeStyles((theme) => ({
         borderRightStyle: 'solid',
         marginLeft: 8,
         [theme.breakpoints.down('xs')]: {
-            borderRightWidth: 2,
-            height: 15,
+            borderRightWidth: 3,
+            height: 25,
             marginTop: 2,
         },
 
@@ -29,7 +29,7 @@ const useStyle = makeStyles((theme) => ({
         fontSize: 28,
         color: '#545454',
         [theme.breakpoints.down('xs')]: {
-            fontSize: 14,
+            fontSize: 18,
         },
     },
 
@@ -42,7 +42,7 @@ function Title(props) {
     return(
         <div className={classes.titleContainer}>
             <div className={classes.titleRectangle}/>
-            <Typography className={classes.title}>{props.title}</Typography>
+            <Typography component={'h1'} className={classes.title}>{props.title}</Typography>
         </div>
     )
 }
