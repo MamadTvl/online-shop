@@ -8,6 +8,7 @@ import PreviewAddressCard from "../Components/Profile/PreviewAddressCard";
 import {useHistory} from 'react-router-dom'
 import useUserData from "../FetchData/useUserData";
 import {toFaDigit} from "../../utills/ToFaDigit";
+import ProfilePageSkeleton from "../Components/Skeletons/ProfilePageSkeleton";
 
 function ProfilePage() {
     const [loading, result] = useUserData(true)
@@ -38,7 +39,7 @@ function ProfilePage() {
         createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
     ]
     if (loading)
-        return null
+        return <ProfilePageSkeleton/>
     return (
         <>
             <div className={classes.container}>

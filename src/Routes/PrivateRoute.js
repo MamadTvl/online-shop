@@ -4,15 +4,15 @@ import useLogin from "../utills/Hooks/useLogin";
 
 function PrivateRoute(props) {
     const [isLogin, loading] = useLogin(true)
-    if (loading)
+    document.getElementById('root').hidden = loading;
+    if(loading)
         return null
-
     return (
         <Route exact path={props.path}>
             {
                 isLogin
                     ? props.children
-                    : <Redirect push to={'/login'}/>
+                    : <Redirect to={'/login'}/>
             }
         </Route>
 

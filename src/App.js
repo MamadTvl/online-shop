@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {createMuiTheme} from '@material-ui/core/styles';
-import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, Switch, useLocation, useHistory} from "react-router-dom";
 import {ThemeProvider} from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import HomePage from "./Shop/Pages/HomePage";
@@ -15,6 +15,7 @@ function App() {
         direction: 'rtl'
     })
 
+
     return (
         <ThemeProvider theme={rtlTheme}>
             <CssBaseline/>
@@ -27,9 +28,9 @@ function App() {
                             <ProductPage setBasketChange={setBasketChange}/>
                         </Route>
                         <ProfileRoutes/>
-                        <Redirect to={'/'}/>
                     </ShopLayout>
 
+                    {/*<Redirect to={'/'}/>*/}
                 </Switch>
             </Router>
         </ThemeProvider>

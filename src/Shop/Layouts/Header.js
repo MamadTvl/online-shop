@@ -34,7 +34,10 @@ function Header(props) {
             if (tempLoc.includes('?s=')) {
                 tempLoc = tempLoc.replace(`${params.get('s')}`, searchInput)
             } else {
-                tempLoc += `${tempLoc.includes('categoryId') && '&'}s=${searchInput}`
+                if(tempLoc.includes('categoryId')){
+                    tempLoc+='&'
+                }
+                tempLoc += `s=${searchInput}`
             }
             history.push(`/search${tempLoc}`);
             setSearchInput('')
@@ -46,6 +49,7 @@ function Header(props) {
         if (localStorageCart)
             setBasketCount(localStorageCart.length)
     }, [props.basketChange])
+
 
     const drawer = (
         <>

@@ -4,9 +4,9 @@ import useLogin from '../utills/Hooks/useLogin'
 
 function PublicRoute(props) {
     const [isLogin, loading] = useLogin(true)
-    if (loading)
+    document.getElementById('root').hidden = loading;
+    if(loading)
         return null
-
     return (
         <Route exact path={props.path}>
             {
