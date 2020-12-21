@@ -86,31 +86,34 @@ function ProductPage(props) {
             <div className={classes.container}>
 
                 {
-                    loading || catsLoading ? <ProductPageSkeleton/>
+                    true || catsLoading ? <ProductPageSkeleton/>
                         : <>
-                        <Breadcrumbs className={classes.breadcrumbContainer}
-                                     separator={<NavigateBeforeIcon fontSize="small"/>}>
-                            <ItemLink to={'/'}>
-                                <Typography className={classes.breadcrumb}>خانه</Typography>
-                            </ItemLink>
-                            <ItemLink
-                                to={`/search?&categoryId[${findCategoryIndex(result.merchandise.category.id)}]=${result.merchandise.category.id}`}>
-                                <Typography
-                                    className={classes.breadcrumb}>{result.merchandise.category.name}</Typography>
-                            </ItemLink>
-                            <Typography className={classes.breadcrumb}>{product}</Typography>
-                        </Breadcrumbs>
+                            <Breadcrumbs className={classes.breadcrumbContainer}
+                                         separator={<NavigateBeforeIcon fontSize="small"/>}>
+                                <ItemLink to={'/'}>
+                                    <Typography className={classes.breadcrumb}>خانه</Typography>
+                                </ItemLink>
+                                <ItemLink
+                                    to={
+                                        `/search?&categoryId[${findCategoryIndex(result.merchandise.category.id)}]=${result.merchandise.category.id}`
+                                    }
+                                >
+                                    <Typography
+                                        className={classes.breadcrumb}>{result.merchandise.category.name}</Typography>
+                                </ItemLink>
+                                <Typography className={classes.breadcrumb}>{product}</Typography>
+                            </Breadcrumbs>
 
-                        {
-                            size.width > 600
-                                ? <DesktopProduct addToCart={addToCart} product={result.merchandise}/>
-                                : <MobileProduct addToCart={addToCart} product={result.merchandise}/>
-                        }
-                        {
-                            size.width > 600 && <ProductDetail product={result.merchandise}/>
-                        }
-                        <SimilarProducts products={result.related_merchandise}/>
-                    </>
+                            {
+                                size.width > 600
+                                    ? <DesktopProduct addToCart={addToCart} product={result.merchandise}/>
+                                    : <MobileProduct addToCart={addToCart} product={result.merchandise}/>
+                            }
+                            {
+                                size.width > 600 && <ProductDetail product={result.merchandise}/>
+                            }
+                            <SimilarProducts products={result.related_merchandise}/>
+                        </>
                 }
             </div>
         </>
