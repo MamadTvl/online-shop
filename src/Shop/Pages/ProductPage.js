@@ -86,7 +86,7 @@ function ProductPage(props) {
             <div className={classes.container}>
 
                 {
-                    true || catsLoading ? <ProductPageSkeleton/>
+                    loading || catsLoading ? <ProductPageSkeleton/>
                         : <>
                             <Breadcrumbs className={classes.breadcrumbContainer}
                                          separator={<NavigateBeforeIcon fontSize="small"/>}>
