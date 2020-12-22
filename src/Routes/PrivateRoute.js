@@ -1,16 +1,16 @@
 import React from "react";
 import {Redirect, Route} from "react-router-dom";
-import useLogin from "../utills/Hooks/useLogin";
+import {useAuth} from "../utills/Auth";
 
 function PrivateRoute(props) {
-    const [isLogin, loading] = useLogin(true)
-    document.getElementById('root').hidden = loading;
-    if(loading)
+    const auth = useAuth()
+    document.getElementById('root').hidden = auth.loading;
+    if (auth.loading)
         return null
     return (
         <Route exact path={props.path}>
             {
-                isLogin
+                auth.isLogin
                     ? props.children
                     : <Redirect to={'/login'}/>
             }

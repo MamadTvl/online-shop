@@ -9,11 +9,13 @@ import {useHistory} from 'react-router-dom'
 import useUserData from "../FetchData/useUserData";
 import {toFaDigit} from "../../utills/ToFaDigit";
 import ProfilePageSkeleton from "../Components/Skeletons/ProfilePageSkeleton";
+import {useAuth} from "../../utills/Auth";
 
 function ProfilePage() {
     const [loading, result] = useUserData(true)
     const classes = useProfilePageStyle()
     const history = useHistory()
+    const auth = useAuth();
 
     function createOrderData(code, date, status, cost) {
         return {code, date, status, cost}
@@ -49,7 +51,8 @@ function ProfilePage() {
                         <img className={classes.image} src={profileImage} alt={'profile'}/>
                         <div className={classes.profileDetail}>
                             <Typography className={classes.name}>{result.name_and_last_name}</Typography>
-                            <Typography className={classes.mobileNumber}>{toFaDigit((result.mobile_number).toString())}</Typography>
+                            <Typography
+                                className={classes.mobileNumber}>{toFaDigit((result.mobile_number).toString())}</Typography>
                         </div>
                     </div>
                     <div style={{display: 'flex', flexDirection: 'column'}}>

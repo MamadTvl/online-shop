@@ -18,6 +18,7 @@ function useLogin(fetch) {
                 const response = await axios.get(`${baseUrl}/user/get_profile`, config)
                 setIsLogin(response.status === 200)
             } catch (error) {
+                console.log(error)
                 setIsLogin(false)
             }
             setLoading(false)
@@ -27,6 +28,8 @@ function useLogin(fetch) {
             getResult().then()
         }
     }, [fetch])
+
+    console.log([isLogin, loading])
 
     return [isLogin, loading]
 }

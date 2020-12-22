@@ -1,13 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {createMuiTheme} from '@material-ui/core/styles';
-import {BrowserRouter as Router, Redirect, Route, Switch, useLocation, useHistory} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import {ThemeProvider} from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import HomePage from "./Shop/Pages/HomePage";
 import SearchPage from "./Shop/Pages/SearchPage";
 import ProductPage from "./Shop/Pages/ProductPage";
-import ProfileRoutes from './Routes/ProfileRoutes'
 import ShopLayout from "./Shop/Layouts/ShopLayout";
+import ProvideAuth from "./utills/Auth";
+import PrivateRoute from "./Routes/PrivateRoute";
+import ProfilePage from "./Shop/Pages/ProfilePage";
+import UserInfoPage from "./Shop/Pages/UserInfoPage";
+import AddressesPage from "./Shop/Pages/AddressesPage";
+import CartPage from "./Shop/Pages/CartPage";
+import PublicRoute from "./Routes/PublicRoute";
+import LoginPage from "./Shop/Pages/LoginPage";
+import SignUpPage from "./Shop/Pages/SignUpPage";
+import ForgetPassPage from "./Shop/Pages/ForgetPassPage";
 
 function App() {
     const [basketChange, setBasketChange] = useState(0)
@@ -19,20 +28,51 @@ function App() {
     return (
         <ThemeProvider theme={rtlTheme}>
             <CssBaseline/>
-            <Router>
-                <Switch>
+            <ProvideAuth>
+                <Router>
                     <ShopLayout basketChange={basketChange}>
-                        <Route exact path={'/'} component={HomePage}/>
-                        <Route exact path={'/search'} component={SearchPage}/>
-                        <Route exact path={'/products/:code/:product'}>
-                            <ProductPage setBasketChange={setBasketChange}/>
-                        </Route>
-                        <ProfileRoutes/>
-                    </ShopLayout>
+                        <Switch>
+                            <Route exact path={'/'} component={HomePage}/>
 
-                    {/*<Redirect to={'/'}/>*/}
-                </Switch>
-            </Router>
+                            <Route exact path={'/search'} component={SearchPage}/>
+
+                            <Route exact path={'/products/:code/:product'}>
+                                <ProductPage setBasketChange={setBasketChange}/>
+                            </Route>
+
+                            <PrivateRoute path={'/profile'}>
+                                <ProfilePage/>
+                            </PrivateRoute>
+
+                            <PrivateRoute path={'/profile/personal-info'}>
+                                <UserInfoPage/>
+                            </PrivateRoute>
+
+                            <PrivateRoute path={'/profile/addresses'}>
+                                <AddressesPage/>
+                            </PrivateRoute>
+
+                            <PrivateRoute path={'/profile/cart'}>
+                                <CartPage/>
+                            </PrivateRoute>
+
+                            <PublicRoute path={`/login`}>
+                                <LoginPage/>
+                            </PublicRoute>
+
+                            <PublicRoute path={`/signup`}>
+                                <SignUpPage/>
+                            </PublicRoute>
+
+                            <PublicRoute path={`/profile/forget-password`}>
+                                <ForgetPassPage/>
+                            </PublicRoute>
+
+                            <Redirect to={'/'}/>
+                        </Switch>
+                    </ShopLayout>
+                </Router>
+            </ProvideAuth>
         </ThemeProvider>
     );
 }

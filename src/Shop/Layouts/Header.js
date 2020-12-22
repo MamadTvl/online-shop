@@ -10,13 +10,13 @@ import {Link, useHistory, useLocation} from "react-router-dom";
 import {useHeaderStyle} from "./Styles/useHeaderStyle";
 import CategoryMenu from "./CategoryMenu";
 import SearchDialog from "./SearchDialog";
-import useLogin from "../../utills/Hooks/useLogin";
 import Typography from "@material-ui/core/Typography";
 import CategoriesList from "./CategoriesList";
 import {separateDigit} from "../../utills/ToFaDigit";
+import {useAuth} from "../../utills/Auth";
 
 function Header(props) {
-    const [isLogin, loading] = useLogin(true)
+    const auth = useAuth()
     const classes = useHeaderStyle()
     const location = useLocation()
     const params = new URLSearchParams(location.search)
@@ -29,13 +29,13 @@ function Header(props) {
 
     const searchHandler = (event) => {
         event.preventDefault()
-        if(searchInput !== '') {
+        if (searchInput !== '') {
             let tempLoc = location.search === '' ? '?' : location.search
             if (tempLoc.includes('?s=')) {
                 tempLoc = tempLoc.replace(`${params.get('s')}`, searchInput)
             } else {
-                if(tempLoc.includes('categoryId')){
-                    tempLoc+='&'
+                if (tempLoc.includes('categoryId')) {
+                    tempLoc += '&'
                 }
                 tempLoc += `s=${searchInput}`
             }
@@ -148,7 +148,7 @@ function Header(props) {
                             searchHandler={searchHandler}
                         />
                         <Button
-                            onClick={() => history.push(`${isLogin ? '/profile' : '/login'}`)}
+                            onClick={() => history.push(`${auth.isLogin ? '/profile' : '/login'}`)}
                             size={"small"}
                             dir={'ltr'}
                             className={classes.login}
@@ -168,12 +168,12 @@ function Header(props) {
                             }
                         >
                             {
-                                isLogin
+                                auth.isLogin
                                     ? 'خوش‌آمدید'
                                     : 'ورود / ثبت‌نام'
                             }
                         </Button>
-                        <IconButton onClick={() => history.push(`${isLogin ? '/profile' : '/login'}`)}
+                        <IconButton onClick={() => history.push(`${auth.isLogin ? '/profile' : '/login'}`)}
                                     className={classes.iconButtons}>
                             <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.5" height="19.5"
                                      viewBox="0 0 17.5 19.5">

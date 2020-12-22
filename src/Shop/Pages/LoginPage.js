@@ -20,6 +20,7 @@ import Title from "../Components/Public/Title";
 import useAxios from "axios-hooks";
 import {useHistory} from 'react-router-dom'
 import useWindowSize from "../../utills/Hooks/useWindowSize";
+import {useAuth} from "../../utills/Auth";
 
 function LoginPage() {
     const classes = useLoginPageStyle()
@@ -35,6 +36,7 @@ function LoginPage() {
         url: `${baseUrl}/user/sign_in`,
         method: 'POST'
     }, {manual: true})
+    const auth = useAuth();
     const size = useWindowSize()
 
     const handleChange = (props) => (event) => {
@@ -68,7 +70,7 @@ function LoginPage() {
                 setError(true)
             }
         } catch (err) {
-            history.push('/profile/login')
+            history.go(0)
         }
     }
 

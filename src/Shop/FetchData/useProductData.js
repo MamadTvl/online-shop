@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useAxios} from "../../utills/Hooks/useAxios";
-
+import {useHistory} from "react-router-dom"
 
 function useProductData(fetch, id) {
     const [result, setResult] = useState([])
@@ -8,6 +8,7 @@ function useProductData(fetch, id) {
     const [, getProduct] = useAxios({
         url: `/merchandise/get?id=${id}`,
     })
+    const history = useHistory()
 
     useEffect(() => {
         async function getResult() {
@@ -17,6 +18,7 @@ function useProductData(fetch, id) {
                 setResult(response.data.data)
                 setLoading(false)
             } catch (err) {
+                history.push('/')
                 setLoading(false)
             }
         }
