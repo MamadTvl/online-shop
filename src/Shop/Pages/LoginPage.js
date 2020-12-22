@@ -104,7 +104,7 @@ function LoginPage() {
                         <div className={classes.passwordContainer}>
                             <div className={classes.passwordLabels}>
                                 <Typography className={classes.label}>رمز عبور</Typography>
-                                <ItemLink style={{margin: 'auto 0'}} to={'/profile/forget-password'}>
+                                <ItemLink style={{margin: 'auto 0'}} to={'/forget-password'}>
                                     <Typography className={classes.forgetLabel}>رمزعبور خود را فراموش
                                         کرده‌اید!؟</Typography>
                                 </ItemLink>
@@ -135,7 +135,7 @@ function LoginPage() {
                                 fullWidth
                                 variant="outlined"
                             />
-                            <ItemLink style={{margin: 'auto 0'}} to={'/profile/forget-password'}>
+                            <ItemLink style={{margin: 'auto 0'}} to={'/forget-password'}>
                                 <Typography className={classes.forgetMobileLabel}>رمزعبور خود را فراموش
                                     کرده‌اید!؟</Typography>
                             </ItemLink>

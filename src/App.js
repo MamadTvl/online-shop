@@ -40,6 +40,18 @@ function App() {
                                 <ProductPage setBasketChange={setBasketChange}/>
                             </Route>
 
+                            <PublicRoute path={`/login`}>
+                                <LoginPage/>
+                            </PublicRoute>
+
+                            <PublicRoute path={`/signup`}>
+                                <SignUpPage/>
+                            </PublicRoute>
+
+                            <PublicRoute path={`/forget-password`}>
+                                <ForgetPassPage/>
+                            </PublicRoute>
+
                             <PrivateRoute path={'/profile'}>
                                 <ProfilePage/>
                             </PrivateRoute>
@@ -55,18 +67,6 @@ function App() {
                             <PrivateRoute path={'/profile/cart'}>
                                 <CartPage/>
                             </PrivateRoute>
-
-                            <PublicRoute path={`/login`}>
-                                <LoginPage/>
-                            </PublicRoute>
-
-                            <PublicRoute path={`/signup`}>
-                                <SignUpPage/>
-                            </PublicRoute>
-
-                            <PublicRoute path={`/profile/forget-password`}>
-                                <ForgetPassPage/>
-                            </PublicRoute>
 
                             <Redirect to={'/'}/>
                         </Switch>
