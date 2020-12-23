@@ -3,7 +3,6 @@ import {Button, Card} from "@material-ui/core";
 import Title from "../Components/Public/Title";
 import Step from "../Components/Public/Step"
 import FirstStep from "../Components/SignUp/FirstStep";
-import ShopLayout from "../Layouts/ShopLayout";
 import {useHistory} from 'react-router-dom'
 import {useSignUpPageStyle} from "./Styles/useSignUpPageStyle";
 import SecondStep from "../Components/SignUp/SecondStep";
@@ -21,8 +20,14 @@ function SignUpPage() {
         timer: 2,
         name: '',
         email: '',
-        state: '',
-        city: '',
+        state: {
+            name: '',
+            id: null,
+        },
+        city: {
+            name: '',
+            id: null,
+        },
         password: ''
 
     })
@@ -32,6 +37,8 @@ function SignUpPage() {
         name: false,
         email: false,
         password: false,
+        state: false,
+        city: false,
     })
     const time = new Date();
     time.setSeconds(time.getSeconds() + 120);
@@ -76,8 +83,37 @@ function SignUpPage() {
         } else if (step === 1) {
             setStep(2)
 
-        } else {
-            history.push('/')
+        } else if (step === 2) {
+            if (values.name === '') {
+                setErrors({...errors, name: true})
+                setTimeout(
+                    () => setErrors({...errors, name: false})
+                    , 5000)
+            } else if (!values.email.includes('@')) {
+                setErrors({...errors, email: true})
+                setTimeout(
+                    () => setErrors({...errors, email: false})
+                    , 5000)
+
+            } else if (values.state.name === ''){
+                setErrors({...errors, state: true})
+                setTimeout(
+                    () => setErrors({...errors, state: false})
+                    , 5000)
+            } else if(values.city.name === ''){
+                setErrors({...errors, city: true})
+                setTimeout(
+                    () => setErrors({...errors, city: false})
+                    , 5000)
+            } else if (values.password.length < 6) {
+                setErrors({...errors, password: true})
+                setTimeout(
+                    () => setErrors({...errors, password: false})
+                    , 5000)
+            }else{
+                history.push('/')
+            }
+
         }
     }
 

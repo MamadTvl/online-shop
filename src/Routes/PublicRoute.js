@@ -4,7 +4,6 @@ import {useAuth} from "../utills/Auth";
 
 function PublicRoute(props) {
     const auth = useAuth()
-    console.log(auth)
     document.getElementById('root').hidden = auth.loading;
     if (auth.loading)
         return null

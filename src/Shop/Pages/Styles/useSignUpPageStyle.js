@@ -30,7 +30,12 @@ export const useSignUpPageStyle = makeStyles((theme) => ({
     input: {
         fontFamily: 'Shabnam'
     },
-
+    menu: {
+        fontFamily: 'Shabnam',
+    },
+    helperText: {
+        fontFamily: 'Shabnam'
+    },
     signUpButton: {
         height: 40,
         backgroundColor: '#F16522',

@@ -52,22 +52,22 @@ function App() {
                                 <ForgetPassPage/>
                             </PublicRoute>
 
-                            <PrivateRoute path={'/profile'}>
-                                <ProfilePage/>
-                            </PrivateRoute>
+                            <Route path={'/profile'}>
+                                <PrivateRoute path={'/profile'}>
+                                    <ProfilePage/>
+                                </PrivateRoute>
+                                <PrivateRoute path={'/profile/personal-info'}>
+                                    <UserInfoPage/>
+                                </PrivateRoute>
 
-                            <PrivateRoute path={'/profile/personal-info'}>
-                                <UserInfoPage/>
-                            </PrivateRoute>
+                                <PrivateRoute path={'/profile/addresses'}>
+                                    <AddressesPage/>
+                                </PrivateRoute>
 
-                            <PrivateRoute path={'/profile/addresses'}>
-                                <AddressesPage/>
-                            </PrivateRoute>
-
-                            <PrivateRoute path={'/profile/cart'}>
-                                <CartPage/>
-                            </PrivateRoute>
-
+                                <PrivateRoute path={'/profile/cart'}>
+                                    <CartPage/>
+                                </PrivateRoute>
+                            </Route>
                             <Redirect to={'/'}/>
                         </Switch>
                     </ShopLayout>

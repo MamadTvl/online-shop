@@ -15,7 +15,6 @@ export function useProvideAuth() {
 
 export default function ProvideAuth({children}) {
     const auth = useProvideAuth();
-    console.log(auth)
     return (
         <authContext.Provider value={auth}>
             {children}
