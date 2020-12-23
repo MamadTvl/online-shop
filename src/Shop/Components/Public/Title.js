@@ -33,7 +33,7 @@ const useStyle = makeStyles((theme) => ({
         },
     },
 
-}))
+}), {index: 1})
 
 
 function Title(props) {

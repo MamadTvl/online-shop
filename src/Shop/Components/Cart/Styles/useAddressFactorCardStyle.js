@@ -36,4 +36,4 @@ export const useAddressFactorCardStyle = makeStyles((theme) => ({
         color: '#545454',
     },
 
-}));
+}), {index: 1});

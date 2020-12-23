@@ -50,4 +50,4 @@ export const useProductSliderStyles = makeStyles((theme) => ({
         padding: 20,
     },
 
-}));
+}), {index: 1});

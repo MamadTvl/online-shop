@@ -40,4 +40,4 @@ export const useOrderFactorCardStyle = makeStyles((theme) => ({
         color: '#434343',
         opacity: 0.68,
     },
-}));
+}), {index: 1});

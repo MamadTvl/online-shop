@@ -80,4 +80,4 @@ export const useProductCardStyles = makeStyles((theme) => ({
         fontWeight: 'bold'
     }
 
-}));
+}), {index: 1});

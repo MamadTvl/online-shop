@@ -109,7 +109,7 @@ export const useStyles = makeStyles((theme) => ({
         },
 
     }
-}));
+}), {index: 1});
 
 export const StyledSwitch = withStyles({
     switchBase: {

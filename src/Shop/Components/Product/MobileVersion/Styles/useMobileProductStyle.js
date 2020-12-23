@@ -241,4 +241,4 @@ export const useMobileProductStyle = makeStyles((theme) => ({
         padding: 24,
         height: '90%'
     }
-}));
+}), {index: 1});

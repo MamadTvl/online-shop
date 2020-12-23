@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
         direction: "rtl",
         textAlign: "right"
     },
-}))
+}), {index: 1})
 
 
 function ListItemLink(props) {

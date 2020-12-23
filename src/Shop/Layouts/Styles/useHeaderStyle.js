@@ -207,4 +207,4 @@ export const useHeaderStyle = makeStyles((theme) => ({
             margin: 0,
         }
     }
-}))
+}), {index: 1})

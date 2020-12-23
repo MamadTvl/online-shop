@@ -123,7 +123,7 @@ export const useFilterPriceStyle = makeStyles((theme) => ({
             fontSize: 14,
         },
     }
-}))
+}), {index: 1})
 export default function ThumbComponent(props) {
     return (
         <div {...props}>
@@ -183,7 +183,7 @@ export const useFilterCategoryStyle = makeStyles((theme) => ({
         transform: 'rotate(180deg)',
     },
 
-}))
+}), {index: 1})
 export const CategoryCheckbox = withStyles({
     root: {
         color: '#434343',

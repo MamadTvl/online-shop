@@ -154,4 +154,4 @@ export const useLoginPageStyle = makeStyles((theme) => ({
     }
 
 
-}));
+}), {index: 1});

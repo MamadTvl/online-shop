@@ -136,4 +136,4 @@ export const useCartPageStyle = makeStyles((theme) => ({
     },
 
 
-}));
+}), {index: 1});

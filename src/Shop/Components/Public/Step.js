@@ -11,7 +11,7 @@ const useStyle = makeStyles((theme) => ({
             flexDirection: 'column'
         },
     },
-}))
+}), {index: 1})
 
 function Step(props) {
     const classes = useStyle()

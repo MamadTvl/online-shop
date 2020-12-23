@@ -81,4 +81,4 @@ export const useProfilePageStyle = makeStyles((theme) => ({
         height: '100%'
     }
 
-}));
+}), {index: 1});

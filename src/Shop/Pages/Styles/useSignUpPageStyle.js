@@ -137,4 +137,4 @@ export const useSignUpPageStyle = makeStyles((theme) => ({
     /** ThirdStep **/
 
 
-}));
+}), {index: 1});

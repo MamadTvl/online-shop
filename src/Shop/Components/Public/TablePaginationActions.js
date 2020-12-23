@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(4, 3, 10, 0),
         float: 'left',
     },
-}));
+}), {index: 1});
 
 
 function TablePaginationActions(props) {

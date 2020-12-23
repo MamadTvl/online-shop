@@ -28,4 +28,4 @@ export const useProductPageStyle = makeStyles((theme) => ({
     },
 
 
-}));
+}), {index: 1});

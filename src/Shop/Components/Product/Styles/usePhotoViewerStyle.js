@@ -70,4 +70,4 @@ export const usePhotoViewerStyle = makeStyles((theme) => ({
         borderColor: '#989898',
         borderWidth: 1,
     }
-}));
+}), {index: 1});

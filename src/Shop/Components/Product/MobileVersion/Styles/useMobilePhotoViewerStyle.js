@@ -40,4 +40,4 @@ export const useMobilePhotoViewerStyle = makeStyles((theme) => ({
             backgroundColor: 'white',
         }
     }
-}));
+}), {index: 1});

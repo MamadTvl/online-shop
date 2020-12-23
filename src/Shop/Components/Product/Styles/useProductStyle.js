@@ -201,4 +201,4 @@ export const useProductStyle = makeStyles((theme) => ({
 
     },
 
-}));
+}), {index: 1});

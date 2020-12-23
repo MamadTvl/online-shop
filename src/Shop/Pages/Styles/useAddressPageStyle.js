@@ -27,4 +27,4 @@ export const useAddressPageStyle = makeStyles((theme) => ({
             opacity: '70%'
         },
     }
-}));
+}), {index: 1});

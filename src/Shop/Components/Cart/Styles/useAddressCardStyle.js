@@ -46,4 +46,4 @@ export const useAddressCardStyle = makeStyles((theme) => ({
         color: '#545454',
     },
 
-}));
+}), {index: 1});

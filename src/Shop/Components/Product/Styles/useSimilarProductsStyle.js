@@ -40,4 +40,4 @@ export const useSimilarProductsStyle = makeStyles((theme) => ({
 
     }
 
-}));
+}), {index: 1});

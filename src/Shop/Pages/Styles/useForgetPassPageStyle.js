@@ -60,4 +60,4 @@ export const useForgetPassStyle = makeStyles((theme) => ({
         color: '#545454',
         marginBottom: 12,
     },
-}));
+}), {index: 1});

@@ -31,4 +31,4 @@ export const useFactorCardStyle = makeStyles((theme) => ({
             width: '100%',
         }
     }
-}));
+}), {index: 1});

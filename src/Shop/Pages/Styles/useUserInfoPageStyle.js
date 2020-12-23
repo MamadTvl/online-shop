@@ -45,4 +45,4 @@ export const useUserInfoPageStyle = makeStyles((theme) => ({
         },
 
     },
-}));
+}), {index: 1});

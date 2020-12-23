@@ -100,4 +100,4 @@ export const useProductDetailStyle = makeStyles((theme) => ({
         whiteSpace: 'pre-wrap',
         lineHeight: '32px'
     },
-}));
+}), {index: 1});

@@ -16,4 +16,4 @@ export const StyledSearchField = withStyles({
         }
     }
     ,
-})(TextField);
+}, {index: 1})(TextField);

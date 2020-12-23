@@ -186,4 +186,4 @@ export const useOrderCardStyle = makeStyles((theme) => ({
         marginTop: 8,
     },
 
-}));
+}), {index: 1});
