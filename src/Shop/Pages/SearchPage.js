@@ -26,7 +26,7 @@ function SearchPage({location}) {
     }
     const numPages = parseInt((searchStates.products.length / 10).toString()) + 1
     const [searchItems, setSearchItems] = useState({
-        s: '',
+        search_text: '',
     })
     useEffect(() => {
         if (!loading && search.current !== undefined) {
@@ -51,7 +51,7 @@ function SearchPage({location}) {
     }, [loading])
     useEffect(() => {
         const params = new URLSearchParams(location.search)
-        const s = params.get('s') ? `"${params.get('s')}"` : ''
+        const search_text = params.get('search_text') ? `"${params.get('search_text')}"` : ''
 
         for (let i = 0; i < searchStates.categories.length; i++) {
             if (params.get(`category_list[${i}]`)) {
@@ -62,14 +62,14 @@ function SearchPage({location}) {
                 })
             }
         }
-        setSearchItems({s: s})
+        setSearchItems({search_text: search_text})
     }, [location])
 
     useEffect(() => {
         const params = new URLSearchParams(location.search)
         let newLocation = ''
-        if (params.get('s')) {
-            newLocation = `s=${params.get('s')}`
+        if (params.get('search_text')) {
+            newLocation = `search_text=${params.get('search_text')}`
         }
         for (let i = 0; i < searchStates.categories.length; i++) {
             if (searchStates.categories[i].checked) {
@@ -88,7 +88,7 @@ function SearchPage({location}) {
                     </ItemLink>
                     <Typography className={classes.breadcrumb}>جستجو میان محصولات</Typography>
                 </Breadcrumbs>
-                <Title title={`لیست محصولات ${searchItems.s}`}/>
+                <Title title={`لیست محصولات ${searchItems.search_text}`}/>
 
                 <Grid xs={12} className={classes.gridContainer} container direction={"row"}>
                     <Grid container sm={3} className={classes.filterContainer} direction={"row"}>

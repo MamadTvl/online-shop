@@ -31,13 +31,13 @@ function Header(props) {
         event.preventDefault()
         if (searchInput !== '') {
             let tempLoc = location.search === '' ? '?' : location.search
-            if (tempLoc.includes('?s=')) {
-                tempLoc = tempLoc.replace(`${params.get('s')}`, searchInput)
+            if (tempLoc.includes('?search_text=')) {
+                tempLoc = tempLoc.replace(`${params.get('search_text')}`, searchInput)
             } else {
                 if (tempLoc.includes('category_list')) {
                     tempLoc += '&'
                 }
-                tempLoc += `s=${searchInput}`
+                tempLoc += `search_text=${searchInput}`
             }
             history.push(`/search${tempLoc}`);
             setSearchInput('')
