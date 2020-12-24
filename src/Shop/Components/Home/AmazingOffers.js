@@ -48,7 +48,7 @@ function AmazingOffers(props) {
             try {
                 const slides = document.getElementsByClassName('amazing-slider-slick')[0]
                     .children[1].children[0].children
-                for (let i = 0; i < slides.length; i++) {
+                for (let i = 0; i < slides.length && size.width > 400; i++) {
                     slides[i].style.padding = '0 20px'
                 }
                 const slideContainer = document.getElementsByClassName('amazing-slider-slick')[0]

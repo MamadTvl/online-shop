@@ -71,6 +71,7 @@ export const useHeaderStyle = makeStyles((theme) => ({
     menuLabel: {
         fontFamily: 'Shabnam',
         fontSize: 14,
+        justifyContent: 'center',
         [theme.breakpoints.up('sm')]: {
             minWidth: 200,
         }
@@ -102,7 +103,7 @@ export const useHeaderStyle = makeStyles((theme) => ({
         position: 'sticky',
         display: 'flex',
         width: '100%',
-        alignItems: 'center',
+        alignItems: 'right',
         background: '#FFFFFF',
         padding: theme.spacing(1),
         // necessary for content to be below app bar
@@ -118,10 +119,10 @@ export const useHeaderStyle = makeStyles((theme) => ({
     },
     appbarTitle: {
         fontFamily: 'Shabnam',
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: "bold",
         color: '#545454',
-        margin: 'auto',
+        margin: 'auto 16px',
     },
     textField: {
         width: 453,

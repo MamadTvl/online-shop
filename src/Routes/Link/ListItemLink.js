@@ -10,7 +10,9 @@ const useStyles = makeStyles((theme) => ({
         color: '#434343',
         fontFamily: "Shabnam",
         direction: "rtl",
-        textAlign: "right"
+        fontWeight: 500,
+        textAlign: "right",
+        marginRight: 8,
     },
 }), {index: 1})
 
