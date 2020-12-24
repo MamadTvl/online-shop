@@ -95,7 +95,7 @@ function ProductPage(props) {
                                 </ItemLink>
                                 <ItemLink
                                     to={
-                                        `/search?&categoryId[${findCategoryIndex(result.merchandise.category.id)}]=${result.merchandise.category.id}`
+                                        `/search?&category_list[${findCategoryIndex(result.merchandise.category.id)}]=${result.merchandise.category.id}`
                                     }
                                 >
                                     <Typography

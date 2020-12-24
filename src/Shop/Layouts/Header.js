@@ -34,7 +34,7 @@ function Header(props) {
             if (tempLoc.includes('?s=')) {
                 tempLoc = tempLoc.replace(`${params.get('s')}`, searchInput)
             } else {
-                if (tempLoc.includes('categoryId')) {
+                if (tempLoc.includes('category_list')) {
                     tempLoc += '&'
                 }
                 tempLoc += `s=${searchInput}`

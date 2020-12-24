@@ -36,7 +36,7 @@ function SearchPage({location}) {
             })
             const params = new URLSearchParams(search.current)
             for (let i = 0; i < result.length; i++) {
-                const categoryId = params.get(`categoryId[${i}]`)
+                const categoryId = params.get(`category_list[${i}]`)
                 if (categoryId) {
                     dispatch({
                         type: 'selectCategory',
@@ -54,10 +54,10 @@ function SearchPage({location}) {
         const s = params.get('s') ? `"${params.get('s')}"` : ''
 
         for (let i = 0; i < searchStates.categories.length; i++) {
-            if (params.get(`categoryId[${i}]`)) {
+            if (params.get(`category_list[${i}]`)) {
                 dispatch({
                     type: 'selectCategory',
-                    categoryId: parseInt(params.get(`categoryId[${i}]`)),
+                    categoryId: parseInt(params.get(`category_list[${i}]`)),
                     value: true,
                 })
             }
@@ -73,7 +73,7 @@ function SearchPage({location}) {
         }
         for (let i = 0; i < searchStates.categories.length; i++) {
             if (searchStates.categories[i].checked) {
-                newLocation += `&categoryId[${i}]=${searchStates.categories[i].id}`
+                newLocation += `&category_list[${i}]=${searchStates.categories[i].id}`
             }
         }
         history.push(`/search?${newLocation}`)

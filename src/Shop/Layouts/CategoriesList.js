@@ -17,7 +17,7 @@ function CategoriesList() {
                 result.map((category, index) => (
                     <ListItemLink
                         primary={category.name}
-                        to={{pathname: '/search', search: `${search}categoryId[${index}]=${category.id}`}}
+                        to={{pathname: '/search', search: `${search}category_list[${index}]=${category.id}`}}
                         key={category.id}
                     />
                 ))
