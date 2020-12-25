@@ -5,7 +5,6 @@ import ItemLink from "../../Routes/Link/ItemLink";
 import {Backdrop, Card, CardContent, CircularProgress, Grid, Typography} from "@material-ui/core";
 import ProductCard from "../Components/Public/ProuductCard";
 import {StyledSwitch, useStyles} from "../Components/Search/Styles/SearchStyle";
-import TablePaginationActions from "../Components/Public/TablePaginationActions";
 import FilterPrice from "../Components/Search/FilterPrice";
 import FilterCategory from "../Components/Search/FilterCategory";
 import {initialStates, reducer} from "../Components/Search/Reducer";
@@ -13,14 +12,20 @@ import {useHistory} from 'react-router-dom'
 import useCategoriesData from "../FetchData/useCategoriesData";
 import Title from "../Components/Public/Title";
 import useSearchData from "../FetchData/useSearchData";
+import TablePaginationActions from "../Components/Public/TablePaginationActions";
+import useWindowSize from "../../utills/Hooks/useWindowSize";
 
 function SearchPage({location}) {
     const search = useRef(location.search)
+    const size = useWindowSize()
     const [catsLoading, catsResult] = useCategoriesData(true)
     const classes = useStyles()
     const history = useHistory()
     const [searchStates, dispatch] = useReducer(reducer, initialStates)
     const [page, setPage] = useState(0)
+    const [mobilePage, setMobilePage] = useState(0)
+    const [mobileMaxPage, setMobileMaxPage] = useState(1)
+    const [maxPages, setMaxPages] = useState(1)
     const [change, setChange] = useState(0)
     const [fetch, setFetch] = useState(false)
     const [filterValues, setFilterValues] = useState({
@@ -29,7 +34,7 @@ function SearchPage({location}) {
     })
     const [searchLoading, searchResults] = useSearchData(
         fetch,
-        history.location.search,
+        location.search,
         page,
         searchStates.categories.length,
         filterValues.from,
@@ -39,7 +44,13 @@ function SearchPage({location}) {
     const handleChangePages = (pageNumber) => {
         setPage(pageNumber)
     }
-    const [maxPages, setMaxPages] = useState(1)
+    const handleMobileChangePages = (pageNumber) => {
+        setMobilePage(pageNumber)
+        if(mobilePage % 3 !== 0 || mobilePage === 0){
+            setPage(Math.round(mobilePage/3))
+        }
+    }
+
     const [searchItems, setSearchItems] = useState({
         search_text: '',
     })
@@ -74,6 +85,7 @@ function SearchPage({location}) {
     useEffect(() => {
         if (!searchLoading) {
             setMaxPages(searchResults.max_pages + 1)
+            setMobileMaxPage((searchResults.max_pages + 1)*3)
             dispatch({
                 type: 'setProducts',
                 products: searchResults.products,
@@ -165,25 +177,59 @@ function SearchPage({location}) {
                     </Grid>
 
                     <Grid container className={classes.productsContainer} sm={9} xs={12} direction={"row"}>
+
                         {
-                            searchStates.products
-                                .map((product) => (
-                                    <Grid className={classes.productItem} md={4} sm={6} xs={12} item>
-                                        <ProductCard product={product} className={classes.card}/>
+                            size.width > 600
+                                ? <>
+                                    {
+                                        searchStates.products
+                                            .map((product) => (
+                                                <Grid className={classes.productItem} md={4} sm={6} xs={12} item>
+                                                    <ProductCard product={product} className={classes.card}/>
+                                                </Grid>
+                                            ))
+                                    }
+
+                                    <Grid item xs={12}>
+
+                                        {
+                                            searchStates.products.length !== 0 &&
+                                            <TablePaginationActions
+                                                buttonGroupClass={classes.buttonGroup}
+                                                numPages={maxPages}
+                                                page={page}
+                                                onChange={handleChangePages}
+
+                                            />
+                                        }
+
                                     </Grid>
-                                ))
+                                </>
+                                : <>
+                                    {
+                                        searchStates.products.slice(mobilePage * 5, mobilePage * 5 + 5)
+                                            .map((product) => (
+                                                <Grid className={classes.productItem} md={4} sm={6} xs={12} item>
+                                                    <ProductCard product={product} className={classes.card}/>
+                                                </Grid>
+                                            ))
+                                    }
+
+                                    <Grid item xs={12}>
+
+                                        {
+                                            searchStates.products.length !== 0 &&
+                                            <TablePaginationActions
+                                                buttonGroupClass={classes.buttonGroup}
+                                                numPages={mobileMaxPage}
+                                                page={mobilePage}
+                                                onChange={handleMobileChangePages}
+                                            />
+                                        }
+
+                                    </Grid>
+                                </>
                         }
-                        <Grid item xs={12}>
-                            {
-                                searchStates.products.length !== 0 &&
-                                <TablePaginationActions
-                                    buttonGroupClass={classes.buttonGroup}
-                                    numPages={maxPages}
-                                    page={page}
-                                    onChange={handleChangePages}
-                                />
-                            }
-                        </Grid>
 
                     </Grid>
 

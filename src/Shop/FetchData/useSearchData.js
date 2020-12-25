@@ -1,14 +1,17 @@
 import {useEffect, useState} from "react";
 import {useAxios} from "../../utills/Hooks/useAxios";
-import {useHistory} from "react-router-dom"
+
 
 function useSearchData(fetch, search, page, catsLength, fromPrice, toPrice, hasDiscount) {
-
     const changeUrl = (search) => {
         let newSearch = search
+        if(search === ''){
+            newSearch += '?'
+        }
         for (let i = 0; i < catsLength; i++) {
             newSearch = newSearch.replace(`[${i}]`, '')
         }
+
         newSearch += `&lb_price=${fromPrice}&ub_price=${toPrice}&has_discount=${hasDiscount}&page=${page}`
         return newSearch
     }
@@ -20,7 +23,6 @@ function useSearchData(fetch, search, page, catsLength, fromPrice, toPrice, hasD
     const [, getProducts] = useAxios({
         url: `/merchandise/get_all${changeUrl(search)}`,
     })
-    const history = useHistory()
 
     useEffect(() => {
         async function getResult() {
