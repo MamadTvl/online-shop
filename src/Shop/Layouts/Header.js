@@ -31,7 +31,7 @@ function Header(props) {
         event.preventDefault()
         if (searchInput !== '') {
             let tempLoc = location.search === '' ? '?' : location.search
-            if (tempLoc.includes('?search_text=')) {
+            if (tempLoc.includes('search_text=')) {
                 tempLoc = tempLoc.replace(`${params.get('search_text')}`, searchInput)
             } else {
                 if (tempLoc.includes('category_list')) {

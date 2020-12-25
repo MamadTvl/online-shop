@@ -2,7 +2,7 @@ import React, {useEffect, useReducer, useRef, useState} from "react";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import ItemLink from "../../Routes/Link/ItemLink";
-import {Card, CardContent, Grid, Typography} from "@material-ui/core";
+import {Backdrop, Card, CardContent, CircularProgress, Grid, Typography} from "@material-ui/core";
 import ProductCard from "../Components/Public/ProuductCard";
 import {StyledSwitch, useStyles} from "../Components/Search/Styles/SearchStyle";
 import TablePaginationActions from "../Components/Public/TablePaginationActions";
@@ -12,30 +12,49 @@ import {initialStates, reducer} from "../Components/Search/Reducer";
 import {useHistory} from 'react-router-dom'
 import useCategoriesData from "../FetchData/useCategoriesData";
 import Title from "../Components/Public/Title";
+import useSearchData from "../FetchData/useSearchData";
 
 function SearchPage({location}) {
     const search = useRef(location.search)
-    const [loading, result] = useCategoriesData(true)
+    const [catsLoading, catsResult] = useCategoriesData(true)
     const classes = useStyles()
     const history = useHistory()
     const [searchStates, dispatch] = useReducer(reducer, initialStates)
     const [page, setPage] = useState(0)
     const [change, setChange] = useState(0)
+    const [fetch, setFetch] = useState(false)
+    const [filterValues, setFilterValues] = useState({
+        from: 0,
+        to: 1500000,
+    })
+    const [searchLoading, searchResults] = useSearchData(
+        fetch,
+        history.location.search,
+        page,
+        searchStates.categories.length,
+        filterValues.from,
+        filterValues.to,
+        searchStates.hasDiscount
+    )
     const handleChangePages = (pageNumber) => {
         setPage(pageNumber)
     }
-    const numPages = parseInt((searchStates.products.length / 10).toString()) + 1
+    const [maxPages, setMaxPages] = useState(1)
     const [searchItems, setSearchItems] = useState({
         search_text: '',
     })
+    const filterPrice = () => {
+        setFilterValues(searchStates.filterValues)
+    }
+
     useEffect(() => {
-        if (!loading && search.current !== undefined) {
+        if (!catsLoading && search.current !== undefined) {
             dispatch({
                 type: 'setCategories',
-                categories: result,
+                categories: catsResult,
             })
             const params = new URLSearchParams(search.current)
-            for (let i = 0; i < result.length; i++) {
+            for (let i = 0; i < catsResult.length; i++) {
                 const categoryId = params.get(`category_list[${i}]`)
                 if (categoryId) {
                     dispatch({
@@ -48,7 +67,21 @@ function SearchPage({location}) {
             }
             search.current = undefined
         }
-    }, [loading])
+        setFetch(true)
+    }, [catsLoading, catsResult])
+
+
+    useEffect(() => {
+        if (!searchLoading) {
+            setMaxPages(searchResults.max_pages + 1)
+            dispatch({
+                type: 'setProducts',
+                products: searchResults.products,
+            })
+        }
+
+    }, [searchLoading, searchResults])
+
     useEffect(() => {
         const params = new URLSearchParams(location.search)
         const search_text = params.get('search_text') ? `"${params.get('search_text')}"` : ''
@@ -81,6 +114,9 @@ function SearchPage({location}) {
 
     return (
         <>
+            <Backdrop className={classes.backdrop} open={searchLoading || catsLoading}>
+                <CircularProgress size={70} color="inherit"/>
+            </Backdrop>
             <div className={classes.searchContainer}>
                 <Breadcrumbs className={classes.breadcrumbContainer} separator={<NavigateBeforeIcon fontSize="small"/>}>
                     <ItemLink to={'/'}>
@@ -98,6 +134,7 @@ function SearchPage({location}) {
                                 <FilterPrice
                                     filterValues={searchStates.filterValues}
                                     dispatch={dispatch}
+                                    filterPrice={filterPrice}
                                 />
                             </div>
                         </Grid>
@@ -129,7 +166,7 @@ function SearchPage({location}) {
 
                     <Grid container className={classes.productsContainer} sm={9} xs={12} direction={"row"}>
                         {
-                            searchStates.products.slice(page * 15, page * 15 + 15)
+                            searchStates.products
                                 .map((product) => (
                                     <Grid className={classes.productItem} md={4} sm={6} xs={12} item>
                                         <ProductCard product={product} className={classes.card}/>
@@ -137,8 +174,15 @@ function SearchPage({location}) {
                                 ))
                         }
                         <Grid item xs={12}>
-                            <TablePaginationActions buttonGroupClass={classes.buttonGroup} numPages={numPages}
-                                                    page={page} onChange={handleChangePages}/>
+                            {
+                                searchStates.products.length !== 0 &&
+                                <TablePaginationActions
+                                    buttonGroupClass={classes.buttonGroup}
+                                    numPages={maxPages}
+                                    page={page}
+                                    onChange={handleChangePages}
+                                />
+                            }
                         </Grid>
 
                     </Grid>

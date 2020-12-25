@@ -1,12 +1,12 @@
 import React from "react";
-import {Card, CardActions, CardHeader, Typography} from "@material-ui/core";
+import {Button, Card, CardActions, CardHeader, Typography} from "@material-ui/core";
 import ThumbComponent, {FilterStyles, useFilterPriceStyle} from "./Styles/FilterStyles";
 import {separateDigit} from '../../../utills/ToFaDigit'
 import * as PropTypes from "prop-types";
 
 function FilterPrice(props) {
     const classes = useFilterPriceStyle()
-    const {filterValues, dispatch} = props
+    const {filterValues, dispatch, filterPrice} = props
 
     return (
         <Card className={classes.card}>
@@ -44,6 +44,14 @@ function FilterPrice(props) {
 
                     </div>
                 </div>
+                <Button
+                    variant={'contained'}
+                    fullWidth
+                    className={classes.filterButton}
+                    onClick={filterPrice}
+                >
+                    اعمال فیلتر
+                </Button>
             </CardActions>
         </Card>
     )
@@ -54,4 +62,5 @@ export default FilterPrice
 FilterPrice.propTypes = {
     filterValues: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
+    filterPrice: PropTypes.func.isRequired,
 }

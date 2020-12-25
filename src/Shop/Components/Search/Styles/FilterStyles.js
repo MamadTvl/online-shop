@@ -54,7 +54,7 @@ export const useFilterPriceStyle = makeStyles((theme) => ({
             padding: theme.spacing(1),
         },
         [theme.breakpoints.down('xs')]: {
-            height: 120,
+            height: 232,
         },
 
     },
@@ -122,7 +122,20 @@ export const useFilterPriceStyle = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             fontSize: 14,
         },
-    }
+    },
+    filterButton: {
+        height: 48,
+        backgroundColor: '#F16522',
+        color: 'white',
+        fontSize: '16px',
+        fontFamily: 'Shabnam',
+        fontWeight: "bold",
+        marginTop: 8,
+        '&:hover': {
+            backgroundColor: '#F16522',
+            opacity: '70%'
+        },
+    },
 }), {index: 1})
 export default function ThumbComponent(props) {
     return (

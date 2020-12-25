@@ -108,6 +108,10 @@ export const useStyles = makeStyles((theme) => ({
             fontSize: 14
         },
 
+    },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color:'#F16522'
     }
 }), {index: 1});
 
