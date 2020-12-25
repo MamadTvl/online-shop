@@ -55,6 +55,7 @@ export const useStyles = makeStyles((theme) => ({
         alignSelf: "center",
         height: 420,
         width: '100%',
+        borderRadius: 7,
         [theme.breakpoints.between(0, 400)]: {
             height: 265,
         },

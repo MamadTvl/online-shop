@@ -51,7 +51,24 @@ const addresses = [
 ]
 
 const info = createInformationData('آرش دامن‌افشان', '۰۹۳۴۴۴۳۲۵۳', 'Arash@mail.com', 'تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴')
-
+// address: null
+// basket_code: "e91c7fd5"
+// boxes_list: [56, 57, 58]
+// city: null
+// costumer_name: null
+// create_date: 1608923979.816435
+// details: null
+// discount_code: null
+// free_transmission: false
+// gift: false
+// id: 3
+// merchandise_number: 14
+// phone_number: null
+// post_code: null
+// state: null
+// total_basket_price: 8374500
+// total_basket_price_with_discount: 8374500
+// user: 2
 function CartPage() {
     const [fetch, setFetch] = useState(true)
     const [loading, result] = usePostCart(fetch)
@@ -60,6 +77,9 @@ function CartPage() {
     const [step, setStep] = useState(0)
     const [addressStep, setAddressStep] = useState(0)
     const [selects, setSelects] = useState({})
+    const [basketDetails, setBasketDetails] = useState({
+
+    })
     const [values, setValues] = useState({
         name: '',
         mobileNumber: '',

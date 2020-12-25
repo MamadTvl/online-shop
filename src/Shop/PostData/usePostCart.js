@@ -4,7 +4,7 @@ import {useAxios} from "../../utills/Hooks/useAxios";
 
 function usePostCart(fetch) {
     const [result, setResult] = useState()
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [, create_box] = useAxios({
         url: '/basket/create_box',
         method: 'POST',
@@ -38,14 +38,14 @@ function usePostCart(fetch) {
                     for (let i = 0; i < response.length; i++) {
                         boxes.push(response[i].data.data.id)
                     }
-                    // const basketResponse = await create_box({
-                    //     data: {
-                    //         "boxes_list": boxes,
-                    //     }
-                    // })
+                    const basketResponse = await create_basket({
+                        data: {
+                            "boxes_list": boxes,
+                        }
+                    })
                     setResult([
                         response[response.length - 1].data.data.total_box_price
-                        // , basketResponse
+                        , basketResponse
                     ])
                     setLoading(false)
                 }

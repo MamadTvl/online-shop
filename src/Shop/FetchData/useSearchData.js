@@ -18,6 +18,7 @@ function useSearchData(fetch, search, page, catsLength, fromPrice, toPrice, hasD
     const [result, setResult] = useState({
         products: [],
         max_pages: 0,
+        merchandise_objs_number: 0,
     })
     const [loading, setLoading] = useState(true)
     const [, getProducts] = useAxios({
@@ -32,6 +33,7 @@ function useSearchData(fetch, search, page, catsLength, fromPrice, toPrice, hasD
                 setResult({
                     products: response.data.data.merchandise,
                     max_pages: response.data.data.max_pages,
+                    merchandise_objs_number: response.data.data.merchandise_objs_number,
                 })
                 setLoading(false)
             } catch (err) {

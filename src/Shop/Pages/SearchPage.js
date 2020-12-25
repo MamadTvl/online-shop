@@ -47,7 +47,7 @@ function SearchPage({location}) {
     const handleMobileChangePages = (pageNumber) => {
         setMobilePage(pageNumber)
         if(mobilePage % 3 !== 0 || mobilePage === 0){
-            setPage(Math.round(mobilePage/3))
+            setPage(Math.floor(mobilePage/3))
         }
     }
 
@@ -85,7 +85,7 @@ function SearchPage({location}) {
     useEffect(() => {
         if (!searchLoading) {
             setMaxPages(searchResults.max_pages + 1)
-            setMobileMaxPage((searchResults.max_pages + 1)*3)
+            setMobileMaxPage(Math.floor(searchResults.merchandise_objs_number/5) + 1)
             dispatch({
                 type: 'setProducts',
                 products: searchResults.products,

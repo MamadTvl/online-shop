@@ -17,6 +17,7 @@ export const useProductCardStyles = makeStyles((theme) => ({
         alignSelf: "center",
         height: 420,
         width: '100%',
+        borderRadius: 7,
     },
     cardContent: {
         display: 'flex',

@@ -8,10 +8,8 @@ import {toFaDigit} from "../../utills/ToFaDigit";
 import useStateData from "../FetchData/useStateData";
 import useCityData from "../FetchData/useCityData";
 import usePathUserInfo from "../PostData/usePathUserInfo";
-import {useHistory} from 'react-router-dom'
 
 function UserInfoPage() {
-    const history = useHistory()
     const [loading, result] = useUserData(true)
     const classes = useUserInfoPageStyle()
     const size = useWindowSize()
@@ -89,7 +87,7 @@ function UserInfoPage() {
     }, [loading, result])
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (!values.email.includes('@')){
+        if (!values.email.includes('@')) {
             setErrors({
                 ...errors,
                 email: true,
@@ -97,7 +95,7 @@ function UserInfoPage() {
             setTimeout(
                 () => setErrors({...errors, email: false})
                 , 5000)
-        }else {
+        } else {
             setFetchSubmit(true)
         }
     }

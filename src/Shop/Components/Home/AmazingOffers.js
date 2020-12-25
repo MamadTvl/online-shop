@@ -42,7 +42,7 @@ function AmazingOffers(props) {
             }
 
         }
-    }, [])
+    }, [products.length])
     useEffect(() => {
         if (products.length !== 0) {
             try {
@@ -56,7 +56,7 @@ function AmazingOffers(props) {
             } catch (e) {
             }
         }
-    }, [])
+    }, [products.length, size.width])
 
     useEffect(() => {
         if (size.width < 900 && size.width >= 800) {
@@ -126,6 +126,7 @@ function AmazingOffers(props) {
                 md={9}
                 sm={setSmGrid()[1]}
                 xs={size.width > 400 ? 8 : 7}
+                style={{paddingTop: 0, paddingBottom: 0}}
             >
                 {
                     size.width > 900 ?
