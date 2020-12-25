@@ -24,7 +24,7 @@ function useCityData(fetch, id) {
         if (fetch)
             getResult().then()
 
-    }, [fetch])
+    }, [fetch, id])
 
     return [loading, result]
 }
