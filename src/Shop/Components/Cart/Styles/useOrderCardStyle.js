@@ -99,6 +99,9 @@ export const useOrderCardStyle = makeStyles((theme) => ({
         fontFamily: 'Shabnam',
         fontSize: 16,
     },
+    menu: {
+        fontFamily: 'Shabnam',
+    },
     buttonGroup: {
         display: 'flex',
         borderRadius: 6,

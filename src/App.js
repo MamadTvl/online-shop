@@ -65,7 +65,7 @@ function App() {
                                 </PrivateRoute>
 
                                 <PrivateRoute path={'/profile/cart'}>
-                                    <CartPage/>
+                                    <CartPage setBasketChange={setBasketChange}/>
                                 </PrivateRoute>
                             </Route>
                             <Redirect to={'/'}/>

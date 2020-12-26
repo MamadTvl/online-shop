@@ -61,7 +61,8 @@ export const useCartPageStyle = makeStyles((theme) => ({
         fontSize: 10,
         color: '#545454',
         opacity: 0.6,
-        margin: 'auto'
+        margin: 'auto',
+        marginRight: 4,
     },
 
     save: {
@@ -105,6 +106,10 @@ export const useCartPageStyle = makeStyles((theme) => ({
         fontSize: '16px',
         fontFamily: 'Shabnam',
         fontWeight: "bold",
+    },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color:'#F16522'
     },
 
     // steps style

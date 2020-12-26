@@ -12,38 +12,15 @@ import {
     Typography
 } from "@material-ui/core";
 import Title from "../Components/Public/Title";
-import useWindowSize from "../../utills/Hooks/useWindowSize";
 import Step from "../Components/Public/Step";
 import OrderCard from "../Components/Cart/OrderCard";
-import image from '../../img/photoViewer.png'
 import AddressCard from "../Components/Cart/AddressCard";
 import AddressForm from "../Components/Public/AddressForm";
 import FactorCard from "../Components/Cart/FactorCard";
 import usePostCart from "../PostData/usePostCart";
-import {separateDigit, toFaDigit} from "../../utills/ToFaDigit";
+import {separateDigit} from "../../utills/ToFaDigit";
+import PropTypes from "prop-types"
 
-const product = {
-    title: 'آستین کوتاه باله دار خاکستری',
-    detail: 'تیشرت دخترانه جنس: یکرو ویسکوز، اسلپ\n' +
-        'جنس: ویسکوز\n' +
-        'سبک: روزمره\n' +
-        'نوع: تیشرت\n' +
-        'یقه: یقه گرد\n' +
-        'نوع آستین: آستین کوتاه\n' +
-        'طرح: ساده\n' +
-        'رنگ: خاکستر',
-    description: '',
-    sizes: ['لارج', "ایکس لارج", "دو ایکس لارج", "اسمال"],
-    colors: ['زرد', "قرمز", "سبز", "آبی"],
-    count: 0,
-    hasDiscount: true,
-    discount: 0.15,
-    price: 2459000,
-    priceWithDiscount: 2659000,
-    image: image,
-
-}
-const products = [product, product]
 
 function createAddressData(state, city, code, address) {
     return {state, city, code, address}
@@ -62,34 +39,36 @@ const addresses = [
 ]
 
 const info = createInformationData('آرش دامن‌افشان', '۰۹۳۴۴۴۳۲۵۳', 'Arash@mail.com', 'تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴')
-// address: null
-// basket_code: "e91c7fd5"
-// boxes_list: [56, 57, 58]
-// city: null
-// costumer_name: null
-// create_date: 1608923979.816435
-// details: null
-// discount_code: null
-// free_transmission: false
-// gift: false
-// id: 3
-// merchandise_number: 14
-// phone_number: null
-// post_code: null
-// state: null
-// total_basket_price: 8374500
-// total_basket_price_with_discount: 8374500
-// user: 2
-function CartPage() {
-    const [postCardLoading, postCardResult] = usePostCart(true)
+
+function CartPage(props) {
+    const [fetchPost, setFetchPost] = useState(true)
+    const {setBasketChange} = props
+    const [postCardLoading, postCardResult] = usePostCart(fetchPost)
     const classes = useCartPageStyle()
-    const size = useWindowSize()
     const [step, setStep] = useState(0)
     const [addressStep, setAddressStep] = useState(0)
-    const [selects, setSelects] = useState({})
     const [basketDetails, setBasketDetails] = useState({
         boxes: [],
-        basket: {},
+        basket: {
+            address: null,
+            basket_code: "",
+            boxes_list: [],
+            city: null,
+            costumer_name: null,
+            create_date: 0,
+            details: null,
+            discount_code: null,
+            free_transmission: false,
+            gift: false,
+            id: 0,
+            merchandise_number: 0,
+            phone_number: null,
+            post_code: null,
+            state: null,
+            total_basket_price: 0,
+            total_basket_price_with_discount: 0,
+            user: 0,
+        },
     })
     const [addressValues, setAddressValues] = useState({
         name: '',
@@ -122,9 +101,62 @@ function CartPage() {
         }
 
     }
-    const handleDelete = () => {
 
+    const findIndexOfCart = (prvBox) => {
+        const localStorageCart = JSON.parse(localStorage.getItem('cart'))
+
+        for (let i = 0; i < localStorageCart.length; i++) {
+            if (localStorageCart[i].id === prvBox.id
+                && localStorageCart[i].color === prvBox.color
+                && localStorageCart[i].size === prvBox.size
+                && localStorageCart[i].count === prvBox.count) {
+                return i
+            }
+        }
+        return -1
     }
+
+    const handleDelete = (prvBox) => {
+        let cart = []
+        const localStorageCart = JSON.parse(localStorage.getItem('cart'))
+        for (let i = 0; i < localStorageCart.length; i++) {
+            cart.push(localStorageCart[i])
+        }
+        console.log(cart)
+        cart = cart.filter(item => item !== cart[findIndexOfCart(prvBox)])
+        console.log(cart)
+        localStorage.setItem('cart', JSON.stringify(cart))
+        setBasketChange(prvState => prvState + 1)
+        setFetchPost(true)
+    }
+
+    const isDuplicate = (newBox) => {
+        const localStorageCart = JSON.parse(localStorage.getItem('cart'))
+        for (let i = 0; i < localStorageCart.length; i++) {
+            if (localStorageCart[i].id === newBox.id
+                && localStorageCart[i].color === newBox.color
+                && localStorageCart[i].size === newBox.size){
+                return true
+            }
+
+        }
+        return false
+    }
+
+    const onChangeSelects = (prvBox, newBox) => {
+        let cart = []
+        // if (!isDuplicate(newBox)) { //todo: duplicate bug
+            const localStorageCart = JSON.parse(localStorage.getItem('cart'))
+            localStorageCart[findIndexOfCart(prvBox)] = newBox
+            for (let i = 0; i < localStorageCart.length; i++) {
+                cart.push(localStorageCart[i])
+            }
+            localStorage.setItem('cart', JSON.stringify(cart))
+            setBasketChange(prvState => prvState + 1)
+            setFetchPost(true)
+        // }
+    }
+
     const handleClickContinue = (event) => {
         if (step === 0) {
             setStep(1)
@@ -133,14 +165,18 @@ function CartPage() {
         }
         window.scrollTo(0, 0)
     }
+
+
     useEffect(() => {
-        setBasketDetails({
-            boxes: postCardResult.boxes,
-            basket: postCardResult.basket,
-        })
+        if (!postCardLoading) {
+            setBasketDetails({
+                boxes: postCardResult.boxes,
+                basket: postCardResult.basket,
+            })
+            setFetchPost(false)
+        }
     }, [postCardLoading, postCardResult])
-    if (postCardLoading)
-        return null
+
     return (
         <>
             <Backdrop className={classes.backdrop} open={postCardLoading}>
@@ -152,14 +188,16 @@ function CartPage() {
                     <Grid item md={9} xs={12}>
                         <Step stepClass={classes.orderCardsStep} index={0} step={step}>
                             {
-                                products.map((product) => (
+                                basketDetails.boxes.map((box) => (
                                     <OrderCard
-                                        selects={selects}
-                                        setSelects={setSelects}
-                                        product={product}
+                                        box={box}
+                                        onChangeSelects={onChangeSelects}
+                                        product={box.merchandise_obj}
                                         deleteHandler={handleDelete}
                                     />
+
                                 ))
+
                             }
                         </Step>
                         <Step stepClass={classes.orderCardsStep} index={1} step={step}>
@@ -212,7 +250,7 @@ function CartPage() {
                         </Step>
                         <Step index={2} step={step}>
                             <Card className={classes.card}>
-                                <FactorCard products={products} info={info}/>
+                                <FactorCard products={{}} info={info}/>
                             </Card>
 
                         </Step>
@@ -254,14 +292,14 @@ function CartPage() {
                                 <Typography style={{marginBottom: 16}}
                                             className={classes.discountTitle}>توضیحات</Typography>
                                 <Typography
-                                    className={classes.descriptionLabel}>{basketDetails.basket.details}</Typography>
+                                    className={classes.descriptionLabel}>{basketDetails.basket.details && basketDetails.basket.details}</Typography>
                             </Card>
                         </Step>
                         <Card className={classes.card}>
                             <div style={{marginBottom: 8,}} className={classes.detailContainer}>
                                 <Typography className={classes.detailTitle}>تعداد کالا</Typography>
                                 <Typography
-                                    className={classes.number}>{toFaDigit(basketDetails.basket.merchandise_number.toString())}</Typography>
+                                    className={classes.number}>{separateDigit(basketDetails.basket.merchandise_number)}</Typography>
                             </div>
                             <Divider/>
                             <div className={classes.detail}>
@@ -288,10 +326,10 @@ function CartPage() {
                                     <Typography className={classes.detailTitle}>هزینه ارسال</Typography>
                                     <div className={classes.priceContainer}>
                                         <Typography
-                                            style={{opacity: 0.6}}
+                                            style={{opacity: 0.6, fontWeight: 'normal', fontSize: 16}}
                                             className={classes.number}
                                         >
-                                            {basketDetails.basket.free_transmission ? '۰' : 'به عهده مشتری'}
+                                            {basketDetails.basket.free_transmission ? 'رایگان' : 'به عهده مشتری'}
                                         </Typography>
                                     </div>
                                 </div>
@@ -338,6 +376,10 @@ function CartPage() {
             </div>
         </>
     )
+}
+
+Card.propTypes = {
+    setBasketChange: PropTypes.func.isRequired,
 }
 
 export default CartPage

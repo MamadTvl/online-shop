@@ -31,6 +31,7 @@ function usePostCart(fetch) {
                             }
                         }))
                     }
+
                     const boxesId = [], boxes = []
                     for (let i = 0; i < response.length; i++) {
                         boxesId.push(response[i].data.data.id)
@@ -48,7 +49,7 @@ function usePostCart(fetch) {
                     setLoading(false)
                 }
             } catch (err) {
-                setLoading(false)
+                setLoading(true)
             }
         }
 

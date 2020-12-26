@@ -1,6 +1,6 @@
 import React from "react";
 import PropType from 'prop-types'
-import {Card, Chip, IconButton, SvgIcon, TextField, Typography} from "@material-ui/core";
+import {Card, Chip, IconButton, MenuItem, SvgIcon, TextField, Typography} from "@material-ui/core";
 import {useOrderCardStyle} from "./Styles/useOrderCardStyle";
 import AddIcon from "@material-ui/icons/Add";
 import {separateDigit} from "../../../utills/ToFaDigit";
@@ -9,12 +9,25 @@ import useWindowSize from "../../../utills/Hooks/useWindowSize";
 
 
 function OrderCard(props) {
-    const {selects, setSelects, product, deleteHandler} = props
+    const {box, onChangeSelects, product, deleteHandler} = props
     const size = useWindowSize()
     const classes = useOrderCardStyle()
+    const getMaxStockNumber = () => {
+        if (product.merchandise_type === 1) {
+            for (let i = 0; i < product.stock_list.length; i++) {
+                if (product.stock_list[i].size === box.size
+                    && product.stock_list[i].color === box.color) {
+                    return product.stock_list[i].stock_number
+                }
+            }
+        } else {
+            return product.stock_number
+        }
+
+    }
     return (
         <Card className={classes.card}>
-            <img className={classes.image} src={product.image} alt={product.title}/>
+            <img className={classes.image} src={product.preview_image} alt={product.title}/>
             <div className={classes.content}>
                 <Typography className={classes.name}>{product.title}</Typography>
                 <div className={classes.downItem}>
@@ -23,10 +36,22 @@ function OrderCard(props) {
                             <TextField
                                 style={{marginLeft: 8, marginBottom: size.width <= 600 ? 8 : 0}}
                                 //size
-                                dir={'ltr'}
                                 select
-                                // value={toFaDigit(values.code)}
-                                // onChange={handleChange('state')}
+                                value={box.size}
+                                onChange={
+                                    (event) => {
+                                        onChangeSelects({
+                                            id: product.id,
+                                            color: box.color,
+                                            size: box.size,
+                                            count: box.count,
+                                        }, {
+                                            id: product.id,
+                                            color: box.color,
+                                            size: event.target.value,
+                                            count: box.count,
+                                        })
+                                    }}
                                 InputProps={{
                                     classes: {
                                         input: classes.input,
@@ -35,13 +60,33 @@ function OrderCard(props) {
                                 }}
                                 fullWidth
                                 variant="outlined"
-                            />
+                            >
+                                {
+                                    product.size_list.map((size, index) => (
+                                        <MenuItem className={classes.menu} key={index} value={size}>
+                                            {size}
+                                        </MenuItem>
+                                    ))
+                                }
+                            </TextField>
                             <TextField
                                 //color
-                                dir={'ltr'}
                                 select
-                                // value={toFaDigit(values.code)}
-                                // onChange={handleChange('state')}
+                                value={box.color}
+                                onChange={
+                                    (event) => {
+                                        onChangeSelects({
+                                            id: product.id,
+                                            color: box.color,
+                                            size: box.size,
+                                            count: box.count,
+                                        }, {
+                                            id: product.id,
+                                            color: event.target.value,
+                                            size: box.size,
+                                            count: box.count,
+                                        })
+                                    }}
                                 InputProps={{
                                     classes: {
                                         input: classes.input,
@@ -50,20 +95,71 @@ function OrderCard(props) {
                                 }}
                                 fullWidth
                                 variant="outlined"
-                            />
+                            >
+                                {
+                                    product.color_list.map((color, index) => (
+                                        <MenuItem className={classes.menu} key={index} value={color}>
+                                            {color}
+                                        </MenuItem>
+                                    ))
+                                }
+                            </TextField>
                         </div>
                         <div className={classes.buttons}>
                             <div className={classes.buttonGroup}>
-                                <IconButton className={classes.addButton}>
+                                <IconButton
+                                    onClick={
+                                        () => {
+                                            box.count !== getMaxStockNumber() &&
+                                            onChangeSelects({
+                                                id: product.id,
+                                                color: box.color,
+                                                size: box.size,
+                                                count: box.count,
+                                            }, {
+                                                id: product.id,
+                                                color: box.color,
+                                                size: box.size,
+                                                count: box.count + 1,
+                                            })
+                                        }
+                                    }
+                                    className={classes.addButton}>
                                     <AddIcon/>
                                 </IconButton>
-                                <Typography className={classes.countLabel}>{separateDigit(product.count)}</Typography>
-                                <IconButton className={classes.removeButton}>
+                                <Typography className={classes.countLabel}>{separateDigit(box.count)}</Typography>
+                                <IconButton
+                                    onClick={
+                                        () => {
+                                            box.count !== 1 && onChangeSelects({
+                                                id: product.id,
+                                                color: box.color,
+                                                size: box.size,
+                                                count: box.count,
+                                            }, {
+                                                id: product.id,
+                                                color: box.color,
+                                                size: box.size,
+                                                count: box.count - 1,
+                                            })
+                                        }
+                                    }
+                                    className={classes.removeButton}
+                                >
                                     <RemoveIcon/>
                                 </IconButton>
                             </div>
                             <div className={classes.deleteButton}>
-                                <IconButton>
+                                <IconButton
+                                    onClick={() => {
+                                        deleteHandler({
+                                            id: product.id,
+                                            color: box.color,
+                                            size: box.size,
+                                            count: box.count,
+                                        })
+                                    }}
+                                >
                                     <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
                                              viewBox="0 0 19.5 21.5">
                                         <g id="trash-2" transform="translate(-2.25 -1.25)">
@@ -88,16 +184,30 @@ function OrderCard(props) {
                         </div>
                     </div>
                     <div className={classes.priceDetailContainer}>
-                        <div className={classes.discountContainer}>
-                            <Chip className={classes.discountChip} label={`%${separateDigit(product.discount * 100)}`}/>
-                            <Typography className={classes.prevPrice}>{separateDigit(product.price)}</Typography>
+                        {
+                            product.has_discount
+                                ? <>
+                                    <div className={classes.discountContainer}>
+                                        <Chip className={classes.discountChip}
+                                              label={`%${separateDigit(product.percent_of_discount * 100)}`}/>
+                                        <Typography
+                                            className={classes.prevPrice}>{separateDigit(product.price)}</Typography>
 
-                        </div>
-                        <div className={classes.priceContainer}>
-                            <Typography className={classes.toman}>تومان</Typography>
-                            <Typography
-                                className={classes.price}>{separateDigit(product.priceWithDiscount)}</Typography>
-                        </div>
+                                    </div>
+                                    <div className={classes.priceContainer}>
+                                        <Typography className={classes.toman}>تومان</Typography>
+                                        <Typography
+                                            className={classes.price}>{separateDigit(product.price_with_discount)}</Typography>
+                                    </div>
+                                </>
+                                : <>
+                                    <div className={classes.priceContainer}>
+                                        <Typography className={classes.toman}>تومان</Typography>
+                                        <Typography
+                                            className={classes.price}>{separateDigit(product.price)}</Typography>
+                                    </div>
+                                </>
+                        }
                     </div>
                 </div>
             </div>
@@ -106,8 +216,8 @@ function OrderCard(props) {
 }
 
 OrderCard.propTypes = {
-    selects: PropType.object.isRequired,
-    setSelects: PropType.func.isRequired,
+    box: PropType.object.isRequired,
+    onChangeSelects: PropType.func.isRequired,
     product: PropType.object.isRequired,
     deleteHandler: PropType.func.isRequired,
 }

@@ -154,9 +154,6 @@ function ProductViewCard(props) {
                         color: selectedColor,
                         size: selectedSize,
                         count: count,
-                        price: product.price,
-                        price_with_discount: product.price_with_discount,
-                        percent_of_discount: product.percent_of_discount,
                     })}
                     variant={'contained'}
                     endIcon={
