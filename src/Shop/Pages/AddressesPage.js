@@ -1,24 +1,61 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import AddressForm from "../Components/Public/AddressForm";
 import {useAddressPageStyle} from "./Styles/useAddressPageStyle";
 import Title from "../Components/Public/Title";
-import {Button} from "@material-ui/core";
+import {Button, CircularProgress} from "@material-ui/core";
 import useWindowSize from "../../utills/Hooks/useWindowSize";
-
+import usePostAddress from "../PostData/usePostAddress";
+import {useLocation, useHistory} from 'react-router-dom'
 
 function AddressPage() {
+    const location = useLocation()
+    const history = useHistory()
     const classes = useAddressPageStyle()
     const size = useWindowSize()
     const [values, setValues] = useState({
         name: '',
         mobileNumber: '',
         email: '',
-        state: '',
-        city: '',
+        state: {
+            name: '',
+            id: null,
+        },
+        city: {
+            name: '',
+            id: null,
+        },
         code: '',
         address: ''
     })
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+        if (location.search){
+            if(!location.state){
+                history.push('/profile/addresses')
+            }
+            else {
+                setValues({
+                    ...values,
+                    name: location.state.costumer_name,
+                    mobileNumber: location.state.phone_number,
+                    // email: location.state.email,
+                    // city: {
+                    //     name: location.state.city_name,
+                    //     id: location.state.city,
+                    // },
+                    // state: {
+                    //     name: location.state.state_name,
+                    //     id: location.state.state,
+                    // },
+                    code: location.state.post_code,
+                    address: location.state.address,
+                })
+            }
+        }
+    }, [])
+    const [fetchPost, setFetchPost] = useState(false)
+    const [postLoading, postResult] = usePostAddress(fetchPost, values)
     const [errors, setErrors] = useState({
         name: false,
         mobileNumber: false,
@@ -26,9 +63,19 @@ function AddressPage() {
         code: false,
         address: false
     })
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        if (location.search){
+
+        }else {
+            setFetchPost(true)
+        }
+    }
+
     return (
         <>
-            <form className={classes.container}>
+            <form className={classes.container} onSubmit={handleSubmit}>
                 <Title title={'افزودن آدرس جدید'}/>
                 <AddressForm
                     values={values}
@@ -36,9 +83,10 @@ function AddressPage() {
                     errors={errors}
                     setErrors={setErrors}
                 />
-                <div style={{width: size.width >= 600 ? '33.33%' : '100%', float: 'left', marginTop: 24}}>
+                <div style={{width: size.width >= 600 ? '33.33%' : '100%', float: 'left', marginTop: 24, position: 'relative'}}>
+                    {postLoading && <CircularProgress size={38} className={classes.buttonProgress}/>}
                     <Button
-                        // disabled={loading}
+                        disabled={postLoading}
                         type={'submit'}
                         fullWidth
                         className={classes.addButton}

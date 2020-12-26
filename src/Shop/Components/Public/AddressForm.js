@@ -1,24 +1,45 @@
 import React, {useState} from "react";
-import {Card, Grid, TextField, Typography} from "@material-ui/core";
+import {Card, Grid, MenuItem, TextField, Typography} from "@material-ui/core";
 import {useUserInfoPageStyle} from "../../Pages/Styles/useUserInfoPageStyle";
 import PropType from 'prop-types'
+import useStateData from "../../FetchData/useStateData";
+import useCityData from "../../FetchData/useCityData";
+import {toFaDigit} from "../../../utills/ToFaDigit";
 
 
 function AddressForm(props) {
-    const classes = useUserInfoPageStyle()
     const {values, setValues, errors, setErrors} = props
+    const [fetchCities, setFetchCities] = useState(false)
+    const [statesLoading, states] = useStateData(true)
+    const [citiesLoading, cities] = useCityData(fetchCities, values.state.id)
+    const classes = useUserInfoPageStyle()
 
+    const findStateId = (name) => {
+        for (let i = 0; i < states.length; i++) {
+            if (states[i].name === name) {
+                return states[i].id
+            }
+        }
+    }
+    const findCityId = (name) => {
+        for (let i = 0; i < cities.length; i++) {
+            if (cities[i].name === name) {
+                return cities[i].id
+            }
+        }
+    }
 
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value})
     }
 
-    return(
+    return (
         <Card className={classes.card}>
             <Grid container spacing={4}>
                 <Grid item md={6} xs={12}>
                     <Typography className={classes.label}>نام و نام‌خانوادگی</Typography>
                     <TextField
+                        required
                         error={errors.name}
                         value={values.name}
                         onChange={handleChange('name')}
@@ -35,6 +56,7 @@ function AddressForm(props) {
                 <Grid item md={6} xs={12}>
                     <Typography className={classes.label}>شماره موبایل</Typography>
                     <TextField
+                        required
                         dir={'ltr'}
                         error={errors.mobileNumber}
                         value={values.mobileNumber}
@@ -52,6 +74,7 @@ function AddressForm(props) {
                 <Grid item md={6} xs={12}>
                     <Typography className={classes.label}>آدرس پست الکترونیک</Typography>
                     <TextField
+                        required
                         dir={'ltr'}
                         error={errors.email}
                         value={values.email}
@@ -69,10 +92,25 @@ function AddressForm(props) {
                 <Grid item md={6} xs={12}>
                     <Typography className={classes.label}>استان</Typography>
                     <TextField
-                        dir={'ltr'}
+                        required
+                        disabled={statesLoading}
                         select
                         placeholder={'استان خود را انتخاب کنید'}
-                        onChange={handleChange('state')}
+                        onChange={(event) => {
+                            setFetchCities(false)
+                            setValues({
+                                ...values,
+                                state: {
+                                    name: event.target.value,
+                                    id: findStateId(event.target.value)
+                                },
+                                city: {
+                                    name: '',
+                                    id: null,
+                                }
+                            })
+                            setFetchCities(true)
+                        }}
                         InputProps={{
                             classes: {
                                 input: classes.input,
@@ -81,15 +119,33 @@ function AddressForm(props) {
                         }}
                         fullWidth
                         variant="outlined"
-                    />
+                    >
+                        {
+                            states.map((state) => (
+                                <MenuItem className={classes.menu} key={state.id} value={state.name}>
+                                    {state.name}
+                                </MenuItem>
+                            ))
+                        }
+                    </TextField>
                 </Grid>
                 <Grid item md={6} xs={12}>
                     <Typography className={classes.label}>شهر</Typography>
                     <TextField
-                        dir={'ltr'}
+                        required
+                        disabled={citiesLoading}
                         select
                         placeholder={'شهر خود را انتخاب کنید'}
-                        onChange={handleChange('city')}
+                        onChange={(event) => {
+                            setValues({
+                                ...values,
+                                city: {
+                                    name: event.target.value,
+                                    id: findCityId(event.target.value)
+                                }
+                            })
+                            setFetchCities(false)
+                        }}
                         InputProps={{
                             classes: {
                                 input: classes.input,
@@ -98,11 +154,20 @@ function AddressForm(props) {
                         }}
                         fullWidth
                         variant="outlined"
-                    />
+                    >
+                        {
+                            cities.map((city) => (
+                                <MenuItem className={classes.menu} key={city.id} value={city.name}>
+                                    {city.name}
+                                </MenuItem>
+                            ))
+                        }
+                    </TextField>
                 </Grid>
                 <Grid item md={6} xs={12}>
                     <Typography className={classes.label}>کد پستی</Typography>
                     <TextField
+                        required
                         dir={'ltr'}
                         error={errors.code}
                         value={values.code}
@@ -120,9 +185,10 @@ function AddressForm(props) {
                 <Grid item xs={12}>
                     <Typography className={classes.label}>آدرس</Typography>
                     <TextField
+                        required
                         multiline
                         error={errors.address}
-                        value={values.address}
+                        value={toFaDigit(values.address)}
                         onChange={handleChange('address')}
                         InputProps={{
                             classes: {

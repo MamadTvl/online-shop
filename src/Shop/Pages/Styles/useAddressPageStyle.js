@@ -26,5 +26,15 @@ export const useAddressPageStyle = makeStyles((theme) => ({
             backgroundColor: '#F16522',
             opacity: '70%'
         },
-    }
+    },
+    buttonProgress: {
+        position: "absolute",
+        right: '44%',
+        top: '3%',
+        color: '#F16522',
+        zIndex: 1,
+        [theme.breakpoints.down('xs')]: {
+            right: '46.25%',
+        },
+    },
 }), {index: 1});
