@@ -228,7 +228,7 @@ function CartPage(props) {
                                     return prevState === 0 ? 1 : 0
                                 })}
                             >
-                                افزودن آدرس جدید
+                                {`${addressStep === 0 ? 'افزودن آدرس جدید' : 'آدرس‌های شما'}`}
                             </Button>
                             <Typography className={classes.title}>توضیحات سفارش</Typography>
                             <Card className={classes.card}>
