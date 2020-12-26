@@ -1,6 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useCartPageStyle} from "./Styles/useCartPageStyle";
-import {Button, Card, Divider, Grid, InputAdornment, TextField, Typography} from "@material-ui/core";
+import {
+    Backdrop,
+    Button,
+    Card,
+    CircularProgress,
+    Divider,
+    Grid,
+    InputAdornment,
+    TextField,
+    Typography
+} from "@material-ui/core";
 import Title from "../Components/Public/Title";
 import useWindowSize from "../../utills/Hooks/useWindowSize";
 import Step from "../Components/Public/Step";
@@ -10,6 +20,7 @@ import AddressCard from "../Components/Cart/AddressCard";
 import AddressForm from "../Components/Public/AddressForm";
 import FactorCard from "../Components/Cart/FactorCard";
 import usePostCart from "../PostData/usePostCart";
+import {separateDigit, toFaDigit} from "../../utills/ToFaDigit";
 
 const product = {
     title: 'آستین کوتاه باله دار خاکستری',
@@ -70,23 +81,23 @@ const info = createInformationData('آرش دامن‌افشان', '۰۹۳۴۴۴
 // total_basket_price_with_discount: 8374500
 // user: 2
 function CartPage() {
-    const [fetch, setFetch] = useState(true)
-    const [loading, result] = usePostCart(fetch)
+    const [postCardLoading, postCardResult] = usePostCart(true)
     const classes = useCartPageStyle()
     const size = useWindowSize()
     const [step, setStep] = useState(0)
     const [addressStep, setAddressStep] = useState(0)
     const [selects, setSelects] = useState({})
     const [basketDetails, setBasketDetails] = useState({
-
+        boxes: [],
+        basket: {},
     })
-    const [values, setValues] = useState({
+    const [addressValues, setAddressValues] = useState({
         name: '',
         mobileNumber: '',
         email: '',
         state: '',
         city: '',
-        code: '',
+        discountCode: '',
         address: ''
     })
 
@@ -94,7 +105,7 @@ function CartPage() {
         name: false,
         mobileNumber: false,
         email: false,
-        code: false,
+        discountCode: false,
         address: false
     })
 
@@ -122,12 +133,19 @@ function CartPage() {
         }
         window.scrollTo(0, 0)
     }
-    if (!loading){
-        console.log(result)
-    }
-
+    useEffect(() => {
+        setBasketDetails({
+            boxes: postCardResult.boxes,
+            basket: postCardResult.basket,
+        })
+    }, [postCardLoading, postCardResult])
+    if (postCardLoading)
+        return null
     return (
         <>
+            <Backdrop className={classes.backdrop} open={postCardLoading}>
+                <CircularProgress size={70} color="inherit"/>
+            </Backdrop>
             <div className={classes.container}>
                 <Title title={setTitle(step)}/>
                 <Grid container spacing={3}>
@@ -158,8 +176,8 @@ function CartPage() {
                             </Step>
                             <Step stepClass={classes.orderCardsStep} index={1} step={addressStep}>
                                 <AddressForm
-                                    values={values}
-                                    setValues={setValues}
+                                    values={addressValues}
+                                    setValues={setAddressValues}
                                     errors={errors}
                                     setErrors={setErrors}
                                 />
@@ -235,21 +253,26 @@ function CartPage() {
                             <Card style={{width: '100%'}} className={classes.card}>
                                 <Typography style={{marginBottom: 16}}
                                             className={classes.discountTitle}>توضیحات</Typography>
-                                <Typography className={classes.descriptionLabel}>لطفا تمامی کقش‌ها در سایز ۴۴
-                                    باشند.</Typography>
+                                <Typography
+                                    className={classes.descriptionLabel}>{basketDetails.basket.details}</Typography>
                             </Card>
                         </Step>
                         <Card className={classes.card}>
                             <div style={{marginBottom: 8,}} className={classes.detailContainer}>
                                 <Typography className={classes.detailTitle}>تعداد کالا</Typography>
-                                <Typography className={classes.number}>۶</Typography>
+                                <Typography
+                                    className={classes.number}>{toFaDigit(basketDetails.basket.merchandise_number.toString())}</Typography>
                             </div>
                             <Divider/>
                             <div className={classes.detail}>
                                 <div className={classes.detailContainer}>
                                     <Typography className={classes.detailTitle}>قیمت کالاها</Typography>
                                     <div className={classes.priceContainer}>
-                                        <Typography className={classes.number}>۱۴۱٫۰۰۰</Typography>
+                                        <Typography
+                                            className={classes.number}
+                                        >
+                                            {separateDigit(basketDetails.basket.total_basket_price)}
+                                        </Typography>
                                         <Typography className={classes.toman}>تومان</Typography>
                                     </div>
                                 </div>
@@ -264,8 +287,12 @@ function CartPage() {
                                 <div style={{marginBottom: 0}} className={classes.detailContainer}>
                                     <Typography className={classes.detailTitle}>هزینه ارسال</Typography>
                                     <div className={classes.priceContainer}>
-                                        <Typography className={classes.number}>۱۴۱٫۰۰۰</Typography>
-                                        <Typography className={classes.toman}>تومان</Typography>
+                                        <Typography
+                                            style={{opacity: 0.6}}
+                                            className={classes.number}
+                                        >
+                                            {basketDetails.basket.free_transmission ? '۰' : 'به عهده مشتری'}
+                                        </Typography>
                                     </div>
                                 </div>
                             </div>
@@ -273,7 +300,11 @@ function CartPage() {
                             <div style={{marginTop: 11, marginBottom: 0}} className={classes.detailContainer}>
                                 <Typography className={classes.detailTitle}>مبلغ قابل پرداخت</Typography>
                                 <div className={classes.priceContainer}>
-                                    <Typography className={classes.number}>۱۴۱٫۰۰۰</Typography>
+                                    <Typography
+                                        className={classes.number}
+                                    >
+                                        {separateDigit(basketDetails.basket.total_basket_price_with_discount)}
+                                    </Typography>
                                     <Typography className={classes.toman}>تومان</Typography>
                                 </div>
                             </div>
