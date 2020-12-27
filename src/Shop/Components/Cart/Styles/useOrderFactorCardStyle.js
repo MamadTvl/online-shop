@@ -32,6 +32,7 @@ export const useOrderFactorCardStyle = makeStyles((theme) => ({
         fontFamily: 'Shabnam',
         fontSize: 16,
         color: '#434343',
+        marginLeft: 4,
     },
     data: {
         fontFamily: 'Shabnam',

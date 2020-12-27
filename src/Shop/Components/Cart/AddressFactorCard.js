@@ -2,6 +2,7 @@ import React from "react";
 import {Card, Typography} from "@material-ui/core";
 import {useAddressFactorCardStyle} from "./Styles/useAddressFactorCardStyle";
 import PropTypes from 'prop-types';
+import {toFaDigit} from "../../../utills/ToFaDigit";
 
 
 function AddressFactorCard(props) {
@@ -13,11 +14,11 @@ function AddressFactorCard(props) {
             <div className={classes.container}>
                 <div className={classes.dataContainer}>
                     <Typography className={classes.title}>نام و نام خانوادگی</Typography>
-                    <Typography className={classes.label}>{info.name}</Typography>
+                    <Typography className={classes.label}>{info.costumer_name}</Typography>
                 </div>
                 <div className={classes.dataContainer}>
                     <Typography className={classes.title}>شماره موبایل</Typography>
-                    <Typography className={classes.label}>{info.mobileNumber}</Typography>
+                    <Typography className={classes.label}>{toFaDigit(info.phone_number)}</Typography>
                 </div>
                 <div className={classes.dataContainer}>
                     <Typography className={classes.title}>ایمیل</Typography>
@@ -25,20 +26,20 @@ function AddressFactorCard(props) {
                 </div>
                 <div className={classes.dataContainer}>
                     <Typography className={classes.title}>استان</Typography>
-                    <Typography className={classes.label}>{info.state}</Typography>
+                    <Typography className={classes.label}>{info.state_obj.name}</Typography>
                 </div>
                 <div className={classes.dataContainer}>
                     <Typography className={classes.title}>شهر</Typography>
-                    <Typography className={classes.label}>{info.city}</Typography>
+                    <Typography className={classes.label}>{info.city_obj.name}</Typography>
                 </div>
                 <div className={classes.dataContainer}>
                     <Typography className={classes.title}>کدپستی</Typography>
-                    <Typography className={classes.label}>{info.code}</Typography>
+                    <Typography className={classes.label}>{toFaDigit(info.post_code)}</Typography>
                 </div>
             </div>
             <div className={classes.dataContainer}>
                 <Typography className={classes.title}>آدرس</Typography>
-                <Typography className={classes.label}>{info.address}</Typography>
+                <Typography className={classes.label}>{toFaDigit(info.address)}</Typography>
             </div>
         </Card>
     )

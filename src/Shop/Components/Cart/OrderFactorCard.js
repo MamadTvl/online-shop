@@ -10,9 +10,9 @@ function OrderFactorCard(props) {
     const classes = useOrderFactorCardStyle()
     return (
         <Card className={classes.card}>
-            <img className={classes.image} src={product.image} alt={product.title}/>
+            <img className={classes.image} src={product.merchandise_obj.preview_image} alt={product.merchandise_obj.title}/>
             <div className={classes.container}>
-                <Typography className={classes.title}>{product.title}</Typography>
+                <Typography className={classes.title}>{product.merchandise_obj.title}</Typography>
                 <div>
                     <div className={classes.labelContainer}>
                         <Typography className={classes.label}>رنگ:</Typography>

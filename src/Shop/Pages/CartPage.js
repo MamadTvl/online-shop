@@ -24,11 +24,13 @@ import useAddressesData from "../FetchData/useAddressesData";
 import useForceUpdate from "../../utills/Hooks/useForceUpdate";
 import useApplyDiscountCode from "../PostData/useApplyDiscountCode";
 import usePathCart from "../PostData/usePathCart";
+import usePostAddress from "../PostData/usePostAddress";
 
 
 function CartPage(props) {
     const forceUpdate = useForceUpdate()
     const [fetchPost, setFetchPost] = useState(true)
+    const [fetchPostAddress, setFetchPostAddress] = useState(false)
     const [fetchApplyCode, setFetchApplyCode] = useState(false)
     const [fetchPathCart, setFetchPathCart] = useState(false)
     const [selectedAddress, setSelectedAddress] = useState({
@@ -47,6 +49,7 @@ function CartPage(props) {
     const [addressCheckboxes, setAddressCheckboxes] = useState([])
     const classes = useCartPageStyle()
     const [step, setStep] = useState(0)
+
     const [addressStep, setAddressStep] = useState(0)
     const [basketDetails, setBasketDetails] = useState({
         boxes: [],
@@ -90,10 +93,11 @@ function CartPage(props) {
         code: '',
         address: ''
     })
+    const [postAddressLoading, postAddressResult] = usePostAddress(fetchPostAddress, addressValues)
     const [details, setDetails] = useState('')
     const [discountCode, setDiscountCode] = useState('')
     const [applyCodeLoading, applyCodeResult] = useApplyDiscountCode(fetchApplyCode, basketDetails.basket.id, discountCode)
-    const [pathCartLoading, pathCartResult] = usePathCart(fetchPathCart,basketDetails.basket.id, selectedAddress, details)
+    const [pathCartLoading, pathCartResult] = usePathCart(fetchPathCart, basketDetails.basket.id, selectedAddress, details)
 
 
     const [errors, setErrors] = useState({
@@ -170,7 +174,6 @@ function CartPage(props) {
         localStorage.setItem('cart', JSON.stringify(cart))
         setBasketChange(prvState => prvState + 1)
         setFetchPost(true)
-        // }
     }
 
     const handleClickContinue = (event) => {
@@ -195,6 +198,7 @@ function CartPage(props) {
                     phone_number: addressValues.mobileNumber,
                 })
                 setFetchPathCart(true)
+                setFetchPostAddress(true)
             }
 
         }
@@ -209,6 +213,8 @@ function CartPage(props) {
                 basket: postCardResult.basket,
             })
             setFetchPost(false)
+            discountCode !== '' && setFetchApplyCode(true)
+
         }
     }, [postCardLoading, postCardResult])
 
@@ -257,11 +263,18 @@ function CartPage(props) {
 
     }, [applyCodeLoading, applyCodeResult])
 
+    useEffect(() => {
+        if (!postAddressLoading && fetchPostAddress){
+
+            setFetchPostAddress(false)
+        }
+    }, [postAddressLoading, postAddressResult])
+
     return (
         <>
             <Backdrop
                 className={classes.backdrop}
-                open={postCardLoading || addressesDataLoading || applyCodeLoading || pathCartLoading}
+                open={postCardLoading || addressesDataLoading || applyCodeLoading || pathCartLoading || postAddressLoading}
             >
                 <CircularProgress size={70} color="inherit"/>
             </Backdrop>
@@ -335,7 +348,7 @@ function CartPage(props) {
                         </Step>
                         <Step index={2} step={step}>
                             <Card className={classes.card}>
-                                <FactorCard products={{}} info={'info'}/>
+                                <FactorCard products={basketDetails.boxes} info={basketDetails.basket}/>
                             </Card>
 
                         </Step>
@@ -367,6 +380,7 @@ function CartPage(props) {
                                                 variant={"contained"}
                                                 onClick={() => {
                                                     if (discountCode === '') {
+                                                        setDiscountCode('')
                                                         setErrors({...errors, discountCode: true})
                                                         setTimeout(
                                                             () => setErrors({...errors, discountCode: false})

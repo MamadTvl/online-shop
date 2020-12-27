@@ -28,9 +28,6 @@ function usePostAddress(fetch, values) {
                 })
                 setResult(response.data.status === 'success')
                 setLoading(false)
-                if(response.data.status === 'success'){
-                    history.push('/profile')
-                }
 
             } catch (err) {
             }

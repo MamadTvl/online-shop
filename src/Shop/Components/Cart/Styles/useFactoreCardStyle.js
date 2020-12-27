@@ -14,12 +14,17 @@ export const useFactorCardStyle = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
         margin: '-16px',
+        flexWrap: 'wrap',
         [theme.breakpoints.down('xs')]: {
             flexDirection: 'column',
         }
     },
     grid: {
-        padding: 16
+        padding: 16,
+        width: '50%',
+        [theme.breakpoints.down('xs')]: {
+            width: '100%',
+        }
     },
     payButton: {
         width: '23%',

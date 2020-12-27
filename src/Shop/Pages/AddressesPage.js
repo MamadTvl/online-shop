@@ -5,7 +5,7 @@ import Title from "../Components/Public/Title";
 import {Button, CircularProgress} from "@material-ui/core";
 import useWindowSize from "../../utills/Hooks/useWindowSize";
 import usePostAddress from "../PostData/usePostAddress";
-import {useLocation, useHistory} from 'react-router-dom'
+import {useHistory, useLocation} from 'react-router-dom'
 
 function AddressPage() {
     const location = useLocation()
@@ -28,32 +28,6 @@ function AddressPage() {
         address: ''
     })
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-        if (location.search){
-            if(!location.state){
-                history.push('/profile/addresses')
-            }
-            else {
-                setValues({
-                    ...values,
-                    name: location.state.costumer_name,
-                    mobileNumber: location.state.phone_number,
-                    // email: location.state.email,
-                    // city: {
-                    //     name: location.state.city_name,
-                    //     id: location.state.city,
-                    // },
-                    // state: {
-                    //     name: location.state.state_name,
-                    //     id: location.state.state,
-                    // },
-                    code: location.state.post_code,
-                    address: location.state.address,
-                })
-            }
-        }
-    }, [])
     const [fetchPost, setFetchPost] = useState(false)
     const [postLoading, postResult] = usePostAddress(fetchPost, values)
     const [errors, setErrors] = useState({
@@ -66,12 +40,17 @@ function AddressPage() {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (location.search){
+        setFetchPost(true)
 
-        }else {
-            setFetchPost(true)
-        }
     }
+    useEffect(() => {
+        if (!postLoading && fetchPost){
+            if(postResult){
+                history.push('/profile')
+            }
+            setFetchPost(false)
+        }
+    }, [postLoading, postResult])
 
     return (
         <>
@@ -83,7 +62,12 @@ function AddressPage() {
                     errors={errors}
                     setErrors={setErrors}
                 />
-                <div style={{width: size.width >= 600 ? '33.33%' : '100%', float: 'left', marginTop: 24, position: 'relative'}}>
+                <div style={{
+                    width: size.width >= 600 ? '33.33%' : '100%',
+                    float: 'left',
+                    marginTop: 24,
+                    position: 'relative'
+                }}>
                     {postLoading && <CircularProgress size={38} className={classes.buttonProgress}/>}
                     <Button
                         disabled={postLoading}
