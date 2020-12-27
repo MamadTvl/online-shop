@@ -478,7 +478,10 @@ function CartPage(props) {
                                 <div style={{width: '100%', float: 'left', marginTop: 24}}>
                                     <Button
                                         fullWidth
-                                        onClick={() => setStep(step - 1)}
+                                        onClick={() => {
+                                            setStep(step - 1)
+                                            window.scrollTo(0, 0)
+                                        }}
                                         className={classes.backButton}
                                         variant={'outlined'}
                                     >

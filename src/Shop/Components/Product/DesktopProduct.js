@@ -23,7 +23,6 @@ function DesktopProduct(props) {
             for (let i = 0; i < product.stock_list.length; i++) {
                 if (product.stock_list[i].size === selectedSize
                     && product.stock_list[i].color === selectedColor) {
-                    console.log(product.stock_list[i].stock_number)
                     return product.stock_list[i].stock_number
                 }
             }
