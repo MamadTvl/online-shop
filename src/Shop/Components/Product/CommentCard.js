@@ -2,14 +2,15 @@ import React, {useState} from "react";
 import {Button, Card, CardContent, SvgIcon, Typography} from "@material-ui/core";
 import profile from "../../../img/profile.png";
 import {useProductDetailStyle} from "./Styles/useProductDetailStyle";
+import {separateDigit} from "../../../utills/ToFaDigit";
 
 
 function CommentCard(props) {
     const {comment} = props
     const classes = useProductDetailStyle()
     const [isActive, setIsActive] = useState({
-        like: false,
-        dislike: false,
+        like: comment.is_liked,
+        dislike: comment.is_disliked,
     })
     return (
         <Card className={classes.commentContainer}>
@@ -37,7 +38,7 @@ function CommentCard(props) {
                         </SvgIcon>
                     }
                 >
-                    پسندیدم
+                    {`(${separateDigit(comment.likes_number)}) پسندیدم`}
                 </Button>
                 <Button
                     className={classes.like}
@@ -63,14 +64,14 @@ function CommentCard(props) {
                         </SvgIcon>
                     }
                 >
-                    نپسندیدم
+                    {`(${separateDigit(comment.dislikes_number)}) نپسندیدم`}
                 </Button>
             </div>
             <CardContent className={classes.cardContent}>
                 <img className={classes.profile} src={profile} alt={'profile'}/>
                 <div style={{marginRight: 20}}>
-                    <Typography className={classes.username}>{comment.user}</Typography>
-                    <Typography className={classes.comment}>{comment.description}</Typography>
+                    <Typography className={classes.username}>{comment.user.name_and_last_name}</Typography>
+                    <Typography className={classes.comment}>{comment.text}</Typography>
                 </div>
             </CardContent>
         </Card>

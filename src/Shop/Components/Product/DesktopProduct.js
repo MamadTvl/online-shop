@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Card, Chip, IconButton, MenuItem, SvgIcon, TextField, Typography} from "@material-ui/core";
 import DesktopPhotoViewer from "./DesktopPhotoViewer";
 import AddIcon from '@material-ui/icons/Add';
@@ -12,14 +12,18 @@ import * as PropTypes from 'prop-types'
 function DesktopProduct(props) {
     const {product, addToCart} = props
     const classes = useProductStyle()
+
     const [selectedSize, setSelectedSize] = useState(product.size_list[0])
     const [selectedColor, setSelectedColor] = useState(product.color_list[0])
+
     const [count, setCount] = useState(1)
+
     const getMaxStockNumber = () => {
-        if (product.merchandise_type === 1) {
+        if (product.merchandise_type == 1) {
             for (let i = 0; i < product.stock_list.length; i++) {
                 if (product.stock_list[i].size === selectedSize
                     && product.stock_list[i].color === selectedColor) {
+                    console.log(product.stock_list[i].stock_number)
                     return product.stock_list[i].stock_number
                 }
             }
@@ -28,6 +32,12 @@ function DesktopProduct(props) {
         }
 
     }
+    const [disabled, setDisabled] = useState(getMaxStockNumber() === 0)
+    useEffect(() => {
+        setDisabled(getMaxStockNumber() === 0)
+
+    }, [selectedSize, selectedColor])
+
     let images = [product.preview_image]
     for (let i = 0; i < product.other_image_list.length; i++) {
         images.push(product.other_image_list[i])
@@ -184,7 +194,7 @@ function DesktopProduct(props) {
                         }
 
                         <Button
-                            disabled={!product.is_exist}
+                            disabled={!product.is_exist || disabled}
                             className={classes.shopButton}// order : id, color, size, count
                             onClick={() => addToCart({
                                 id: product.id,

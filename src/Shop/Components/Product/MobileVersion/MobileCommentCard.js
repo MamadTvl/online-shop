@@ -2,20 +2,20 @@ import React, {useState} from 'react'
 import {Button, Card, SvgIcon, Typography} from "@material-ui/core";
 import {useMobileProductStyle} from "./Styles/useMobileProductStyle";
 import PropTypes from 'prop-types';
-import {toFaDigit} from "../../../../utills/ToFaDigit";
+import {separateDigit, toFaDigit} from "../../../../utills/ToFaDigit";
 
 
 function MobileCommentCard(props) {
     const classes = useMobileProductStyle()
     const {comment, isPreview} = props
     const [isActive, setIsActive] = useState({
-        like: false,
-        dislike: false,
+        like: comment.is_liked,
+        dislike: comment.is_disliked,
     })
 
     return (
         <Card className={classes.commentCard}>
-            <Typography className={classes.userComment}>{comment.name}</Typography>
+            <Typography className={classes.userComment}>{comment.user.name_and_last_name}</Typography>
             <Typography
                 className={
                     isPreview
@@ -23,7 +23,7 @@ function MobileCommentCard(props) {
                         : classes.commentDescription
                 }
             >
-                {comment.description}
+                {comment.text}
             </Typography>
             {
                 !isPreview &&
@@ -55,7 +55,7 @@ function MobileCommentCard(props) {
                             </SvgIcon>
                         }
                     >
-                        {toFaDigit('34')}
+                        {separateDigit(comment.likes_number)}
                     </Button>
 
                     <Button
@@ -86,7 +86,7 @@ function MobileCommentCard(props) {
                             </SvgIcon>
                         }
                     >
-                        {toFaDigit('12')}
+                        {separateDigit(comment.dislikes_number)}
                     </Button>
                 </div>
             }

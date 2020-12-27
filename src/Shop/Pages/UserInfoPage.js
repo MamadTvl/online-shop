@@ -110,6 +110,7 @@ function UserInfoPage() {
                             <Typography className={classes.label}>نام و نام‌خانوادگی</Typography>
                             <TextField
                                 required
+                                disabled={loading}
                                 error={errors.name}
                                 value={values.name}
                                 onChange={handleChange('name')}
@@ -146,6 +147,7 @@ function UserInfoPage() {
                             <Typography className={classes.label}>آدرس پست الکترونیک</Typography>
                             <TextField
                                 required
+                                disabled={loading}
                                 dir={'ltr'}
                                 error={errors.email}
                                 value={values.email}
@@ -164,7 +166,7 @@ function UserInfoPage() {
                             <Typography className={classes.label}>استان</Typography>
                             <TextField
                                 required
-                                disabled={statesLoading}
+                                disabled={statesLoading || loading}
                                 select
                                 placeholder={'استان خود را انتخاب کنید'}
                                 value={values.state.name ? values.state.name : ''}
@@ -205,7 +207,7 @@ function UserInfoPage() {
                             <Typography className={classes.label}>شهر</Typography>
                             <TextField
                                 required
-                                disabled={citiesLoading}
+                                disabled={citiesLoading || loading}
                                 select
                                 placeholder={'شهر خود را انتخاب کنید'}
                                 value={values.city.name}
@@ -245,9 +247,9 @@ function UserInfoPage() {
                     marginTop: 24,
                     position: 'relative'
                 }}>
-                    {updateLoading && <CircularProgress size={38} className={classes.buttonProgress}/>}
+                    {(updateLoading || loading) && <CircularProgress size={38} className={classes.buttonProgress}/>}
                     <Button
-                        disabled={updateLoading}
+                        disabled={updateLoading || loading}
                         type={'submit'}
                         fullWidth
                         className={classes.editButton}

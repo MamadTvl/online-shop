@@ -20,7 +20,7 @@ function MobileProduct(props) {
                 <DescriptionCard product={product}/>
             </Grid>
             <Grid item xs={12}>
-                <CommentContainer comments={product.comment_list}/>
+                <CommentContainer comments={product.comment_objs_list}/>
             </Grid>
         </Grid>
     )

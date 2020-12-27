@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import {Button, Card, IconButton} from "@material-ui/core";
 import {useMobileProductStyle} from "./Styles/useMobileProductStyle";
 import Typography from "@material-ui/core/Typography";
-import {toFaDigit} from "../../../../utills/ToFaDigit";
+import {separateDigit, toFaDigit} from "../../../../utills/ToFaDigit";
 import MobileCommentCard from "./MobileCommentCard";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import FullScreenDialog from "./FullScreenDialog";
@@ -19,7 +19,7 @@ function CommentContainer(props) {
     return (
         <>
             <Card className={classes.card}>
-                <Typography className={classes.detailTitle}>{toFaDigit(`دیدگاه ها (2)`)}</Typography>
+                <Typography className={classes.detailTitle}>{toFaDigit(`دیدگاه ها (${separateDigit(comments.length)})`)}</Typography>
                 {comments.length > 0 && <MobileCommentCard isPreview={true} comment={comments[0]}/>}
                 <Button
                     onClick={() => setOpen(true)}
@@ -34,7 +34,7 @@ function CommentContainer(props) {
                     مشاهده بیشتر
                 </Button>
             </Card>
-            <FullScreenDialog open={open} setOpen={setOpen} title={toFaDigit(`دیدگاه ها (2)`)}>
+            <FullScreenDialog open={open} setOpen={setOpen} title={toFaDigit(`دیدگاه ها (${separateDigit(comments.length)})`)}>
                 <Card className={classes.card}>
                     {
                         comments.map((comment) => (

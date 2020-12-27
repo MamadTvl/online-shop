@@ -33,7 +33,7 @@ function ProductDetail(props) {
 
                 <TabPanel index={1} value={value}>
                     {
-                        product.comment_list.map((comment) => (
+                        product.comment_objs_list.map((comment) => (
                             <CommentCard comment={comment}/>
                         ))
                     }
