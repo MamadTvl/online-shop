@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Card, Chip, IconButton, MenuItem, SvgIcon, TextField, Typography} from "@material-ui/core";
 import MobilePhotoViewer from "./MobilePhotoViewer";
 import {useMobileProductStyle} from "./Styles/useMobileProductStyle";
@@ -15,7 +15,7 @@ function ProductViewCard(props) {
     const [selectedColor, setSelectedColor] = useState(product.color_list[0])
     const [count, setCount] = useState(1)
     const getMaxStockNumber = () => {
-        if (product.merchandise_type === 1) {
+        if (product.merchandise_type == 1) {
             for (let i = 0; i < product.stock_list.length; i++) {
                 if (product.stock_list[i].size === selectedSize
                     && product.stock_list[i].color === selectedColor) {
@@ -27,6 +27,11 @@ function ProductViewCard(props) {
         }
 
     }
+    const [disabled, setDisabled] = useState(getMaxStockNumber() === 0)
+    useEffect(() => {
+        setDisabled(getMaxStockNumber() === 0)
+
+    }, [selectedSize, selectedColor])
     let images = [product.preview_image]
     for (let i = 0; i < product.other_image_list.length; i++) {
         images.push(product.other_image_list[i])
@@ -146,7 +151,7 @@ function ProductViewCard(props) {
                     </div>
                 </div>
                 <Button
-                    disabled={!product.is_exist}
+                    disabled={!product.is_exist || disabled}
                     className={classes.shopButton}
                     dir={'ltr'}
                     onClick={() => addToCart({
