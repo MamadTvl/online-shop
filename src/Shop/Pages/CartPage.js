@@ -226,7 +226,6 @@ function CartPage(props) {
                 checkboxes.push({id: addressesDataResult[i].id, checked: i === 0})
             }
             setAddressCheckboxes(checkboxes)
-            console.log(addressesDataResult)
         }
     }, [addressesDataLoading, addressesDataResult])
 
@@ -265,7 +264,7 @@ function CartPage(props) {
     }, [applyCodeLoading, applyCodeResult])
 
     useEffect(() => {
-        if (!postAddressLoading && fetchPostAddress){
+        if (!postAddressLoading && fetchPostAddress) {
 
             setFetchPostAddress(false)
         }
@@ -286,12 +285,14 @@ function CartPage(props) {
                         <Step stepClass={classes.orderCardsStep} index={0} step={step}>
                             {
                                 basketDetails.boxes.map((box) => (
-                                    <OrderCard
-                                        box={box}
-                                        onChangeSelects={onChangeSelects}
-                                        product={box.merchandise_obj}
-                                        deleteHandler={handleDelete}
-                                    />
+                                    <div key={box.id}>
+                                        <OrderCard
+                                            box={box}
+                                            onChangeSelects={onChangeSelects}
+                                            product={box.merchandise_obj}
+                                            deleteHandler={handleDelete}
+                                        />
+                                    </div>
 
                                 ))
 
@@ -301,13 +302,15 @@ function CartPage(props) {
                             <Step stepClass={classes.orderCardsStep} index={0} step={addressStep}>
                                 {
                                     addressesDataResult.map((address, index) => (
-                                        <AddressCard
-                                            data={address}
-                                            addressCheckbox={addressCheckboxes[index]}
-                                            index={index}
-                                            setAddressCheckboxes={setAddressCheckboxes}
-                                            forceUpdate={updateAddress}
-                                        />
+                                        <div key={address.id}>
+                                            <AddressCard
+                                                data={address}
+                                                addressCheckbox={addressCheckboxes[index]}
+                                                index={index}
+                                                setAddressCheckboxes={setAddressCheckboxes}
+                                                forceUpdate={updateAddress}
+                                            />
+                                        </div>
                                     ))
                                 }
                             </Step>

@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function ListItemLink(props) {
-    const {primary, to, key} = props;
+    const {primary, to, id} = props;
     const classes = useStyles();
     const renderLink = React.useMemo(
         () => React.forwardRef((itemProps, ref) =>
@@ -28,7 +28,7 @@ function ListItemLink(props) {
 
     return (
         <li>
-            <ListItem key={key} button component={renderLink}>
+            <ListItem key={id} button component={renderLink}>
                 <ListItemText classes={{primary: classes.textStyle}} primary={primary}/>
             </ListItem>
         </li>
@@ -37,8 +37,8 @@ function ListItemLink(props) {
 
 ListItemLink.propTypes = {
     primary: PropTypes.string.isRequired,
-    to: PropTypes.string.isRequired,
-    key: PropTypes.number.isRequired,
+    to: PropTypes.object.isRequired,
+    id: PropTypes.number.isRequired,
 };
 
 export default ListItemLink

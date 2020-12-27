@@ -42,14 +42,14 @@ function ProfilePage() {
     }
 
     useEffect(() => {
-        if(!loadingAddressesData){
+        if (!loadingAddressesData) {
             setFetchAddresses(false)
         }
     }, [loadingAddressesData, addressesDataResult])
 
     useEffect(() => {
-        if(!loadingDeleteAddress){
-            if (deleteAddressResult){
+        if (!loadingDeleteAddress) {
+            if (deleteAddressResult) {
                 setFetchAddresses(true)
             }
         }
@@ -97,8 +97,10 @@ function ProfilePage() {
                 <Typography className={classes.title}>سفارشات شما</Typography>
                 <div className={classes.cardsContainer}>
                     {
-                        orders.map((order) => (
-                            <PreviewOrderCard order={order}/>
+                        orders.map((order, index) => (
+                            <div key={index}>
+                                <PreviewOrderCard order={order}/>
+                            </div>
                         ))
                     }
                 </div>
@@ -120,7 +122,9 @@ function ProfilePage() {
                 <div className={classes.cardsContainer}>
                     {
                         addressesDataResult.map((address) => (
-                            <PreviewAddressCard data={address} handleDelete={handleDeleteAddress}/>
+                            <div key={address.id}>
+                                <PreviewAddressCard data={address} handleDelete={handleDeleteAddress}/>
+                            </div>
                         ))
                     }
                 </div>

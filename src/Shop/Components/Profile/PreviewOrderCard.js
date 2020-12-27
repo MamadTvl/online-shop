@@ -39,7 +39,7 @@ function PreviewOrderCard(props) {
                 <div className={classes.right}>
                     {
                         titles.map((title, index) => (
-                            <div className={classes.dataContainer}>
+                            <div key={index} className={classes.dataContainer}>
                                 <Typography className={classes.title}>{title}</Typography>
                                 {
                                     index !== 2

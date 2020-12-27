@@ -18,7 +18,7 @@ function CategoriesList() {
                     <ListItemLink
                         primary={category.name}
                         to={{pathname: '/search', search: `${search}category_list[${index}]=${category.id}`}}
-                        key={category.id}
+                        id={Math.round(category.create_date + index + category.id)}
                     />
                 ))
             }

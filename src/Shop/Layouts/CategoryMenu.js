@@ -48,13 +48,13 @@ function CategoryMenu(props) {
             {
                 result.map((category, index) => (
                     index !== result.length - 1 ?
-                    <ItemLink style={linkStyle} to={{pathname: '/search', search: `${search}category_list[${index}]=${category.id}`}}>
-                        <MenuItem key={category.id} className={classes.menuLabel}
+                    <ItemLink key={Math.round(category.create_date)} style={linkStyle} to={{pathname: '/search', search: `${search}category_list[${index}]=${category.id}`}}>
+                        <MenuItem className={classes.menuLabel}
                                   onClick={handleClose}>{category.name}</MenuItem>
                     </ItemLink>
                         :
-                        <ItemLink to={{pathname: '/search', search: `${search}category_list[${index}]=${category.id}`}}>
-                            <MenuItem key={category.id} className={classes.menuLabel}
+                        <ItemLink key={Math.round(category.create_date)} to={{pathname: '/search', search: `${search}category_list[${index}]=${category.id}`}}>
+                            <MenuItem className={classes.menuLabel}
                                       onClick={handleClose}>{category.name}</MenuItem>
                         </ItemLink>
                 ))

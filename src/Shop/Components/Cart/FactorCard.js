@@ -39,7 +39,7 @@ function FactorCard(props) {
 }
 
 FactorCard.propTypes = {
-    products: PropType.object.isRequired,
+    products: PropType.array.isRequired,
     info: PropType.object.isRequired,
 }
 export default FactorCard

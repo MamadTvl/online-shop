@@ -29,7 +29,7 @@ function PreviewAddressCard(props) {
             <div style={{width: '80%', margin: 'auto 0', justifyContent: 'flex-start'}} className={classes.right}>
                 {
                     titles.map((title, index) => (
-                        <div style={{marginLeft: 80,}} className={classes.dataContainer}>
+                        <div key={index} style={{marginLeft: 80,}} className={classes.dataContainer}>
                             <Typography className={classes.title}>{title}</Typography>
                             <Typography className={classes.data}>{toFaDigit(setData(index))}</Typography>
                         </div>

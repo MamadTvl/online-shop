@@ -61,7 +61,7 @@ function AddressCard(props) {
 
 AddressCard.propTypes = {
     data: PropType.object.isRequired,
-    addressCheckbox: PropType.object.isRequired,
+    addressCheckbox: PropType.object,
     setAddressCheckboxes: PropType.func.isRequired,
     index: PropType.number.isRequired,
     forceUpdate: PropType.func.isRequired,
