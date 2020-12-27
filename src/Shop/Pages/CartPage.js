@@ -177,6 +177,7 @@ function CartPage(props) {
     }
 
     const handleClickContinue = (event) => {
+        event.preventDefault()
         if (step === 0) {
             setStep(1)
         } else if (step === 1) {
@@ -278,7 +279,7 @@ function CartPage(props) {
             >
                 <CircularProgress size={70} color="inherit"/>
             </Backdrop>
-            <div className={classes.container}>
+            <form className={classes.container} onSubmit={handleClickContinue}>
                 <Title title={setTitle(step)}/>
                 <Grid container spacing={3}>
                     <Grid item md={9} xs={12}>
@@ -461,9 +462,8 @@ function CartPage(props) {
                             </div>
                             <div style={{width: '100%', float: 'left', marginTop: 24}}>
                                 <Button
-                                    // disabled={loading}
                                     fullWidth
-                                    onClick={handleClickContinue}
+                                    type={'submit'}
                                     className={classes.shopButton}
                                     variant={'contained'}
                                 >
@@ -486,7 +486,7 @@ function CartPage(props) {
                         </Card>
                     </Grid>
                 </Grid>
-            </div>
+            </form>
         </>
     )
 }

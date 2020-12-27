@@ -1,9 +1,7 @@
 import {useEffect, useState} from "react";
 import {useAxios} from "../../utills/Hooks/useAxios";
-import {useHistory} from 'react-router-dom'
 
 function usePostAddress(fetch, values) {
-    const history = useHistory()
     const [result, setResult] = useState(false)
     const [loading, setLoading] = useState(false)
     const [, createAddress] = useAxios({
@@ -32,7 +30,8 @@ function usePostAddress(fetch, values) {
             } catch (err) {
             }
         }
-        if(fetch)
+
+        if (fetch)
             getResult().then()
     }, [fetch])
 
