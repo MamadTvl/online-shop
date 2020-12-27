@@ -12,7 +12,10 @@ function useSearchData(fetch, search, page, catsLength, fromPrice, toPrice, hasD
             newSearch = newSearch.replace(`[${i}]`, '')
         }
 
-        newSearch += `&lb_price=${fromPrice}&ub_price=${toPrice}&has_discount=${hasDiscount}&page=${page}`
+        newSearch += `&lb_price=${fromPrice}&ub_price=${toPrice}&page=${page}`
+        if (hasDiscount){
+            newSearch += `&has_discount=${hasDiscount}`
+        }
         return newSearch
     }
     const [result, setResult] = useState({

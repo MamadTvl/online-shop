@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Title from "../Components/Public/Title";
 import {Button, Card, Typography} from "@material-ui/core";
 import profileImage from '../../img/profile.png'
@@ -10,10 +10,16 @@ import useUserData from "../FetchData/useUserData";
 import {toFaDigit} from "../../utills/ToFaDigit";
 import ProfilePageSkeleton from "../Components/Skeletons/ProfilePageSkeleton";
 import useAddressesData from "../FetchData/useAddressesData";
+import useDeleteAddress from "../DeleteData/useDeleteAddress";
 
 function ProfilePage() {
+    const [fetchDelete, setFetchDelete] = useState(false)
+    const [fetchAddresses, setFetchAddresses] = useState(true)
+
+    const [deleteId, setDeleteId] = useState(0)
     const [loadingUserData, userDataResult] = useUserData(true)
-    const [loadingAddressesData, addressesDataResult] = useAddressesData(true)
+    const [loadingAddressesData, addressesDataResult] = useAddressesData(fetchAddresses)
+    const [loadingDeleteAddress, deleteAddressResult] = useDeleteAddress(fetchDelete, deleteId)
     const classes = useProfilePageStyle()
     const history = useHistory()
 
@@ -21,9 +27,6 @@ function ProfilePage() {
         return {code, date, status, cost}
     }
 
-    function createAddressData(state, city, code, address) {
-        return {state, city, code, address}
-    }
 
     const orders = [
         createOrderData('۳۴۰۹۵۸۴۷۲۳۰۴۹۲۹۸', '۹۸/۱۱/۱۵', 'درحال بررسی', '560000'),
@@ -33,14 +36,26 @@ function ProfilePage() {
         createOrderData('۳۴۰۹۵۸۴۷۲۳۰۴۹۲۹۸', '۹۸/۱۱/۱۵', 'درحال بررسی', '560000'),
     ]
 
-    const addresses = [
-        createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
-        createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
-        createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
-        createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
-        createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
-    ]
-    if (loadingUserData || loadingAddressesData)
+    const handleDeleteAddress = (id) => {
+        setDeleteId(id)
+        setFetchDelete(true)
+    }
+
+    useEffect(() => {
+        if(!loadingAddressesData){
+            setFetchAddresses(false)
+        }
+    }, [loadingAddressesData, addressesDataResult])
+
+    useEffect(() => {
+        if(!loadingDeleteAddress){
+            if (deleteAddressResult){
+                setFetchAddresses(true)
+            }
+        }
+    }, [loadingDeleteAddress, deleteAddressResult])
+
+    if (loadingUserData || loadingAddressesData || loadingDeleteAddress)
         return <ProfilePageSkeleton/>
     return (
         <>
@@ -105,7 +120,7 @@ function ProfilePage() {
                 <div className={classes.cardsContainer}>
                     {
                         addressesDataResult.map((address) => (
-                            <PreviewAddressCard data={address}/>
+                            <PreviewAddressCard data={address} handleDelete={handleDeleteAddress}/>
                         ))
                     }
                 </div>

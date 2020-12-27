@@ -3,19 +3,18 @@ import {Card, IconButton, SvgIcon, Typography} from "@material-ui/core";
 import PropType from 'prop-types'
 import {usePreviewOrderStyle} from "./Styles/usePreviewOrderStyle";
 import {toFaDigit} from "../../../utills/ToFaDigit";
-import ItemLink from "../../../Routes/Link/ItemLink";
 
 function PreviewAddressCard(props) {
     const classes = usePreviewOrderStyle()
-    const {data} = props
+    const {data, handleDelete} = props
     const titles = ['استان', 'شهر', 'کدپستی', 'آدرس']
 
     const setData = (index) => {
         switch (index) {
             case 0:
-                return data.state.toString()
+                return data.state_obj.name
             case 1:
-                return data.city.toString()
+                return data.city_obj.name
             case 2:
                 return data.post_code
             case 3:
@@ -27,10 +26,10 @@ function PreviewAddressCard(props) {
     return (
         <Card style={{marginBottom: 12}} className={classes.card}>
 
-            <div style={{width: '80%', margin: 'auto 0'}} className={classes.right}>
+            <div style={{width: '80%', margin: 'auto 0', justifyContent: 'flex-start'}} className={classes.right}>
                 {
                     titles.map((title, index) => (
-                        <div className={classes.dataContainer}>
+                        <div style={{marginLeft: 80,}} className={classes.dataContainer}>
                             <Typography className={classes.title}>{title}</Typography>
                             <Typography className={classes.data}>{toFaDigit(setData(index))}</Typography>
                         </div>
@@ -38,8 +37,8 @@ function PreviewAddressCard(props) {
                 }
             </div>
             <div className={classes.left}>
-                <div className={classes.dataContainer}>
-                    <IconButton style={{padding: 4}}>
+                <div style={{marginLeft: 0}} className={classes.dataContainer}>
+                    <IconButton onClick={() => handleDelete(data.id)} style={{padding: 4}}>
                         <SvgIcon xmlns="http://www.w3.org/2000/svg" width="15.9" height="17.5"
                                  viewBox="0 0 15.9 17.5">
                             <g id="trash-2" transform="translate(-2.25 -1.25)">
@@ -59,27 +58,6 @@ function PreviewAddressCard(props) {
                             </g>
                         </SvgIcon>
                     </IconButton>
-                    <ItemLink to={{
-                        pathname: '/profile/addresses',
-                        search: `?id=${data.id}`,
-                        state: data,
-                    }}>
-                        <IconButton style={{padding: 4}}>
-                            <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.648" height="17.5"
-                                     viewBox="0 0 17.648 17.5">
-                                <g id="edit" transform="translate(-1.25 -1.129)">
-                                    <path id="Path_2582" data-name="Path 2582"
-                                          d="M9.157,4H3.59A1.59,1.59,0,0,0,2,5.59V16.723a1.59,1.59,0,0,0,1.59,1.59H14.723a1.59,1.59,0,0,0,1.59-1.59V11.157"
-                                          transform="translate(0 -0.434)" fill="none" stroke="#434343"
-                                          strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
-                                    <path id="Path_2583" data-name="Path 2583"
-                                          d="M16.349,2.373a1.687,1.687,0,0,1,2.386,2.386l-7.554,7.554L8,13.108l.8-3.181Z"
-                                          transform="translate(-1.229)" fill="none" stroke="#434343"
-                                          strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
-                                </g>
-                            </SvgIcon>
-                        </IconButton>
-                    </ItemLink>
                 </div>
             </div>
         </Card>
@@ -87,7 +65,8 @@ function PreviewAddressCard(props) {
 }
 
 PreviewAddressCard.propTypes = {
-    data: PropType.object.isRequired
+    data: PropType.object.isRequired,
+    handleDelete: PropType.func.isRequired,
 }
 
 export default PreviewAddressCard

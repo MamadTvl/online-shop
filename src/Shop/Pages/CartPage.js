@@ -20,30 +20,31 @@ import FactorCard from "../Components/Cart/FactorCard";
 import usePostCart from "../PostData/usePostCart";
 import {separateDigit} from "../../utills/ToFaDigit";
 import PropTypes from "prop-types"
+import useAddressesData from "../FetchData/useAddressesData";
+import useForceUpdate from "../../utills/Hooks/useForceUpdate";
+import useApplyDiscountCode from "../PostData/useApplyDiscountCode";
+import usePathCart from "../PostData/usePathCart";
 
-
-function createAddressData(state, city, code, address) {
-    return {state, city, code, address}
-}
-
-function createInformationData(name, mobileNumber, email, state, city, code, address) {
-    return {name, mobileNumber, email, state, city, code, address}
-}
-
-const addresses = [
-    createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
-    createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
-    createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
-    createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
-    createAddressData('تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴'),
-]
-
-const info = createInformationData('آرش دامن‌افشان', '۰۹۳۴۴۴۳۲۵۳', 'Arash@mail.com', 'تهران', 'تهران', '۳۴۸۵۸۴۸۴۸', 'ایران، تهران، پونک جنوبی، خ قدسی، پلاک ۹۸ واحد ۴')
 
 function CartPage(props) {
+    const forceUpdate = useForceUpdate()
     const [fetchPost, setFetchPost] = useState(true)
+    const [fetchApplyCode, setFetchApplyCode] = useState(false)
+    const [fetchPathCart, setFetchPathCart] = useState(false)
+    const [selectedAddress, setSelectedAddress] = useState({
+        city: null,
+        state: null,
+        email: '',
+        address: '',
+        post_code: '',
+        costumer_name: '',
+        phone_number: '',
+    })
     const {setBasketChange} = props
     const [postCardLoading, postCardResult] = usePostCart(fetchPost)
+    const [addressesDataLoading, addressesDataResult] = useAddressesData(true)
+
+    const [addressCheckboxes, setAddressCheckboxes] = useState([])
     const classes = useCartPageStyle()
     const [step, setStep] = useState(0)
     const [addressStep, setAddressStep] = useState(0)
@@ -54,6 +55,7 @@ function CartPage(props) {
             basket_code: "",
             boxes_list: [],
             city: null,
+            city_obj: {name: "", id: null},
             costumer_name: null,
             create_date: 0,
             details: null,
@@ -65,20 +67,34 @@ function CartPage(props) {
             phone_number: null,
             post_code: null,
             state: null,
+            state_obj: {name: "", id: null},
             total_basket_price: 0,
             total_basket_price_with_discount: 0,
             user: 0,
+            email: null,
+            approved: false,
         },
     })
     const [addressValues, setAddressValues] = useState({
         name: '',
         mobileNumber: '',
         email: '',
-        state: '',
-        city: '',
-        discountCode: '',
+        state: {
+            name: '',
+            id: null
+        },
+        city: {
+            name: '',
+            id: null
+        },
+        code: '',
         address: ''
     })
+    const [details, setDetails] = useState('')
+    const [discountCode, setDiscountCode] = useState('')
+    const [applyCodeLoading, applyCodeResult] = useApplyDiscountCode(fetchApplyCode, basketDetails.basket.id, discountCode)
+    const [pathCartLoading, pathCartResult] = usePathCart(fetchPathCart,basketDetails.basket.id, selectedAddress, details)
+
 
     const [errors, setErrors] = useState({
         name: false,
@@ -135,7 +151,7 @@ function CartPage(props) {
         for (let i = 0; i < localStorageCart.length; i++) {
             if (localStorageCart[i].id === newBox.id
                 && localStorageCart[i].color === newBox.color
-                && localStorageCart[i].size === newBox.size){
+                && localStorageCart[i].size === newBox.size) {
                 return true
             }
 
@@ -146,14 +162,14 @@ function CartPage(props) {
     const onChangeSelects = (prvBox, newBox) => {
         let cart = []
         // if (!isDuplicate(newBox)) { //todo: duplicate bug
-            const localStorageCart = JSON.parse(localStorage.getItem('cart'))
-            localStorageCart[findIndexOfCart(prvBox)] = newBox
-            for (let i = 0; i < localStorageCart.length; i++) {
-                cart.push(localStorageCart[i])
-            }
-            localStorage.setItem('cart', JSON.stringify(cart))
-            setBasketChange(prvState => prvState + 1)
-            setFetchPost(true)
+        const localStorageCart = JSON.parse(localStorage.getItem('cart'))
+        localStorageCart[findIndexOfCart(prvBox)] = newBox
+        for (let i = 0; i < localStorageCart.length; i++) {
+            cart.push(localStorageCart[i])
+        }
+        localStorage.setItem('cart', JSON.stringify(cart))
+        setBasketChange(prvState => prvState + 1)
+        setFetchPost(true)
         // }
     }
 
@@ -161,7 +177,26 @@ function CartPage(props) {
         if (step === 0) {
             setStep(1)
         } else if (step === 1) {
-            setStep(2)
+            if (addressStep === 0) {
+                for (let i = 0; i < addressCheckboxes.length; i++) {
+                    if (addressCheckboxes[i].checked === true) {
+                        setSelectedAddress(addressesDataResult[i])
+                    }
+                }
+                setFetchPathCart(true)
+            } else {
+                setSelectedAddress({
+                    city: addressValues.city.id,
+                    state: addressValues.state.id,
+                    email: addressValues.email,
+                    address: addressValues.address,
+                    post_code: addressValues.code,
+                    costumer_name: addressValues.name,
+                    phone_number: addressValues.mobileNumber,
+                })
+                setFetchPathCart(true)
+            }
+
         }
         window.scrollTo(0, 0)
     }
@@ -177,9 +212,57 @@ function CartPage(props) {
         }
     }, [postCardLoading, postCardResult])
 
+    useEffect(() => {
+        if (!addressesDataLoading) {
+            let checkboxes = []
+            for (let i = 0; i < addressesDataResult.length; i++) {
+                checkboxes.push({id: addressesDataResult[i].id, checked: i === 0})
+            }
+            setAddressCheckboxes(checkboxes)
+            console.log(addressesDataResult)
+        }
+    }, [addressesDataLoading, addressesDataResult])
+
+    useEffect(() => {
+        if (!pathCartLoading && fetchPathCart) {
+            setBasketDetails({
+                ...basketDetails,
+                basket: pathCartResult,
+            })
+            setStep(2)
+            setFetchPathCart(false)
+        }
+
+    }, [pathCartLoading, pathCartResult])
+
+    const updateAddress = () => {
+        forceUpdate()
+    }
+
+    useEffect(() => {
+        if (!applyCodeLoading) {
+            if (applyCodeResult.status === 'success') {
+                setBasketDetails({
+                    ...basketDetails,
+                    basket: applyCodeResult.data,
+                })
+            } else {
+                setErrors({...errors, discountCode: true})
+                setTimeout(
+                    () => setErrors({...errors, discountCode: false})
+                    , 5000)
+            }
+            setFetchApplyCode(false)
+        }
+
+    }, [applyCodeLoading, applyCodeResult])
+
     return (
         <>
-            <Backdrop className={classes.backdrop} open={postCardLoading}>
+            <Backdrop
+                className={classes.backdrop}
+                open={postCardLoading || addressesDataLoading || applyCodeLoading || pathCartLoading}
+            >
                 <CircularProgress size={70} color="inherit"/>
             </Backdrop>
             <div className={classes.container}>
@@ -203,11 +286,13 @@ function CartPage(props) {
                         <Step stepClass={classes.orderCardsStep} index={1} step={step}>
                             <Step stepClass={classes.orderCardsStep} index={0} step={addressStep}>
                                 {
-                                    addresses.map((address) => (
+                                    addressesDataResult.map((address, index) => (
                                         <AddressCard
                                             data={address}
-                                            checked={true}
-                                            handleChange={() => console.log()}
+                                            addressCheckbox={addressCheckboxes[index]}
+                                            index={index}
+                                            setAddressCheckboxes={setAddressCheckboxes}
+                                            forceUpdate={updateAddress}
                                         />
                                     ))
                                 }
@@ -236,8 +321,8 @@ function CartPage(props) {
                                 <TextField
                                     multiline
                                     rows={4}
-                                    // value={values.address}
-                                    // onChange={handleChange('address')}
+                                    value={details}
+                                    onChange={(event) => setDetails(event.target.value)}
                                     InputProps={{
                                         classes: {
                                             input: classes.input,
@@ -250,7 +335,7 @@ function CartPage(props) {
                         </Step>
                         <Step index={2} step={step}>
                             <Card className={classes.card}>
-                                <FactorCard products={{}} info={info}/>
+                                <FactorCard products={{}} info={'info'}/>
                             </Card>
 
                         </Step>
@@ -262,10 +347,12 @@ function CartPage(props) {
                             <Typography className={classes.discountTitle}>کد تخفیف</Typography>
                             <TextField
                                 dir={'ltr'}
-                                // placeholder={'کد تخفیف'}
-                                // value={values[`${index + 1}`]}
-                                // onChange={handleChangeValues(`${index + 1}`)}
+                                value={discountCode}
+                                onChange={
+                                    (event) => setDiscountCode(event.target.value)
+                                }
                                 margin={'normal'}
+                                error={errors.discountCode}
                                 fullWidth
                                 InputProps={{
                                     classes: {
@@ -278,7 +365,17 @@ function CartPage(props) {
                                                 size={"small"}
                                                 className={classes.save}
                                                 variant={"contained"}
-                                                // onClick={() => addProduct(index + 1)}
+                                                onClick={() => {
+                                                    if (discountCode === '') {
+                                                        setErrors({...errors, discountCode: true})
+                                                        setTimeout(
+                                                            () => setErrors({...errors, discountCode: false})
+                                                            , 5000)
+                                                    } else {
+                                                        setFetchApplyCode(true)
+                                                    }
+
+                                                }}
                                             >
                                                 ثبت
                                             </Button>
@@ -318,7 +415,9 @@ function CartPage(props) {
                                     <Typography className={classes.detailTitle}>تخفیف</Typography>
                                     <div className={classes.priceContainer}>
                                         <Typography style={{color: '#F16522'}}
-                                                    className={classes.number}>۱۴۱٫۰۰۰</Typography>
+                                                    className={classes.number}>
+                                            {separateDigit(basketDetails.basket.total_basket_price - basketDetails.basket.total_basket_price_with_discount)}
+                                        </Typography>
                                         <Typography className={classes.toman}>تومان</Typography>
                                     </div>
                                 </div>

@@ -24,7 +24,7 @@ export const useAddressCardStyle = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         width: '100%',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         [theme.breakpoints.down('xs')]: {
             flexDirection: 'column',
         }
@@ -33,7 +33,7 @@ export const useAddressCardStyle = makeStyles((theme) => ({
     dataContainer: {
         display: 'flex',
         flexDirection: 'column',
-        marginRight: 32
+        marginRight: 80
     },
     title: {
         fontFamily: 'Shabnam',
