@@ -17,9 +17,9 @@ function usePostCart(fetch) {
     useEffect(() => {
         async function getResult() {
             try {
-                setLoading(true)
                 const localStorageCart = JSON.parse(localStorage.getItem('cart'))
                 if (localStorageCart) {
+                    setLoading(true)
                     let response = []
                     for (let i = 0; i < localStorageCart.length; i++) {
                         response.push(await create_box({
@@ -46,6 +46,9 @@ function usePostCart(fetch) {
                         boxes: boxes,
                         basket: basketResponse.data.data,
                     })
+                    setLoading(false)
+                }
+                else {
                     setLoading(false)
                 }
             } catch (err) {

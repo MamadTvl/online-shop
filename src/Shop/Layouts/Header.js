@@ -72,7 +72,7 @@ function Header(props) {
                             <MenuIcon/>
                         </IconButton>
                         <Link style={{margin: 'auto'}} to={'/'}>
-                            <img className={classes.logo} src={logo} alt={'didartshop.ir'}/>
+                            <img onClick={() => window.scrollTo(0, 0)} className={classes.logo} src={logo} alt={'didartshop.ir'}/>
                         </Link>
                         <Button
                             size={"small"}
@@ -148,7 +148,10 @@ function Header(props) {
                             searchHandler={searchHandler}
                         />
                         <Button
-                            onClick={() => history.push(`${auth.isLogin ? '/profile' : '/login'}`)}
+                            onClick={() => {
+                                history.push(`${auth.isLogin ? '/profile' : '/login'}`)
+                                window.scrollTo(0, 0)
+                            }}
                             size={"small"}
                             dir={'ltr'}
                             className={classes.login}
@@ -173,7 +176,10 @@ function Header(props) {
                                     : 'ورود / ثبت‌نام'
                             }
                         </Button>
-                        <IconButton onClick={() => history.push(`${auth.isLogin ? '/profile' : '/login'}`)}
+                        <IconButton onClick={() => {
+                            history.push(`${auth.isLogin ? '/profile' : '/login'}`)
+                            window.scrollTo(0, 0)
+                        }}
                                     className={classes.iconButtons}>
                             <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.5" height="19.5"
                                      viewBox="0 0 17.5 19.5">
@@ -208,7 +214,10 @@ function Header(props) {
                                 dir={'ltr'}
                                 variant={"outlined"}
                                 className={classes.cart}
-                                onClick={() => history.push('/profile/cart')}
+                                onClick={() => {
+                                    history.push('/profile/cart')
+                                    window.scrollTo(0, 0)
+                                }}
                                 endIcon={
                                     <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
                                              viewBox="0 0 19.5 21.5">
@@ -245,7 +254,10 @@ function Header(props) {
                             }}
                             invisible={basketCount === 0}
                         >
-                            <IconButton onClick={() => history.push('/profile/cart')} className={classes.iconButtons}>
+                            <IconButton onClick={() => {
+                                history.push('/profile/cart')
+                                window.scrollTo(0, 0)
+                            }} className={classes.iconButtons}>
                                 <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
                                          viewBox="0 0 19.5 21.5">
                                     <g id="shopping-bag" transform="translate(-2.25 -1.25)">

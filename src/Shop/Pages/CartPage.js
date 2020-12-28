@@ -28,6 +28,7 @@ import usePostAddress from "../PostData/usePostAddress";
 
 
 function CartPage(props) {
+    const localStorageCart = JSON.parse(localStorage.getItem('cart'))
     const forceUpdate = useForceUpdate()
     const [fetchPost, setFetchPost] = useState(true)
     const [fetchPostAddress, setFetchPostAddress] = useState(false)
@@ -208,7 +209,7 @@ function CartPage(props) {
 
 
     useEffect(() => {
-        if (!postCardLoading) {
+        if (!postCardLoading && fetchPost && localStorageCart) {
             setBasketDetails({
                 boxes: postCardResult.boxes,
                 basket: postCardResult.basket,
@@ -230,7 +231,7 @@ function CartPage(props) {
     }, [addressesDataLoading, addressesDataResult])
 
     useEffect(() => {
-        if (!pathCartLoading && fetchPathCart) {
+        if (!pathCartLoading && fetchPathCart && localStorageCart) {
             setBasketDetails({
                 ...basketDetails,
                 basket: pathCartResult,
@@ -296,6 +297,12 @@ function CartPage(props) {
 
                                 ))
 
+                            }
+                            {
+                                basketDetails.boxes.length=== 0 &&
+                                <Typography style={{textAlign: 'center', fontSize: 22}} className={classes.discountTitle}>
+                                    سبد خرید شما خالی است
+                                </Typography>
                             }
                         </Step>
                         <Step stepClass={classes.orderCardsStep} index={1} step={step}>
@@ -363,6 +370,7 @@ function CartPage(props) {
                         <Card className={classes.card}>
                             <Typography className={classes.discountTitle}>کد تخفیف</Typography>
                             <TextField
+                                disabled={basketDetails.boxes.length === 0}
                                 dir={'ltr'}
                                 value={discountCode}
                                 onChange={
@@ -379,6 +387,7 @@ function CartPage(props) {
                                     startAdornment:
                                         <InputAdornment position={"start"}>
                                             <Button
+                                                disabled={basketDetails.boxes.length === 0}
                                                 size={"small"}
                                                 className={classes.save}
                                                 variant={"contained"}
@@ -465,6 +474,7 @@ function CartPage(props) {
                             </div>
                             <div style={{width: '100%', float: 'left', marginTop: 24}}>
                                 <Button
+                                    disabled={basketDetails.boxes.length === 0}
                                     fullWidth
                                     type={'submit'}
                                     className={classes.shopButton}
