@@ -43,12 +43,14 @@ function SearchPage({location}) {
     )
     const handleChangePages = (pageNumber) => {
         setPage(pageNumber)
+        window.scrollTo(0, 0)
     }
     const handleMobileChangePages = (pageNumber) => {
         setMobilePage(pageNumber)
         if(mobilePage % 3 !== 0 || mobilePage === 0){
             setPage(Math.floor(mobilePage/3))
         }
+        window.scrollTo(0, 0)
     }
 
     const [searchItems, setSearchItems] = useState({
@@ -85,7 +87,12 @@ function SearchPage({location}) {
     useEffect(() => {
         if (!searchLoading) {
             setMaxPages(searchResults.max_pages + 1)
-            setMobileMaxPage(Math.floor(searchResults.merchandise_objs_number/5) + 1)
+            let max
+            max = Math.floor(searchResults.merchandise_objs_number/5)
+            if (searchResults.merchandise_objs_number%5 !==0){
+                max++
+            }
+            setMobileMaxPage(max)
             dispatch({
                 type: 'setProducts',
                 products: searchResults.products,
@@ -207,9 +214,9 @@ function SearchPage({location}) {
                                 </>
                                 : <>
                                     {
-                                        searchStates.products.slice(mobilePage * 5, mobilePage * 5 + 5)
+                                        searchStates.products.slice((mobilePage % 3) * 5, (mobilePage % 3)  * 5 + 5)
                                             .map((product) => (
-                                                <Grid className={classes.productItem} md={4} sm={6} xs={12} item>
+                                                <Grid key={product.id} className={classes.productItem} md={4} sm={6} xs={12} item>
                                                     <ProductCard product={product} className={classes.card}/>
                                                 </Grid>
                                             ))

@@ -271,6 +271,10 @@ function CartPage(props) {
         }
     }, [postAddressLoading, postAddressResult])
 
+    useEffect(() => {
+        setBasketChange(prevState => prevState + 1)
+    }, [])
+
     return (
         <>
             <Backdrop
@@ -357,8 +361,8 @@ function CartPage(props) {
                                 />
                             </Card>
                         </Step>
-                        <Step index={2} step={step}>
-                            <Card className={classes.card}>
+                        <Step index={2} step={step} >
+                            <Card style={{width: '100%'}} className={classes.card}>
                                 <FactorCard products={basketDetails.boxes} info={basketDetails.basket}/>
                             </Card>
 
