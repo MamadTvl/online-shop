@@ -36,7 +36,7 @@ function App() {
 
                             <Route exact path={'/search'} component={SearchPage}/>
 
-                            <Route exact path={'/products/:code/:product'}>
+                            <Route exact path={'/products/:code/:product/:id'}>
                                 <ProductPage setBasketChange={setBasketChange}/>
                             </Route>
 

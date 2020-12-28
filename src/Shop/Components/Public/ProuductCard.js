@@ -1,7 +1,7 @@
 import React from "react";
 import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
 import Chip from "@material-ui/core/Chip";
-import {Link, useHistory} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import PropType from 'prop-types'
 import {separateDigit, toFaDigit} from "../../../utills/ToFaDigit";
 import {useProductCardStyles} from "./Styles/useProductCardStyle";
@@ -10,7 +10,6 @@ import {useProductCardStyles} from "./Styles/useProductCardStyle";
 function ProductCard(props) {
     const classes = useProductCardStyles()
     const {product, className} = props
-    const history = useHistory()
     return (
         <Card component={'div'} className={className ? className : classes.card}>
 
@@ -22,7 +21,8 @@ function ProductCard(props) {
                     () => window.scrollTo(0, 0)}
             >
                 <Link className={classes.cardRoot}
-                      to={`/products/${product.unique_code}/${product.title}?id=${product.id}`} target="_blank" rel="noopener noreferrer">
+                      to={`/products/${product.unique_code}/${product.title}/${product.id}`} target="_blank"
+                      rel="noopener noreferrer">
                     <CardMedia className={classes.cardMedia} image={product.preview_image} title={product.name}/>
                     <CardContent className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>{product.title}</Typography>

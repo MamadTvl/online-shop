@@ -1,5 +1,5 @@
 import React from "react";
-import {useLocation, useParams} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import DesktopProduct from "../Components/Product/DesktopProduct";
 import {useProductPageStyle} from "./Styles/useProductPageStyle";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
@@ -17,10 +17,8 @@ import ProductPageSkeleton from "../Components/Skeletons/ProductPageSkeleton";
 
 function ProductPage(props) {
     const {setBasketChange} = props
-    const {product} = useParams()
-    const location = useLocation()
-    const params = new URLSearchParams(location.search)
-    const [loading, result] = useProductData(true, params.get('id'))
+    const {product, id} = useParams()
+    const [loading, result] = useProductData(true, id)
     const [catsLoading, catsResult] = useCategoriesData(true)
     const classes = useProductPageStyle()
     const size = useWindowSize()
@@ -101,7 +99,7 @@ function ProductPage(props) {
                                     <Typography
                                         className={classes.breadcrumb}>{result.merchandise.category.name}</Typography>
                                 </ItemLink>
-                                <Typography className={classes.breadcrumb}>{product}</Typography>
+                                <Typography className={classes.breadcrumb}>{result.merchandise.title}</Typography>
                             </Breadcrumbs>
 
                             {
