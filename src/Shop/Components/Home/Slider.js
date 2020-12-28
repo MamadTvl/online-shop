@@ -17,10 +17,11 @@ function Slider(props) {
     return (
         <div className={'slide-container'}>
             <SlickSlider{...settings}>
-                <img className={'image'} src={sliders[0].cover} alt={''}/>
-                <img className={'image'} src={sliders[1].cover} alt={''}/>
-                <img className={'image'} src={sliders[2].cover} alt={''}/>
-                <img className={'image'} src={sliders[3].cover} alt={''}/>
+                {
+                    sliders.map((slider, index) => (
+                        <img key={index} className={'image'} src={slider.cover} alt={'didartshop.ir'}/>
+                    ))
+                }
             </SlickSlider>
         </div>
     )
