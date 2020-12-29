@@ -17,7 +17,7 @@ import ProductPageSkeleton from "../Components/Skeletons/ProductPageSkeleton";
 
 function ProductPage(props) {
     const {setBasketChange} = props
-    const {product, id} = useParams()
+    const {id} = useParams()
     const [loading, result] = useProductData(true, id)
     const [catsLoading, catsResult] = useCategoriesData(true)
     const classes = useProductPageStyle()

@@ -119,7 +119,7 @@ function AmazingOffers(props) {
             >
                 <Typography className={classes.title}>پیشنهاد</Typography>
                 <Typography className={classes.title}>شگفت‌انگیز</Typography>
-                <img src={cover} alt={''} className={classes.previewImage}/>
+                <img src={cover} alt={'پیشنهاد شگفت‌انگیز'} className={classes.previewImage}/>
             </Grid>
             <Grid
                 item

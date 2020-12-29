@@ -24,7 +24,7 @@ function ProductCard(props) {
                       to={`/products/${product.unique_code}/${product.title}/${product.id}`} target="_blank"
                       rel="noopener noreferrer">
                     <CardMedia className={classes.cardMedia} image={product.preview_image} title={product.name}/>
-                    <CardContent className={classes.cardContent}>
+                    <CardContent title={product.name} className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>{product.title}</Typography>
                         <div className={classes.priceContainer}>
                             {

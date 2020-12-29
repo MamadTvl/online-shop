@@ -12,17 +12,17 @@ function Banners(props) {
         <>
             <Grid className={classes.container} container justify={"space-between"}>
                 <Grid className={classes.imageContainer} item md={5} xs={12}>
-                    <img className={classes.firstImage} src={banners[0].image} alt={banners[0].image}/>
+                    <img className={classes.firstImage} src={banners[0].image} alt={'didartshop.ir'}/>
                 </Grid>
                 <Grid className={classes.secondImageContainer} item md={7} xs={12}>
-                    <img className={classes.secondImage} src={banners[1].image} alt={banners[0].image}/>
+                    <img className={classes.secondImage} src={banners[1].image} alt={'didartshop.ir'}/>
                 </Grid>
                 <Grid className={classes.thirdImageContainer} item xs={12}>
-                    <img className={classes.thirdImage} src={banners[2].image} alt={banners[0].image}/>
+                    <img className={classes.thirdImage} src={banners[2].image} alt={'didartshop.ir'}/>
                 </Grid>
             </Grid>
             <div className={classes.thirdImageXsContainer}>
-                <img className={classes.thirdImage} src={banners[2].image} alt={banners[0].image}/>
+                <img className={classes.thirdImage} src={banners[2].image} alt={'didartshop.ir'}/>
             </div>
         </>
     )
