@@ -5,10 +5,10 @@ import Title from "../Components/Public/Title";
 import {Button, CircularProgress} from "@material-ui/core";
 import useWindowSize from "../../utills/Hooks/useWindowSize";
 import usePostAddress from "../PostData/usePostAddress";
-import {useHistory, useLocation} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
 function AddressPage() {
-    const location = useLocation()
+    document.title = 'اضافه کردن آدرس'
     const history = useHistory()
     const classes = useAddressPageStyle()
     const size = useWindowSize()
@@ -44,8 +44,8 @@ function AddressPage() {
 
     }
     useEffect(() => {
-        if (!postLoading && fetchPost){
-            if(postResult){
+        if (!postLoading && fetchPost) {
+            if (postResult) {
                 history.push('/profile')
             }
             setFetchPost(false)

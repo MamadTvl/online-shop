@@ -10,6 +10,7 @@ import useWindowSize from "../../utills/Hooks/useWindowSize";
 import ThirdStep from "../Components/SignUp/ThirdStep";
 
 function SignUpPage() {
+    document.title = 'ثبت نام'
     const classes = useSignUpPageStyle()
     const size = useWindowSize()
     const [step, setStep] = useState(0)

@@ -17,6 +17,7 @@ function useProductData(fetch, id) {
                 const response = await getProduct()
                 setResult(response.data.data)
                 setLoading(false)
+                document.title = response.data.data.merchandise.title
             } catch (err) {
                 history.push('/')
                 setLoading(false)

@@ -23,7 +23,6 @@ function ProductPage(props) {
     const classes = useProductPageStyle()
     const size = useWindowSize()
 
-
     const findCategoryIndex = (id) => {
         for (let i = 0; i < catsResult.length; i++) {
             if (id === catsResult[i].id) {

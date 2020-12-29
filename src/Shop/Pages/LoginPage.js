@@ -21,9 +21,9 @@ import useAxios from "axios-hooks";
 import {useHistory} from 'react-router-dom'
 import useWindowSize from "../../utills/Hooks/useWindowSize";
 import {useAuth} from "../../utills/Auth";
-import {toFaDigit} from "../../utills/ToFaDigit";
 
 function LoginPage() {
+    document.title = 'ورود به حساب کاربری'
     const classes = useLoginPageStyle()
     const history = useHistory()
     const baseUrl = "https://api.didartshop.ir"

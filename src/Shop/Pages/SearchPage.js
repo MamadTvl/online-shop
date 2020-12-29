@@ -130,7 +130,7 @@ function SearchPage({location}) {
         }
         history.push(`/search?${newLocation}`)
     }, [change])
-
+    document.title = `لیست محصولات ${searchItems.search_text}`
     return (
         <>
             <Backdrop className={classes.backdrop} open={searchLoading || catsLoading}>

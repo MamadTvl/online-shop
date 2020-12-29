@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {useForgetPassStyle} from "./Styles/useForgetPassPageStyle";
-import ShopLayout from "../Layouts/ShopLayout";
 import Title from "../Components/Public/Title";
 import {Button, Card} from "@material-ui/core";
 import Step from "../Components/Public/Step";
@@ -12,6 +11,7 @@ import ThirdStep from "../Components/ForgetPass/ThirdStep";
 
 
 function ForgetPassPage() {
+    document.title = 'فراموشی رمز عبور'
     const classes = useForgetPassStyle()
     const [step, setStep] = useState(0)
     const size = useWindowSize()

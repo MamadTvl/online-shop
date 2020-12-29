@@ -16,6 +16,7 @@ function useUserData(fetch) {
                 const response = await getInfo()
                 setResult(response.data.data)
                 setLoading(false)
+                document.title =`حساب کاربری ${response.data.data.name_and_last_name}`
             } catch (err) {
                 setLoading(false)
             }

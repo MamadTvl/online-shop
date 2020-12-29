@@ -26,7 +26,7 @@ function Header(props) {
     const [anchorEl, setAnchorEl] = useState(null);
     const [drawerOpen, setDrawerOpen] = useState(false)
     const [basketCount, setBasketCount] = useState(0)
-
+    document.getElementById('root').hidden = auth.loading
     const searchHandler = (event) => {
         event.preventDefault()
         if (searchInput !== '') {

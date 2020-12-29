@@ -99,7 +99,7 @@ function CartPage(props) {
     const [discountCode, setDiscountCode] = useState('')
     const [applyCodeLoading, applyCodeResult] = useApplyDiscountCode(fetchApplyCode, basketDetails.basket.id, discountCode)
     const [pathCartLoading, pathCartResult] = usePathCart(fetchPathCart, basketDetails.basket.id, selectedAddress, details)
-
+    document.title = 'سبد خرید'
 
     const [errors, setErrors] = useState({
         name: false,

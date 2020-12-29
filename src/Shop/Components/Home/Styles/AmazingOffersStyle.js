@@ -29,8 +29,10 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-start',
     },
     sliderContainer: {
-        width: '100%',
         margin: 'auto',
+        display: 'flex',
+        overflow: 'visible',
+        marginRight: 32,
     },
     title: {
         fontFamily: 'Shabnam',
@@ -56,8 +58,10 @@ export const useStyles = makeStyles((theme) => ({
         height: 420,
         width: '100%',
         borderRadius: 7,
-        [theme.breakpoints.between(0, 400)]: {
-            height: 265,
+        marginLeft: 16,
+        [theme.breakpoints.between(0, 900)]: {
+            height: 320,
+            minWidth: 211,
         },
     }
 
