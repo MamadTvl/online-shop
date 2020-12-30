@@ -21,8 +21,7 @@ function ProductCard(props) {
                     () => window.scrollTo(0, 0)}
             >
                 <Link className={classes.cardRoot}
-                      to={`/products/${product.unique_code}/${product.title}/${product.id}`} target="_blank"
-                      rel="noopener noreferrer">
+                      to={`/products/${product.unique_code}/${product.title}/${product.id}`}>
                     <CardMedia className={classes.cardMedia} image={product.preview_image} title={product.name}/>
                     <CardContent title={product.name} className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>{product.title}</Typography>
