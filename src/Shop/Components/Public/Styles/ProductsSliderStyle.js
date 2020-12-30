@@ -49,5 +49,18 @@ export const useProductSliderStyles = makeStyles((theme) => ({
     slider: {
         padding: 20,
     },
+    card: {
+        direction: 'rtl',
+        display: "flex",
+        flexDirection: "column",
+        alignSelf: "center",
+        height: 420,
+        width: '100%',
+        borderRadius: 7,
+        [theme.breakpoints.down('sm')]: {
+            height: 320,
+            width: 215,
+        },
+    },
 
 }), {index: 1});

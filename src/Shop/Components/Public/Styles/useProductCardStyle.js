@@ -18,6 +18,10 @@ export const useProductCardStyles = makeStyles((theme) => ({
         height: 420,
         width: '100%',
         borderRadius: 7,
+        [theme.breakpoints.down('sm')]: {
+            height: 320,
+            // width: '100%',
+        },
     },
     cardContent: {
         display: 'flex',

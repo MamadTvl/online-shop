@@ -71,7 +71,7 @@ function LoginPage() {
                 setError(true)
             }
         } catch (err) {
-            history.go(0)
+            setError(true)
         }
     }
 
@@ -88,6 +88,7 @@ function LoginPage() {
                             <Typography style={{marginBottom: '12px'}} className={classes.label}>شماره
                                 موبایل</Typography>
                             <TextField
+                                required
                                 dir={'ltr'}
                                 error={error}
                                 value={values.mobileNumber}
@@ -111,6 +112,7 @@ function LoginPage() {
                                 </ItemLink>
                             </div>
                             <TextField
+                                required
                                 error={error}
                                 dir={'ltr'}
                                 autocompelete={'current-password'}

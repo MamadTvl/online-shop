@@ -35,6 +35,15 @@
 .slick-dots {
     bottom: 32px;
 }
+@media only screen and (max-width: 600px) {
+    .slick-dots {
+        bottom: 8px;
+    }
+    .slick-dots li button:before {
+        height: 10px;
+        width: 10px;
+    }
+}
 .slick-arrow{
     display: none!important;
 }

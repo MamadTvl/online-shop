@@ -48,9 +48,10 @@ function ProfilePage() {
     }, [loadingAddressesData, addressesDataResult])
 
     useEffect(() => {
-        if (!loadingDeleteAddress) {
+        if (!loadingDeleteAddress && fetchDelete) {
             if (deleteAddressResult) {
                 setFetchAddresses(true)
+                setFetchDelete(false)
             }
         }
     }, [loadingDeleteAddress, deleteAddressResult])

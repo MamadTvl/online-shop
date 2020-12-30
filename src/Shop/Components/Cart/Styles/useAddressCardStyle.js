@@ -10,13 +10,13 @@ export const useAddressCardStyle = makeStyles((theme) => ({
         justifyContent: 'flex-start',
         marginBottom: 16,
         borderRadius: 7,
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             flexDirection: 'column',
 
         },
     },
     radio: {
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             width: 0,
         }
     },
@@ -24,8 +24,9 @@ export const useAddressCardStyle = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         width: '100%',
+
         // justifyContent: 'space-between',
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             flexDirection: 'column',
         }
 
@@ -34,7 +35,7 @@ export const useAddressCardStyle = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         marginRight: 80,
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             flexDirection: 'column',
             marginRight: 0,
         }

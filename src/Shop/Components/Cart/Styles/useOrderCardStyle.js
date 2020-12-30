@@ -19,7 +19,13 @@ export const useOrderCardStyle = makeStyles((theme) => ({
         width: '22%',
         borderRadius: 7,
         marginLeft: 16,
+        [theme.breakpoints.down('sm')]:{
+            width: '22%',
+            height: '22vw',
+        },
         [theme.breakpoints.down('xs')]: {
+            // width: '22vw',
+            height: '100%',
             width: '80%',
             margin: 'auto'
         },

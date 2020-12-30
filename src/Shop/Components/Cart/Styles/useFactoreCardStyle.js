@@ -22,7 +22,7 @@ export const useFactorCardStyle = makeStyles((theme) => ({
     grid: {
         padding: 16,
         width: '50%',
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('md')]: {
             width: '100%',
         }
     },

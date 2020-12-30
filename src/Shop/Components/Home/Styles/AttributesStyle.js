@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
 
         [theme.breakpoints.down('xs')]: {
             marginTop: 12,
-            padding: 0,
+            padding: '0 4px',
         }
     },
 

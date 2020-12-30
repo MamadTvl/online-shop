@@ -42,6 +42,8 @@ function Header(props) {
             history.push(`/search${tempLoc}`);
             setSearchInput('')
             window.scrollTo(0, 0)
+        }else {
+            history.push('/search')
         }
     }
     useEffect(() => {

@@ -12,6 +12,10 @@ export const useOrderFactorCardStyle = makeStyles((theme) => ({
         width: '30%',
         marginLeft: 16,
         borderRadius: 7,
+        [theme.breakpoints.down('md')]: {
+            width: '20vw',
+            height: '20vw',
+        }
     },
     container: {
         display: 'flex',

@@ -29,8 +29,13 @@ function ProductsSlider(props) {
     useEffect(() => {
         if (products.length > 4 || (products.length === 4 && size.width <= 1280) ) {
             try {
-                document.getElementsByClassName('custom-slider-slick')[0]
-                    .children[1].children[0].style.height = '422px'
+                if (size.width > 900){
+                    document.getElementsByClassName('custom-slider-slick')[0]
+                        .children[1].children[0].style.height = '422px'
+                }else {
+                    document.getElementsByClassName('custom-slider-slick')[0]
+                        .children[1].children[0].style.height = '322px'
+                }
                 const slides = document.getElementsByClassName('custom-slider-slick')[0]
                     .children[1].children[0].children
                 for (let i = 0; i < slides.length; i++) {
@@ -40,7 +45,7 @@ function ProductsSlider(props) {
                 slideContainer.style.marginTop = '23px'
             }catch (e) {}
         }
-    }, [])
+    }, [products.length, size.width])
 
     useEffect(() => {
         if (size.width > 1280) {
