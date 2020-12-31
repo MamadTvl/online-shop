@@ -1,6 +1,5 @@
 export const SmoothVerticalScrolling = (e, time, where) => {
     const eTop = e.getBoundingClientRect().top;
-    console.log(e.getBoundingClientRect())
     const eAmt = eTop / 100;
     let curTime = 0;
     while (curTime <= 275) {
