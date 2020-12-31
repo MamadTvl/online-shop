@@ -113,7 +113,6 @@ function Header(props) {
                         type="search"
                         value={searchInput}
                         onChange={(event) => setSearchInput(event.target.value)}
-                        // onClick={searchHandler}
                         InputProps={{
                             classes: {
                                 input: classes.textField,
