@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useAxios} from "../../utills/Hooks/useAxios";
 import {useHistory, useLocation} from "react-router-dom"
+import {SmoothVerticalScrolling} from "../../utills/smoothScroll";
 
 
 function useSearchData(fetch, search, page, catsLength, fromPrice, toPrice, hasDiscount, showCampaign) {
@@ -56,7 +57,7 @@ function useSearchData(fetch, search, page, catsLength, fromPrice, toPrice, hasD
                 }
 
             }
-            window.scrollTo({top: 0, behavior: 'smooth'})
+            SmoothVerticalScrolling(document.body, 500, "top")
         }
 
         if (fetch)

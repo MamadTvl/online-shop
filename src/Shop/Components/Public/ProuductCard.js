@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import PropType from 'prop-types'
 import {separateDigit, toFaDigit} from "../../../utills/ToFaDigit";
 import {useProductCardStyles} from "./Styles/useProductCardStyle";
+import {SmoothVerticalScrolling} from "../../../utills/smoothScroll";
 
 
 function ProductCard(props) {
@@ -18,7 +19,7 @@ function ProductCard(props) {
                     root: classes.cardRoot,
                 }}
                 onClick={
-                    () => window.scrollTo({top: 0, behavior: 'smooth'})}
+                    () => SmoothVerticalScrolling(document.body, 500, "top")}
             >
                 <Link className={classes.cardRoot}
                       to={`/products/${product.unique_code}/${product.title}/${product.id}`}>

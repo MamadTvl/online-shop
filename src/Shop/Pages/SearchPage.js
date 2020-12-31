@@ -14,6 +14,7 @@ import Title from "../Components/Public/Title";
 import useSearchData from "../FetchData/useSearchData";
 import TablePaginationActions from "../Components/Public/TablePaginationActions";
 import useWindowSize from "../../utills/Hooks/useWindowSize";
+import {SmoothVerticalScrolling} from "../../utills/smoothScroll";
 
 function SearchPage({location}) {
     const history = useHistory()
@@ -44,14 +45,14 @@ function SearchPage({location}) {
     )
     const handleChangePages = (pageNumber) => {
         setPage(pageNumber)
-        window.scrollTo({top: 0, behavior: 'smooth'})
+        SmoothVerticalScrolling(document.body, 500, "top")
     }
     const handleMobileChangePages = (pageNumber) => {
         setMobilePage(pageNumber)
         if(mobilePage % 3 !== 0 || mobilePage === 0){
             setPage(Math.floor(mobilePage/3))
         }
-        window.scrollTo({top: 0, behavior: 'smooth'})
+        SmoothVerticalScrolling(document.body, 500, "top")
     }
 
     const [searchItems, setSearchItems] = useState({

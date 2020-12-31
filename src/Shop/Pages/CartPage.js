@@ -25,6 +25,7 @@ import useForceUpdate from "../../utills/Hooks/useForceUpdate";
 import useApplyDiscountCode from "../PostData/useApplyDiscountCode";
 import usePathCart from "../PostData/usePathCart";
 import usePostAddress from "../PostData/usePostAddress";
+import {SmoothVerticalScrolling} from "../../utills/smoothScroll";
 
 
 function CartPage(props) {
@@ -208,7 +209,7 @@ function CartPage(props) {
             }
 
         }
-        window.scrollTo({top: 0, behavior: 'smooth'})
+        SmoothVerticalScrolling(document.body, 500, "top")
     }
 
 
@@ -498,7 +499,7 @@ function CartPage(props) {
                                         fullWidth
                                         onClick={() => {
                                             setStep(step - 1)
-                                            window.scrollTo({top: 0, behavior: 'smooth'})
+                                            SmoothVerticalScrolling(document.body, 500, "top")
                                         }}
                                         className={classes.backButton}
                                         variant={'outlined'}

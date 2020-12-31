@@ -14,6 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import CategoriesList from "./CategoriesList";
 import {separateDigit} from "../../utills/ToFaDigit";
 import {useAuth} from "../../utills/Auth";
+import {SmoothVerticalScrolling} from "../../utills/smoothScroll";
 
 function Header(props) {
     const auth = useAuth()
@@ -45,7 +46,7 @@ function Header(props) {
                 state: {showCampaign: false}
         });
             setSearchInput('')
-            window.scrollTo({top: 0, behavior: 'smooth'})
+            SmoothVerticalScrolling(document.body, 500, "top")
         }else {
             history.push({
                 pathname: '/search',
@@ -81,7 +82,7 @@ function Header(props) {
                             <MenuIcon/>
                         </IconButton>
                         <Link style={{margin: 'auto'}} to={'/'}>
-                            <img onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className={classes.logo} src={logo} alt={'didartshop.ir'}/>
+                            <img onClick={() => SmoothVerticalScrolling(document.body, 500, "top")} className={classes.logo} src={logo} alt={'didartshop.ir'}/>
                         </Link>
                         <Button
                             size={"small"}
@@ -159,7 +160,7 @@ function Header(props) {
                         <Button
                             onClick={() => {
                                 history.push(`${auth.isLogin ? '/profile' : '/login'}`)
-                                window.scrollTo({top: 0, behavior: 'smooth'})
+                                SmoothVerticalScrolling(document.body, 500, "top")
                             }}
                             size={"small"}
                             dir={'ltr'}
@@ -189,7 +190,7 @@ function Header(props) {
                         </Button>
                         <IconButton onClick={() => {
                             history.push(`${auth.isLogin ? '/profile' : '/login'}`)
-                            window.scrollTo({top: 0, behavior: 'smooth'})
+                            SmoothVerticalScrolling(document.body, 500, "top")
                         }}
                                     className={classes.iconButtons}>
                             <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.5" height="19.5"
@@ -227,7 +228,7 @@ function Header(props) {
                                 className={classes.cart}
                                 onClick={() => {
                                     history.push('/profile/cart')
-                                    window.scrollTo({top: 0, behavior: 'smooth'})
+                                    SmoothVerticalScrolling(document.body, 500, "top")
                                 }}
                                 endIcon={
                                     <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
@@ -267,7 +268,7 @@ function Header(props) {
                         >
                             <IconButton onClick={() => {
                                 history.push('/profile/cart')
-                                window.scrollTo({top: 0, behavior: 'smooth'})
+                                SmoothVerticalScrolling(document.body, 500, "top")
                             }} className={classes.iconButtons}>
                                 <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
                                          viewBox="0 0 19.5 21.5">

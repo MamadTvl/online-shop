@@ -11,6 +11,7 @@ import {toFaDigit} from "../../utills/ToFaDigit";
 import ProfilePageSkeleton from "../Components/Skeletons/ProfilePageSkeleton";
 import useAddressesData from "../FetchData/useAddressesData";
 import useDeleteAddress from "../DeleteData/useDeleteAddress";
+import {SmoothVerticalScrolling} from "../../utills/smoothScroll";
 
 function ProfilePage() {
     const [fetchDelete, setFetchDelete] = useState(false)
@@ -74,7 +75,7 @@ function ProfilePage() {
                     <div className={classes.actionContainer}>
                         <Button
                             onClick={() => {
-                                window.scrollTo({top: 0, behavior: 'smooth'})
+                                SmoothVerticalScrolling(document.body, 500, "top")
                                 history.push('/profile/personal-info')
                             }}
                             className={classes.editButton}
@@ -109,7 +110,7 @@ function ProfilePage() {
                     <Typography style={{margin: 'auto 0'}} className={classes.title}>آدرس‌های شما</Typography>
                     <Button
                         onClick={() => {
-                            window.scrollTo({top: 0, behavior: 'smooth'})
+                            SmoothVerticalScrolling(document.body, 500, "top")
                             history.push('/profile/addresses')
                         }}
                     >
