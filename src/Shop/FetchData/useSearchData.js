@@ -1,19 +1,20 @@
 import {useEffect, useState} from "react";
 import {useAxios} from "../../utills/Hooks/useAxios";
-import {useLocation} from "react-router-dom"
+import {useHistory, useLocation} from "react-router-dom"
 
 
 function useSearchData(fetch, search, page, catsLength, fromPrice, toPrice, hasDiscount, showCampaign) {
     const location = useLocation()
+    const history = useHistory()
     const changeUrl = (search) => {
         let newSearch = search
-        if (!showCampaign){
+        if (!showCampaign) {
             const queryParams = new URLSearchParams(location.search)
-            if (queryParams.has('campaign_id')){
+            if (queryParams.has('campaign_id')) {
                 const id = queryParams.get('campaign_id')
                 newSearch = newSearch.replace(`campaign_id=${id}`, '')
             }
-            if(search === ''){
+            if (search === '') {
                 newSearch += '?'
             }
             for (let i = 0; i < catsLength; i++) {
@@ -21,7 +22,7 @@ function useSearchData(fetch, search, page, catsLength, fromPrice, toPrice, hasD
             }
 
             newSearch += `&lb_price=${fromPrice}&ub_price=${toPrice}`
-            if (hasDiscount){
+            if (hasDiscount) {
                 newSearch += `&has_discount=${hasDiscount}`
             }
         }
@@ -50,6 +51,9 @@ function useSearchData(fetch, search, page, catsLength, fromPrice, toPrice, hasD
                 })
                 setLoading(false)
             } catch (err) {
+                if (err.response) {
+                    history.push({pathname: '/search', state: {showCampaign: false}})
+                }
 
             }
         }

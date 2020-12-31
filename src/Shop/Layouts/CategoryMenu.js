@@ -22,11 +22,10 @@ const StyledMenu = withStyles({
 
 
 function CategoryMenu(props) {
-    const [loading, result] = useCategoriesData(true)
+    const [, result] = useCategoriesData(true)
     const {anchorEl, setAnchorEl} = props
     const classes = useHeaderStyle()
     const location = useLocation()
-    const params = new URLSearchParams(location.search)
     const linkStyle = {
         borderLeftStyle: 'solid',
         borderLeftColor: 'rgba(0, 0, 0, 0.12)',
@@ -48,12 +47,27 @@ function CategoryMenu(props) {
             {
                 result.map((category, index) => (
                     index !== result.length - 1 ?
-                    <ItemLink key={Math.round(category.create_date)} style={linkStyle} to={{pathname: '/search', search: `${search}category_list[${index}]=${category.id}`}}>
+                    <ItemLink
+                        key={Math.round(category.create_date)}
+                        style={linkStyle}
+                        to={{
+                            pathname: '/search',
+                            search: `${search}category_list[${index}]=${category.id}`,
+                            state: {showCampaign: false}
+                        }}
+                    >
                         <MenuItem className={classes.menuLabel}
                                   onClick={handleClose}>{category.name}</MenuItem>
                     </ItemLink>
                         :
-                        <ItemLink key={Math.round(category.create_date)} to={{pathname: '/search', search: `${search}category_list[${index}]=${category.id}`}}>
+                        <ItemLink
+                            key={Math.round(category.create_date)}
+                            to={{
+                                pathname: '/search',
+                                search: `${search}category_list[${index}]=${category.id}`,
+                                state: {showCampaign: false}
+                            }}
+                        >
                             <MenuItem className={classes.menuLabel}
                                       onClick={handleClose}>{category.name}</MenuItem>
                         </ItemLink>
