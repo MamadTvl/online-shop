@@ -149,8 +149,31 @@ function CartPage(props) {
         if (cart.length === 0){
             localStorage.removeItem('cart')
             setBasketDetails({
-                ...basketDetails,
-                boxes: []
+                boxes: [],
+                basket: {
+                    address: null,
+                    basket_code: "",
+                    boxes_list: [],
+                    city: null,
+                    city_obj: {name: "", id: null},
+                    costumer_name: null,
+                    create_date: 0,
+                    details: null,
+                    discount_code: null,
+                    free_transmission: false,
+                    gift: false,
+                    id: 0,
+                    merchandise_number: 0,
+                    phone_number: null,
+                    post_code: null,
+                    state: null,
+                    state_obj: {name: "", id: null},
+                    total_basket_price: 0,
+                    total_basket_price_with_discount: 0,
+                    user: 0,
+                    email: null,
+                    approved: false,
+                },
             })
         }else {
             localStorage.setItem('cart', JSON.stringify(cart))
