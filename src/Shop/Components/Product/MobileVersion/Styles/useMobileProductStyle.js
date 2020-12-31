@@ -240,5 +240,11 @@ export const useMobileProductStyle = makeStyles((theme) => ({
     dialogContent: {
         padding: 24,
         height: '90%'
-    }
+    },
+    snackbarAction: {
+        paddingLeft: 0,
+    },
+    snackbarIcon: {
+        marginRight: 16,
+    },
 }), {index: 1});

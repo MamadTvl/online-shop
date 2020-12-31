@@ -41,6 +41,10 @@ function ProductDetail(props) {
                 <Alert
                     dir={'ltr'}
                     variant={'filled'}
+                    classes={{
+                        action: classes.snackbarAction,
+                        icon: classes.snackbarIcon,
+                    }}
                     style={{fontFamily: 'Shabnam'}}
                     onClose={() => setOpenSnackBar(false)}
                     severity={createCommentResult ? "success" : "error"}
@@ -71,49 +75,55 @@ function ProductDetail(props) {
                                 </div>
                             ))
                         }
-
-                        <StyledTextField
-                            id="comment-input"
-                            placeholder="دیدگاه خود را بنویسید"
-                            value={toFaDigit(commentInput)}
-                            disabled={!auth.isLogin}
-                            onChange={(event) => setCommentInput(event.target.value)}
-                            InputProps={{
-                                endAdornment:
-                                    <InputAdornment
-                                        style={{
-                                            position: 'absolute',
-                                            left: 0,
-                                            bottom: 28,
-                                            display: (commentInput === '') && 'none'
-                                        }}
-                                        position="end"
-                                    >
-                                        {
-                                            createCommentLoading
-                                                ?
-                                                <CircularProgress size={32} color={'initial'}
-                                                                  style={{color: '#F16522'}}/>
-                                                :
-                                                <IconButton
-                                                    onClick={() => setFetchPostComment(true)}
-                                                >
-                                                    <SendRoundedIcon
-                                                        style={{transform: 'rotate(180deg)', color: '#F16522'}}/>
-                                                </IconButton>
-
-                                        }
-                                    </InputAdornment>
-                                ,
-                                classes: {
-                                    input: classes.commentInput,
-                                    root: classes.commentInputRoot,
-                                }
+                        <form
+                            onSubmit={(event) => {
+                                event.preventDefault()
+                                setFetchPostComment(true)
                             }}
-                            fullWidth
-                            multiline
-                            variant="outlined"
-                        />
+                        >
+                            <StyledTextField
+                                required
+                                id="comment-input"
+                                placeholder="دیدگاه خود را بنویسید"
+                                value={toFaDigit(commentInput)}
+                                disabled={!auth.isLogin}
+                                onChange={(event) => setCommentInput(event.target.value)}
+                                InputProps={{
+                                    endAdornment:
+                                        <InputAdornment
+                                            style={{
+                                                position: 'absolute',
+                                                left: 0,
+                                                bottom: 28,
+                                            }}
+                                            position="end"
+                                        >
+                                            {
+                                                createCommentLoading
+                                                    ?
+                                                    <CircularProgress size={32} color={'initial'}
+                                                                      style={{color: '#F16522'}}/>
+                                                    :
+                                                    <IconButton
+                                                        type={'submit'}
+                                                    >
+                                                        <SendRoundedIcon
+                                                            style={{transform: 'rotate(180deg)', color: '#F16522'}}/>
+                                                    </IconButton>
+
+                                            }
+                                        </InputAdornment>
+                                    ,
+                                    classes: {
+                                        input: classes.commentInput,
+                                        root: classes.commentInputRoot,
+                                    }
+                                }}
+                                fullWidth
+                                multiline
+                                variant="outlined"
+                            />
+                        </form>
                     </TabPanel>
 
                 </AppBar>

@@ -36,7 +36,8 @@ function CommentContainer(props) {
     return (
         <>
             <Card className={classes.card}>
-                <Typography className={classes.detailTitle}>{toFaDigit(`دیدگاه ها (${separateDigit(comments.length)})`)}</Typography>
+                <Typography
+                    className={classes.detailTitle}>{toFaDigit(`دیدگاه ها (${separateDigit(comments.length)})`)}</Typography>
                 {comments.length > 0 && <MobileCommentCard isPreview={true} comment={comments[0]}/>}
                 <Button
                     onClick={() => setOpen(true)}
@@ -51,11 +52,16 @@ function CommentContainer(props) {
                     مشاهده بیشتر
                 </Button>
             </Card>
-            <FullScreenDialog open={open} setOpen={setOpen} title={toFaDigit(`دیدگاه ها (${separateDigit(comments.length)})`)}>
+            <FullScreenDialog open={open} setOpen={setOpen}
+                              title={toFaDigit(`دیدگاه ها (${separateDigit(comments.length)})`)}>
                 <Snackbar open={openSnackBar} autoHideDuration={6000} onClose={() => setOpenSnackBar(false)}>
                     <Alert
                         dir={'ltr'}
                         variant={'filled'}
+                        classes={{
+                            action: classes.snackbarAction,
+                            icon: classes.snackbarIcon,
+                        }}
                         style={{fontFamily: 'Shabnam'}}
                         onClose={() => setOpenSnackBar(false)}
                         severity={createCommentResult ? "success" : "error"}
@@ -75,48 +81,55 @@ function CommentContainer(props) {
                             </div>
                         ))
                     }
-                    <StyledTextField
-                        id="comment-input"
-                        placeholder="دیدگاه خود را بنویسید"
-                        value={toFaDigit(commentInput)}
-                        disabled={!auth.isLogin}
-                        onChange={(event) => setCommentInput(event.target.value)}
-                        InputProps={{
-                            endAdornment:
-                                <InputAdornment
-                                    style={{
-                                        position: 'absolute',
-                                        left: 0,
-                                        bottom: 28,
-                                        display: (commentInput === '') && 'none'
-                                    }}
-                                    position="end"
-                                >
-                                    {
-                                        createCommentLoading
-                                            ?
-                                            <CircularProgress size={32} color={'initial'}
-                                                              style={{color: '#F16522'}}/>
-                                            :
-                                            <IconButton
-                                                onClick={() => setFetchPostComment(true)}
-                                            >
-                                                <SendRoundedIcon
-                                                    style={{transform: 'rotate(180deg)', color: '#F16522'}}/>
-                                            </IconButton>
-
-                                    }
-                                </InputAdornment>
-                            ,
-                            classes: {
-                                input: classes.commentInput,
-                                root: classes.commentInputRoot,
-                            }
+                    <form
+                        onSubmit={(event) => {
+                            event.preventDefault()
+                            setFetchPostComment(true)
                         }}
-                        fullWidth
-                        multiline
-                        variant="outlined"
-                    />
+                    >
+                        <StyledTextField
+                            required
+                            id="comment-input"
+                            placeholder="دیدگاه خود را بنویسید"
+                            value={toFaDigit(commentInput)}
+                            disabled={!auth.isLogin}
+                            onChange={(event) => setCommentInput(event.target.value)}
+                            InputProps={{
+                                endAdornment:
+                                    <InputAdornment
+                                        style={{
+                                            position: 'absolute',
+                                            left: 0,
+                                            bottom: 28,
+                                        }}
+                                        position="end"
+                                    >
+                                        {
+                                            createCommentLoading
+                                                ?
+                                                <CircularProgress size={32} color={'initial'}
+                                                                  style={{color: '#F16522'}}/>
+                                                :
+                                                <IconButton
+                                                    type={'submit'}
+                                                >
+                                                    <SendRoundedIcon
+                                                        style={{transform: 'rotate(180deg)', color: '#F16522'}}/>
+                                                </IconButton>
+
+                                        }
+                                    </InputAdornment>
+                                ,
+                                classes: {
+                                    input: classes.commentInput,
+                                    root: classes.commentInputRoot,
+                                }
+                            }}
+                            fullWidth
+                            multiline
+                            variant="outlined"
+                        />
+                    </form>
                 </Card>
 
             </FullScreenDialog>

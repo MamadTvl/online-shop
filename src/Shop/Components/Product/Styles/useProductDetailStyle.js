@@ -100,4 +100,10 @@ export const useProductDetailStyle = makeStyles((theme) => ({
         whiteSpace: 'pre-wrap',
         lineHeight: '32px'
     },
+    snackbarAction: {
+        paddingLeft: 0,
+    },
+    snackbarIcon: {
+        marginRight: 16,
+    },
 }), {index: 1});
