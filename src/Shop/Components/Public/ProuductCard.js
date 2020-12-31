@@ -18,7 +18,7 @@ function ProductCard(props) {
                     root: classes.cardRoot,
                 }}
                 onClick={
-                    () => window.scrollTo(0, 0)}
+                    () => window.scrollTo({top: 0, behavior: 'smooth'})}
             >
                 <Link className={classes.cardRoot}
                       to={`/products/${product.unique_code}/${product.title}/${product.id}`}>

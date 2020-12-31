@@ -56,6 +56,7 @@ function useSearchData(fetch, search, page, catsLength, fromPrice, toPrice, hasD
                 }
 
             }
+            window.scrollTo({top: 0, behavior: 'smooth'})
         }
 
         if (fetch)

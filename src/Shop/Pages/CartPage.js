@@ -30,7 +30,7 @@ import usePostAddress from "../PostData/usePostAddress";
 function CartPage(props) {
     const localStorageCart = JSON.parse(localStorage.getItem('cart'))
     const forceUpdate = useForceUpdate()
-    const [fetchPost, setFetchPost] = useState(true)
+    const [fetchPostCart, setFetchPostCart] = useState(true)
     const [fetchPostAddress, setFetchPostAddress] = useState(false)
     const [fetchApplyCode, setFetchApplyCode] = useState(false)
     const [fetchPathCart, setFetchPathCart] = useState(false)
@@ -44,7 +44,7 @@ function CartPage(props) {
         phone_number: '',
     })
     const {setBasketChange} = props
-    const [postCardLoading, postCardResult] = usePostCart(fetchPost)
+    const [postCartLoading, postCartResult] = usePostCart(fetchPostCart)
     const [addressesDataLoading, addressesDataResult] = useAddressesData(true)
 
     const [addressCheckboxes, setAddressCheckboxes] = useState([])
@@ -143,12 +143,16 @@ function CartPage(props) {
         for (let i = 0; i < localStorageCart.length; i++) {
             cart.push(localStorageCart[i])
         }
-        console.log(cart)
+
         cart = cart.filter(item => item !== cart[findIndexOfCart(prvBox)])
-        console.log(cart)
-        localStorage.setItem('cart', JSON.stringify(cart))
+        if (cart.length === 0){
+            localStorage.removeItem('cart')
+        }else {
+            localStorage.setItem('cart', JSON.stringify(cart))
+        }
+
         setBasketChange(prvState => prvState + 1)
-        setFetchPost(true)
+        setFetchPostCart(true)
     }
 
     const isDuplicate = (newBox) => {
@@ -174,7 +178,7 @@ function CartPage(props) {
         }
         localStorage.setItem('cart', JSON.stringify(cart))
         setBasketChange(prvState => prvState + 1)
-        setFetchPost(true)
+        setFetchPostCart(true)
     }
 
     const handleClickContinue = (event) => {
@@ -204,21 +208,21 @@ function CartPage(props) {
             }
 
         }
-        window.scrollTo(0, 0)
+        window.scrollTo({top: 0, behavior: 'smooth'})
     }
 
 
     useEffect(() => {
-        if (!postCardLoading && fetchPost && localStorageCart) {
+        if (!postCartLoading && fetchPostCart && localStorageCart) {
             setBasketDetails({
-                boxes: postCardResult.boxes,
-                basket: postCardResult.basket,
+                boxes: postCartResult.boxes,
+                basket: postCartResult.basket,
             })
-            setFetchPost(false)
+            setFetchPostCart(false)
             discountCode !== '' && setFetchApplyCode(true)
 
         }
-    }, [postCardLoading, postCardResult])
+    }, [postCartLoading, postCartResult])
 
     useEffect(() => {
         if (!addressesDataLoading) {
@@ -279,7 +283,7 @@ function CartPage(props) {
         <>
             <Backdrop
                 className={classes.backdrop}
-                open={postCardLoading || addressesDataLoading || applyCodeLoading || pathCartLoading || postAddressLoading}
+                open={postCartLoading || addressesDataLoading || applyCodeLoading || pathCartLoading || postAddressLoading}
             >
                 <CircularProgress size={70} color="inherit"/>
             </Backdrop>
@@ -494,7 +498,7 @@ function CartPage(props) {
                                         fullWidth
                                         onClick={() => {
                                             setStep(step - 1)
-                                            window.scrollTo(0, 0)
+                                            window.scrollTo({top: 0, behavior: 'smooth'})
                                         }}
                                         className={classes.backButton}
                                         variant={'outlined'}

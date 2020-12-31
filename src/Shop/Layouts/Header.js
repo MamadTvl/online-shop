@@ -45,7 +45,7 @@ function Header(props) {
                 state: {showCampaign: false}
         });
             setSearchInput('')
-            window.scrollTo(0, 0)
+            window.scrollTo({top: 0, behavior: 'smooth'})
         }else {
             history.push({
                 pathname: '/search',
@@ -81,7 +81,7 @@ function Header(props) {
                             <MenuIcon/>
                         </IconButton>
                         <Link style={{margin: 'auto'}} to={'/'}>
-                            <img onClick={() => window.scrollTo(0, 0)} className={classes.logo} src={logo} alt={'didartshop.ir'}/>
+                            <img onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className={classes.logo} src={logo} alt={'didartshop.ir'}/>
                         </Link>
                         <Button
                             size={"small"}
@@ -159,7 +159,7 @@ function Header(props) {
                         <Button
                             onClick={() => {
                                 history.push(`${auth.isLogin ? '/profile' : '/login'}`)
-                                window.scrollTo(0, 0)
+                                window.scrollTo({top: 0, behavior: 'smooth'})
                             }}
                             size={"small"}
                             dir={'ltr'}
@@ -189,7 +189,7 @@ function Header(props) {
                         </Button>
                         <IconButton onClick={() => {
                             history.push(`${auth.isLogin ? '/profile' : '/login'}`)
-                            window.scrollTo(0, 0)
+                            window.scrollTo({top: 0, behavior: 'smooth'})
                         }}
                                     className={classes.iconButtons}>
                             <SvgIcon xmlns="http://www.w3.org/2000/svg" width="17.5" height="19.5"
@@ -227,7 +227,7 @@ function Header(props) {
                                 className={classes.cart}
                                 onClick={() => {
                                     history.push('/profile/cart')
-                                    window.scrollTo(0, 0)
+                                    window.scrollTo({top: 0, behavior: 'smooth'})
                                 }}
                                 endIcon={
                                     <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
@@ -267,7 +267,7 @@ function Header(props) {
                         >
                             <IconButton onClick={() => {
                                 history.push('/profile/cart')
-                                window.scrollTo(0, 0)
+                                window.scrollTo({top: 0, behavior: 'smooth'})
                             }} className={classes.iconButtons}>
                                 <SvgIcon xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5"
                                          viewBox="0 0 19.5 21.5">

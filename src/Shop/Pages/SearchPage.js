@@ -44,14 +44,14 @@ function SearchPage({location}) {
     )
     const handleChangePages = (pageNumber) => {
         setPage(pageNumber)
-        window.scrollTo(0, 0)
+        window.scrollTo({top: 0, behavior: 'smooth'})
     }
     const handleMobileChangePages = (pageNumber) => {
         setMobilePage(pageNumber)
         if(mobilePage % 3 !== 0 || mobilePage === 0){
             setPage(Math.floor(mobilePage/3))
         }
-        window.scrollTo(0, 0)
+        window.scrollTo({top: 0, behavior: 'smooth'})
     }
 
     const [searchItems, setSearchItems] = useState({

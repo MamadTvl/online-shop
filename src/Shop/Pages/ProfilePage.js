@@ -74,7 +74,7 @@ function ProfilePage() {
                     <div className={classes.actionContainer}>
                         <Button
                             onClick={() => {
-                                window.scrollTo(0, 0)
+                                window.scrollTo({top: 0, behavior: 'smooth'})
                                 history.push('/profile/personal-info')
                             }}
                             className={classes.editButton}
@@ -109,7 +109,7 @@ function ProfilePage() {
                     <Typography style={{margin: 'auto 0'}} className={classes.title}>آدرس‌های شما</Typography>
                     <Button
                         onClick={() => {
-                            window.scrollTo(0, 0)
+                            window.scrollTo({top: 0, behavior: 'smooth'})
                             history.push('/profile/addresses')
                         }}
                     >
