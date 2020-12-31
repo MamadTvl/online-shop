@@ -20,6 +20,7 @@ function FirstStep(props) {
                 <Typography className={classes.label}>شماره موبایل</Typography>
                 <TextField
                     dir={'ltr'}
+                    type={'tel'}
                     error={errors.mobileNumber}
                     placeholder={toFaDigit('09123456789')}
                     value={toFaDigit(values.mobileNumber)}

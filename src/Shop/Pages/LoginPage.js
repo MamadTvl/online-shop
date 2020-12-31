@@ -21,6 +21,7 @@ import useAxios from "axios-hooks";
 import {useHistory} from 'react-router-dom'
 import useWindowSize from "../../utills/Hooks/useWindowSize";
 import {useAuth} from "../../utills/Auth";
+import {toEnDigit, toFaDigit} from "../../utills/ToFaDigit";
 
 function LoginPage() {
     document.title = 'ورود به حساب کاربری'
@@ -60,7 +61,7 @@ function LoginPage() {
         try {
             const response = await signIn({
                 data: {
-                    "mobile_number": values.mobileNumber,
+                    "mobile_number": toEnDigit(values.mobileNumber),
                     "password": values.password,
                 }
             })
@@ -89,9 +90,10 @@ function LoginPage() {
                                 موبایل</Typography>
                             <TextField
                                 required
+                                type={'tel'}
                                 dir={'ltr'}
                                 error={error}
-                                value={values.mobileNumber}
+                                value={toFaDigit(values.mobileNumber)}
                                 onChange={handleChange('mobileNumber')}
                                 InputProps={{
                                     classes: {
@@ -133,6 +135,7 @@ function LoginPage() {
                                         </InputAdornment>,
                                     classes: {
                                         input: classes.input,
+                                        root: classes.root,
                                     }
                                 }}
                                 fullWidth

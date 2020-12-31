@@ -16,11 +16,11 @@ import TablePaginationActions from "../Components/Public/TablePaginationActions"
 import useWindowSize from "../../utills/Hooks/useWindowSize";
 
 function SearchPage({location}) {
+    const history = useHistory()
     const search = useRef(location.search)
     const size = useWindowSize()
     const [catsLoading, catsResult] = useCategoriesData(true)
     const classes = useStyles()
-    const history = useHistory()
     const [searchStates, dispatch] = useReducer(reducer, initialStates)
     const [page, setPage] = useState(0)
     const [mobilePage, setMobilePage] = useState(0)
@@ -39,7 +39,8 @@ function SearchPage({location}) {
         searchStates.categories.length,
         filterValues.from,
         filterValues.to,
-        searchStates.hasDiscount
+        searchStates.hasDiscount,
+        location.state ? location.state.showCampaign : false
     )
     const handleChangePages = (pageNumber) => {
         setPage(pageNumber)
@@ -58,6 +59,7 @@ function SearchPage({location}) {
     })
     const filterPrice = () => {
         setFilterValues(searchStates.filterValues)
+        location.state = {showCampaign: false}
     }
 
     useEffect(() => {
@@ -67,16 +69,25 @@ function SearchPage({location}) {
                 categories: catsResult,
             })
             const params = new URLSearchParams(search.current)
-            for (let i = 0; i < catsResult.length; i++) {
-                const categoryId = params.get(`category_list[${i}]`)
-                if (categoryId) {
-                    dispatch({
-                        type: 'selectCategory',
-                        categoryId: parseInt(categoryId),
-                        value: true,
-                    })
-                    setChange(prevState => prevState + 1)
+            if(!params.has('campaign_id')) {
+                for (let i = 0; i < catsResult.length; i++) {
+                    const categoryId = params.get(`category_list[${i}]`)
+                    if (categoryId) {
+                        location.state = {showCampaign: false}
+                        dispatch({
+                            type: 'selectCategory',
+                            categoryId: parseInt(categoryId),
+                            value: true,
+                        })
+                        setChange(prevState => prevState + 1)
+                    }
                 }
+            } else {
+                history.push({
+                    pathname: '/search',
+                    search: `campaign_id=${params.get('campaign_id')}`,
+                    state: {showCampaign: true}
+                })
             }
             search.current = undefined
         }
@@ -175,7 +186,10 @@ function SearchPage({location}) {
                                         <Typography className={classes.discountTitle}>تخفیف‌دار ها</Typography>
                                         <StyledSwitch
                                             checked={searchStates.hasDiscount}
-                                            onChange={() => dispatch({type: 'discount'})}
+                                            onChange={() => {
+                                                dispatch({type: 'discount'})
+                                                location.state = {showCampaign: false}
+                                            }}
                                         />
                                     </CardContent>
                                 </Card>

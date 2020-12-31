@@ -39,11 +39,18 @@ function Header(props) {
                 }
                 tempLoc += `search_text=${searchInput}`
             }
-            history.push(`/search${tempLoc}`);
+            history.push({
+                pathname: `/search`,
+                search: tempLoc,
+                state: {showCampaign: false}
+        });
             setSearchInput('')
             window.scrollTo(0, 0)
         }else {
-            history.push('/search')
+            history.push({
+                pathname: '/search',
+                state: {showCampaign: false}
+            })
         }
     }
     useEffect(() => {

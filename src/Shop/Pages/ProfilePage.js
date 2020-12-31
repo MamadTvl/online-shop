@@ -71,7 +71,7 @@ function ProfilePage() {
                                 className={classes.mobileNumber}>{toFaDigit((userDataResult.mobile_number).toString())}</Typography>
                         </div>
                     </div>
-                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <div className={classes.actionContainer}>
                         <Button
                             onClick={() => {
                                 window.scrollTo(0, 0)

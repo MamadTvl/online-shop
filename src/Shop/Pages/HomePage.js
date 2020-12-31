@@ -15,7 +15,7 @@ function HomePage() {
 
     if (loading)
         return <Skeleton animation={'wave'} width={'100%'} height={1000} variant={'rect'}/>
-    console.log(result)
+
     return (
         <>
             <Slider

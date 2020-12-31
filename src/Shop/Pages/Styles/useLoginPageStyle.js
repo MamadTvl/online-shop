@@ -68,9 +68,12 @@ export const useLoginPageStyle = makeStyles((theme) => ({
     },
 
     input: {
-
+        fontFamily: 'Shabnam',
     },
-    root: {},
+    root: {
+        borderRadius: 6,
+        height: 48,
+    },
     passwordContainer: {
         margin: 'auto 12.5px'
     },

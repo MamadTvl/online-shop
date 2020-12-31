@@ -47,6 +47,13 @@ export const useProfilePageStyle = makeStyles((theme) => ({
         fontSize: 16,
         color: '#545454',
     },
+    actionContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        [theme.breakpoints.down('xs')]: {
+            marginTop: 16,
+        }
+    },
     editButton: {
         height: 48,
         borderColor: '#F16522',
@@ -59,6 +66,9 @@ export const useProfilePageStyle = makeStyles((theme) => ({
             backgroundColor: '#F16522',
             color: 'white',
         },
+        [theme.breakpoints.down('xs')]: {
+            marginBottom: 8,
+        }
     },
     title: {
         fontFamily: 'Shabnam',
