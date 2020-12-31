@@ -150,6 +150,10 @@ function CartPage(props) {
             localStorage.removeItem('cart')
         }else {
             localStorage.setItem('cart', JSON.stringify(cart))
+            setBasketDetails({
+                ...basketDetails,
+                boxes: []
+            })
         }
 
         setBasketChange(prvState => prvState + 1)
