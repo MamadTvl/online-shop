@@ -44,10 +44,10 @@ function Header(props) {
                 pathname: `/search`,
                 search: tempLoc,
                 state: {showCampaign: false}
-        });
+            });
             setSearchInput('')
             SmoothVerticalScrolling(document.body, 500, "top")
-        }else {
+        } else {
             history.push({
                 pathname: '/search',
                 state: {showCampaign: false}
@@ -82,7 +82,12 @@ function Header(props) {
                             <MenuIcon/>
                         </IconButton>
                         <Link style={{margin: 'auto'}} to={'/'}>
-                            <img onClick={() => SmoothVerticalScrolling(document.body, 500, "top")} className={classes.logo} src={logo} alt={'didartshop.ir'}/>
+                            <img
+                                onClick={() => SmoothVerticalScrolling(document.body, 500, "top")}
+                                className={classes.logo}
+                                src={logo}
+                                alt={'دیدآرت شاپ'}
+                            />
                         </Link>
                         <Button
                             size={"small"}
@@ -182,9 +187,9 @@ function Header(props) {
                         >
                             {
                                 !auth.loading ?
-                                auth.isLogin
-                                    ? 'خوش‌آمدید'
-                                    : 'ورود / ثبت‌نام'
+                                    auth.isLogin
+                                        ? 'خوش‌آمدید'
+                                        : 'ورود / ثبت‌نام'
                                     : ''
                             }
                         </Button>

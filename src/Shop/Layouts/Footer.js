@@ -3,7 +3,9 @@ import {useStyles} from "./Styles/FooterStyle";
 import {Grid, Typography} from "@material-ui/core";
 import logo from '../../img/zimmerman-white.svg'
 import Link from "@material-ui/core/Link";
+import {Link as RouterLink} from "react-router-dom"
 import SocialNetwork from "./SocialNetwork";
+import {SmoothVerticalScrolling} from "../../utills/smoothScroll";
 
 function Footer() {
     const classes = useStyles()
@@ -13,7 +15,14 @@ function Footer() {
             <div className={classes.root}>
                 <Grid container spacing={3}>
                     <Grid item md={6} sm={8} xs={12}>
-                        <a href={'google.com'}><img className={classes.logo} src={logo} alt={'zimmerman.ir'}/></a>
+                        <RouterLink to={'/'}>
+                            <img
+                                onClick={() => SmoothVerticalScrolling(document.body, 500, "top")}
+                                className={classes.logo}
+                                src={logo}
+                                alt={'دیدآرت شاپ'}
+                            />
+                        </RouterLink>
                         <Typography className={classes.description} paragraph noWrap={false}>دیجی‌استایل، پس از تجربه‌ی
                             موفق فروشگاه اینترنتی دیجی‌کالا به صورت تخصصی پا به
                             عرصه مد، پوشاک و سبک زندگی گذاشت تا همان تجربه‌ی شیرین، در قالبی نو تکرار شود. در دیجی
