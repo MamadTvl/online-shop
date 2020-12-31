@@ -44,6 +44,7 @@ function ProductDetail(props) {
                     classes={{
                         action: classes.snackbarAction,
                         icon: classes.snackbarIcon,
+                        message: classes.snackbarMessage
                     }}
                     style={{fontFamily: 'Shabnam'}}
                     onClose={() => setOpenSnackBar(false)}

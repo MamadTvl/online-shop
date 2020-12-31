@@ -247,4 +247,7 @@ export const useMobileProductStyle = makeStyles((theme) => ({
     snackbarIcon: {
         marginRight: 16,
     },
+    snackbarMessage: {
+        direction: 'rtl'
+    }
 }), {index: 1});

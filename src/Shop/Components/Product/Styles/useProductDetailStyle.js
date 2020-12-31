@@ -106,4 +106,7 @@ export const useProductDetailStyle = makeStyles((theme) => ({
     snackbarIcon: {
         marginRight: 16,
     },
+    snackbarMessage: {
+        direction: 'rtl'
+    }
 }), {index: 1});
