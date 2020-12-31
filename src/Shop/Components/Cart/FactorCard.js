@@ -32,7 +32,7 @@ function FactorCard(props) {
                 variant={'contained'}
                 className={classes.payButton}
             >
-                <img style={{width: '40vw'}} src={idPayLogo} alt="IdPay"/>
+                <img className={classes.paymentIcon} src={idPayLogo} alt="IdPay"/>
             </Button>
         </>
     )

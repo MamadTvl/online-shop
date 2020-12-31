@@ -9,4 +9,5 @@ export const StyledRadio = withStyles({
         },
     },
     checked: {},
-})((props) => <Radio color="default" {...props} />);
+
+}, {index: 1})((props) => <Radio color="default" {...props} />);

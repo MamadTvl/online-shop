@@ -35,5 +35,8 @@ export const useFactorCardStyle = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]:{
             width: '100%',
         }
+    },
+    paymentIcon: {
+        width: '40vw',
     }
 }), {index: 1});
