@@ -47,7 +47,7 @@ export const useProductDetailStyle = makeStyles((theme) => ({
         color: '#444444'
     },
     commentInputRoot: {
-        marginTop: 24,
+        marginTop: 8,
 
     },
 
