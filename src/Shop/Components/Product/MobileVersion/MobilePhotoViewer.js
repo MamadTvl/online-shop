@@ -54,7 +54,7 @@ function MobilePhotoViewer(props) {
                             index={index} enableMouseEvents>
                 {
                     images.map((image) => (
-                        <img className={classes.imageView} src={image} alt={'Hello'}/>
+                        <img className={classes.imageView} src={image} alt={document.title}/>
                     ))
                 }
             </SwipeableViews>

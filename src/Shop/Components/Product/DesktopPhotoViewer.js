@@ -85,7 +85,7 @@ function DesktopPhotoViewer(props) {
             <SwipeableViews onChangeIndex={(event) => setIndex(event)} axis={'x-reverse'} index={index} enableMouseEvents>
                 {
                     images.map((image) => (
-                        <img className={classes.imageView} src={image} alt={image}/>
+                        <img className={classes.imageView} src={image} alt={document.title}/>
                     ))
                 }
             </SwipeableViews>
@@ -111,7 +111,7 @@ function DesktopPhotoViewer(props) {
                 {
                     images.map((image, index) => (
                         <ButtonBase className={classes.listItem} onClick={() => setIndex(index)}>
-                            <img id={`image-button-${index}`} className={classes.imageButton} src={image} alt={'Hello'}/>
+                            <img id={`image-button-${index}`} className={classes.imageButton} src={image} alt={document.title}/>
                         </ButtonBase>
                     ))
                 }

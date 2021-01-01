@@ -10,10 +10,11 @@ import useWindowSize from "../../../utills/Hooks/useWindowSize";
 
 function OrderCard(props) {
     const {box, onChangeSelects, product, deleteHandler} = props
+
     const size = useWindowSize()
     const classes = useOrderCardStyle()
     const getMaxStockNumber = () => {
-        if (product.merchandise_type === 1) {
+        if (product.merchandise_type === "1") {
             for (let i = 0; i < product.stock_list.length; i++) {
                 if (product.stock_list[i].size === box.size
                     && product.stock_list[i].color === box.color) {
@@ -24,6 +25,18 @@ function OrderCard(props) {
             return product.stock_number
         }
 
+    }
+    const isExist = (size, color) => {
+        if (product.merchandise_type === "1") {
+            for (let i = 0; i < product.stock_list.length; i++) {
+                if (product.stock_list[i].size === size
+                    && product.stock_list[i].color === color) {
+                    return product.stock_list[i].stock_number !== 0
+                }
+            }
+        } else {
+            return product.stock_number !== 0
+        }
     }
     return (
         <Card className={classes.card}>
@@ -40,17 +53,19 @@ function OrderCard(props) {
                                 value={box.size}
                                 onChange={
                                     (event) => {
-                                        onChangeSelects({
-                                            id: product.id,
-                                            color: box.color,
-                                            size: box.size,
-                                            count: box.count,
-                                        }, {
-                                            id: product.id,
-                                            color: box.color,
-                                            size: event.target.value,
-                                            count: box.count,
-                                        })
+                                        if (isExist(event.target.value, box.color)) {
+                                            onChangeSelects({
+                                                id: product.id,
+                                                color: box.color,
+                                                size: box.size,
+                                                count: box.count,
+                                            }, {
+                                                id: product.id,
+                                                color: box.color,
+                                                size: event.target.value,
+                                                count: box.count,
+                                            })
+                                        }
                                     }}
                                 InputProps={{
                                     classes: {
@@ -75,17 +90,19 @@ function OrderCard(props) {
                                 value={box.color}
                                 onChange={
                                     (event) => {
-                                        onChangeSelects({
-                                            id: product.id,
-                                            color: box.color,
-                                            size: box.size,
-                                            count: box.count,
-                                        }, {
-                                            id: product.id,
-                                            color: event.target.value,
-                                            size: box.size,
-                                            count: box.count,
-                                        })
+                                        if (isExist(box.size, event.target.value)) {
+                                            onChangeSelects({
+                                                id: product.id,
+                                                color: box.color,
+                                                size: box.size,
+                                                count: box.count,
+                                            }, {
+                                                id: product.id,
+                                                color: event.target.value,
+                                                size: box.size,
+                                                count: box.count,
+                                            })
+                                        }
                                     }}
                                 InputProps={{
                                     classes: {
