@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import {useAxios} from "../../utills/Hooks/useAxios";
 
-function usePostComment(fetch, id, input) {
-    const [result, setResult] = useState(false)
+function useLikingComment(fetch, id, status) {
+    const [result, setResult] = useState()
     const [loading, setLoading] = useState(false)
-    const [, createComment] = useAxios({
-        url: '/create_comment',
+    const [, liking] = useAxios({
+        url: '/liking',
         method: 'POST',
     }, {manual: true})
 
@@ -13,18 +13,17 @@ function usePostComment(fetch, id, input) {
         async function getResult() {
             try {
                 setLoading(true)
-                const response = await createComment({
+                const response = await liking({
                     data: {
-                        "is_comment": true,
-                        "text": input,
-                        "merchandise_id": id
+                        "like": status.like,
+                        "dislike": status.dislike,
+                        "comment_id": id
                     },
                 })
-                setResult(response.data.status === 'success')
+                setResult(response.data.data)
                 setLoading(false)
-
             } catch (err) {
-                setResult(false)
+                setResult(null)
                 setLoading(false)
             }
         }
@@ -36,4 +35,4 @@ function usePostComment(fetch, id, input) {
     return [loading, result]
 }
 
-export default usePostComment
+export default useLikingComment

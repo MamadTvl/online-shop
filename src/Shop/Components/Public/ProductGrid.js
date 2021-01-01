@@ -8,7 +8,7 @@ import {useProductSliderStyles} from "./Styles/ProductsSliderStyle";
 function ProductGrid(props) {
     const {products} = props
     const classes = useProductSliderStyles()
-    // if 1 = xs=6
+
     return (
         <Grid justify={'center'} container spacing={2}>
             {

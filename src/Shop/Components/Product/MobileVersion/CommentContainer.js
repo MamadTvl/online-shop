@@ -68,8 +68,8 @@ function CommentContainer(props) {
                         severity={createCommentResult ? "success" : "error"}
                     >{
                         createCommentResult
-                            ? 'نظر شما ثبت گردید و پس از تایید در وب سایت نمایش داده خواهد شد'
-                            : 'به نظر میرسد که مشکلی پیش آمده لطفا دوباره تلاش کنید'
+                            ? 'نظر شما ثبت شد. پس از بررسی، نظر شما در سایت قرار داده می‌شود.'
+                            : 'خطا لطفا دوباره تلاش کنید.'
                     }
 
                     </Alert>

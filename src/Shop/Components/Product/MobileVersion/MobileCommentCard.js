@@ -1,18 +1,43 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Button, Card, SvgIcon, Typography} from "@material-ui/core";
 import {useMobileProductStyle} from "./Styles/useMobileProductStyle";
 import PropTypes from 'prop-types';
 import {separateDigit, toFaDigit} from "../../../../utills/ToFaDigit";
+import useLikingComment from "../../../PostData/useLikingComment";
 
 
 function MobileCommentCard(props) {
     const classes = useMobileProductStyle()
     const {comment, isPreview} = props
-    const [isActive, setIsActive] = useState({
+    const [status, setStatus] = useState({
         like: comment.is_liked,
         dislike: comment.is_disliked,
+        likes_number: comment.likes_number,
+        dislikes_number: comment.dislikes_number,
     })
+    const [fetchLiking, setFetchLiking] = useState(false)
+    const [data, setData] = useState({
+        like: false,
+        dislike: false,
+    })
+    const [likingLoading, likingResult] = useLikingComment(fetchLiking, comment.id, data)
 
+    useEffect(() => {
+        if(!likingLoading && likingResult!==undefined){
+            if (likingResult !== null){
+                setStatus({
+                    like: likingResult.is_liked,
+                    dislike: likingResult.is_disliked,
+                    likes_number: likingResult.likes_number,
+                    dislikes_number: likingResult.dislikes_number,
+                })
+            }
+            else {
+                // show error
+            }
+            setFetchLiking(false)
+        }
+    }, [likingLoading, likingResult])
     return (
         <Card className={classes.commentCard}>
             <Typography className={classes.userComment}>{comment.user.name_and_last_name}</Typography>
@@ -33,19 +58,22 @@ function MobileCommentCard(props) {
                         dir={'ltr'}
                         color={'primary'}
                         classes={{
-                            textPrimary: !isActive.like
+                            textPrimary: !status.like
                                 ? classes.defaultButtonColor
                                 : classes.activeColor
                         }}
                         variant={'text'}
-                        onClick={() => setIsActive({
-                            like: true,
-                            dislike: false,
-                        })}
+                        onClick={() => {
+                            setData({
+                                like: true,
+                                dislike: false,
+                            })
+                            setFetchLiking(true)
+                        }}
                         endIcon={
                             <SvgIcon color={'primary'}
                                      classes={{
-                                         colorPrimary: !isActive.like
+                                         colorPrimary: !status.like
                                              ? classes.defaultColor
                                              : classes.activeColor
                                      }}
@@ -55,27 +83,30 @@ function MobileCommentCard(props) {
                             </SvgIcon>
                         }
                     >
-                        {separateDigit(comment.likes_number)}
+                        {separateDigit(status.likes_number)}
                     </Button>
 
                     <Button
                         className={classes.like}
                         color={'primary'}
                         classes={{
-                            textPrimary: !isActive.dislike
+                            textPrimary: !status.dislike
                                 ? classes.defaultButtonColor
                                 : classes.activeColor
                         }}
                         dir={'ltr'}
                         variant={'text'}
-                        onClick={() => setIsActive({
-                            like: false,
-                            dislike: true,
-                        })}
+                        onClick={() => {
+                            setData({
+                                like: false,
+                                dislike: true,
+                            })
+                            setFetchLiking(true)
+                        }}
                         endIcon={
                             <SvgIcon color={'primary'}
                                      classes={{
-                                         colorPrimary: !isActive.dislike
+                                         colorPrimary: !status.dislike
                                              ? classes.defaultColor
                                              : classes.activeColor
                                      }}
@@ -86,7 +117,7 @@ function MobileCommentCard(props) {
                             </SvgIcon>
                         }
                     >
-                        {separateDigit(comment.dislikes_number)}
+                        {separateDigit(status.dislikes_number)}
                     </Button>
                 </div>
             }
