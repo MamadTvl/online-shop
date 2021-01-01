@@ -56,6 +56,7 @@ export const useProductDetailStyle = makeStyles((theme) => ({
         backgroundColor: '#FAFAFA',
         position: 'relative',
         borderRadius: 10,
+        boxShadow: 'none'
     },
     cardHeader: {
         display: 'flex',

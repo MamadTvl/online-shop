@@ -167,6 +167,7 @@ export const useMobileProductStyle = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         padding: 16,
+        boxShadow: 'none',
     },
     userComment: {
         fontFamily: 'Shabnam',
