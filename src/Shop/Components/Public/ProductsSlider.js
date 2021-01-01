@@ -27,7 +27,6 @@ function ProductsSlider(props) {
     })
 
     useEffect(() => {
-        if (products.length > 4 || (products.length === 4 && size.width <= 1280) ) {
             try {
                 if (size.width > 900){
                     document.getElementsByClassName('custom-slider-slick')[0]
@@ -44,7 +43,6 @@ function ProductsSlider(props) {
                 const slideContainer = document.getElementsByClassName('custom-slider-slick')[0]
                 slideContainer.style.marginTop = '23px'
             }catch (e) {}
-        }
     }, [products.length, size.width])
 
     useEffect(() => {
@@ -96,14 +94,17 @@ function ProductsSlider(props) {
                 rtl: true,
             })
         }
-        if (size.width >= 373 && size.width <= 500 && products.length >= 4) {
-            const slides = document.getElementsByClassName('custom-slider-slick')[0]
-                .children[1].children[0].children
-            // if you want to find out what you are doing log it !
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].children[0].style.display = 'flex'
-                slides[i].children[0].style.justifyContent = 'center'
-            }
+        if (size.width >= 373 && size.width <= 500) {
+            try{
+                const slides = document.getElementsByClassName('custom-slider-slick')[0]
+                    .children[1].children[0].children
+                // if you want to find out what you are doing log it !
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].children[0].style.display = 'flex'
+                    slides[i].children[0].style.justifyContent = 'center'
+                }
+            }catch(err){}
+
         }
     }, [size.width])
 
