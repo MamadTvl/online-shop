@@ -71,7 +71,7 @@ function PreviewOrderCard(props) {
                 <div className={classes.left}>
                     <div className={classes.dataContainer}>
                         <Typography className={classes.title}>هزینه سفارش</Typography>
-                        <Typography className={classes.data}>{`${separateDigit(order.cost)} تومان`}</Typography>
+                        <Typography className={classes.data}>{`${separateDigit(order.total_basket_price_with_discount)} تومان`}</Typography>
                     </div>
                 </div>
             </div>

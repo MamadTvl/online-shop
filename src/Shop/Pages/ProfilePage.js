@@ -26,19 +26,6 @@ function ProfilePage() {
     const classes = useProfilePageStyle()
     const history = useHistory()
 
-    function createOrderData(code, date, status, cost) {
-        return {code, date, status, cost}
-    }
-
-
-    const orders = [
-        createOrderData('۳۴۰۹۵۸۴۷۲۳۰۴۹۲۹۸', '۹۸/۱۱/۱۵', 'درحال بررسی', '560000'),
-        createOrderData('۳۴۰۹۵۸۴۷۲۳۰۴۹۲۹۸', '۹۸/۱۱/۱۵', 'تحویل داده شده', '560000'),
-        createOrderData('۳۴۰۹۵۸۴۷۲۳۰۴۹۲۹۸', '۹۸/۱۱/۱۵', 'تحویل داده شده', '560000'),
-        createOrderData('۳۴۰۹۵۸۴۷۲۳۰۴۹۲۹۸', '۹۸/۱۱/۱۵', 'درحال بررسی', '560000'),
-        createOrderData('۳۴۰۹۵۸۴۷۲۳۰۴۹۲۹۸', '۹۸/۱۱/۱۵', 'درحال بررسی', '560000'),
-    ]
-
     const handleDeleteAddress = (id) => {
         setDeleteId(id)
         setFetchDelete(true)
