@@ -13,7 +13,7 @@ function ProductGrid(props) {
         <Grid justify={'center'} container spacing={2}>
             {
                 products.map(product => (
-                    <Grid  item xs={3} >
+                    <Grid item sm={3} xs={12}>
                         <ProductCard className={classes.card} product={product}/>
                     </Grid>
                 ))

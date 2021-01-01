@@ -60,6 +60,7 @@ export const useProductSliderStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             height: 320,
             width: 215,
+            margin: 'auto'
         },
     },
 
