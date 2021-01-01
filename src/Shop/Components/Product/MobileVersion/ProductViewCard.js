@@ -15,7 +15,7 @@ function ProductViewCard(props) {
     const [selectedColor, setSelectedColor] = useState(product.color_list[0])
     const [count, setCount] = useState(1)
     const getMaxStockNumber = () => {
-        if (product.merchandise_type == 1) {
+        if (product.merchandise_type === "1") {
             for (let i = 0; i < product.stock_list.length; i++) {
                 if (product.stock_list[i].size === selectedSize
                     && product.stock_list[i].color === selectedColor) {
