@@ -1,8 +1,9 @@
 import React from "react";
-import {Card, CardActionArea, Typography} from "@material-ui/core";
+import {Card, Typography} from "@material-ui/core";
 import PropType from 'prop-types'
-import {separateDigit} from '../../../utills/ToFaDigit'
+import {separateDigit, toFaDigit} from '../../../utills/ToFaDigit'
 import {usePreviewOrderStyle} from "./Styles/usePreviewOrderStyle";
+import moment from "jalali-moment";
 
 function PreviewOrderCard(props) {
     const classes = usePreviewOrderStyle()
@@ -12,30 +13,37 @@ function PreviewOrderCard(props) {
     const setData = (index) => {
         switch (index) {
             case 0:
-                return order.code
+                return toFaDigit(order.basket_code)
             case 1:
-                return order.date
+                return toFaDigit(moment.unix(order.create_date).format("jYYYY/jM/jD"))
             case 2:
                 return order.status
             default:
                 break
         }
     }
+    const setStatusText = (status) => {
+        if (status === '1') {
+            return 'در حال بررسی'
+        } else if ('2') {
+            return 'تحویل داده شده'
+        } else if ('3') {
+            return 'لغو شده'
+        }
+    }
     const setStatusColor = (status) => {
-        if (status === 'درحال بررسی') {
-            return {
-                color: '#FF9E02'
-            }
-        } else {
-            return {
-                color: '#0AD071'
-            }
+        if (status === '1') {
+            return {color: '#FF9E02'}
+        } else if ('2') {
+            return {color: '#0AD071'}
+        } else if ('3') {
+            return {color: '#f12222'}
         }
 
     }
     return (
         <Card style={{marginBottom: 12}}>
-            <CardActionArea className={classes.card}>
+            <div className={classes.card}>
                 <div className={classes.right}>
                     {
                         titles.map((title, index) => (
@@ -43,9 +51,17 @@ function PreviewOrderCard(props) {
                                 <Typography className={classes.title}>{title}</Typography>
                                 {
                                     index !== 2
-                                        ? <Typography className={classes.data}>{setData(index)}</Typography>
-                                        : <Typography className={classes.data}
-                                                      style={setStatusColor(setData(index))}>{setData(index)}</Typography>
+                                        ? <Typography
+                                            className={classes.data}
+                                        >
+                                            {setData(index)}
+                                        </Typography>
+                                        : <Typography
+                                            className={classes.data}
+                                            style={setStatusColor(setData(index))}
+                                        >
+                                            {setStatusText(setData(index))}
+                                        </Typography>
 
                                 }
                             </div>
@@ -58,7 +74,7 @@ function PreviewOrderCard(props) {
                         <Typography className={classes.data}>{`${separateDigit(order.cost)} تومان`}</Typography>
                     </div>
                 </div>
-            </CardActionArea>
+            </div>
         </Card>
     )
 }

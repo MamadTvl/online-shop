@@ -8,18 +8,7 @@
     max-width: 100%;
     height: auto;
 }
-/*@media only screen and (max-width: 600px) {*/
-/*    .image {*/
-/*        width: 100%;*/
-/*        height: 200px;*/
-/*    }*/
-/*}*/
-/*@media only screen and (min-width: 960px) {*/
-/*    .image {*/
-/*        width: 100%;*/
-/*        height: 600px;*/
-/*    }*/
-/*}*/
+
 .slick-dots li button:before {
     height: 16px;
     width: 16px;

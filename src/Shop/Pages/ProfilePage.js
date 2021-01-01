@@ -12,6 +12,7 @@ import ProfilePageSkeleton from "../Components/Skeletons/ProfilePageSkeleton";
 import useAddressesData from "../FetchData/useAddressesData";
 import useDeleteAddress from "../DeleteData/useDeleteAddress";
 import {SmoothVerticalScrolling} from "../../utills/smoothScroll";
+import useUserOrderData from "../FetchData/useUserOrderData";
 
 function ProfilePage() {
     const [fetchDelete, setFetchDelete] = useState(false)
@@ -20,6 +21,7 @@ function ProfilePage() {
     const [deleteId, setDeleteId] = useState(0)
     const [loadingUserData, userDataResult] = useUserData(true)
     const [loadingAddressesData, addressesDataResult] = useAddressesData(fetchAddresses)
+    const [loadingOrderData, orderDataResult] = useUserOrderData(true)
     const [loadingDeleteAddress, deleteAddressResult] = useDeleteAddress(fetchDelete, deleteId)
     const classes = useProfilePageStyle()
     const history = useHistory()
@@ -57,7 +59,7 @@ function ProfilePage() {
         }
     }, [loadingDeleteAddress, deleteAddressResult])
 
-    if (loadingUserData || loadingAddressesData || loadingDeleteAddress)
+    if (loadingUserData || loadingAddressesData || loadingDeleteAddress || loadingOrderData)
         return <ProfilePageSkeleton/>
     return (
         <>
@@ -99,11 +101,19 @@ function ProfilePage() {
                 <Typography className={classes.title}>سفارشات شما</Typography>
                 <div className={classes.cardsContainer}>
                     {
-                        orders.map((order, index) => (
-                            <div key={index}>
+                        orderDataResult.map((order) => (
+                            <div key={Math.round(order.create_date)}>
                                 <PreviewOrderCard order={order}/>
                             </div>
                         ))
+                    }
+                    {
+                        orderDataResult.length === 0 &&
+                            <Typography
+                                style={{fontWeight: 500, fontSize: 16, textAlign: 'center'}}
+                                className={classes.title}>
+                                سفارشی ثبت نشده
+                            </Typography>
                     }
                 </div>
                 <div style={{marginTop: 22, marginBottom: 16, display: 'flex', justifyContent: 'space-between'}}>
@@ -128,6 +138,14 @@ function ProfilePage() {
                                 <PreviewAddressCard data={address} handleDelete={handleDeleteAddress}/>
                             </div>
                         ))
+                    }
+                    {
+                        addressesDataResult.length === 0 &&
+                        <Typography
+                            style={{fontWeight: 500, fontSize: 16, textAlign: 'center'}}
+                            className={classes.title}>
+                            آدرسی ثبت نشده
+                        </Typography>
                     }
                 </div>
             </div>
