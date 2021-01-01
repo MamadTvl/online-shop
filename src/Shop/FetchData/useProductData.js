@@ -27,7 +27,7 @@ function useProductData(fetch, id) {
         if (fetch)
             getResult().then()
 
-    }, [fetch])
+    }, [fetch, getProduct, history, id])
 
     return [loading, result]
 }
