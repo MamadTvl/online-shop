@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useAxios} from "../../utills/Hooks/useAxios";
+import {toEnDigit} from "../../utills/ToFaDigit";
 
 function usePathCart(fetch, id, address, details) {
     const [result, setResult] = useState()
@@ -19,9 +20,9 @@ function usePathCart(fetch, id, address, details) {
                         "city": address.city,
                         "state": address.state,
                         "address": address.address,
-                        "post_code": address.post_code,
+                        "post_code": toEnDigit(address.post_code),
                         "costumer_name": address.costumer_name,
-                        "phone_number": address.phone_number,
+                        "phone_number": toEnDigit(address.phone_number),
                         // "email": address.email, //todo: unComment this
                         "details": details === '' ? 'بدون توضیح' : details,
                     },

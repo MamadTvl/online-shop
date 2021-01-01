@@ -58,8 +58,9 @@ function AddressForm(props) {
                     <TextField
                         required
                         dir={'ltr'}
+                        type={'tel'}
                         error={errors.mobileNumber}
-                        value={values.mobileNumber}
+                        value={toFaDigit(values.mobileNumber)}
                         onChange={handleChange('mobileNumber')}
                         InputProps={{
                             classes: {
@@ -170,7 +171,7 @@ function AddressForm(props) {
                         required
                         dir={'ltr'}
                         error={errors.code}
-                        value={values.code}
+                        value={toFaDigit(values.code)}
                         onChange={handleChange('code')}
                         InputProps={{
                             classes: {

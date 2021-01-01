@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useAxios} from "../../utills/Hooks/useAxios";
+import {toEnDigit} from "../../utills/ToFaDigit";
 
 function usePostAddress(fetch, values) {
     const [result, setResult] = useState(false)
@@ -17,9 +18,9 @@ function usePostAddress(fetch, values) {
                     data: {
                         "costumer_name": values.name,
                         "address": values.address,
-                        "post_code": values.code,
+                        "post_code": toEnDigit(values.code),
                         "phone_number": values.mobileNumber,
-                        "email": values.email,
+                        "email": toEnDigit(values.email),
                         "state": values.state.id,
                         "city": values.city.id
                     },

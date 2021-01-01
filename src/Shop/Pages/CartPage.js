@@ -259,6 +259,9 @@ function CartPage(props) {
                 checkboxes.push({id: addressesDataResult[i].id, checked: i === 0})
             }
             setAddressCheckboxes(checkboxes)
+            if (checkboxes.length === 0){
+                setAddressStep(1)
+            }
         }
     }, [addressesDataLoading, addressesDataResult])
 
@@ -370,6 +373,9 @@ function CartPage(props) {
                                 variant={'text'}
                                 className={classes.addAddress}
                                 onClick={() => setAddressStep(prevState => {
+                                    if (addressesDataResult.length === 0){
+                                        return 1
+                                    }
                                     return prevState === 0 ? 1 : 0
                                 })}
                             >
