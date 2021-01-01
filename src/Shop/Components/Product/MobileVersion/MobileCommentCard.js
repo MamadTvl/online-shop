@@ -2,12 +2,14 @@ import React, {useEffect, useState} from 'react'
 import {Button, Card, SvgIcon, Typography} from "@material-ui/core";
 import {useMobileProductStyle} from "./Styles/useMobileProductStyle";
 import PropTypes from 'prop-types';
-import {separateDigit, toFaDigit} from "../../../../utills/ToFaDigit";
+import {separateDigit} from "../../../../utills/ToFaDigit";
 import useLikingComment from "../../../PostData/useLikingComment";
+import {useAuth} from "../../../../utills/Auth";
 
 
 function MobileCommentCard(props) {
     const classes = useMobileProductStyle()
+    const auth = useAuth()
     const {comment, isPreview} = props
     const [status, setStatus] = useState({
         like: comment.is_liked,
@@ -23,16 +25,15 @@ function MobileCommentCard(props) {
     const [likingLoading, likingResult] = useLikingComment(fetchLiking, comment.id, data)
 
     useEffect(() => {
-        if(!likingLoading && likingResult!==undefined){
-            if (likingResult !== null){
+        if (!likingLoading && likingResult !== undefined) {
+            if (likingResult !== null) {
                 setStatus({
                     like: likingResult.is_liked,
                     dislike: likingResult.is_disliked,
                     likes_number: likingResult.likes_number,
                     dislikes_number: likingResult.dislikes_number,
                 })
-            }
-            else {
+            } else {
                 // show error
             }
             setFetchLiking(false)
@@ -54,6 +55,7 @@ function MobileCommentCard(props) {
                 !isPreview &&
                 <div className={classes.likeButtonContainer}>
                     <Button
+                        disabled={!auth.isLogin}
                         className={classes.like}
                         dir={'ltr'}
                         color={'primary'}
@@ -87,6 +89,7 @@ function MobileCommentCard(props) {
                     </Button>
 
                     <Button
+                        disabled={!auth.isLogin}
                         className={classes.like}
                         color={'primary'}
                         classes={{

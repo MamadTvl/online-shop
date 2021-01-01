@@ -4,10 +4,12 @@ import profile from "../../../img/profile.png";
 import {useProductDetailStyle} from "./Styles/useProductDetailStyle";
 import {separateDigit} from "../../../utills/ToFaDigit";
 import useLikingComment from "../../PostData/useLikingComment";
+import {useAuth} from "../../../utills/Auth";
 
 
 function CommentCard(props) {
     const {comment} = props
+    const auth = useAuth()
     const classes = useProductDetailStyle()
     const [status, setStatus] = useState({
         like: comment.is_liked,
@@ -42,6 +44,7 @@ function CommentCard(props) {
         <Card className={classes.commentContainer}>
             <div className={classes.cardHeader}>
                 <Button
+                    disabled={!auth.isLogin}
                     className={classes.like}
                     dir={'ltr'}
                     color={'primary'}
@@ -70,6 +73,7 @@ function CommentCard(props) {
                     {`(${separateDigit(status.likes_number)}) پسندیدم`}
                 </Button>
                 <Button
+                    disabled={!auth.isLogin}
                     className={classes.like}
                     color={'primary'}
                     classes={{textPrimary: !status.dislike
