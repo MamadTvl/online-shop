@@ -2,6 +2,7 @@ export const initialStates = {
     filterValues: {
         from: 0,
         to: 1500000,
+        max: 1500000,
     },
     changed: 0,
     products: [],

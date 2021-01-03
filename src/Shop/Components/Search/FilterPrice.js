@@ -19,16 +19,16 @@ function FilterPrice(props) {
                     ThumbComponent={ThumbComponent}
                     getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
                     value={[filterValues.from, filterValues.to]}
-                    defaultValue={[0, 1500000]}
+                    defaultValue={[filterValues.from, filterValues.to]}
                     step={100000}
                     onChange={(event, newValues) => {
                         dispatch(
                             {
                                 type: 'priceFilter',
-                                filterValues: {from: newValues[0], to: newValues[1]}
+                                filterValues: {...filterValues,from: newValues[0], to: newValues[1]}
                             })
                     }}
-                    max={1500000}
+                    max={filterValues.max}
                     scale={(x) => x}
                 />
                 <div className={classes.priceContainer}>

@@ -15,6 +15,7 @@ import useSearchData from "../FetchData/useSearchData";
 import TablePaginationActions from "../Components/Public/TablePaginationActions";
 import useWindowSize from "../../utills/Hooks/useWindowSize";
 import {SmoothVerticalScrolling} from "../../utills/smoothScroll";
+import useMaxPriceData from "../FetchData/useMaxPriceData";
 
 function SearchPage({location}) {
     const history = useHistory()
@@ -33,6 +34,12 @@ function SearchPage({location}) {
         from: 0,
         to: 1500000,
     })
+    const [maxPriceLoading, maxPriceResult] = useMaxPriceData(
+        fetch,
+        location.search,
+        searchStates.categories.length,
+        location.state ? location.state.showCampaign : false
+    )
     const [searchLoading, searchResults] = useSearchData(
         fetch,
         location.search,
@@ -49,8 +56,8 @@ function SearchPage({location}) {
     }
     const handleMobileChangePages = (pageNumber) => {
         setMobilePage(pageNumber)
-        if(mobilePage % 3 !== 0 || mobilePage === 0){
-            setPage(Math.floor(mobilePage/3))
+        if (mobilePage % 3 !== 0 || mobilePage === 0) {
+            setPage(Math.floor(mobilePage / 3))
         }
         SmoothVerticalScrolling(document.body, 500, "top")
     }
@@ -59,7 +66,10 @@ function SearchPage({location}) {
         search_text: '',
     })
     const filterPrice = () => {
-        setFilterValues(searchStates.filterValues)
+        setFilterValues({
+            from: searchStates.filterValues.from,
+            to: searchStates.filterValues.to
+        })
         location.state = {showCampaign: false}
     }
 
@@ -70,7 +80,7 @@ function SearchPage({location}) {
                 categories: catsResult,
             })
             const params = new URLSearchParams(search.current)
-            if(!params.has('campaign_id')) {
+            if (!params.has('campaign_id')) {
                 for (let i = 0; i < catsResult.length; i++) {
                     const categoryId = params.get(`category_list[${i}]`)
                     if (categoryId) {
@@ -95,13 +105,28 @@ function SearchPage({location}) {
         setFetch(true)
     }, [catsLoading, catsResult])
 
-
+    useEffect(() => {
+        if (!maxPriceLoading) {
+            setFilterValues({
+                from: 0,
+                to: maxPriceResult,
+            })
+            dispatch({
+                type: 'priceFilter',
+                filterValues: {
+                    from: 0,
+                    to: maxPriceResult,
+                    max: maxPriceResult,
+                },
+            })
+        }
+    }, [maxPriceLoading, maxPriceResult])
     useEffect(() => {
         if (!searchLoading) {
             setMaxPages(searchResults.max_pages + 1)
             let max
-            max = Math.floor(searchResults.merchandise_objs_number/5)
-            if (searchResults.merchandise_objs_number%5 !==0){
+            max = Math.floor(searchResults.merchandise_objs_number / 5)
+            if (searchResults.merchandise_objs_number % 5 !== 0) {
                 max++
             }
             setMobileMaxPage(max)
@@ -145,7 +170,7 @@ function SearchPage({location}) {
     document.title = `لیست محصولات ${searchItems.search_text}`
     return (
         <>
-            <Backdrop className={classes.backdrop} open={searchLoading || catsLoading}>
+            <Backdrop className={classes.backdrop} open={maxPriceLoading || searchLoading || catsLoading}>
                 <CircularProgress size={70} color="inherit"/>
             </Backdrop>
             <div className={classes.searchContainer}>
@@ -229,9 +254,10 @@ function SearchPage({location}) {
                                 </>
                                 : <>
                                     {
-                                        searchStates.products.slice((mobilePage % 3) * 5, (mobilePage % 3)  * 5 + 5)
+                                        searchStates.products.slice((mobilePage % 3) * 5, (mobilePage % 3) * 5 + 5)
                                             .map((product) => (
-                                                <Grid key={product.id} className={classes.productItem} md={4} sm={6} xs={12} item>
+                                                <Grid key={product.id} className={classes.productItem} md={4} sm={6} xs={12}
+                                                      item>
                                                     <ProductCard product={product} className={classes.card}/>
                                                 </Grid>
                                             ))
