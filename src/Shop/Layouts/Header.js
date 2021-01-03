@@ -58,6 +58,8 @@ function Header(props) {
         const localStorageCart = JSON.parse(localStorage.getItem('cart'))
         if (localStorageCart)
             setBasketCount(localStorageCart.length)
+        else
+            setBasketCount(0)
     }, [props.basketChange])
 
 
