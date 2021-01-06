@@ -13,6 +13,7 @@ export const useHeaderStyle = makeStyles((theme) => ({
         justifyContent: 'center',
         width: "100%",
         height: 84,
+        overflow: 'auto',
     },
     items: {
         display: "flex",
