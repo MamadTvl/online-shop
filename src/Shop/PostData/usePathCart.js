@@ -23,7 +23,7 @@ function usePathCart(fetch, id, address, details) {
                         "post_code": toEnDigit(address.post_code),
                         "costumer_name": address.costumer_name,
                         "phone_number": toEnDigit(address.phone_number),
-                        // "email": address.email, //todo: unComment this
+                        "email": address.email,
                         "details": details === '' ? 'بدون توضیح' : details,
                     },
                 })
