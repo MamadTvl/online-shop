@@ -42,10 +42,10 @@ function AmazingOffers(props) {
                             md={9}
                             sm={setSmGrid()[1]}
                             xs={size.width > 400 ? 8 : 7}
-                            style={{paddingTop: 0, paddingBottom: 0}}
+                            style={{paddingTop: 0, paddingBottom: 0, margin: '-20px'}}
                         >
                             {
-                                <Grid container spacing={2} direction={"row"}>
+                                <Grid style={{height: '100%'}} container spacing={2} direction={"row"}>
                                     {
                                         products.map((product) => (
                                             <Grid item xs={4}>

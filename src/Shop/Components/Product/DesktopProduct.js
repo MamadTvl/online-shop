@@ -188,14 +188,14 @@ function DesktopProduct(props) {
                                             <div className={classes.priceContainer}>
                                                 <Typography className={classes.toman}>تومان</Typography>
                                                 <Typography
-                                                    className={classes.price}>{separateDigit(product.price_with_discount)}</Typography>
+                                                    className={classes.price}>{separateDigit(Math.floor(product.price_with_discount))}</Typography>
                                             </div>
                                         </>
                                         :
                                         <div className={classes.priceContainer}>
                                             <Typography className={classes.toman}>تومان</Typography>
                                             <Typography
-                                                className={classes.price}>{separateDigit(product.price)}</Typography>
+                                                className={classes.price}>{separateDigit(Math.floor(product.price))}</Typography>
                                         </div>
                                     :
                                     <>

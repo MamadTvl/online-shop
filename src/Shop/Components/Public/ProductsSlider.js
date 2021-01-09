@@ -42,8 +42,18 @@ function ProductsSlider(props) {
                 }
                 const slideContainer = document.getElementsByClassName('custom-slider-slick')[0]
                 slideContainer.style.marginTop = '23px'
-            }catch (e) {}
-    }, [products.length, size.width])
+            }catch (e) {
+                document.getElementsByClassName('custom-slider-slick')[0]
+                    .children[0].children[0].style.height = '422px'
+                const slides = document.getElementsByClassName('custom-slider-slick')[0]
+                    .children[0].children[0].children
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.padding = '0 20px'
+                }
+                const slideContainer = document.getElementsByClassName('custom-slider-slick')[0]
+                slideContainer.style.marginTop = '23px'
+            }
+    }, [size.width])
 
     useEffect(() => {
         if (size.width > 1280) {

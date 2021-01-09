@@ -50,20 +50,20 @@ function ProductViewCard(props) {
                                     <Chip className={classes.discountChip}
                                           label={`%${separateDigit(product.percent_of_discount * 100)}`}/>
                                     <Typography
-                                        className={classes.prevPrice}>{separateDigit(product.price)}</Typography>
+                                        className={classes.prevPrice}>{separateDigit(Math.floor(product.price))}</Typography>
 
                                 </div>
                                 <div className={classes.priceContainer}>
                                     <Typography className={classes.toman}>تومان</Typography>
                                     <Typography
-                                        className={classes.price}>{separateDigit(product.price_with_discount)}</Typography>
+                                        className={classes.price}>{separateDigit(Math.floor(product.price_with_discount))}</Typography>
                                 </div>
                             </>
                             :
                             <div className={classes.priceContainer}>
                                 <Typography className={classes.toman}>تومان</Typography>
                                 <Typography
-                                    className={classes.price}>{separateDigit(product.price)}</Typography>
+                                    className={classes.price}>{separateDigit(Math.floor(product.price))}</Typography>
                             </div>
                         :
                         <>

@@ -41,7 +41,7 @@ function ProductCard(props) {
                                                 <Typography
                                                     className={classes.discountLabel}
                                                 >
-                                                    {separateDigit(product.price)}
+                                                    {separateDigit(Math.floor(product.price))}
                                                 </Typography>
                                             </div>
                                             <div
@@ -61,7 +61,7 @@ function ProductCard(props) {
                                                 <Typography
                                                     className={classes.priceLabel}
                                                 >
-                                                    {separateDigit(product.price_with_discount)}
+                                                    {separateDigit(Math.floor(product.price_with_discount))}
                                                 </Typography>
                                             </div>
 
@@ -79,7 +79,7 @@ function ProductCard(props) {
                                                 <Typography
                                                     className={classes.priceLabel}
                                                 >
-                                                    {separateDigit(product.price)}
+                                                    {separateDigit(Math.floor(product.price))}
                                                 </Typography>
                                             </div>
                                         </>

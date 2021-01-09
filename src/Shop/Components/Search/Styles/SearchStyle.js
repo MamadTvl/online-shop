@@ -80,8 +80,10 @@ export const useStyles = makeStyles((theme) => ({
     productItem: {
         paddingRight: 20,
         paddingBottom: 20,
+        height: 420,
         [theme.breakpoints.down('xs')]: {
             paddingRight: 0,
+            height: 340,
         },
     },
     buttonGroup: {

@@ -36,7 +36,7 @@ function useMaxPriceData(fetch, search, catsLength, showCampaign) {
             try {
                 setLoading(true)
                 const response = await getProducts()
-                setResult(response.data.data.max_price)
+                setResult(Math.floor(response.data.data.max_price) + 100000)
                 setLoading(false)
             } catch (err) {
                 if (err.response) {

@@ -9,7 +9,7 @@ function SimilarProducts(props) {
     const size = useWindowSize()
     const {products} = props
 
-    const setComponent = (products, width) => {
+    const setComponent = (products) => {
         if (products.length >= 4) {
             return <ProductsSlider products={products}/>
         } else if (products.length === 3) {
