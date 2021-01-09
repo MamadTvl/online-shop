@@ -91,7 +91,7 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         margin: 'auto',
         [theme.breakpoints.down('xs')]: {
-            width: '78%',
+            width: '100%',
             marginBottom: 16,
         },
     },

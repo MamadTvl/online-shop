@@ -56,8 +56,8 @@ function SearchPage({location}) {
     }
     const handleMobileChangePages = (pageNumber) => {
         setMobilePage(pageNumber)
-        if (mobilePage % 3 !== 0 || mobilePage === 0) {
-            setPage(Math.floor(mobilePage / 3))
+        if ((pageNumber + 1) % 3 !== 0 || pageNumber === 0) {
+            setPage(Math.floor(pageNumber / 3))
         }
         SmoothVerticalScrolling(document.body, 500, "top")
     }
@@ -70,6 +70,7 @@ function SearchPage({location}) {
             from: searchStates.filterValues.from,
             to: searchStates.filterValues.to
         })
+        setPage(0)
         location.state = {showCampaign: false}
     }
 
@@ -151,6 +152,7 @@ function SearchPage({location}) {
                 })
             }
         }
+        setPage(0)
         setSearchItems({search_text: search_text})
     }, [location])
 
