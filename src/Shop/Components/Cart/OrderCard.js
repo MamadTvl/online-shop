@@ -6,6 +6,7 @@ import AddIcon from "@material-ui/icons/Add";
 import {separateDigit} from "../../../utills/ToFaDigit";
 import RemoveIcon from "@material-ui/icons/Remove";
 import useWindowSize from "../../../utills/Hooks/useWindowSize";
+import {Link} from "react-router-dom";
 
 
 function OrderCard(props) {
@@ -40,7 +41,9 @@ function OrderCard(props) {
     }
     return (
         <Card className={classes.card}>
-            <img className={classes.image} src={product.preview_image} alt={product.title}/>
+            <Link to={`/products/${product.unique_code}/${product.title}/${product.id}`} className={classes.image}>
+                <img style={{width: '100%', borderRadius: 7}} src={product.preview_image} alt={product.title}/>
+            </Link>
             <div className={classes.content}>
                 <Typography className={classes.name}>{product.title}</Typography>
                 <div className={classes.downItem}>
