@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useAxios} from "../../utills/Hooks/useAxios";
-import {toEnDigit} from "../../utills/ToFaDigit";
+import {toEnDigit, toFaDigit} from "../../utills/ToFaDigit";
 
 function usePostAddress(fetch, values) {
     const [result, setResult] = useState(false)
@@ -17,9 +17,9 @@ function usePostAddress(fetch, values) {
                 const response = await createAddress({
                     data: {
                         "costumer_name": values.name,
-                        "address": values.address,
+                        "address": toFaDigit(values.address),
                         "post_code": toEnDigit(values.code),
-                        "phone_number": values.mobileNumber,
+                        "phone_number": toEnDigit(values.mobileNumber),
                         "email": toEnDigit(values.email),
                         "state": values.state.id,
                         "city": values.city.id
