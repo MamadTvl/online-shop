@@ -35,7 +35,7 @@ function reverseString(str) {
 
 export const separateDigit = (number) => {
     let count = 0
-    number = toFaDigit(number.toString())
+    number = toFaDigit((Math.floor(number)).toString())
     let separatedNum = ''
     for (let i = number.length - 1; i >= 0; i--) {
         if (count < 3) {

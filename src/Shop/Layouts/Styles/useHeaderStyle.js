@@ -77,6 +77,11 @@ export const useHeaderStyle = makeStyles((theme) => ({
             minWidth: 200,
         }
     },
+    catsLink: {
+        '&.MuiLink-underlineHover:hover': {
+            textDecoration: 'none',
+        }
+    },
     label: {
         alignSelf: "center",
         fontFamily: 'Shabnam',

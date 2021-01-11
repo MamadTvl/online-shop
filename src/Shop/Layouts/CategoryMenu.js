@@ -13,7 +13,7 @@ const StyledMenu = withStyles({
             display: 'flex',
             flexWrap: 'wrap',
             height: 200,
-            justifyContent: 'space-between',
+            // justifyContent: 'space-between',
         },
     }
 })((props) => (
@@ -46,10 +46,11 @@ function CategoryMenu(props) {
         >
             {
                 result.map((category, index) => (
-                    index !== result.length - 1 ?
+                    // index !== result.length - 1 ?
                     <ItemLink
                         key={Math.round(category.create_date)}
                         style={linkStyle}
+                        className={classes.catsLink}
                         to={{
                             pathname: '/search',
                             search: `${search}category_list[${index}]=${category.id}`,
@@ -59,18 +60,18 @@ function CategoryMenu(props) {
                         <MenuItem className={classes.menuLabel}
                                   onClick={handleClose}>{category.name}</MenuItem>
                     </ItemLink>
-                        :
-                        <ItemLink
-                            key={Math.round(category.create_date)}
-                            to={{
-                                pathname: '/search',
-                                search: `${search}category_list[${index}]=${category.id}`,
-                                state: {showCampaign: false}
-                            }}
-                        >
-                            <MenuItem className={classes.menuLabel}
-                                      onClick={handleClose}>{category.name}</MenuItem>
-                        </ItemLink>
+                        // :
+                        // <ItemLink
+                        //     key={Math.round(category.create_date)}
+                        //     to={{
+                        //         pathname: '/search',
+                        //         search: `${search}category_list[${index}]=${category.id}`,
+                        //         state: {showCampaign: false}
+                        //     }}
+                        // >
+                        //     <MenuItem className={classes.menuLabel}
+                        //               onClick={handleClose}>{category.name}</MenuItem>
+                        // </ItemLink>
                 ))
             }
         </StyledMenu>

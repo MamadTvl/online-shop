@@ -17,8 +17,8 @@ const useStyle = makeStyles((theme) => ({
         borderRightStyle: 'solid',
         marginLeft: 8,
         [theme.breakpoints.down('xs')]: {
-            borderRightWidth: 3,
-            height: 25,
+            borderRightWidth: 4,
+            height: 28,
             marginTop: 2,
         },
 
@@ -29,7 +29,7 @@ const useStyle = makeStyles((theme) => ({
         fontSize: 28,
         color: '#545454',
         [theme.breakpoints.down('xs')]: {
-            fontSize: 18,
+            fontSize: 20,
         },
     },
 

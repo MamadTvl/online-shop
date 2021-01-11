@@ -5,7 +5,7 @@ import * as PropTypes from "prop-types";
 
 
 function ItemLink(props) {
-    const {text, to, children, style} = props;
+    const {text, to, children, style, className} = props;
 
     const renderLink = React.useMemo(
         () => React.forwardRef((itemProps, ref) =>
@@ -14,7 +14,7 @@ function ItemLink(props) {
     );
 
     return (
-        <Link style={style} component={renderLink} color={"inherit"}>{children ? children : text}</Link>
+        <Link className={className} style={style} component={renderLink} color={"inherit"}>{children ? children : text}</Link>
     );
 }
 
@@ -23,6 +23,7 @@ ItemLink.propTypes = {
     to: PropTypes.any.isRequired,
     children: PropTypes.object,
     style: PropTypes.any,
+    className: PropTypes.any,
 };
 
 export default ItemLink
