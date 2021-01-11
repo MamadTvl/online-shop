@@ -152,9 +152,10 @@ function SearchPage({location}) {
         }
         setPage(0)
         setSearchItems({search_text: search_text})
-    }, [location])
+    }, [location, searchStates.categories.length])
 
     useEffect(() => {
+        setPage(0)
         const params = new URLSearchParams(location.search)
         let newLocation = ''
         if (params.get('search_text')) {
@@ -163,9 +164,14 @@ function SearchPage({location}) {
         for (let i = 0; i < searchStates.categories.length; i++) {
             if (searchStates.categories[i].checked) {
                 newLocation += `&category_list[${i}]=${searchStates.categories[i].id}`
+
             }
         }
         history.push(`/search?${newLocation}`)
+    }, [change])
+
+    useEffect(() => {
+        console.log('change')
     }, [change])
     document.title = `لیست محصولات ${searchItems.search_text}`
     return (
