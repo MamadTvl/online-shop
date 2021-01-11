@@ -22,45 +22,45 @@ function AmazingOffers(props) {
     }
     return (
         <>
-            {
-                size.width > 900 ?
-                    <Grid classes={{"spacing-xs-5": classes.spacingContainer}} container spacing={5}
-                          className={classes.container}>
-                        <Grid
-                            item
-                            md={3}
-                            sm={setSmGrid()[0]}
-                            xs={size.width > 400 ? 4 : 5}
-                            className={classes.titleContainer}
-                        >
-                            <Typography className={classes.title}>پیشنهاد</Typography>
-                            <Typography className={classes.title}>شگفت‌انگیز</Typography>
-                            <img src={cover} alt={'پیشنهاد شگفت‌انگیز'} className={classes.previewImage}/>
-                        </Grid>
-                        <Grid
-                            item
-                            md={9}
-                            sm={setSmGrid()[1]}
-                            xs={size.width > 400 ? 8 : 7}
-                            style={{paddingTop: 0, paddingBottom: 0, margin: '-20px'}}
-                        >
-                            {
-                                <Grid style={{height: '100%'}} container spacing={2} direction={"row"}>
-                                    {
-                                        products.map((product) => (
-                                            <Grid item xs={4}>
-                                                <ProductCard product={product}/>
-                                            </Grid>
-                                        ))
-                                    }
+            {/*{*/}
+            {/*    size.width > 900 ?*/}
+            {/*        <Grid classes={{"spacing-xs-5": classes.spacingContainer}} container spacing={5}*/}
+            {/*              className={classes.container}>*/}
+            {/*            <Grid*/}
+            {/*                item*/}
+            {/*                md={3}*/}
+            {/*                sm={setSmGrid()[0]}*/}
+            {/*                xs={size.width > 400 ? 4 : 5}*/}
+            {/*                className={classes.titleContainer}*/}
+            {/*            >*/}
+            {/*                <Typography className={classes.title}>پیشنهاد</Typography>*/}
+            {/*                <Typography className={classes.title}>شگفت‌انگیز</Typography>*/}
+            {/*                <img src={cover} alt={'پیشنهاد شگفت‌انگیز'} className={classes.previewImage}/>*/}
+            {/*            </Grid>*/}
+            {/*            <Grid*/}
+            {/*                item*/}
+            {/*                md={9}*/}
+            {/*                sm={setSmGrid()[1]}*/}
+            {/*                xs={size.width > 400 ? 8 : 7}*/}
+            {/*                style={{paddingTop: 0, paddingBottom: 0, margin: '-20px'}}*/}
+            {/*            >*/}
+            {/*                {*/}
+            {/*                    <Grid style={{height: '100%'}} container spacing={2} direction={"row"}>*/}
+            {/*                        {*/}
+            {/*                            products.map((product) => (*/}
+            {/*                                <Grid item xs={4}>*/}
+            {/*                                    <ProductCard product={product}/>*/}
+            {/*                                </Grid>*/}
+            {/*                            ))*/}
+            {/*                        }*/}
 
-                                </Grid>
+            {/*                    </Grid>*/}
 
-                            }
-                        </Grid>
+            {/*                }*/}
+            {/*            </Grid>*/}
 
-                    </Grid>
-                    :
+            {/*        </Grid>*/}
+            {/*        :*/}
                     <>
                         <div style={{overflow: 'auto'}} className={classes.container}>
                             <div style={{width: '33%', marginRight: 16,}} className={classes.titleContainer}>
@@ -79,7 +79,7 @@ function AmazingOffers(props) {
                             </div>
                         </div>
                     </>
-            }
+            {/*}*/}
         </>
     )
 }

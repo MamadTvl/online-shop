@@ -45,7 +45,7 @@ function Footer() {
                             </Link>
                         </div>
                     </Grid>
-                    <Grid item className={classes.xsGrid} md={false} sm={false} xs={5}/>
+                    <Grid item className={classes.xsGrid} md={false} sm={false} xs={6}/>
                     <Grid item className={classes.xsGrid} md={false} sm={false} xs={1}>
                         <SocialNetwork isXs={true}/>
                     </Grid>

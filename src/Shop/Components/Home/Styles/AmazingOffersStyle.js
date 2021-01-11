@@ -29,10 +29,15 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-start',
     },
     sliderContainer: {
-        margin: 'auto',
+        margin: '0 auto',
         display: 'flex',
         overflow: 'visible',
         marginRight: 32,
+        marginLeft: '-16px',
+        width: '100%',
+        [theme.breakpoints.between(0, 960)]: {
+            width: 'auto'
+        },
     },
     title: {
         fontFamily: 'Shabnam',
@@ -55,11 +60,11 @@ export const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignSelf: "center",
-        height: '100%',
+        height: '420px',
         width: '100%',
         borderRadius: 7,
         marginLeft: 16,
-        [theme.breakpoints.between(0, 900)]: {
+        [theme.breakpoints.between(0, 960)]: {
             height: 320,
             minWidth: 211,
         },
