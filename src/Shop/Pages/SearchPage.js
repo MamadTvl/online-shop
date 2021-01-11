@@ -56,9 +56,7 @@ function SearchPage({location}) {
     }
     const handleMobileChangePages = (pageNumber) => {
         setMobilePage(pageNumber)
-        if ((pageNumber + 1) % 3 !== 0 || pageNumber === 0) {
-            setPage(Math.floor(pageNumber / 3))
-        }
+        setPage(Math.floor(pageNumber / 3))
         SmoothVerticalScrolling(document.body, 500, "top")
     }
 
