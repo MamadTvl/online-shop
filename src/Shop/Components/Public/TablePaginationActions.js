@@ -6,6 +6,7 @@ import * as PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core/styles";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
+import useWindowSize from "../../../utills/Hooks/useWindowSize";
 
 const useStyles = makeStyles((theme) => ({
     pageButton: {
@@ -27,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 32,
     },
     buttonGroup: {
-        margin: '0 38%',
+        display: 'flex',
+        justifyContent: 'center',
         [theme.breakpoints.down('xs')]: {
             margin: '16px -16px',
         },
@@ -38,11 +40,12 @@ const useStyles = makeStyles((theme) => ({
 
 function TablePaginationActions(props) {
     const classes = useStyles();
+    const size = useWindowSize()
     const {numPages, page, onChange} = props
     const {items} = usePagination({
         count: numPages,
         boundaryCount: 1,
-        siblingCount: 0,
+        siblingCount: size.width > 650 ? 1 : 0,
         defaultPage: page + 1,
         onChange: (event, page) => {
             onChange(page - 1)
