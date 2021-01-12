@@ -3,7 +3,7 @@ import SwipeableViews from 'react-swipeable-views';
 import {ButtonBase, IconButton, SvgIcon} from "@material-ui/core";
 import {usePhotoViewerStyle} from "./Styles/usePhotoViewerStyle";
 import * as PropTypes from "prop-types";
-
+import {GlassMagnifier} from 'react-image-magnifiers'
 
 function DesktopPhotoViewer(props) {
     const [index, setIndex] = useState(0)
@@ -71,8 +71,8 @@ function DesktopPhotoViewer(props) {
     }, [])
 
     useEffect(() => {
-        for (let i = 0; i <images.length; i++) {
-            const imageButton =  document.getElementById(`image-button-${i}`)
+        for (let i = 0; i < images.length; i++) {
+            const imageButton = document.getElementById(`image-button-${i}`)
             imageButton.style.borderColor = '#989898'
         }
         const imageButton = document.getElementById(`image-button-${index}`)
@@ -82,10 +82,23 @@ function DesktopPhotoViewer(props) {
 
     return (
         <div className={classes.container}>
-            <SwipeableViews onChangeIndex={(event) => setIndex(event)} axis={'x-reverse'} index={index} enableMouseEvents>
+            <SwipeableViews
+                onChangeIndex={(event) => setIndex(event)}
+                axis={'x-reverse'}
+                index={index}
+                enableMouseEvents
+            >
                 {
                     images.map((image) => (
-                        <img className={classes.imageView} src={image} alt={document.title}/>
+                        <GlassMagnifier
+                            magnifierSize={'50%'}
+                            allowOverflow={true}
+                            dragToMove={false}
+                            className={classes.imageView}
+                            imageSrc={image}
+                            largeImageSrc={image}
+                            imageAlt={document.title}
+                        />
                     ))
                 }
             </SwipeableViews>
@@ -99,7 +112,7 @@ function DesktopPhotoViewer(props) {
 
             </IconButton>
 
-            <IconButton onClick={() => index !== images.length -1 && setIndex(prevState => prevState + 1)}
+            <IconButton onClick={() => index !== images.length - 1 && setIndex(prevState => prevState + 1)}
                         className={classes.prevArrow}>
                 <SvgIcon style={{width: '8px', height: '14px'}} xmlns="http://www.w3.org/2000/svg" width="5.811"
                          height="10.121" viewBox="0 0 5.811 10.121">
@@ -111,7 +124,8 @@ function DesktopPhotoViewer(props) {
                 {
                     images.map((image, index) => (
                         <ButtonBase className={classes.listItem} onClick={() => setIndex(index)}>
-                            <img id={`image-button-${index}`} className={classes.imageButton} src={image} alt={document.title}/>
+                            <img id={`image-button-${index}`} className={classes.imageButton} src={image}
+                                 alt={document.title}/>
                         </ButtonBase>
                     ))
                 }
@@ -120,6 +134,7 @@ function DesktopPhotoViewer(props) {
     )
 
 }
+
 DesktopPhotoViewer.propTypes = {
     images: PropTypes.array.isRequired,
 }

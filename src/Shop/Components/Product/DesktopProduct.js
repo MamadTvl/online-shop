@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {Button, Card, Chip, IconButton, MenuItem, Snackbar, SvgIcon, TextField, Typography} from "@material-ui/core";
+import {
+    Button,
+    Card,
+    Chip,
+    IconButton,
+    MenuItem,
+    Snackbar,
+    SvgIcon,
+    TextField,
+    Typography
+} from "@material-ui/core";
 import DesktopPhotoViewer from "./DesktopPhotoViewer";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -16,7 +26,6 @@ function DesktopProduct(props) {
     const [openSnackBar, setOpenSnackBar] = useState(false)
     const [selectedSize, setSelectedSize] = useState(product.size_list[0])
     const [selectedColor, setSelectedColor] = useState(product.color_list[0])
-
     const [count, setCount] = useState(1)
 
     const getMaxStockNumber = () => {

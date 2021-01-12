@@ -3,6 +3,7 @@ import SwipeableViews from "react-swipeable-views";
 import {useMobilePhotoViewerStyle} from "./Styles/useMobilePhotoViewerStyle";
 import {IconButton} from "@material-ui/core";
 import * as PropTypes from "prop-types";
+import {GlassMagnifier} from "react-image-magnifiers";
 
 
 function MobilePhotoViewer(props) {
@@ -54,7 +55,15 @@ function MobilePhotoViewer(props) {
                             index={index} enableMouseEvents>
                 {
                     images.map((image) => (
-                        <img className={classes.imageView} src={image} alt={document.title}/>
+                        <GlassMagnifier
+                            magnifierSize={'50%'}
+                            allowOverflow={true}
+                            dragToMove={false}
+                            className={classes.imageView}
+                            imageSrc={image}
+                            largeImageSrc={image}
+                            imageAlt={document.title}
+                        />
                     ))
                 }
             </SwipeableViews>

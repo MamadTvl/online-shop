@@ -170,9 +170,6 @@ function SearchPage({location}) {
         history.push(`/search?${newLocation}`)
     }, [change])
 
-    useEffect(() => {
-        console.log('change')
-    }, [change])
     document.title = `لیست محصولات ${searchItems.search_text}`
     return (
         <>
