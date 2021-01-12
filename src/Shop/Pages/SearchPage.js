@@ -235,7 +235,7 @@ function SearchPage({location}) {
                                         searchStates.products
                                             .map((product) => (
                                                 <Grid className={classes.productItem} md={4} sm={6} xs={12} item>
-                                                    <ProductCard product={product} className={classes.card}/>
+                                                    <ProductCard product={product}/>
                                                 </Grid>
                                             ))
                                     }
@@ -261,7 +261,7 @@ function SearchPage({location}) {
                                             .map((product) => (
                                                 <Grid key={product.id} className={classes.productItem} md={4} sm={6} xs={12}
                                                       item>
-                                                    <ProductCard product={product} className={classes.card}/>
+                                                    <ProductCard product={product}/>
                                                 </Grid>
                                             ))
                                     }

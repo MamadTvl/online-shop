@@ -57,9 +57,11 @@ export const useProductSliderStyles = makeStyles((theme) => ({
         height: 420,
         width: '100%',
         borderRadius: 7,
+        maxWidth: 300,
         [theme.breakpoints.down('sm')]: {
             height: 320,
             width: 215,
+            maxWidth: 250,
             margin: 'auto',
             overflow: 'overlay',
         },

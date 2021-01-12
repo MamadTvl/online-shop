@@ -64,9 +64,11 @@ export const useStyles = makeStyles((theme) => ({
         width: '100%',
         borderRadius: 7,
         marginLeft: 16,
+        maxWidth: 300,
         [theme.breakpoints.between(0, 960)]: {
             height: 320,
             minWidth: 211,
+            maxWidth: 250,
         },
     }
 
