@@ -236,7 +236,16 @@ function SearchPage({location}) {
                         </Grid>
                     </Grid>
 
-                    <Grid container className={classes.productsContainer} sm={9} xs={12} direction={"row"}>
+                    <Grid
+                        container
+                        className={classes.productsContainer}
+                        sm={location.state ?
+                            location.state.showCampaign ? 12 : 9
+                            : 9
+                        }
+                        xs={12}
+                        direction={"row"}
+                    >
                         {
                             searchStates.products.length === 0 && (!maxPriceLoading && !searchLoading && !catsLoading) &&
                             <>
