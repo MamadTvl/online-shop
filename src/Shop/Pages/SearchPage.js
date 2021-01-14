@@ -186,7 +186,17 @@ function SearchPage({location}) {
                 <Title title={`لیست محصولات ${searchItems.search_text}`}/>
 
                 <Grid xs={12} className={classes.gridContainer} container direction={"row"}>
-                    <Grid container sm={3} className={classes.filterContainer} direction={"row"}>
+                    <Grid
+                        style={{
+                            display:
+                                location.state ?
+                                    location.state.showCampaign && 'none'
+                                    : undefined
+                        }}
+                        container sm={3}
+                        className={classes.filterContainer}
+                        direction={"row"}
+                    >
 
                         <Grid className={classes.filterItem} xs={12} item>
                             <div>
@@ -227,7 +237,23 @@ function SearchPage({location}) {
                     </Grid>
 
                     <Grid container className={classes.productsContainer} sm={9} xs={12} direction={"row"}>
-
+                        {
+                            searchStates.products.length === 0 && (!maxPriceLoading && !searchLoading && !catsLoading) &&
+                            <>
+                                <Typography
+                                    style={{
+                                        textAlign: 'center',
+                                        margin: 'auto',
+                                        fontFamily: 'Shabnam',
+                                        fontSize: 20,
+                                        fontWeight: 500,
+                                        marginBottom: location.state ?
+                                            location.state.showCampaign && '150px'
+                                            : 'auto'
+                                    }}
+                                >محصولی ثبت نشده</Typography>
+                            </>
+                        }
                         {
                             size.width > 600
                                 ? <>
@@ -284,7 +310,17 @@ function SearchPage({location}) {
 
                     </Grid>
 
-                    <Grid item className={classes.categoryXsItem} xs={12}>
+                    <Grid
+                        style={{
+                            display:
+                                location.state ?
+                                    location.state.showCampaign && 'none'
+                                    : undefined
+                        }}
+                        item
+                        className={classes.categoryXsItem}
+                        xs={12}
+                    >
                         <div style={{width: '100%'}}>
                             <FilterCategory
                                 setChange={setChange}

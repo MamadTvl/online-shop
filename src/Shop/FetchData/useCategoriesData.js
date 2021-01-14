@@ -16,6 +16,7 @@ function useCategoriesData(fetch) {
                 const response = await getCategories()
                 const responseCats = response.data.data.categories
                 let categories = []
+                responseCats.sort((a, b) => a.name.localeCompare(b.name))
                 for (let i = 0; i < responseCats.length; i++) {
                     categories.push({...responseCats[i], checked: false})
                 }
