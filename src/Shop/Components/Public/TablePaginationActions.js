@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             margin: '16px -16px',
         },
-
+        listStyleType: 'none',
     },
 }), {index: 1});
 
@@ -62,7 +62,7 @@ function TablePaginationActions(props) {
                         if (type === "start-ellipsis" || type === "end-ellipsis") {
                             children = (
                                 <Button
-                                    component={'li'}
+                                    // component={'li'}
                                     classes={{root: classes.buttonRoot}}
                                     key={index}
                                     style={{
@@ -85,7 +85,6 @@ function TablePaginationActions(props) {
                         } else if (type === "page") {
                             children = (
                                 <Button
-                                    component={'li'}
                                     classes={{root: classes.buttonRoot}}
                                     key={index}
                                     style={{
@@ -109,7 +108,6 @@ function TablePaginationActions(props) {
                         } else {
                             children = (
                                 <IconButton
-                                    component={'li'}
                                     key={index}
                                     style={{marginLeft: '8px'}}
                                     {...item}
@@ -147,7 +145,7 @@ function TablePaginationActions(props) {
                                 </IconButton>
                             )
                         }
-                        return <>{children}</>;
+                        return <li key={index}>{children}</li>;
                     })
                 }
             </ButtonGroup>
