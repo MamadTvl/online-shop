@@ -31,10 +31,16 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         [theme.breakpoints.down('xs')]: {
-            margin: '16px -16px',
+            margin: '16px -32px',
+            marginLeft: 0,
         },
         listStyleType: 'none',
     },
+    nav: {
+        [theme.breakpoints.down('xs')]: {
+            margin: '16px -32px',
+        },
+    }
 }), {index: 1});
 
 
@@ -54,7 +60,7 @@ function TablePaginationActions(props) {
     const pageButtonColor = '#F16522'
 
     return (
-        <nav>
+        <nav className={classes.nav}>
             <ButtonGroup component={'ol'} className={classes.buttonGroup}>
                 {
                     items.map(({page, type, selected, ...item}, index) => {
