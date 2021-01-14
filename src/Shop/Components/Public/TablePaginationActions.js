@@ -54,99 +54,104 @@ function TablePaginationActions(props) {
     const pageButtonColor = '#F16522'
 
     return (
-        <ButtonGroup className={classes.buttonGroup}>
-            {
-                items.map(({page, type, selected, ...item}, index) => {
-                    let children
-                    if (type === "start-ellipsis" || type === "end-ellipsis") {
-                        children = (
-                            <Button
-                                classes={{root: classes.buttonRoot}}
-                                key={index}
-                                style={{
-                                    backgroundColor: 'transparent',
-                                    borderColor: 'rgba(67, 67, 67, 0.68)',
-                                    borderStyle: 'solid',
-                                    borderWidth: 1,
-                                    height: 32,
-                                    width: 32,
-                                    borderRadius: 7,
-                                    color: '#545454',
-                                    marginLeft: '8px',
-                                    marginTop: 5
-                                }}
-                                className={classes.pageButton}
-                            >
-                                …
-                            </Button>
-                        )
-                    } else if (type === "page") {
-                        children = (
-                            <Button
-                                classes={{root: classes.buttonRoot}}
-                                key={index}
-                                style={{
-                                    backgroundColor: selected ? pageButtonColor : 'transparent',
-                                    borderColor: selected ? 'transparent' : 'rgba(67, 67, 67, 0.68)',
-                                    borderStyle: 'solid',
-                                    borderWidth: selected ? 0 : 1,
-                                    height: 32,
-                                    width: 32,
-                                    borderRadius: 7,
-                                    color: !selected ? '#545454' : undefined,
-                                    marginLeft: '8px',
-                                    marginTop: 5
-                                }}
-                                className={classes.pageButton}
-                                {...item}
-                            >
-                                {toFaDigit(page.toString())}
-                            </Button>
-                        )
-                    } else {
-                        children = (
-                            <IconButton
-                                key={index}
-                                style={{marginLeft: '8px'}}
-                                {...item}
-                            >
-                                {
-                                    type === 'next' ?
-                                        <>
-                                            <Typography
-                                                style={{
-                                                    fontFamily: 'Shabnam',
-                                                    fontSize: 16,
-                                                    color: '#545454'
-                                                }}
-                                                component={"span"}>
-                                                بعدی
-                                            </Typography>
-                                            <KeyboardArrowLeft/>
-                                        </>
-                                        :
-                                        <>
-                                            <KeyboardArrowRight/>
-                                            <Typography
-                                                style={{
-                                                    fontFamily: 'Shabnam',
-                                                    fontSize: 16,
-                                                    color: '#545454'
-                                                }}
-                                                component={"span"}
-                                            >
-                                                قبلی
-                                            </Typography>
-                                        </>
-                                }
+        <nav>
+            <ButtonGroup component={'ol'} className={classes.buttonGroup}>
+                {
+                    items.map(({page, type, selected, ...item}, index) => {
+                        let children
+                        if (type === "start-ellipsis" || type === "end-ellipsis") {
+                            children = (
+                                <Button
+                                    component={'li'}
+                                    classes={{root: classes.buttonRoot}}
+                                    key={index}
+                                    style={{
+                                        backgroundColor: 'transparent',
+                                        borderColor: 'rgba(67, 67, 67, 0.68)',
+                                        borderStyle: 'solid',
+                                        borderWidth: 1,
+                                        height: 32,
+                                        width: 32,
+                                        borderRadius: 7,
+                                        color: '#545454',
+                                        marginLeft: '8px',
+                                        marginTop: 5
+                                    }}
+                                    className={classes.pageButton}
+                                >
+                                    …
+                                </Button>
+                            )
+                        } else if (type === "page") {
+                            children = (
+                                <Button
+                                    component={'li'}
+                                    classes={{root: classes.buttonRoot}}
+                                    key={index}
+                                    style={{
+                                        backgroundColor: selected ? pageButtonColor : 'transparent',
+                                        borderColor: selected ? 'transparent' : 'rgba(67, 67, 67, 0.68)',
+                                        borderStyle: 'solid',
+                                        borderWidth: selected ? 0 : 1,
+                                        height: 32,
+                                        width: 32,
+                                        borderRadius: 7,
+                                        color: !selected ? '#545454' : undefined,
+                                        marginLeft: '8px',
+                                        marginTop: 5
+                                    }}
+                                    className={classes.pageButton}
+                                    {...item}
+                                >
+                                    {toFaDigit(page.toString())}
+                                </Button>
+                            )
+                        } else {
+                            children = (
+                                <IconButton
+                                    component={'li'}
+                                    key={index}
+                                    style={{marginLeft: '8px'}}
+                                    {...item}
+                                >
+                                    {
+                                        type === 'next' ?
+                                            <>
+                                                <Typography
+                                                    style={{
+                                                        fontFamily: 'Shabnam',
+                                                        fontSize: 16,
+                                                        color: '#545454'
+                                                    }}
+                                                    component={"span"}>
+                                                    بعدی
+                                                </Typography>
+                                                <KeyboardArrowLeft/>
+                                            </>
+                                            :
+                                            <>
+                                                <KeyboardArrowRight/>
+                                                <Typography
+                                                    style={{
+                                                        fontFamily: 'Shabnam',
+                                                        fontSize: 16,
+                                                        color: '#545454'
+                                                    }}
+                                                    component={"span"}
+                                                >
+                                                    قبلی
+                                                </Typography>
+                                            </>
+                                    }
 
-                            </IconButton>
-                        )
-                    }
-                    return <>{children}</>;
-                })
-            }
-        </ButtonGroup>
+                                </IconButton>
+                            )
+                        }
+                        return <>{children}</>;
+                    })
+                }
+            </ButtonGroup>
+        </nav>
     )
 }
 
