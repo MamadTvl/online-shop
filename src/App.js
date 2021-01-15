@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {createMuiTheme} from '@material-ui/core/styles';
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import {ThemeProvider} from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -19,16 +18,14 @@ import SignUpPage from "./Shop/Pages/SignUpPage";
 import ForgetPassPage from "./Shop/Pages/ForgetPassPage";
 import PaymentPage from "./Shop/Pages/Paymentpage";
 import AboutUsPage from "./Shop/Pages/AboutUsPage";
+import {theme} from "./Theme";
 
 function App() {
     const [basketChange, setBasketChange] = useState(0)
-    const rtlTheme = createMuiTheme({
-        direction: 'rtl'
-    })
 
 
     return (
-        <ThemeProvider theme={rtlTheme}>
+        <ThemeProvider theme={theme}>
             <CssBaseline/>
             <ProvideAuth>
                 <Router>

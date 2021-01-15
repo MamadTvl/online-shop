@@ -59,7 +59,10 @@ export const useStyles = makeStyles((theme) => ({
         fontSize: 18,
         color: "white",
         opacity: 0.68,
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(2),
+        '&:visited': {
+            textDecoration: 'none'
+        }
     },
     xsGrid: {
         [theme.breakpoints.up('sm')]: {
