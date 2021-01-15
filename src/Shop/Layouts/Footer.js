@@ -35,7 +35,7 @@ function Footer() {
                         <div className={classes.title}><Typography className={classes.pages}>صفحات</Typography></div>
                         <div className={classes.linkContainer}>
                             <Link className={classes.link}>تماس با ما</Link>
-                            <RouterLink to={'/about-us'} className={classes.link}>درباره ما</RouterLink>
+                            <RouterLink onClick={() => SmoothVerticalScrolling(document.body, 500, "top")} to={'/about-us'} className={classes.link}>درباره ما</RouterLink>
                             <Link
                                 href={'https://blog.didartshop.ir'}
                                 target="_blank" rel="noopener noreferrer"
