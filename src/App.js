@@ -18,6 +18,7 @@ import LoginPage from "./Shop/Pages/LoginPage";
 import SignUpPage from "./Shop/Pages/SignUpPage";
 import ForgetPassPage from "./Shop/Pages/ForgetPassPage";
 import PaymentPage from "./Shop/Pages/Paymentpage";
+import AboutUsPage from "./Shop/Pages/AboutUsPage";
 
 function App() {
     const [basketChange, setBasketChange] = useState(0)
@@ -39,6 +40,10 @@ function App() {
 
                             <Route exact path={'/products/:code/:product/:id'}>
                                 <ProductPage setBasketChange={setBasketChange}/>
+                            </Route>
+
+                            <Route exact path={'/about-us'}>
+                                <AboutUsPage/>
                             </Route>
 
                             <PublicRoute path={`/login`}>
