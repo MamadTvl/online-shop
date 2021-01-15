@@ -109,7 +109,11 @@ function ProductPage(props) {
                             {
                                 size.width > 600 && <ProductDetail product={result.merchandise}/>
                             }
-                            <SimilarProducts products={result.related_merchandise}/>
+                            {
+                                result.related_merchandise.length !== 0 &&
+                                <SimilarProducts products={result.related_merchandise}/>
+                            }
+
                         </>
                 }
             </div>
