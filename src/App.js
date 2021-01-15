@@ -17,6 +17,7 @@ import PublicRoute from "./Routes/PublicRoute";
 import LoginPage from "./Shop/Pages/LoginPage";
 import SignUpPage from "./Shop/Pages/SignUpPage";
 import ForgetPassPage from "./Shop/Pages/ForgetPassPage";
+import PaymentPage from "./Shop/Pages/Paymentpage";
 
 function App() {
     const [basketChange, setBasketChange] = useState(0)
@@ -51,6 +52,10 @@ function App() {
                             <PublicRoute path={`/forget-password`}>
                                 <ForgetPassPage/>
                             </PublicRoute>
+
+                            <PrivateRoute path={'/payment/:status'}>
+                                <PaymentPage/>
+                            </PrivateRoute>
 
                             <Route path={'/profile'}>
                                 <PrivateRoute path={'/profile'}>
