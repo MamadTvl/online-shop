@@ -45,6 +45,12 @@ export const useHeaderStyle = makeStyles((theme) => ({
             width: 114.51,
         }
     },
+    logoLink: {
+        margin: 'auto',
+        [theme.breakpoints.down('xs')]: {
+            marginTop: 10,
+        }
+    },
     rightItems: {
         display: 'flex',
         marginLeft: '32px',

@@ -83,7 +83,7 @@ function Header(props) {
                         >
                             <MenuIcon/>
                         </IconButton>
-                        <Link style={{margin: 'auto'}} to={'/'}>
+                        <Link className={classes.logoLink} to={'/'}>
                             <img
                                 onClick={() => SmoothVerticalScrolling(document.body, 500, "top")}
                                 className={classes.logo}
