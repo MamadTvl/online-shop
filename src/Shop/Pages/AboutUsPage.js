@@ -7,6 +7,7 @@ import Title from "../Components/Public/Title";
 
 function AboutUsPage() {
     const classes = useAboutUsPageStyle()
+    document.title = "درباره ما"
     return (
 
         <div className={classes.container}>

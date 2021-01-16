@@ -18,7 +18,7 @@ function Banners(props) {
                         search: '?campaign_id=1',
                         state: {showCampaign: true}
                     }}>
-                        <img className={classes.firstImage} src={banners[0].image} alt={'کمپین شماره ۱'}/>
+                        <img className={classes.firstImage} src={banners[0].image ? banners[0].image : null} alt={'کمپین شماره ۱'}/>
                     </Link>
                 </Grid>
                 <Grid className={classes.secondImageContainer} item md={7} xs={12}>
@@ -28,7 +28,7 @@ function Banners(props) {
                         state: {showCampaign: true}
                     }}
                     >
-                        <img className={classes.secondImage} src={banners[1].image} alt={'کمپین شماره ۲'}/>
+                        <img className={classes.secondImage} src={banners[1].image ? banners[1].image : null} alt={'کمپین شماره ۲'}/>
                     </Link>
                 </Grid>
                 <Grid className={classes.thirdImageContainer} item xs={12}>
@@ -38,7 +38,7 @@ function Banners(props) {
                         state: {showCampaign: true}
                     }}
                     >
-                        <img className={classes.thirdImage} src={banners[2].image} alt={'کمپین شماره ۳'}/>
+                        <img className={classes.thirdImage} src={banners[2].image ? banners[2].image : null} alt={'کمپین شماره ۳'}/>
                     </Link>
                 </Grid>
             </Grid>
@@ -49,7 +49,7 @@ function Banners(props) {
                     state: {showCampaign: true}
                 }}
                 >
-                    <img className={classes.thirdImage} src={banners[2].image} alt={'کمپین شماره ۳'}/>
+                    <img className={classes.thirdImage} src={banners[2].image ? banners[2].image : null} alt={'کمپین شماره ۳'}/>
                 </Link>
             </div>
         </>
