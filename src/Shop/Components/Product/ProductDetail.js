@@ -11,6 +11,9 @@ import * as PropTypes from "prop-types";
 import {useAuth} from "../../../utills/Auth";
 import usePostComment from "../../PostData/usePostComment";
 import {Alert} from "@material-ui/lab";
+import {Link} from "react-router-dom";
+import {SmoothVerticalScrolling} from "../../../utills/smoothScroll";
+import FullScreenDialog from "./MobileVersion/FullScreenDialog";
 
 function ProductDetail(props) {
     const {product} = props
@@ -44,15 +47,36 @@ function ProductDetail(props) {
                     classes={{
                         action: classes.snackbarAction,
                         icon: classes.snackbarIcon,
-                        message: classes.snackbarMessage
+                        message: classes.snackbarMessage,
                     }}
                     style={{fontFamily: 'Shabnam'}}
                     onClose={() => setOpenSnackBar(false)}
-                    severity={createCommentResult ? "success" : "error"}
+                    severity={auth.isLogin ? createCommentResult ? "success" : "error" : "warning"}
                 >{
-                    createCommentResult
-                        ? 'نظر شما ثبت شد. پس از بررسی، نظر شما در سایت قرار داده می‌شود.'
-                        : 'خطا لطفا دوباره تلاش کنید.'
+                    auth.isLogin ?
+                        createCommentResult
+                            ? 'نظر شما ثبت شد. پس از بررسی، نظر شما در سایت قرار داده می‌شود.'
+                            : 'خطا لطفا دوباره تلاش کنید.'
+                        : <div style={{display: 'flex'}}>
+                            <Typography>
+                                {' شما ابتدا باید'}
+                            </Typography>
+                            <Typography
+                                component={
+                                    (props) =>
+                                        <Link
+                                            {...props}
+                                            onClick={() => SmoothVerticalScrolling(document.body, 500, "top")}
+                                            to={'/login'}/>
+                                }
+                                style={{margin: 'auto 4px'}}
+                            >
+                                ورود/ثبت‌نام
+                            </Typography>
+                            <Typography>
+                                {'کنید '}
+                            </Typography>
+                        </div>
                 }
 
                 </Alert>
@@ -76,10 +100,28 @@ function ProductDetail(props) {
                                 </div>
                             ))
                         }
+                        {
+                            product.comment_objs_list.length === 0 &&
+                            <Typography
+                                style={{
+                                    color: '#545454',
+                                    fontSize: 14,
+                                    textAlign: 'center',
+                                    opacity: 0.68,
+                                    margin: '16px 0'
+                                }}
+                            >
+                                هنوز دیدگاهی ثبت نشده !
+                            </Typography>
+                        }
                         <form
                             onSubmit={(event) => {
                                 event.preventDefault()
-                                setFetchPostComment(true)
+                                if (!auth.isLogin) {
+                                    setOpenSnackBar(true)
+                                } else {
+                                    setFetchPostComment(true)
+                                }
                             }}
                         >
                             <StyledTextField
@@ -87,7 +129,6 @@ function ProductDetail(props) {
                                 id="comment-input"
                                 placeholder="دیدگاه خود را بنویسید"
                                 value={toFaDigit(commentInput)}
-                                disabled={!auth.isLogin}
                                 onChange={(event) => setCommentInput(event.target.value)}
                                 InputProps={{
                                     endAdornment:
