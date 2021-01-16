@@ -18,7 +18,6 @@ export const useStyles = makeStyles((theme) => ({
     },
     logo: {
         width: 175,
-        height: 34,
     },
     description: {
         fontFamily: 'Shabnam',

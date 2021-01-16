@@ -1,7 +1,7 @@
 import React from 'react'
 import {useStyles} from "./Styles/FooterStyle";
 import {Grid, Typography} from "@material-ui/core";
-import logo from '../../img/zimmerman-white.svg'
+import logo from '../../img/didshop-logo-white.svg'
 import Link from "@material-ui/core/Link";
 import {Link as RouterLink} from "react-router-dom"
 import SocialNetwork from "./SocialNetwork";

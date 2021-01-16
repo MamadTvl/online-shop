@@ -39,12 +39,10 @@ export const useHeaderStyle = makeStyles((theme) => ({
     },
     logo: {
         width: 175,
-        height: 34,
         alignSelf: 'center',
         marginLeft: theme.spacing(4),
         [theme.breakpoints.down('xs')]: {
             width: 114.51,
-            height: 28,
         }
     },
     rightItems: {

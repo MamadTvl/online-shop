@@ -18,24 +18,24 @@ export const useAboutUsPageStyle = makeStyles((theme) => ({
     },
     section1: {
         display: 'flex',
-        [theme.breakpoints.down('sm')]: {
             flexDirection: 'column'
-        },
+
     },
     text: {
-        fontFamily: 'Shabnam',
+        fontFamily: 'Shabnam, sans-serif',
         fontSize: 14,
         color: '#545454',
         whiteSpace: 'pre-wrap',
         lineHeight: '32px',
     },
     h2: {
-        fontFamily: 'Shabnam',
+        fontFamily: 'sans-serif',
         fontSize: 20,
         color: '#545454',
         fontWeight: 'bold',
         marginTop: 24,
         marginBottom: 16,
+        direction: 'ltr'
     },
     image: {
         width: '30vw',

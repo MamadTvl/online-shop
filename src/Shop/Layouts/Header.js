@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import AppBar from "@material-ui/core/AppBar";
-import logo from '../../img/zimmerman.svg'
+import logo from '../../img/didshop-logo-black.svg'
 import {Badge, Button, Drawer, IconButton, SvgIcon} from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InputAdornment from '@material-ui/core/InputAdornment';
