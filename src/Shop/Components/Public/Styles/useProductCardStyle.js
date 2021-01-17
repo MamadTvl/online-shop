@@ -18,7 +18,7 @@ export const useProductCardStyles = makeStyles((theme) => ({
         height: '100%',
         width: '100%',
         borderRadius: 7,
-        maxWidth: 300,
+        maxWidth: 265,
         margin: 'auto',
         [theme.breakpoints.down('sm')]: {
             height: 320,

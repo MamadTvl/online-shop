@@ -9,7 +9,7 @@ import {Skeleton} from "@material-ui/lab";
 import BestSeller from "../Components/Home/BestSeller";
 
 function HomePage() {
-    document.title = "DID Art Shop"
+    document.title = "DID ArtShop"
     const [fetch,] = useState(true)
     const [loading, result] = useHomeData(fetch)
 
