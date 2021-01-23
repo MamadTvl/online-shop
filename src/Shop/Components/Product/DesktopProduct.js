@@ -47,7 +47,7 @@ function DesktopProduct(props) {
 
     }, [selectedSize, selectedColor])
 
-    let images = [product.preview_image]
+    let images = [product.preview_image !== null && product.preview_image]
     for (let i = 0; i < product.other_image_list.length; i++) {
         images.push(product.other_image_list[i])
     }

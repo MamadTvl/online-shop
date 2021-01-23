@@ -52,7 +52,8 @@ function usePostCart(fetch) {
                     setLoading(false)
                 }
             } catch (err) {
-                setLoading(true)
+                localStorage.removeItem('cart')
+                setLoading(false)
             }
         }
 
