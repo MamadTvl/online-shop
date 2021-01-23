@@ -33,8 +33,8 @@ function SecondStep(props) {
                 <Typography className={classes.timerLabel}>تا ارسال دوباره کد تایید</Typography>
             </div>
             <div className={classes.timerContent}>
-                <Typography className={classes.timerTitle}>کد پنج رقمی تایید به شماره ۰۹۱۲۶۶۸۷۴۷۳ ارسال شده
-                    است.</Typography>
+                <Typography className={classes.timerTitle}>{`کد چهار رقمی تایید به شماره ${toFaDigit(values.mobileNumber)} ارسال شده
+                    است.`}</Typography>
                 <div className={classes.codeContainer}>
                     <Typography className={classes.label}>کد تایید</Typography>
                     <TextField
@@ -57,6 +57,7 @@ function SecondStep(props) {
                     <Button
                         className={classes.timerButton}
                         dir={'ltr'}
+                        disabled={seconds !== 0 && seconds!== 0}
                         onClick={() => {
                             const time = new Date();
                             time.setSeconds(time.getSeconds() + 120);

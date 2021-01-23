@@ -7,10 +7,6 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 
-
-
-
-
 function ThirdStep(props) {
     const classes = useForgetPassStyle()
     const {values, setValues, errors} = props
@@ -25,7 +21,7 @@ function ThirdStep(props) {
     };
     return(
         <div style={{width: '100%'}}>
-            <Typography className={classes.title}>رمزعبور عبور جدید خود را وارد کنید</Typography>
+            <Typography className={classes.title}>رمزعبور جدید خود را وارد کنید</Typography>
             <div className={classes.mobileContainer}>
                 <Typography className={classes.label}>رمزعبور</Typography>
                 <TextField

@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Button, Card} from "@material-ui/core";
+import React, {useEffect, useState} from "react";
+import {Button, Card, Snackbar} from "@material-ui/core";
 import Title from "../Components/Public/Title";
 import Step from "../Components/Public/Step"
 import FirstStep from "../Components/SignUp/FirstStep";
@@ -8,6 +8,8 @@ import {useSignUpPageStyle} from "./Styles/useSignUpPageStyle";
 import SecondStep from "../Components/SignUp/SecondStep";
 import useWindowSize from "../../utills/Hooks/useWindowSize";
 import ThirdStep from "../Components/SignUp/ThirdStep";
+import useSendSms from "../PostData/useSendSms";
+import {Alert} from "@material-ui/lab";
 
 function SignUpPage() {
     document.title = 'ثبت نام'
@@ -43,6 +45,10 @@ function SignUpPage() {
     })
     const time = new Date();
     time.setSeconds(time.getSeconds() + 120);
+    const [openSnackBar, setOpenSnackBar] = useState(false)
+    const [alertMessage, setAlertMessage] = useState('به نظر میرسد که مشکلی پیش آمده لطفا دوباره تلاش کنید')
+    const [fetchSms, setFetchSms] = useState(false)
+    const [sendSmsLoading, sendSmsResult] = useSendSms(fetchSms, values.mobileNumber)
 
     const setTitle = (step) => {
         switch (step) {
@@ -70,11 +76,31 @@ function SignUpPage() {
         }
     }
 
+    useEffect(() => {
+        if (!sendSmsLoading && fetchSms){
+            if (sendSmsResult === "OK"){
+                setStep(1)
+            }
+            else {
+                setErrors({...errors, mobileNumber: true})
+                setTimeout(
+                    () => setErrors({...errors, mobileNumber: false})
+                    , 1000)
+                setOpenSnackBar(true)
+                if (sendSmsResult === "this mobile_number have account."){
+                    setAlertMessage('این شماره موبایل قبلا ثبت شده است')
+                }
+            }
+            setFetchSms(false)
+        }
+    }, [sendSmsLoading, sendSmsResult])
+
     const handleSubmit = (event) => {
         event.preventDefault()
         if (step === 0) {
-            if (values.mobileNumber.length === 11)
-                setStep(1)
+            if (values.mobileNumber.length === 11){
+                setFetchSms(true)
+            }
             else {
                 setErrors({...errors, mobileNumber: true})
                 setTimeout(
@@ -120,6 +146,17 @@ function SignUpPage() {
 
     return (
         <>
+            <Snackbar open={openSnackBar} autoHideDuration={6000} onClose={() => setOpenSnackBar(false)}>
+                <Alert
+                    dir={'ltr'}
+                    variant={'filled'}
+                    style={{fontFamily: 'Shabnam'}}
+                    onClose={() => setOpenSnackBar(false)}
+                    severity={"error"}
+                >
+                    {alertMessage}
+                </Alert>
+            </Snackbar>
             <form onSubmit={handleSubmit} className={classes.container}>
                 <Title title={setTitle(step)}/>
                 <Card>
@@ -149,7 +186,7 @@ function SignUpPage() {
                 </Card>
                 <div style={{width: size.width >= 600 ? '33.33%' : '100%', float: 'left', marginTop: 24}}>
                     <Button
-                        // disabled={loading}
+                        disabled={sendSmsLoading}
                         type={'submit'}
                         fullWidth
                         className={classes.signUpButton}
