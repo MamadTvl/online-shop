@@ -23,11 +23,13 @@ function Footer() {
                                 alt={'دیدآرت شاپ'}
                             />
                         </RouterLink>
-                        <Typography className={classes.description} paragraph noWrap={false}>دیجی‌استایل، پس از تجربه‌ی
-                            موفق فروشگاه اینترنتی دیجی‌کالا به صورت تخصصی پا به
-                            عرصه مد، پوشاک و سبک زندگی گذاشت تا همان تجربه‌ی شیرین، در قالبی نو تکرار شود. در دیجی
-                            ‌استایل
-                            می‌توانید همه آنچه مرتبط با مد و پوشاک است.</Typography>
+                        <Typography
+                            className={classes.description}
+                            paragraph
+                            noWrap={false}
+                        >
+                            فعالیت اصلی Did Agency تهیه، تولید و فروش صنایع‌دستی در قالب‌ محصولات متنوع، با همکاری هنرمندان بنام، خلاق و کار بلد ایرانی است. هنرمندان جوان همکار در Did Agency که تشکیل‌دهنده‌ی  Did Creative Agency نیز هستند، با طراحی محصولات خاص و منحصربه‌فرد و استفاده از مواد اولیه‌ی باکیفیت درصدد بازگرداندن کالای مرغوب ایرانی به سبد خانواده‌ی ایرانی در Did ArtShop هستند.
+                        </Typography>
                         <SocialNetwork isXs={false}/>
                     </Grid>
 
