@@ -35,6 +35,7 @@ export const useProductCardStyles = makeStyles((theme) => ({
     cardMedia: {
         width: '100%',
         height: '49%',
+        maxHeight: '49%',
     },
     priceContainer: {
         display: 'flex',

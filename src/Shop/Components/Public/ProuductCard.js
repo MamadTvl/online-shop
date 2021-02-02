@@ -23,7 +23,7 @@ function ProductCard(props) {
             >
                 <Link className={classes.cardRoot}
                       to={`/products/${product.unique_code}/${product.title}/${product.id}`}>
-                    <CardMedia className={classes.cardMedia} image={product.preview_image} title={product.name}/>
+                    <CardMedia component={'img'} className={classes.cardMedia} image={product.preview_image} title={product.name}/>
                     <CardContent title={product.name} className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>{product.title}</Typography>
                         <div className={classes.priceContainer}>
