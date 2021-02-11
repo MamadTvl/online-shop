@@ -18,14 +18,15 @@ function useSignUp(fetch, values) {
                     data: {
                         "mobile_number": toEnDigit(values.mobileNumber),
                         "name_and_last_name": values.name,
+                        "password": toEnDigit(values.password),
                         "state": values.state.id,
                         "city": values.city.id,
                         "email": values.email,
                     },
                 })
-                setResult(response.data.data)
+                setResult(response.data.status === 201)
             } catch (err) {
-                setResult(err.response.data.data)
+                setResult(false)
             }
             setLoading(false)
         }

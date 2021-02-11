@@ -10,6 +10,8 @@ import useWindowSize from "../../utills/Hooks/useWindowSize";
 import ThirdStep from "../Components/SignUp/ThirdStep";
 import useSendSms from "../PostData/useSendSms";
 import {Alert} from "@material-ui/lab";
+import useValidation from "../PostData/useValidation";
+import useSignUp from "../PostData/useSignUp";
 
 function SignUpPage() {
     document.title = 'ثبت نام'
@@ -48,7 +50,12 @@ function SignUpPage() {
     const [openSnackBar, setOpenSnackBar] = useState(false)
     const [alertMessage, setAlertMessage] = useState('به نظر میرسد که مشکلی پیش آمده لطفا دوباره تلاش کنید')
     const [fetchSms, setFetchSms] = useState(false)
+    const [fetchValidation, setFetchValidation] = useState(false)
+    const [fetchSignup, setFetchSignup] = useState(false)
+
+    const [validationResult, validationLoading] = useValidation(fetchValidation, values)
     const [sendSmsLoading, sendSmsResult] = useSendSms(fetchSms, values.mobileNumber)
+    const [signupLoading, signupResult] = useSignUp(fetchSignup, values)
 
     const setTitle = (step) => {
         switch (step) {
@@ -87,13 +94,34 @@ function SignUpPage() {
                     () => setErrors({...errors, mobileNumber: false})
                     , 1000)
                 setOpenSnackBar(true)
-                if (sendSmsResult === "this mobile_number have account."){
-                    setAlertMessage('این شماره موبایل قبلا ثبت شده است')
-                }
+                setAlertMessage('این شماره موبایل قبلا ثبت شده است')
             }
             setFetchSms(false)
         }
     }, [sendSmsLoading, sendSmsResult])
+
+    useEffect(() => {
+        if (!validationLoading && fetchValidation){
+            if (validationResult){
+                setStep(2)
+            } else {
+                setOpenSnackBar(true)
+                setAlertMessage('کد اشتباه است')
+            }
+            setFetchValidation(false)
+        }
+    }, [validationLoading, validationResult])
+
+    useEffect(() => {
+        if (!signupLoading && fetchSignup){
+            if (signupResult){
+                history.push('/login')
+            }else {
+                setOpenSnackBar(true)
+                setAlertMessage('مشکلی پیش آمده لطفا دوباره تلاش کنید')
+            }
+        }
+    }, [signupLoading, signupResult])
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -108,8 +136,7 @@ function SignUpPage() {
                     , 1000)
             }
         } else if (step === 1) {
-            setStep(2)
-
+            setFetchValidation(true)
         } else if (step === 2) {
             if (values.name === '') {
                 setErrors({...errors, name: true})
@@ -138,7 +165,7 @@ function SignUpPage() {
                     () => setErrors({...errors, password: false})
                     , 5000)
             }else{
-                history.push('/')
+                setFetchSignup(true)
             }
 
         }
@@ -174,6 +201,7 @@ function SignUpPage() {
                             setValues={setValues}
                             errors={errors}
                             setStep={setStep}
+                            setFetchSms={setFetchSms}
                         />
                     </Step>
                     <Step index={2} step={step} stepClass={classes.step}>
@@ -186,7 +214,7 @@ function SignUpPage() {
                 </Card>
                 <div style={{width: size.width >= 600 ? '33.33%' : '100%', float: 'left', marginTop: 24}}>
                     <Button
-                        disabled={sendSmsLoading}
+                        disabled={sendSmsLoading || signupLoading}
                         type={'submit'}
                         fullWidth
                         className={classes.signUpButton}

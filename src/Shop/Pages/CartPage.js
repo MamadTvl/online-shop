@@ -237,7 +237,6 @@ function CartPage(props) {
                 setFetchPathCart(true)
                 setFetchPostAddress(true)
             }
-
         } else {
             setFetchPayment(true)
         }
@@ -317,7 +316,6 @@ function CartPage(props) {
 
     useEffect(() => {
         if (!paymentLoading && fetchPayment) {
-            console.log('here is payment')
             console.log(paymentResult)
             setFetchPayment(false)
         }

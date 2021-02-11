@@ -6,7 +6,7 @@ import {useSignUpPageStyle} from "../../Pages/Styles/useSignUpPageStyle";
 import PropType from 'prop-types'
 
 function SecondStep(props) {
-    const {expiryTimestamp, values, setValues, errors, setStep} = props
+    const {expiryTimestamp, values, setValues, errors, setStep, setFetchSms} = props
     const classes = useSignUpPageStyle()
     const {
         seconds,
@@ -59,6 +59,7 @@ function SecondStep(props) {
                         dir={'ltr'}
                         disabled={seconds !== 0 && seconds!== 0}
                         onClick={() => {
+                            setFetchSms(true)
                             const time = new Date();
                             time.setSeconds(time.getSeconds() + 120);
                             restart(time)
@@ -123,6 +124,7 @@ SecondStep.propTypes = {
     setValues: PropType.func.isRequired,
     errors: PropType.object.isRequired,
     setStep: PropType.func.isRequired,
+    setFetchSms: PropType.func.isRequired,
 }
 
 export default SecondStep
