@@ -25,8 +25,10 @@ function ThirdStep(props) {
             <div className={classes.mobileContainer}>
                 <Typography className={classes.label}>رمزعبور</Typography>
                 <TextField
+                    required
                     dir={'ltr'}
                     error={errors.password}
+                    helperText={toFaDigit('حداقل شامل 6 کاراکتر')}
                     type={showPassword ? 'text' : 'password'}
                     value={toFaDigit(values.password)}
                     onChange={handleChange('password')}
@@ -45,6 +47,14 @@ function ThirdStep(props) {
                         classes: {
                             input: classes.input,
                             root: classes.textFieldRoot,
+                        }
+                    }}
+                    FormHelperTextProps={{
+                        style: {
+                            fontFamily: 'Shabnam',
+                            fontSize: 10,
+                            fontWeight: 500,
+                            textAlign: 'right'
                         }
                     }}
                     fullWidth

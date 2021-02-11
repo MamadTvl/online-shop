@@ -6,7 +6,7 @@ export const useSignUpPageStyle = makeStyles((theme) => ({
     container: {
         marginTop: theme.spacing(7),
         marginBottom: 185,
-        padding: theme.spacing(0, 52.6),
+        padding: theme.spacing(0, 49),
         [theme.breakpoints.down('md')]: {
             padding: theme.spacing(0, 3),
         },

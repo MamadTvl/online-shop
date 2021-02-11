@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useAxios} from "../../utills/Hooks/useAxios";
 import {toEnDigit} from "../../utills/ToFaDigit";
 
-function useRestorePassword(fetch, mobileNumber, password, code) {
+function useRestorePassword(fetch, mobileNumber,values) {
     const [result, setResult] = useState()
     const [loading, setLoading] = useState(false)
     const [, restorePassword] = useAxios({
@@ -16,14 +16,13 @@ function useRestorePassword(fetch, mobileNumber, password, code) {
                 setLoading(true)
                 const response = await restorePassword({
                     data: {
-                        "mobile_number": toEnDigit(mobileNumber),
-                        "password": toEnDigit(password),
-                        "code": toEnDigit(code),
+                        "mobile_number": toEnDigit(values.mobileNumber),
+                        "password": toEnDigit(values.password),
                     },
                 })
-                setResult(response.data.data)
+                setResult(response.data.status === 'success')
             } catch (err) {
-                setResult(err.response.data.data)
+                setResult(false)
             }
             setLoading(false)
         }

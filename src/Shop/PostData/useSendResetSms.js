@@ -19,9 +19,9 @@ function useSendResetSms(fetch, mobileNumber) {
                         "mobile_number": toEnDigit(mobileNumber),
                     },
                 })
-                setResult(response.data.data)
+                setResult(response.data.status === 'success')
             } catch (err) {
-                setResult(err.response.data.data)
+                setResult(false)
             }
             setLoading(false)
         }
