@@ -25,6 +25,7 @@ import useForceUpdate from "../../utills/Hooks/useForceUpdate";
 import useApplyDiscountCode from "../PostData/useApplyDiscountCode";
 import usePathCart from "../PostData/usePathCart";
 import usePostAddress from "../PostData/usePostAddress";
+import usePayment from "../PostData/usePayment";
 import {SmoothVerticalScrolling} from "../../utills/smoothScroll";
 
 
@@ -35,6 +36,7 @@ function CartPage(props) {
     const [fetchPostAddress, setFetchPostAddress] = useState(false)
     const [fetchApplyCode, setFetchApplyCode] = useState(false)
     const [fetchPathCart, setFetchPathCart] = useState(false)
+    const [fetchPayment, setFetchPayment] = useState(false)
     const [selectedAddress, setSelectedAddress] = useState({
         city: null,
         state: null,
@@ -96,6 +98,7 @@ function CartPage(props) {
         address: ''
     })
     const [postAddressLoading, postAddressResult] = usePostAddress(fetchPostAddress, addressValues)
+    const [paymentLoading, paymentResult] = usePayment(fetchPayment, basketDetails.basket.id)
     const [details, setDetails] = useState('')
     const [discountCode, setDiscountCode] = useState('')
     const [applyCodeLoading, applyCodeResult] = useApplyDiscountCode(fetchApplyCode, basketDetails.basket.id, discountCode)
@@ -235,6 +238,8 @@ function CartPage(props) {
                 setFetchPostAddress(true)
             }
 
+        } else {
+            setFetchPayment(true)
         }
         SmoothVerticalScrolling(document.body, 500, "top")
     }
@@ -309,6 +314,14 @@ function CartPage(props) {
     useEffect(() => {
         setBasketChange(prevState => prevState + 1)
     }, [])
+
+    useEffect(() => {
+        if (!paymentLoading && fetchPayment) {
+            console.log('here is payment')
+            console.log(paymentResult)
+            setFetchPayment(false)
+        }
+    }, [paymentLoading, paymentResult])
 
     return (
         <>
