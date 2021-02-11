@@ -120,6 +120,7 @@ export const useSignUpPageStyle = makeStyles((theme) => ({
         fontWeight: 500,
         color: '#434343',
         marginBottom: 24,
+        letterSpacing: '-0.05em',
     },
     codeContainer: {
         display: 'flex',
