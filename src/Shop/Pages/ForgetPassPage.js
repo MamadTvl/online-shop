@@ -168,7 +168,7 @@ function ForgetPassPage() {
                 </Card>
                 <div style={{width: size.width >= 600 ? '33.33%' : '100%', float: 'left', marginTop: 24}}>
                     <Button
-                        disabled={sendSmsLoading || restoreLoading}
+                        disabled={sendSmsLoading || restoreLoading || validationLoading}
                         type={'submit'}
                         fullWidth
                         className={classes.forgetButton}

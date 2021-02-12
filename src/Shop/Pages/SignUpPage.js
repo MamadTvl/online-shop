@@ -53,7 +53,7 @@ function SignUpPage() {
     const [fetchValidation, setFetchValidation] = useState(false)
     const [fetchSignup, setFetchSignup] = useState(false)
 
-    const [validationResult, validationLoading] = useValidation(fetchValidation, values)
+    const [validationLoading, validationResult] = useValidation(fetchValidation, values)
     const [sendSmsLoading, sendSmsResult] = useSendSms(fetchSms, values.mobileNumber)
     const [signupLoading, signupResult] = useSignUp(fetchSignup, values)
 
@@ -214,7 +214,7 @@ function SignUpPage() {
                 </Card>
                 <div style={{width: size.width >= 600 ? '33.33%' : '100%', float: 'left', marginTop: 24}}>
                     <Button
-                        disabled={sendSmsLoading || signupLoading}
+                        disabled={sendSmsLoading || signupLoading || validationLoading}
                         type={'submit'}
                         fullWidth
                         className={classes.signUpButton}
