@@ -94,6 +94,7 @@ function ForgetPassPage() {
                 setOpenSnackBar(true)
                 setAlertMessage('مشکلی پیش آمده لطفا دوباره تلاش کنید')
             }
+            setFetchRestorePassword(false)
         }
     }, [restoreLoading ,restoreResult])
 
