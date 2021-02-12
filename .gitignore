@@ -26,3 +26,5 @@ yarn-error.log*
 build.zip
 .gitignore
 .eslintcache
+prettier.config.js
+.prettierrc.js
