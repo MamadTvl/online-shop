@@ -2,9 +2,11 @@ import React from "react";
 import {usePaymentPageStyle} from "./Styles/usePaymentpageStyle";
 import {SvgIcon, Typography, Link} from "@material-ui/core";
 import {toFaDigit} from "../../utills/ToFaDigit";
+import {useLocation} from 'react-router-dom'
 
-function PaymentPage({location}) {
+function PaymentPage() {
     const classes = usePaymentPageStyle()
+    const location = useLocation()
     const params = new URLSearchParams(location.search)
     const status = params.get('status')
     const msg = params.get('msg')
@@ -97,8 +99,9 @@ function PaymentPage({location}) {
                 className={classes.describe}
             >
                 {
-                    `${status && 
+                    `${status ? 
                         'در صورت کسر وجه از حساب شما؛ تا ۷۲ ساعت بعد به حسابتان بازگشت خواهد خورد.'
+                        : ''
                     }`   
                 }
             </Typography>

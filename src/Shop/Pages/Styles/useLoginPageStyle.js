@@ -6,11 +6,18 @@ export const useLoginPageStyle = makeStyles((theme) => ({
         marginTop: theme.spacing(7),
         padding: theme.spacing(0, 52.6),
         [theme.breakpoints.down('md')]: {
-            padding: theme.spacing(0, 3),
+            padding: theme.spacing(0, 30),
         },
-
+        [theme.breakpoints.down('sm')]: {
+            padding: theme.spacing(0, 10),
+        },
         [theme.breakpoints.down('xs')]: {
             padding: 18.5,
+        },
+        [theme.breakpoints.up('lg')]: {
+            maxWidth: 600,
+            margin: 'auto',
+            padding: 0,
         },
     },
     card: {
@@ -142,7 +149,7 @@ export const useLoginPageStyle = makeStyles((theme) => ({
         fontWeight: "bold",
         '&:hover': {
             backgroundColor: '#F16522',
-            opacity: '70%'
+            // opacity: '70%'
         },
     },
     buttonProgress: {

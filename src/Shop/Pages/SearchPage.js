@@ -193,7 +193,7 @@ function SearchPage({location}) {
                                     location.state.showCampaign && 'none'
                                     : undefined
                         }}
-                        container sm={3}
+                        container md={3}
                         className={classes.filterContainer}
                         direction={"row"}
                     >
@@ -264,7 +264,7 @@ function SearchPage({location}) {
                             </>
                         }
                         {
-                            size.width > 600
+                            size.width > 900
                                 ? <>
                                     {
                                         searchStates.products

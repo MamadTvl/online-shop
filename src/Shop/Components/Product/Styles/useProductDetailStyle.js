@@ -43,7 +43,8 @@ export const useProductDetailStyle = makeStyles((theme) => ({
     },
     commentInput: {
         fontFamily: 'Shabnam',
-        fontSize: 16,
+        fontSize: 18,
+        lineHeight: '32px',
         color: '#444444'
     },
     commentInputRoot: {
@@ -96,10 +97,10 @@ export const useProductDetailStyle = makeStyles((theme) => ({
     },
     comment: {
         fontFamily: 'Shabnam',
-        fontSize: 16,
+        fontSize: 18,
         color: '#888888',
         whiteSpace: 'pre-wrap',
-        lineHeight: '32px'
+        lineHeight: '32px',
     },
     snackbarAction: {
         paddingLeft: 0,

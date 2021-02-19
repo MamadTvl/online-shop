@@ -11,7 +11,12 @@ export const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             marginTop: 12,
             padding: '0 4px',
-        }
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: 1560,
+            margin: 'auto',
+            padding: 0,
+        },
     },
 
     title:{
@@ -36,7 +41,7 @@ export const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
         justifyContent: 'center',
         [theme.breakpoints.down('md')]: {
-            marginBottom: "30px",
+            marginBottom: "46px",
         },
 
     },

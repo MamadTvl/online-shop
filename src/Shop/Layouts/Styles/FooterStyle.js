@@ -13,7 +13,12 @@ export const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(6, 17.5),
         [theme.breakpoints.down('sm')]: {
             padding: theme.spacing(3),
-        }
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: 1560,
+            margin: 'auto',
+            padding: 0,
+        },
 
     },
     logo: {

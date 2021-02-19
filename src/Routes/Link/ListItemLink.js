@@ -28,7 +28,7 @@ function ListItemLink(props) {
 
     return (
         <li>
-            <ListItem key={id} button component={renderLink}>
+            <ListItem classes={{root: classes.root}} key={id} button component={renderLink}>
                 <ListItemText classes={{primary: classes.textStyle}} primary={primary}/>
             </ListItem>
         </li>

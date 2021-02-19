@@ -17,6 +17,11 @@ export const FilterStyles = withStyles((theme) => ({
             maxWidth: 312,
             marginLeft: 20,
         },
+        [theme.breakpoints.down('md')]: {
+            maxWidth: 434,
+            marginLeft: 20,
+        },
+
     },
     thumb: {
         height: 20,
@@ -65,7 +70,7 @@ export const useFilterPriceStyle = makeStyles((theme) => ({
         maxWidth: '100%',
         width: 228,
         background: 'transparent',
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('md')]: {
             justifyContent: 'center',
             width: 311,
         },
@@ -101,7 +106,7 @@ export const useFilterPriceStyle = makeStyles((theme) => ({
             flexDirection: 'row',
             padding: 8,
             width: 155,
-            margin: 'auto'
+            margin: 'auto 0',
         },
     },
     label: {
@@ -110,7 +115,7 @@ export const useFilterPriceStyle = makeStyles((theme) => ({
         color: '#545454',
         opacity: 0.68,
         [theme.breakpoints.down('xs')]: {
-            margin: '0 8px',
+            margin: 'auto 8px',
             textAlign: 'center'
         },
     },
@@ -121,6 +126,7 @@ export const useFilterPriceStyle = makeStyles((theme) => ({
         color: '#545454',
         [theme.breakpoints.down('xs')]: {
             fontSize: 14,
+            margin: 'auto 0',
         },
     },
     filterButton: {
@@ -133,7 +139,7 @@ export const useFilterPriceStyle = makeStyles((theme) => ({
         marginTop: 8,
         '&:hover': {
             backgroundColor: '#F16522',
-            opacity: '70%'
+            // opacity: '70%'
         },
     },
 }), {index: 1})

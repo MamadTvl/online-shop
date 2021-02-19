@@ -11,6 +11,11 @@ export const useProductSliderStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             padding: 18.5,
         },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: 1560,
+            margin: 'auto',
+            padding: 0,
+        },
 
     },
     title: {
@@ -58,6 +63,7 @@ export const useProductSliderStyles = makeStyles((theme) => ({
         width: '100%',
         borderRadius: 7,
         maxWidth: 300,
+        margin: 'auto',
         [theme.breakpoints.down('sm')]: {
             height: 320,
             width: 215,

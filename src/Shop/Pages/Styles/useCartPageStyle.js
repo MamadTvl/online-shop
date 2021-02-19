@@ -13,7 +13,16 @@ export const useCartPageStyle = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             marginTop: 12,
             padding: 18.5,
-        }
+        },
+        [theme.breakpoints.up('lg')]: {
+            padding: theme.spacing(0, 17.5),
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: 1560,
+            margin: 'auto',
+            padding: 0,
+        },
+
     },
     card: {
         display: 'flex',
@@ -73,7 +82,7 @@ export const useCartPageStyle = makeStyles((theme) => ({
         fontWeight: "bold",
         '&:hover': {
             backgroundColor: '#F16522',
-            opacity: '70%'
+            // opacity: '70%'
         },
         marginLeft: '-8px'
 
@@ -95,7 +104,7 @@ export const useCartPageStyle = makeStyles((theme) => ({
         fontWeight: "bold",
         '&:hover': {
             backgroundColor: '#F16522',
-            opacity: '70%'
+            // opacity: '70%'
         },
     },
     backButton: {

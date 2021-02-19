@@ -13,6 +13,14 @@ export const useAddressPageStyle = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             padding: 18.5,
         },
+        [theme.breakpoints.up('lg')]: {
+            padding: theme.spacing(0, 17.5),
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: 1560,
+            margin: 'auto',
+            padding: 0,
+        },
 
     },
     addButton: {

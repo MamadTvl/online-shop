@@ -14,6 +14,7 @@ export const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             padding: theme.spacing(4, 0),
         },
+
         marginTop: 64,
     },
     spacingContainer: {
@@ -38,6 +39,7 @@ export const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.between(0, 960)]: {
             width: 'auto'
         },
+
     },
     title: {
         fontFamily: 'Shabnam',
@@ -69,6 +71,9 @@ export const useStyles = makeStyles((theme) => ({
             height: 320,
             minWidth: 211,
             maxWidth: 250,
+        },
+        [theme.breakpoints.up('xl')]: {
+            marginLeft: 200,
         },
     }
 

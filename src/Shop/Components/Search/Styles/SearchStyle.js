@@ -12,6 +12,12 @@ export const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             padding: 18.5,
         },
+        [theme.breakpoints.up('lg')]: {
+            maxWidth: 1560,
+            margin: 'auto',
+
+        },
+
     },
     breadcrumbContainer: {
         marginTop: 24,
@@ -59,24 +65,28 @@ export const useStyles = makeStyles((theme) => ({
     },
     filterItem: {
         marginBottom: theme.spacing(2),
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('md')]: {
             marginBottom: 1,
         },
     },
     categoryMdItem: {
         marginBottom: theme.spacing(2),
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('md')]: {
             display: 'none',
         },
     },
     categoryXsItem: {
         display: "none",
         marginBottom: theme.spacing(2),
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('md')]: {
             display: 'flex'
         },
     },
-    productsContainer: {},
+    productsContainer: {
+        [theme.breakpoints.down('md')]: {
+            marginTop: 16,
+        },
+    },
     productItem: {
         paddingRight: 20,
         paddingBottom: 20,

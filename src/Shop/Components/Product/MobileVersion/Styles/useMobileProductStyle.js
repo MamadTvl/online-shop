@@ -132,7 +132,7 @@ export const useMobileProductStyle = makeStyles((theme) => ({
         fontWeight: "bold",
         '&:hover': {
             backgroundColor: '#F16522',
-            opacity: '70%'
+            // opacity: '70%'
         },
 
     },

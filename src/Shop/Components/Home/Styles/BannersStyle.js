@@ -14,7 +14,12 @@ export const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             marginTop: 12,
             padding: 18.5,
-        }
+        },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: 1560,
+            margin: 'auto',
+            padding: 0,
+        },
     },
     imageContainer: {
       position: "relative",

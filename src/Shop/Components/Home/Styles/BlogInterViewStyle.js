@@ -14,6 +14,11 @@ export const useStyles = makeStyles((theme) => ({
             marginTop: 12,
             padding: 18.5,
         },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: 1560,
+            margin: 'auto',
+            padding: 0,
+        },
         marginBottom: 48,
     },
     title: {

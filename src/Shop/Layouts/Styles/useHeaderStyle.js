@@ -19,16 +19,24 @@ export const useHeaderStyle = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "row",
         justifyContent: 'space-between',
-        margin: theme.spacing(0, 17.5),
+        padding: theme.spacing(0, 17.5),
         [theme.breakpoints.down('md')]: {
-            margin: theme.spacing(0, 3),
+            padding: theme.spacing(0, 3),
         },
         // [theme.breakpoints.down('sm')]: {
         //     margin: theme.spacing(0, 3),
         // },
         [theme.breakpoints.down('xs')]: {
-            margin: theme.spacing(0, 0),
-        }
+            padding: theme.spacing(0, 0),
+        },
+        // [theme.breakpoints.up('lg')]: {
+        //     padding: theme.spacing(0, 17.5),
+        // },
+        [theme.breakpoints.up('xl')]: {
+            minWidth: 1560,
+            padding: 0,
+            margin: 'auto'
+        },
     },
     menuIcon: {
         color: '#434343',
@@ -98,14 +106,16 @@ export const useHeaderStyle = makeStyles((theme) => ({
     dialog: {
         top: '-34%'
     },
-    dialogContent: {
-
-    },
+    dialogContent: {},
     drawer: {
         [theme.breakpoints.up('sm')]: {
             width: 270,
             flexShrink: 0,
         },
+    },
+    desktopDrawer: {
+        width: 270,
+        flexShrink: 0,
     },
     drawerAppBar: {
         //for keep it fix on bottom and necessary for content to be below bar
@@ -118,6 +128,19 @@ export const useHeaderStyle = makeStyles((theme) => ({
         padding: theme.spacing(1),
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
+        [theme.breakpoints.up('md')]: {
+            height: 84,
+        }
+    },
+    desktopDrawerPaper: {
+        width: '27%',
+        right: '8%',
+        borderRadius: '3px 0 0 7px',
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+        '&::-webkit-scrollbar': {
+            display: "none"
+        },
     },
     drawerPaper: {
         width: 270,
@@ -198,11 +221,11 @@ export const useHeaderStyle = makeStyles((theme) => ({
         fontFamily: 'Shabnam',
     },
     basketBadgeAlign: {
-      bottom:10,
+        bottom: 10,
     },
     basketBadgeXsAlign: {
         right: 20,
-        bottom:10,
+        bottom: 10,
     },
     iconButtons: {
         marginRight: 8,

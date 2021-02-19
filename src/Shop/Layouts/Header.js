@@ -26,6 +26,7 @@ function Header(props) {
     const [dialogOpen, setDialogOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null);
     const [drawerOpen, setDrawerOpen] = useState(false)
+    const [desktopDrawerOpen, setDesktopDrawerOpen] = useState(false)
     const [basketCount, setBasketCount] = useState(0)
 
     const searchHandler = (event) => {
@@ -93,7 +94,8 @@ function Header(props) {
                         </Link>
                         <Button
                             size={"small"}
-                            onClick={(event) => setAnchorEl(event.currentTarget)}
+                            // onClick={(event) => setAnchorEl(event.currentTarget)}
+                            onClick={() => setDesktopDrawerOpen(true)}
                             dir={'ltr'}
                             className={classes.category}
                             startIcon={
@@ -102,10 +104,10 @@ function Header(props) {
                         >
                             دسته‌بندی‌ها
                         </Button>
-                        <CategoryMenu
-                            anchorEl={anchorEl}
-                            setAnchorEl={setAnchorEl}
-                        />
+                        {/*<CategoryMenu*/}
+                        {/*    anchorEl={anchorEl}*/}
+                        {/*    setAnchorEl={setAnchorEl}*/}
+                        {/*/>*/}
                     </div>
 
                     <StyledSearchField
@@ -304,6 +306,22 @@ function Header(props) {
                     onClose={() => setDrawerOpen(false)}
                     classes={{
                         paper: classes.drawerPaper,
+                    }}
+                    ModalProps={{
+                        keepMounted: true,
+                    }}
+                >
+                    {drawer}
+                </Drawer>
+            </nav>
+            <nav className={classes.desktopDrawer} aria-label={'categories'}>
+                <Drawer
+                    variant="temporary"
+                    anchor={'top'}
+                    open={desktopDrawerOpen}
+                    onClose={() => setDesktopDrawerOpen(false)}
+                    classes={{
+                        paper: classes.desktopDrawerPaper,
                     }}
                     ModalProps={{
                         keepMounted: true,

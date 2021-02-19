@@ -8,11 +8,18 @@ export const useSignUpPageStyle = makeStyles((theme) => ({
         marginBottom: 185,
         padding: theme.spacing(0, 49),
         [theme.breakpoints.down('md')]: {
-            padding: theme.spacing(0, 3),
+            padding: theme.spacing(0, 30),
         },
-
+        [theme.breakpoints.down('sm')]: {
+            padding: theme.spacing(0, 10),
+        },
         [theme.breakpoints.down('xs')]: {
             padding: 18.5,
+        },
+        [theme.breakpoints.up('lg')]: {
+            maxWidth: 600,
+            margin: 'auto',
+            padding: 0,
         },
     },
     step: {
@@ -45,7 +52,7 @@ export const useSignUpPageStyle = makeStyles((theme) => ({
         fontWeight: "bold",
         '&:hover': {
             backgroundColor: '#F16522',
-            opacity: '70%'
+            // opacity: '70%'
         },
 
     },

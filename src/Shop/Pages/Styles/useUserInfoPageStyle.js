@@ -13,6 +13,11 @@ export const useUserInfoPageStyle = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             padding: 18.5,
         },
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: 1560,
+            margin: 'auto',
+            padding: 0,
+        },
 
     },
     card: {
@@ -44,7 +49,7 @@ export const useUserInfoPageStyle = makeStyles((theme) => ({
         fontWeight: "bold",
         '&:hover': {
             backgroundColor: '#F16522',
-            opacity: '70%'
+            // opacity: '70%'
         },
 
     },
