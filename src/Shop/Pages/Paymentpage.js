@@ -1,16 +1,17 @@
 import React from "react";
 import {usePaymentPageStyle} from "./Styles/usePaymentpageStyle";
 import {SvgIcon, Typography, Link} from "@material-ui/core";
-import {useParams} from "react-router-dom";
+import {toFaDigit} from "../../utills/ToFaDigit";
 
-
-function PaymentPage() {
+function PaymentPage({location}) {
     const classes = usePaymentPageStyle()
-    const {status} = useParams()
+    const params = new URLSearchParams(location.search)
+    const status = params.get('status')
+    const msg = params.get('msg')
+    const track_id = params.get('track_id')
 
-    const setIcon = (status) => {
-        if (status === 'error') {
-
+    const setIcon = () => {
+        if (status) {
             return (
                 <SvgIcon className={classes.icon} xmlns="http://www.w3.org/2000/svg" width="161.926" height="163.532"
                          viewBox="0 0 161.926 163.532">
@@ -72,7 +73,7 @@ function PaymentPage() {
     return (
         <div className={classes.container}>
             {
-                setIcon(status)
+                setIcon()
             }
 
             <Typography
@@ -80,23 +81,25 @@ function PaymentPage() {
                 className={classes.message}
             >
                 {
-                    `${status === 'error'
-                        ? 'سفارش شما با خطا رو به رو شد!'
+                    `${status
+                        ? msg
                         : 'سفارش شما با موفقیت ثبت شد.'}`
                 }
             </Typography>
             <Typography
                 component={'h5'}
                 className={classes.code}
-            >کد پیگیری: ۳۲۹۴۲۳۱</Typography>
+            >
+            {`کد پیگیری ${toFaDigit(track_id)}`}
+            </Typography>
             <Typography
                 component={'h4'}
                 className={classes.describe}
             >
                 {
-                    `${status === 'error'
-                        ? 'در صورت کسر وجه از حساب شما؛ تا ۷۲ ساعت بعد به حسابتان بازگشت خواهد خورد.'
-                        : 'وضعیت سفارش شما از طریق پیامک به شما اطلاع رسانی خواهد شد.'}`
+                    `${status && 
+                        'در صورت کسر وجه از حساب شما؛ تا ۷۲ ساعت بعد به حسابتان بازگشت خواهد خورد.'
+                    }`   
                 }
             </Typography>
             <Link color={'initial'} className={classes.link} to={'/'}>
