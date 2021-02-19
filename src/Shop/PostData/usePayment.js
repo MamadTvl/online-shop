@@ -9,6 +9,10 @@ function usePayment(fetch, id) {
     const [, post] = useAxios({
         url: '/payment/pay',
         method: 'POST',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        }
     }, {manual: true})
 
     useEffect(() => {
@@ -20,14 +24,15 @@ function usePayment(fetch, id) {
                         "basket_id": id,
                     },
                 })
-                    setResult(response)
-                    
+                setResult(response)
+
             } catch (err) {
                 setResult(err)
             }
             setLoading(false)
         }
-        if(fetch)
+
+        if (fetch)
             getResult().then()
     }, [fetch, id, post])
 
