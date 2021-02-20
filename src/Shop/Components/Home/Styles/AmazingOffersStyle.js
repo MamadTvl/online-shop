@@ -72,9 +72,6 @@ export const useStyles = makeStyles((theme) => ({
             minWidth: 211,
             maxWidth: 250,
         },
-        [theme.breakpoints.up('xl')]: {
-            marginLeft: 200,
-        },
     }
 
 }), {index: 1});

@@ -9,10 +9,6 @@ function usePayment(fetch, id) {
     const [, post] = useAxios({
         url: '/payment/pay',
         method: 'POST',
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        }
     }, {manual: true})
 
     useEffect(() => {
