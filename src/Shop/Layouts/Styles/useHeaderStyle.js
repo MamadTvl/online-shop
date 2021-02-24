@@ -135,7 +135,7 @@ export const useHeaderStyle = makeStyles((theme) => ({
     desktopDrawerPaper: {
         width: '27%',
         right: '8%',
-        borderRadius: '3px 0 0 7px',
+        borderRadius: '0 0 7px 7px',
         scrollbarWidth: "none",
         msOverflowStyle: "none",
         '&::-webkit-scrollbar': {

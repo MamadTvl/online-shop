@@ -36,7 +36,7 @@ export const useMobilePhotoViewerStyle = makeStyles((theme) => ({
         backgroundColor: 'rgba(0, 0, 0, 0.45)',
         width: 12,
         height: 12,
-        '&:hovor':{
+        '&:hover':{
             backgroundColor: 'white',
         }
     }

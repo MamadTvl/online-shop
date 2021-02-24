@@ -10,6 +10,7 @@ export const useOrderFactorCardStyle = makeStyles((theme) => ({
     },
     image:{
         width: '30%',
+        height: '30%', // safari bug
         marginLeft: 16,
         borderRadius: 7,
         [theme.breakpoints.down('md')]: {

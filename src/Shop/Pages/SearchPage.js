@@ -301,7 +301,7 @@ function SearchPage({location}) {
                                             ))
                                     }
 
-                                    <Grid item xs={12}>
+                                    <Grid style={{overflowX: 'hidden'}} item xs={12}>
 
                                         {
                                             searchStates.products.length !== 0 &&

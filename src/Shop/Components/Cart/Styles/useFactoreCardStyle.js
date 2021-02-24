@@ -37,6 +37,6 @@ export const useFactorCardStyle = makeStyles((theme) => ({
         }
     },
     paymentIcon: {
-        width: '40vw',
+        width: '13vw', // safari bug
     }
 }), {index: 1});
