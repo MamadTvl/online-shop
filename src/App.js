@@ -55,9 +55,9 @@ function App() {
                                 <ForgetPassPage/>
                             </PublicRoute>
 
-                            <PrivateRoute path={'/payment/status'}>
+                            <Route path={'/payment/status'}>
                                 <PaymentPage/>
-                            </PrivateRoute>
+                            </Route>
 
                             <Route path={'/profile'}>
                                 <PrivateRoute path={'/profile'}>

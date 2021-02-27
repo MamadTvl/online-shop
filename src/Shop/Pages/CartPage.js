@@ -316,7 +316,7 @@ function CartPage(props) {
 
     useEffect(() => {
         if (!paymentLoading && fetchPayment) {
-            console.log(paymentResult)
+            window.location.href = paymentResult
             setFetchPayment(false)
         }
     }, [paymentLoading, paymentResult])

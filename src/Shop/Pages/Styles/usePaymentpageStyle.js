@@ -17,7 +17,7 @@ export const usePaymentPageStyle = makeStyles((theme) => ({
         },
         [theme.breakpoints.up('xl')]: {
             maxWidth: 1560,
-            margin: 'auto',
+            margin: '76px auto',
             padding: 0,
         },
 
@@ -66,9 +66,13 @@ export const usePaymentPageStyle = makeStyles((theme) => ({
         },
     },
     link: {
-        '&.MuiLink-underlineHover:hover': {
+        '& .MuiLink-underlineHover:hover': {
             textDecoration: 'none'
-        }
+        },
+        '& .MuiLink-underlineHover:after': {
+            textDecoration: 'none'
+        },
+        textDecoration: 'none'
     },
     backToHome: {
         fontFamily: 'Shabnam',

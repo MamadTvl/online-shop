@@ -1,6 +1,7 @@
 import React from "react";
 import {usePaymentPageStyle} from "./Styles/usePaymentpageStyle";
-import {SvgIcon, Typography, Link} from "@material-ui/core";
+import {SvgIcon, Typography} from "@material-ui/core";
+import {Link} from 'react-router-dom'
 import {toFaDigit} from "../../utills/ToFaDigit";
 import {useLocation} from 'react-router-dom'
 

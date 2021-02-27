@@ -20,7 +20,7 @@ function usePayment(fetch, id) {
                         "basket_id": id,
                     },
                 })
-                setResult(response)
+                setResult(response.data.data.link)
 
             } catch (err) {
                 setResult(err)

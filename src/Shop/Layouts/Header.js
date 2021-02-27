@@ -24,7 +24,6 @@ function Header(props) {
     const history = useHistory()
     const [searchInput, setSearchInput] = useState('')
     const [dialogOpen, setDialogOpen] = useState(false)
-    const [anchorEl, setAnchorEl] = useState(null);
     const [drawerOpen, setDrawerOpen] = useState(false)
     const [desktopDrawerOpen, setDesktopDrawerOpen] = useState(false)
     const [basketCount, setBasketCount] = useState(0)
